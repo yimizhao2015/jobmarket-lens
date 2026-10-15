@@ -1,0 +1,407 @@
+<title>JobMarket Lens</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a filter rail across the top, a summary strip, then a grid of small single-question panels;
+   coverage and the posting table close the page. Color is a cool optical blue on blue-tinted neutrals. */
+:root {
+  --bg: #f4f6f9;
+  --panel: #ffffff;
+  --ink: #111820;
+  --ink-2: #4a5563;
+  --ink-3: #7a8594;
+  --line: #dde3ea;
+  --bar: #2a78d6;
+  --bar-soft: #cde2fb;
+  --accent: #1c5cab;
+  --chip: #e8eef6;
+  --good: #1f7a4d; --good-bg: #e3f3ea;
+  --warn: #8a5a00; --warn-bg: #fbf0d6;
+  --bad: #b03a3a;  --bad-bg: #f9e3e3;
+  --mute-bg: #eceff3;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1419; --panel: #171e26; --ink: #e9eef4; --ink-2: #b2bcc8; --ink-3: #8390a0; --line: #2a3440;
+    --bar: #3987e5; --bar-soft: #1c3a5e; --accent: #86b6ef; --chip: #203041;
+    --good: #6fd1a0; --good-bg: #173527; --warn: #f0c060; --warn-bg: #3a2e12; --bad: #f08a8a; --bad-bg: #3d1d1d;
+    --mute-bg: #222b35; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1419; --panel: #171e26; --ink: #e9eef4; --ink-2: #b2bcc8; --ink-3: #8390a0; --line: #2a3440;
+  --bar: #3987e5; --bar-soft: #1c3a5e; --accent: #86b6ef; --chip: #203041;
+  --good: #6fd1a0; --good-bg: #173527; --warn: #f0c060; --warn-bg: #3a2e12; --bad: #f08a8a; --bad-bg: #3d1d1d;
+  --mute-bg: #222b35; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--f-body); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 20px; }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+h1 { font: 700 clamp(28px, 4vw, 40px)/1.05 var(--f-display); letter-spacing: -0.02em; margin: 0; }
+h1 .lens { color: var(--accent); }
+.tagline { margin: 6px 0 0; color: var(--ink-2); font-size: 15px; }
+.meta { font: 12px/1.5 var(--f-mono); color: var(--ink-3); text-align: right; }
+h2 { font: 600 15px/1.3 var(--f-body); margin: 0; text-wrap: balance; }
+.sub { color: var(--ink-3); font-size: 12px; margin: 2px 0 0; }
+.notice { border: 1px solid var(--warn); background: var(--warn-bg); color: var(--ink); border-radius: 8px; padding: 12px 14px; }
+.notice b { color: var(--warn); }
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; padding: 12px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 10px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; }
+.filters label { display: grid; gap: 3px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); }
+.filters select, .filters input { font: 13px var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 8px; min-width: 0; max-width: 180px; }
+.filters input { width: 170px; }
+.filters button { font: 500 13px var(--f-body); color: var(--accent); background: transparent; border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--line);
+  border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.kpi { background: var(--panel); padding: 12px 14px; }
+.kpi .v { font: 600 24px/1.1 var(--f-display); font-variant-numeric: tabular-nums; }
+.kpi .l { font-size: 12px; color: var(--ink-2); }
+.kpi .n { font: 11px var(--f-mono); color: var(--ink-3); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 16px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px 16px; display: grid;
+  gap: 10px; align-content: start; min-width: 0; }
+.panel.wide { grid-column: 1 / -1; }
+.panel-head { display: flex; justify-content: space-between; gap: 8px; align-items: start; flex-wrap: wrap; }
+.bars { display: grid; gap: 5px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 48%) 1fr 48px; gap: 8px; align-items: center; font-size: 12.5px; cursor: default; }
+.bar-row .lab { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }
+.bar-row .trk { height: 12px; position: relative; }
+.bar-row .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bar-row .val { font: 12px var(--f-mono); text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bar-row:hover .lab { color: var(--ink); }
+.bar-row:hover .fill { filter: brightness(1.12); }
+.empty { color: var(--ink-3); font-size: 12.5px; padding: 8px 0; }
+.range-row { display: grid; grid-template-columns: minmax(0, 38%) 1fr 120px; gap: 8px; align-items: center; font-size: 12.5px; }
+.range-row .trk { height: 14px; position: relative; border-left: 1px solid var(--line); }
+.range-row .seg { position: absolute; top: 5px; height: 4px; background: var(--bar-soft); border-radius: 2px; }
+.range-row .dot { position: absolute; top: 2px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--bar);
+  box-shadow: 0 0 0 2px var(--panel); }
+.range-row .val { font: 11.5px var(--f-mono); text-align: right; font-variant-numeric: tabular-nums; }
+.axis { display: grid; grid-template-columns: minmax(0, 38%) 1fr 120px; gap: 8px; font: 10.5px var(--f-mono); color: var(--ink-3); }
+.axis .ticks { display: flex; justify-content: space-between; }
+.cols { display: flex; align-items: end; gap: 6px; height: 140px; border-bottom: 1px solid var(--line); padding-top: 14px; overflow-x: auto; }
+.col { flex: 1 0 28px; display: grid; justify-items: center; align-content: end; gap: 3px; height: 100%; }
+.col .c { width: 70%; background: var(--bar); border-radius: 4px 4px 0 0; min-height: 2px; }
+.col .cv { font: 10.5px var(--f-mono); color: var(--ink-2); }
+.col-labels { display: flex; gap: 6px; font: 10.5px var(--f-mono); color: var(--ink-3); overflow: hidden; }
+.col-labels span { flex: 1 0 28px; text-align: center; }
+select.inline { font: 12px var(--f-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; max-width: 220px; }
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+td.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+a { color: var(--accent); }
+.pill { display: inline-block; font: 500 11px/1.6 var(--f-body); padding: 0 8px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { color: var(--good); background: var(--good-bg); }
+.pill.sample { color: var(--warn); background: var(--warn-bg); }
+.pill.pending { color: var(--ink-2); background: var(--mute-bg); }
+.pill.blocked { color: var(--bad); background: var(--bad-bg); }
+.tag { display: inline-block; font-size: 11px; background: var(--chip); color: var(--ink-2); border-radius: 4px; padding: 0 6px; margin: 1px 2px 1px 0; }
+.method { color: var(--ink-2); font-size: 13px; display: grid; gap: 6px; max-width: 80ch; }
+.method p { margin: 0; }
+@media (max-width: 700px) { .filters { position: static; } .meta { text-align: left; } }
+#tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); font-size: 12px; padding: 6px 9px;
+  border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .1s; }
+@media (prefers-reduced-motion: reduce) { #tip { transition: none; } }
+.more { font-size: 12px; color: var(--ink-3); }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>JobMarket <span class="lens">Lens</span></h1>
+      <p class="tagline">See demand. Understand skills. Track change.</p>
+    </div>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <div class="notice" id="notice" hidden></div>
+
+  <div class="filters" role="group" aria-label="Filters">
+    <label for="f-year">Year posted<select id="f-year"></select></label>
+    <label for="f-co">Company<select id="f-co"></select></label>
+    <label for="f-soc">Occupation (SOC)<select id="f-soc"></select></label>
+    <label for="f-lvl">Job level<select id="f-lvl"></select></label>
+    <label for="f-arr">Work arrangement<select id="f-arr"></select></label>
+    <label for="f-sched">Full/part-time<select id="f-sched"></select></label>
+    <label for="f-yrs">Years of experience<select id="f-yrs"></select></label>
+    <label for="f-country">Country<select id="f-country"></select></label>
+    <label for="f-q">Title contains<input id="f-q" type="search" placeholder="e.g. engineer"></label>
+    <button id="f-reset" type="button">Reset</button>
+  </div>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <section class="grid">
+    <div class="panel"><div><h2>Openings by occupation group</h2><p class="sub">SOC 2018 major groups, assigned from job titles</p></div><div class="bars" id="c-soc"></div></div>
+    <div class="panel"><div><h2>Openings by company</h2><p class="sub">Postings in view, by index-weight rank</p></div><div class="bars" id="c-co"></div></div>
+    <div class="panel"><div><h2>Job level</h2><p class="sub">From title keywords, the company's own level label, then years required</p></div><div class="bars" id="c-lvl"></div></div>
+    <div class="panel"><div><h2>Minimum degree required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
+    <div class="panel"><div><h2>Experience required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
+    <div class="panel"><div><h2>Work arrangement</h2><p class="sub">Remote, hybrid or on-site as the posting states it</p></div><div class="bars" id="c-arr"></div></div>
+    <div class="panel"><div><h2>Full-time or part-time</h2><p class="sub">Employment type field, then title</p></div><div class="bars" id="c-sched"></div></div>
+    <div class="panel"><div><h2>Licenses and certifications</h2><p class="sub">Share of postings in view naming each</p></div><div class="bars" id="c-lic"></div></div>
+    <div class="panel wide">
+      <div class="panel-head"><div><h2>Pay ranges by occupation group</h2><p class="sub">Median posted range, annualized USD (hourly × 2,080). Only postings that disclose pay in USD.</p></div></div>
+      <div id="c-pay"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div><h2>Top skills</h2><p class="sub">Share of postings mentioning each skill</p></div>
+        <select class="inline" id="skill-soc" aria-label="Skills for occupation group"></select></div>
+      <div class="bars" id="c-skills"></div>
+    </div>
+    <div class="panel"><div><h2>Where the jobs are</h2><p class="sub">Primary location, by country</p></div><div class="bars" id="c-country"></div></div>
+    <div class="panel"><div><h2>US states</h2><p class="sub">Primary location of US postings</p></div><div class="bars" id="c-state"></div></div>
+    <div class="panel wide"><div><h2>Postings over time</h2><p class="sub">By month posted. History fills in as scheduled collection runs accumulate.</p></div><div id="c-month"></div></div>
+  </section>
+
+  <section class="panel wide" aria-labelledby="cov-h">
+    <div><h2 id="cov-h">Source coverage</h2><p class="sub">The 20 largest S&amp;P 500 companies by index weight and the state of collection from each official career site</p></div>
+    <div class="tbl-wrap"><table id="cov"></table></div>
+  </section>
+
+  <section class="panel wide" aria-labelledby="tbl-h">
+    <div class="panel-head"><div><h2 id="tbl-h">Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
+    <div class="tbl-wrap"><table id="tbl"></table></div>
+    <div class="more" id="tbl-more"></div>
+  </section>
+
+  <section class="panel wide method" aria-labelledby="m-h">
+    <h2 id="m-h">How the numbers are made</h2>
+    <p>Postings come only from each company's official career site. Collectors call the site's own job API where one exists (Workday, Oracle Recruiting, Eightfold, SmartRecruiters, Jibe, amazon.jobs) and otherwise read the schema.org JobPosting data on each posting page. Sites that refuse automated access are listed as blocked, not estimated.</p>
+    <p>Each collection run is a snapshot. A posting keeps the date it was first seen; one that disappears from a later run is counted as closed. Only postings dated October 1, 2026 or later are included. A posting dated after the day it was collected (a scheduled start date on some sites) is dated to the collection day.</p>
+    <p>Occupation groups follow the 2018 Standard Occupational Classification major groups, assigned by auditable title rules with the company's own job family as a fallback. Pay is the posted range, annualized for comparison; it is not actual earnings. Skills and licenses are matched against a fixed dictionary, so a skill the dictionary lacks will not appear. "Not specified" means the posting does not say.</p>
+  </section>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+const EMBEDDED = /*DATA*/null;
+const NS = "Not specified";
+
+async function load() {
+  if (EMBEDDED) return EMBEDDED;
+  const r = await fetch("data.json");
+  return r.json();
+}
+
+load().then(D => {
+  const F = D.fields;
+  const rows = D.rows.map(r => Object.fromEntries(F.map((f, i) => [f, r[i]])));
+  const coName = Object.fromEntries(D.companies.map(c => [c.ticker, c.name]));
+  const socName = D.soc_major;
+  const skillNames = D.skills.map(s => s.name);
+  const fmt = n => n.toLocaleString("en-US");
+  const pct = (a, b) => b ? Math.round(100 * a / b) + "%" : "–";
+  const money = v => "$" + (v >= 1000 ? Math.round(v / 1000) + "k" : Math.round(v));
+
+  // ---- header + sample notice
+  const sampleCos = [...new Set(rows.filter(r => r.src === "page-read").map(r => r.co))];
+  document.getElementById("meta").innerHTML =
+    `Universe: top 20 S&amp;P 500 by weight<br>Ranking: Slickcharts, ${D.universe.retrieved}<br>Dataset built ${D.generated}`;
+  if (sampleCos.length) {
+    const n = rows.filter(r => r.src === "page-read").length;
+    const el = document.getElementById("notice");
+    el.hidden = false;
+    el.innerHTML = `<b>Pilot sample.</b> ${fmt(n)} real postings from ${sampleCos.map(c => coName[c]).join(", ")}, read from their career sites on ${D.universe.retrieved}. ` +
+      `These companies' sites do not allow automated collection, so this is a small hand-read sample of their newest listings: it shows the shape of the analysis, not market totals. Every other company comes from the full collector run.`;
+  }
+
+  // ---- filters
+  const defs = [
+    ["f-year", "year", "All years", v => v],
+    ["f-co", "co", "All companies", v => coName[v] || v],
+    ["f-soc", "soc", "All groups", v => `${v}-0000 ${socName[v]}`],
+    ["f-lvl", "lvl", "All levels", v => v],
+    ["f-arr", "arr", "All arrangements", v => v],
+    ["f-sched", "sched", "All types", v => v],
+    ["f-yrs", "yrs_b", "All experience", v => v],
+    ["f-country", "country", "All countries", v => v],
+  ];
+  const order = {
+    co: D.companies.map(c => c.ticker),
+    lvl: [...D.levels, NS],
+    yrs_b: ["0-1 yrs", "2-4 yrs", "5-7 yrs", "8-10 yrs", "10+ yrs", NS],
+  };
+  for (const [id, key, all, label] of defs) {
+    const sel = document.getElementById(id);
+    let vals = [...new Set(rows.map(r => r[key]).filter(v => v != null))];
+    if (order[key]) vals.sort((a, b) => order[key].indexOf(a) - order[key].indexOf(b));
+    else vals.sort();
+    sel.innerHTML = `<option value="">${all}</option>` + vals.map(v => `<option value="${v}">${label(v)}</option>`).join("");
+    sel.addEventListener("change", render);
+  }
+  document.getElementById("f-q").addEventListener("input", render);
+  document.getElementById("f-reset").addEventListener("click", () => {
+    defs.forEach(([id]) => document.getElementById(id).value = "");
+    document.getElementById("f-q").value = "";
+    render();
+  });
+  const skillSel = document.getElementById("skill-soc");
+  skillSel.innerHTML = `<option value="">All occupation groups</option>` +
+    Object.keys(socName).filter(k => rows.some(r => r.soc === k)).map(k => `<option value="${k}">${socName[k]}</option>`).join("");
+  skillSel.addEventListener("change", render);
+
+  function filtered() {
+    const q = document.getElementById("f-q").value.trim().toLowerCase();
+    return rows.filter(r => defs.every(([id, key]) => {
+      const v = document.getElementById(id).value;
+      return !v || String(r[key]) === v;
+    }) && (!q || r.title.toLowerCase().includes(q)));
+  }
+
+  // ---- tooltip
+  const tip = document.getElementById("tip");
+  document.addEventListener("pointermove", e => {
+    const t = e.target.closest("[data-tip]");
+    if (!t) { tip.style.opacity = 0; return; }
+    tip.textContent = t.dataset.tip;
+    const x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+    tip.style.left = x + "px"; tip.style.top = (e.clientY + 14) + "px"; tip.style.opacity = 1;
+  });
+
+  // ---- bar list
+  function bars(id, counts, total, opts = {}) {
+    const el = document.getElementById(id);
+    let entries = Object.entries(counts);
+    if (opts.order) entries.sort((a, b) => opts.order.indexOf(a[0]) - opts.order.indexOf(b[0]));
+    else entries.sort((a, b) => b[1] - a[1]);
+    if (opts.hideNS) entries = entries.filter(([k]) => k !== NS);
+    if (opts.limit) entries = entries.slice(0, opts.limit);
+    if (!entries.length) { el.innerHTML = `<div class="empty">${opts.emptyText || "No postings in view."}</div>`; return; }
+    const max = Math.max(...entries.map(e => e[1]));
+    el.innerHTML = entries.map(([k, v]) => {
+      const lab = opts.label ? opts.label(k) : k;
+      const shown = opts.share ? pct(v, total) : fmt(v);
+      return `<div class="bar-row" data-tip="${lab}: ${fmt(v)} postings (${pct(v, total)} of ${fmt(total)})">
+        <span class="lab">${lab}</span><span class="trk"><span class="fill" style="width:${100 * v / max}%"></span></span>
+        <span class="val">${shown}</span></div>`;
+    }).join("");
+  }
+  const count = (list, key) => list.reduce((m, r) => (m[r[key]] = (m[r[key]] || 0) + 1, m), {});
+  const countMulti = (list, key, names) => list.reduce((m, r) => (r[key].forEach(i => m[names[i]] = (m[names[i]] || 0) + 1), m), {});
+  const median = a => { if (!a.length) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+
+  function render() {
+    const R = filtered();
+    const N = R.length;
+    const paid = R.filter(r => r.pay_min && r.pay_cur === "USD");
+    const mids = paid.map(r => (r.pay_min + r.pay_max) / 2);
+    const known = (k) => R.filter(r => r[k] !== NS);
+    const arrKnown = known("arr");
+    const degKnown = known("deg");
+    const schedKnown = known("sched");
+    const yrsKnown = R.filter(r => r.yrs != null);
+    const kpis = [
+      [fmt(N), "postings in view", `${new Set(R.map(r => r.co)).size} companies`],
+      [pct(paid.length, N), "disclose pay (USD)", `${fmt(paid.length)} postings`],
+      [mids.length ? money(median(mids)) : "–", "median pay midpoint", "annualized USD"],
+      [pct(R.filter(r => ["Bachelor's", "Master's", "Doctorate"].includes(r.deg)).length, degKnown.length), "ask for a bachelor's or higher", `of ${fmt(degKnown.length)} stating a degree`],
+      [pct(R.filter(r => r.deg_equiv).length, degKnown.length), "accept equivalent experience", `of ${fmt(degKnown.length)} stating a degree`],
+      [pct(arrKnown.filter(r => r.arr !== "On-site").length, arrKnown.length), "remote or hybrid", `of ${fmt(arrKnown.length)} stating it`],
+      [pct(schedKnown.filter(r => r.sched === "Full-time").length, schedKnown.length), "full-time", `of ${fmt(schedKnown.length)} stating a job type`],
+      [yrsKnown.length ? `${median(yrsKnown.map(r => r.yrs))} yrs` : "–", "median experience required", `of ${fmt(yrsKnown.length)} stating years`],
+    ];
+    document.getElementById("kpis").innerHTML = kpis.map(([v, l, n]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div><div class="n">${n}</div></div>`).join("");
+
+    bars("c-soc", count(R, "soc"), N, { label: k => `${k} ${socName[k]}` });
+    bars("c-co", count(R, "co"), N, { label: k => coName[k] || k, order: order.co });
+    bars("c-lvl", count(R, "lvl"), N, { order: order.lvl });
+    bars("c-deg", count(R, "deg"), N, { order: ["High school", "Associate", "Bachelor's", "Master's", "Doctorate", "Enrolled student", NS] });
+    bars("c-yrs", count(R, "yrs_b"), N, { order: ["0-1 yrs", "2-4 yrs", "5-7 yrs", "8-10 yrs", "10+ yrs", NS] });
+    bars("c-arr", count(R, "arr"), N, { order: ["On-site", "Hybrid", "Remote", NS] });
+    bars("c-sched", count(R, "sched"), N, { order: ["Full-time", "Part-time", "Full- or part-time", "Temporary / Seasonal", "Internship", "Contract", NS] });
+    bars("c-lic", countMulti(R, "lic", D.licenses), N, { share: true, limit: 10, emptyText: "No licenses or certifications named in postings in view." });
+    bars("c-country", count(R, "country"), N, { limit: 12 });
+    bars("c-state", count(R.filter(r => r.state), "state"), R.filter(r => r.state).length, { limit: 12, emptyText: "No US postings in view." });
+    const sk = skillSel.value;
+    const RS = sk ? R.filter(r => r.soc === sk) : R;
+    bars("c-skills", countMulti(RS, "skills", skillNames), RS.length, { share: true, limit: 15, emptyText: "No dictionary skills found in postings in view." });
+
+    // pay ranges per SOC group
+    const groups = {};
+    paid.forEach(r => (groups[r.soc] = groups[r.soc] || []).push(r));
+    const payEl = document.getElementById("c-pay");
+    const gl = Object.entries(groups).map(([k, a]) => ({ k, n: a.length, lo: median(a.map(r => r.pay_min)), hi: median(a.map(r => r.pay_max)) }))
+      .sort((a, b) => (b.lo + b.hi) - (a.lo + a.hi));
+    if (!gl.length) { payEl.innerHTML = `<div class="empty">No postings in view disclose pay in USD.</div>`; }
+    else {
+      const top = Math.ceil(Math.max(...gl.map(g => g.hi)) / 50000) * 50000;
+      const ticks = [0, top / 4, top / 2, 3 * top / 4, top];
+      payEl.innerHTML = `<div class="bars">` + gl.map(g => `<div class="range-row" data-tip="${socName[g.k]}: median range ${money(g.lo)} to ${money(g.hi)} across ${g.n} postings">
+          <span class="lab">${socName[g.k]} <span class="more">n=${g.n}</span></span>
+          <span class="trk"><span class="seg" style="left:${100 * g.lo / top}%;width:${100 * (g.hi - g.lo) / top}%"></span>
+            <span class="dot" style="left:${100 * g.lo / top}%"></span><span class="dot" style="left:${100 * g.hi / top}%"></span></span>
+          <span class="val">${money(g.lo)} – ${money(g.hi)}</span></div>`).join("") +
+        `</div><div class="axis"><span></span><span class="ticks">${ticks.map(t => `<span>${money(t)}</span>`).join("")}</span><span></span></div>`;
+    }
+
+    // months
+    const months = count(R.filter(r => r.month), "month");
+    const mk = Object.keys(months).sort();
+    const mEl = document.getElementById("c-month");
+    if (!mk.length) mEl.innerHTML = `<div class="empty">No dated postings in view.</div>`;
+    else {
+      const mmax = Math.max(...Object.values(months));
+      mEl.innerHTML = `<div class="cols">${mk.map(m => `<div class="col" data-tip="${m}: ${fmt(months[m])} postings"><span class="cv">${fmt(months[m])}</span><span class="c" style="height:${85 * months[m] / mmax}%"></span></div>`).join("")}</div>
+        <div class="col-labels">${mk.map(m => `<span>${m}</span>`).join("")}</div>` +
+        (mk.length < 3 ? `<p class="sub">Only ${mk.length} month${mk.length > 1 ? "s" : ""} of postings so far; the trend line becomes meaningful after a few monthly runs.</p>` : "");
+    }
+
+    // table
+    const tb = document.getElementById("tbl");
+    const LIM = 150;
+    document.getElementById("tbl-sub").textContent = `${fmt(N)} postings match the filters` + (N > LIM ? `; showing the newest ${LIM}` : "");
+    const list = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || "")).slice(0, LIM);
+    tb.innerHTML = `<thead><tr><th>Title</th><th>Company</th><th>SOC group</th><th>Level</th><th>Job type</th><th>Location</th><th>Posted</th><th>Pay</th><th>Degree</th><th>Yrs</th><th>Skills</th></tr></thead><tbody>` +
+      list.map(r => `<tr><td><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></td><td>${coName[r.co]}</td><td>${socName[r.soc]}</td><td>${r.lvl}</td><td>${r.sched}</td>
+        <td>${[r.city, r.state, r.country !== NS ? r.country : null].filter(Boolean).join(", ") || NS}${r.nloc > 1 ? ` <span class="more">+${r.nloc - 1}</span>` : ""}</td>
+        <td class="num">${r.posted || ""}</td><td class="num">${postedPay(r)}</td>
+        <td>${r.deg}${r.deg_equiv ? " or equiv." : ""}</td><td class="num">${r.yrs ?? ""}</td>
+        <td>${r.skills.slice(0, 5).map(i => `<span class="tag">${skillNames[i]}</span>`).join("")}</td></tr>`).join("") + "</tbody>";
+  }
+
+  // Pay as the posting states it: the original amounts and period, not annualized.
+  function postedPay(r) {
+    if (r.pay_lo == null) return NS;
+    const sym = r.pay_cur === "USD" || !r.pay_cur ? "$" : r.pay_cur + " ";
+    const dec = r.pay_period === "hour" ? 2 : 0;
+    const f = v => sym + v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    const amt = r.pay_lo === r.pay_hi ? f(r.pay_lo) : `${f(r.pay_lo)}–${f(r.pay_hi)}`;
+    return `${amt} ${{ hour: "per hour", month: "per month", year: "per year" }[r.pay_period] || ""}`.trim();
+  }
+
+  // coverage
+  const latest = {};
+  (D.snapshots || []).forEach(s => latest[s.company] = s);
+  const byCo = count(rows, "co");
+  document.getElementById("cov").innerHTML = `<thead><tr><th>#</th><th>Company</th><th>Weight</th><th>Career site</th><th>Platform</th><th>Status</th><th>Postings</th><th>Notes</th></tr></thead><tbody>` +
+    D.companies.map(c => {
+      const s = latest[c.ticker];
+      let pill;
+      if (s && s.status === "ok") pill = `<span class="pill ok">Collected ${s.run_date}</span>`;
+      else if (s && s.status === "blocked") pill = `<span class="pill blocked">Blocked by site</span>`;
+      else if (sampleCos.includes(c.ticker)) pill = `<span class="pill sample">Page-read sample</span>`;
+      else if (c.adapter === "none") pill = `<span class="pill pending">No company-wide site</span>`;
+      else pill = `<span class="pill pending">Collector ready, not yet run</span>`;
+      const note = (s && s.detail) || c.known_issue || "";
+      const host = c.career_site ? new URL(c.career_site).hostname : "";
+      return `<tr><td class="num">${c.rank}</td><td>${c.name} <span class="more">${c.ticker}</span></td><td class="num">${c.weight_pct.toFixed(2)}%</td>
+        <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
+        <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td><td class="more">${note}</td></tr>`;
+    }).join("") + "</tbody>";
+
+  render();
+});
+</script>
