@@ -113,7 +113,7 @@ def main():
     for f in sorted((ROOT / "data/seed").glob("*.jsonl")):
         for line in f.open():
             s = json.loads(line)
-            if s["co"] not in collected:
+            if col.get("use_seed_sample") and s["co"] not in collected:
                 seed_rows.append(seed_to_raw(s))
 
     out, dropped = [], Counter()
@@ -134,6 +134,7 @@ def main():
               "state", "city", "nloc", "src", "first_seen"]
     data = {
         "generated": date.today().isoformat(),
+        "posted_from": col["posted_from"],
         "universe": cfg["universe"],
         "companies": [{k: c.get(k) for k in ("rank", "ticker", "name", "weight_pct", "sector", "career_site",
                                              "adapter", "known_issue")} for c in cfg["companies"]],

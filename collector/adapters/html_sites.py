@@ -4,6 +4,8 @@ Each lists posting URLs from search pages (or a sitemap), then reads schema.org 
 from the detail page. If a site refuses (robots.txt, 403), BlockedError propagates and the run log
 records the company as blocked.
 """
+import gzip
+import html
 import json
 import re
 
@@ -87,10 +89,38 @@ def collect_google(company, params, http, max_jobs, stats):
                         r"jobs/results/(\d{6,})-[a-z0-9\-]+")
 
 
+JOB_URL = r"/(job|jobs|position|vacanc|requisition|opening|careers?/job)[s]?/|jid-|/details/|jobid=|/job-"
+
+
+def _sitemap_entries(http, url, depth=0):
+    """(loc, lastmod) pairs from a sitemap, following sitemap indexes and gzip."""
+    r = http.get(url)
+    body = r.content
+    if body[:2] == b"\x1f\x8b":
+        body = gzip.decompress(body)
+    xml = body.decode("utf-8", "replace")
+    entries = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>(?:\s*<lastmod>\s*([^<\s]+))?", xml)
+    if "<sitemapindex" in xml and depth < 2:
+        out = []
+        for loc, _ in entries[:60]:
+            try:
+                out += _sitemap_entries(http, html.unescape(loc), depth + 1)
+            except (requests.RequestException, OSError):
+                continue
+        return out
+    return [(html.unescape(l), m) for l, m in entries]
+
+
 def collect_sitemap(company, params, http, max_jobs, stats):
-    xml = http.get(params["sitemap"]).text
-    urls = re.findall(r"<loc>([^<]+)</loc>", xml)
-    urls = [u for u in urls if re.search(params["url_pattern"], u)]
+    """Any career site that lists job pages in its sitemap and marks them up as schema.org JobPosting.
+    params: sitemap (one URL) or sitemaps (list); url_pattern (default: common job-page paths)."""
+    pattern = params.get("url_pattern", JOB_URL)
+    entries = []
+    for sm in params.get("sitemaps") or [params["sitemap"]]:
+        entries += _sitemap_entries(http, sm)
+    entries = {u: m for u, m in entries if re.search(pattern, u, re.I)}
+    # Newest first when the sitemap gives lastmod; otherwise keep the site's own order.
+    urls = sorted(entries, key=lambda u: entries[u] or "", reverse=True)
     stats["site_total"] = len(urls)
     seen = 0
     for u in urls:
@@ -99,6 +129,11 @@ def collect_sitemap(company, params, http, max_jobs, stats):
             rec = _detail(company, jid, u, http)
         except requests.HTTPError:  # sitemaps lag behind closed postings; skip pages that are gone
             stats["gone"] = stats.get("gone", 0) + 1
+            continue
+        if rec.get("source_method") != "jsonld":  # not a job page after all
+            stats["no_jobposting"] = stats.get("no_jobposting", 0) + 1
+            if stats["no_jobposting"] > 20 and not seen:
+                return
             continue
         yield rec
         seen += 1

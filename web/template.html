@@ -50,6 +50,7 @@ h1 .lens { color: var(--accent); }
 .meta { font: 12px/1.5 var(--f-mono); color: var(--ink-3); text-align: right; }
 h2 { font: 600 15px/1.3 var(--f-body); margin: 0; text-wrap: balance; }
 .sub { color: var(--ink-3); font-size: 12px; margin: 2px 0 0; }
+.intro { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 90ch; }
 .notice { border: 1px solid var(--warn); background: var(--warn-bg); color: var(--ink); border-radius: 8px; padding: 12px 14px; }
 .notice b { color: var(--warn); }
 .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; padding: 12px; background: var(--panel);
@@ -126,7 +127,7 @@ a { color: var(--accent); }
     <div class="meta" id="meta"></div>
   </header>
 
-  <div class="notice" id="notice" hidden></div>
+  <p class="intro" id="intro"></p>
 
   <div class="filters" role="group" aria-label="Filters">
     <label for="f-year">Year posted<select id="f-year"></select></label>
@@ -206,17 +207,15 @@ load().then(D => {
   const pct = (a, b) => b ? Math.round(100 * a / b) + "%" : "–";
   const money = v => "$" + (v >= 1000 ? Math.round(v / 1000) + "k" : Math.round(v));
 
-  // ---- header + sample notice
+  // ---- header + intro
   const sampleCos = [...new Set(rows.filter(r => r.src === "page-read").map(r => r.co))];
+  const nCos = new Set(rows.map(r => r.co)).size;
+  const since = new Date(D.posted_from + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
   document.getElementById("meta").innerHTML =
-    `Universe: top 20 S&amp;P 500 by weight<br>Ranking: Slickcharts, ${D.universe.retrieved}<br>Dataset built ${D.generated}`;
-  if (sampleCos.length) {
-    const n = rows.filter(r => r.src === "page-read").length;
-    const el = document.getElementById("notice");
-    el.hidden = false;
-    el.innerHTML = `<b>Pilot sample.</b> ${fmt(n)} real postings from ${sampleCos.map(c => coName[c]).join(", ")}, read from their career sites on ${D.universe.retrieved}. ` +
-      `These companies' sites do not allow automated collection, so this is a small hand-read sample of their newest listings: it shows the shape of the analysis, not market totals. Every other company comes from the full collector run.`;
-  }
+    `Universe: S&amp;P 500, excluding Berkshire Hathaway<br>Constituents as of ${D.universe.retrieved}<br>Dataset built ${D.generated}`;
+  document.getElementById("intro").textContent =
+    `${fmt(rows.length)} job postings from the official career sites of ${fmt(nCos)} S&P 500 companies, posted since ${since}. ` +
+    `Filter by year, company, occupation, level, schedule, experience and location to see where demand is, which skills employers ask for, and how pay and requirements differ.`;
 
   // ---- filters
   const defs = [
@@ -397,7 +396,7 @@ load().then(D => {
       else pill = `<span class="pill pending">Collector ready, not yet run</span>`;
       const note = (s && s.detail) || c.known_issue || "";
       const host = c.career_site ? new URL(c.career_site).hostname : "";
-      return `<tr><td class="num">${c.rank}</td><td>${c.name} <span class="more">${c.ticker}</span></td><td class="num">${c.weight_pct.toFixed(2)}%</td>
+      return `<tr><td class="num">${c.rank}</td><td>${c.name} <span class="more">${c.ticker}</span></td><td class="num">${c.weight_pct != null ? c.weight_pct.toFixed(2) + "%" : ""}</td>
         <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
         <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td><td class="more">${note}</td></tr>`;
     }).join("") + "</tbody>";
