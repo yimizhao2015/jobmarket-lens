@@ -265,10 +265,13 @@
    "name": "3M",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://careers.3m.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on talentbrew; no collector for it yet."
+   "career_site": "https://3m.wd1.myworkdayjobs.com/Search",
+   "adapter": "workday",
+   "params": {
+    "host": "3m.wd1.myworkdayjobs.com",
+    "tenant": "3m",
+    "site": "Search"
+   }
   },
   {
    "rank": 21,
@@ -276,10 +279,10 @@
    "name": "A. O. Smith",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.aosmith.com/search/",
+   "career_site": "https://jobs.aosmith.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.aosmith.com"
+    "host": "jobs.aosmith.com"
    }
   },
   {
@@ -330,10 +333,13 @@
    "name": "AES Corporation",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://www.aes.com/about-us/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://aes.wd1.myworkdayjobs.com/AES_US",
+   "adapter": "workday",
+   "params": {
+    "host": "aes.wd1.myworkdayjobs.com",
+    "tenant": "aes",
+    "site": "AES_US"
+   }
   },
   {
    "rank": 26,
@@ -481,10 +487,10 @@
    "name": "Altria",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": "https://www.altria.com/search/",
+   "career_site": "https://careers.altria.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.altria.com"
+    "host": "careers.altria.com"
    }
   },
   {
@@ -493,10 +499,13 @@
    "name": "Amcor",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://www.amcor.com/careers/inclusion-and-belonging",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://amcor.wd5.myworkdayjobs.com/Amcor_External_Career_Site",
+   "adapter": "workday",
+   "params": {
+    "host": "amcor.wd5.myworkdayjobs.com",
+    "tenant": "amcor",
+    "site": "Amcor_External_Career_Site"
+   }
   },
   {
    "rank": 39,
@@ -504,10 +513,13 @@
    "name": "Ameren",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://ameren.wd1.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "ameren.wd1.myworkdayjobs.com",
+    "tenant": "ameren",
+    "site": "External"
+   }
   },
   {
    "rank": 40,
@@ -591,10 +603,10 @@
    "name": "Ametek",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.ametek.com/search/",
+   "career_site": "https://jobs.ametek.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.ametek.com"
+    "host": "jobs.ametek.com"
    }
   },
   {
@@ -628,10 +640,13 @@
    "name": "Analog Devices",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://analogdevices.wd1.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "analogdevices.wd1.myworkdayjobs.com",
+    "tenant": "analogdevices",
+    "site": "External"
+   }
   },
   {
    "rank": 50,
@@ -653,10 +668,10 @@
    "name": "APA Corporation",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://apacorp.com/search/",
+   "career_site": "https://careers.apachecorp.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "apacorp.com"
+    "host": "careers.apachecorp.com"
    }
   },
   {
@@ -703,10 +718,13 @@
    "name": "Aptiv",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.aptiv.com/en/jobs",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://aptiv.wd5.myworkdayjobs.com/APTIV_CAREERS",
+   "adapter": "workday",
+   "params": {
+    "host": "aptiv.wd5.myworkdayjobs.com",
+    "tenant": "aptiv",
+    "site": "APTIV_CAREERS"
+   }
   },
   {
    "rank": 56,
@@ -739,10 +757,13 @@
    "name": "Ares Management",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://aresmgmt.wd1.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "aresmgmt.wd1.myworkdayjobs.com",
+    "tenant": "aresmgmt",
+    "site": "External"
+   }
   },
   {
    "rank": 59,
@@ -761,10 +782,10 @@
    "name": "Arthur J. Gallagher & Co.",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.ajg.com/careers-home/jobs",
+   "career_site": "https://jobs.ajg.com/jobs",
    "adapter": "jibe",
    "params": {
-    "host": "www.ajg.com"
+    "host": "jobs.ajg.com"
    }
   },
   {
@@ -773,10 +794,13 @@
    "name": "Assurant",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://assurant.wd1.myworkdayjobs.com/Assurant_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "assurant.wd1.myworkdayjobs.com",
+    "tenant": "assurant",
+    "site": "Assurant_Careers"
+   }
   },
   {
    "rank": 62,
@@ -784,10 +808,13 @@
    "name": "AT&T",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://att.wd1.myworkdayjobs.com/ATTGeneral",
+   "adapter": "workday",
+   "params": {
+    "host": "att.wd1.myworkdayjobs.com",
+    "tenant": "att",
+    "site": "ATTGeneral"
+   }
   },
   {
    "rank": 63,
@@ -809,10 +836,13 @@
    "name": "Autodesk",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://jobs.autodesk.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://autodesk.wd1.myworkdayjobs.com/Ext",
+   "adapter": "workday",
+   "params": {
+    "host": "autodesk.wd1.myworkdayjobs.com",
+    "tenant": "autodesk",
+    "site": "Ext"
+   }
   },
   {
    "rank": 65,
@@ -864,10 +894,13 @@
    "name": "Baker Hughes",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://careers.bakerhughes.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://bakerhughes.wd5.myworkdayjobs.com/BakerHughes",
+   "adapter": "workday",
+   "params": {
+    "host": "bakerhughes.wd5.myworkdayjobs.com",
+    "tenant": "bakerhughes",
+    "site": "BakerHughes"
+   }
   },
   {
    "rank": 70,
@@ -937,10 +970,13 @@
    "name": "Bio-Techne",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://biotechne.wd5.myworkdayjobs.com/Biotechne",
+   "adapter": "workday",
+   "params": {
+    "host": "biotechne.wd5.myworkdayjobs.com",
+    "tenant": "biotechne",
+    "site": "Biotechne"
+   }
   },
   {
    "rank": 76,
@@ -976,10 +1012,13 @@
    "name": "Blackstone Inc.",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://blackstone.wd1.myworkdayjobs.com/Blackstone_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "blackstone.wd1.myworkdayjobs.com",
+    "tenant": "blackstone",
+    "site": "Blackstone_Careers"
+   }
   },
   {
    "rank": 79,
@@ -1050,10 +1089,10 @@
    "name": "Boston Scientific",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.bostonscientific.com/search/",
+   "career_site": "https://jobs.bostonscientific.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.bostonscientific.com"
+    "host": "jobs.bostonscientific.com"
    }
   },
   {
@@ -1157,10 +1196,13 @@
    "name": "Cadence Design Systems",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://cadence.wd1.myworkdayjobs.com/External_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "cadence.wd1.myworkdayjobs.com",
+    "tenant": "cadence",
+    "site": "External_Careers"
+   }
   },
   {
    "rank": 93,
@@ -1292,10 +1334,13 @@
    "name": "CDW Corporation",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://cdw.wd5.myworkdayjobs.com/Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "cdw.wd5.myworkdayjobs.com",
+    "tenant": "cdw",
+    "site": "Careers"
+   }
   },
   {
    "rank": 104,
@@ -1317,10 +1362,13 @@
    "name": "Centene Corporation",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://centene.wd5.myworkdayjobs.com/Centene_External",
+   "adapter": "workday",
+   "params": {
+    "host": "centene.wd5.myworkdayjobs.com",
+    "tenant": "centene",
+    "site": "Centene_External"
+   }
   },
   {
    "rank": 106,
@@ -1340,10 +1388,13 @@
    "name": "CF Industries",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://careers.cfindustries.com/search-jobs",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://cfindustries.wd1.myworkdayjobs.com/careers",
+   "adapter": "workday",
+   "params": {
+    "host": "cfindustries.wd1.myworkdayjobs.com",
+    "tenant": "cfindustries",
+    "site": "careers"
+   }
   },
   {
    "rank": 108,
@@ -1351,10 +1402,10 @@
    "name": "Charles River Laboratories",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://jobs.criver.com/search/",
+   "career_site": "https://careers.criver.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "jobs.criver.com"
+    "host": "careers.criver.com"
    }
   },
   {
@@ -1440,10 +1491,13 @@
    "name": "Ciena",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://ciena.wd5.myworkdayjobs.com/Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "ciena.wd5.myworkdayjobs.com",
+    "tenant": "ciena",
+    "site": "Careers"
+   }
   },
   {
    "rank": 116,
@@ -1476,10 +1530,10 @@
    "name": "Cintas",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.cintas.com/search/",
+   "career_site": "https://careers.cintas.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.cintas.com"
+    "host": "careers.cintas.com"
    }
   },
   {
@@ -1541,10 +1595,13 @@
    "name": "CME Group",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://cmegroup.wd1.myworkdayjobs.com/cme_careers",
+   "adapter": "workday",
+   "params": {
+    "host": "cmegroup.wd1.myworkdayjobs.com",
+    "tenant": "cmegroup",
+    "site": "cme_careers"
+   }
   },
   {
    "rank": 124,
@@ -1564,10 +1621,9 @@
    "weight_pct": null,
    "sector": "Consumer Staples",
    "career_site": "https://www.coca-colacompany.com/search/",
-   "adapter": "successfactors",
-   "params": {
-    "host": "www.coca-colacompany.com"
-   }
+   "adapter": "none",
+   "params": {},
+   "known_issue": "Career site runs on successfactors; its job search host was not found yet."
   },
   {
    "rank": 126,
@@ -1632,10 +1688,13 @@
    "name": "Comfort Systems USA",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://comfortsystemsusa.wd1.myworkdayjobs.com/Corpcareers",
+   "adapter": "workday",
+   "params": {
+    "host": "comfortsystemsusa.wd1.myworkdayjobs.com",
+    "tenant": "comfortsystemsusa",
+    "site": "Corpcareers"
+   }
   },
   {
    "rank": 132,
@@ -1643,10 +1702,13 @@
    "name": "ConocoPhillips",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://conocophillips.wd1.myworkdayjobs.com/eQuest",
+   "adapter": "workday",
+   "params": {
+    "host": "conocophillips.wd1.myworkdayjobs.com",
+    "tenant": "conocophillips",
+    "site": "eQuest"
+   }
   },
   {
    "rank": 133,
@@ -1708,10 +1770,13 @@
    "name": "Copart",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.copart.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://copart.wd12.myworkdayjobs.com/Copart",
+   "adapter": "workday",
+   "params": {
+    "host": "copart.wd12.myworkdayjobs.com",
+    "tenant": "copart",
+    "site": "Copart"
+   }
   },
   {
    "rank": 138,
@@ -1744,10 +1809,13 @@
    "name": "CoStar Group",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": "https://login.microsoftonline.com/9a64e7ca-363f-441c-9aa7-4f85977c09f1/saml2?SAMLRequest=fVLLbtswELz7KwTd9ZYli7AcuHHaGnBtIXZ7yCVYUZRNQCJVLpWmf19SSZrmUPPG5czsziyXCH03kPWoL%2BKe%2FRwZ6pnjPPedQDI9le6oBJGAHImAniHRlBzX33Yk9kMyKKkllZ37gXSdA4hMaS6FJW03pXvY3%2B0OX7b7R4igDes8WdCiiOI6ZfmCLpKGQh4WMSQwz2pK67y1xB9ModEoXSNp745TKfnEG6b2pmPp3vHzRbeya6YuiCPbCtQgtGGEceZFoRfNT9GCpBlJ8weL2hjzXICeZC9aD0iCoJNnLvyeUyVRtlqKjgvmU9kHBWRmQgpekiWtl6YR9QqA3EvbxbzIcxoWbRTYOGIrXr0m9YmLhovz9YjqFxCSr6dT5VWH48lKrN%2BCu5UCx56pI1NPnLLv97v3eak0LpXP3uz7wANE%2BQhmwzdAsXwFGAfuasptaWckU0RqdUVmGfwLfKcOxCa%2B3VSy4%2FT3VLfns1Q96P%2F7jPxoqvDGaycoGQUOjPKWs8b9K7PuOvnrVjHQZqlajcx1gtVs9jLMx4%2B7%2BgM%3D&RelayState=https%3A%2F%2Fcareers.costargroup.com%2Fhome",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://costar.wd1.myworkdayjobs.com/CoStarCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "costar.wd1.myworkdayjobs.com",
+    "tenant": "costar",
+    "site": "CoStarCareers"
+   }
   },
   {
    "rank": 141,
@@ -1769,10 +1837,10 @@
    "name": "CRH plc",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://www.crh.com/search/",
+   "career_site": "https://jobs.crh.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.crh.com"
+    "host": "jobs.crh.com"
    }
   },
   {
@@ -1979,10 +2047,13 @@
    "name": "Diamondback Energy",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://diamondbackenergy.wd12.myworkdayjobs.com/DBE",
+   "adapter": "workday",
+   "params": {
+    "host": "diamondbackenergy.wd12.myworkdayjobs.com",
+    "tenant": "diamondbackenergy",
+    "site": "DBE"
+   }
   },
   {
    "rank": 160,
@@ -2076,10 +2147,13 @@
    "name": "Dow Inc.",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://dow.wd1.myworkdayjobs.com/ExternalCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "dow.wd1.myworkdayjobs.com",
+    "tenant": "dow",
+    "site": "ExternalCareers"
+   }
   },
   {
    "rank": 168,
@@ -2088,10 +2162,9 @@
    "weight_pct": null,
    "sector": "Utilities",
    "career_site": "https://www.dteenergy.com/search/",
-   "adapter": "successfactors",
-   "params": {
-    "host": "www.dteenergy.com"
-   }
+   "adapter": "none",
+   "params": {},
+   "known_issue": "Career site runs on successfactors; its job search host was not found yet."
   },
   {
    "rank": 169,
@@ -2099,10 +2172,13 @@
    "name": "Duke Energy",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://dukeenergy.wd1.myworkdayjobs.com/Search",
+   "adapter": "workday",
+   "params": {
+    "host": "dukeenergy.wd1.myworkdayjobs.com",
+    "tenant": "dukeenergy",
+    "site": "Search"
+   }
   },
   {
    "rank": 170,
@@ -2110,10 +2186,13 @@
    "name": "DuPont",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://careers.dupont.com/us/en",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on phenom; no collector for it yet."
+   "career_site": "https://dupont.wd5.myworkdayjobs.com/Jobs",
+   "adapter": "workday",
+   "params": {
+    "host": "dupont.wd5.myworkdayjobs.com",
+    "tenant": "dupont",
+    "site": "Jobs"
+   }
   },
   {
    "rank": 171,
@@ -2189,10 +2268,13 @@
    "name": "Edwards Lifesciences",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.edwards.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://edwards.wd5.myworkdayjobs.com/EdwardsCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "edwards.wd5.myworkdayjobs.com",
+    "tenant": "edwards",
+    "site": "EdwardsCareers"
+   }
   },
   {
    "rank": 177,
@@ -2309,10 +2391,13 @@
    "name": "Essex Property Trust",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://essex.wd5.myworkdayjobs.com/essexcareers",
+   "adapter": "workday",
+   "params": {
+    "host": "essex.wd5.myworkdayjobs.com",
+    "tenant": "essex",
+    "site": "essexcareers"
+   }
   },
   {
    "rank": 187,
@@ -2394,10 +2479,10 @@
    "name": "Expand Energy",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://www.expandenergy.com/search/",
+   "career_site": "https://jobs.expandenergy.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.expandenergy.com"
+    "host": "jobs.expandenergy.com"
    }
   },
   {
@@ -2459,10 +2544,13 @@
    "name": "FactSet",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.factset.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://factset.wd108.myworkdayjobs.com/FactSetCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "factset.wd108.myworkdayjobs.com",
+    "tenant": "factset",
+    "site": "FactSetCareers"
+   }
   },
   {
    "rank": 199,
@@ -2470,10 +2558,13 @@
    "name": "Fair Isaac",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.fico.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://fico.wd1.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "fico.wd1.myworkdayjobs.com",
+    "tenant": "fico",
+    "site": "External"
+   }
   },
   {
    "rank": 200,
@@ -2660,10 +2751,13 @@
    "name": "Fox Corporation(Class A)",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": "https://www.foxcareers.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://fox.wd1.myworkdayjobs.com/Domestic",
+   "adapter": "workday",
+   "params": {
+    "host": "fox.wd1.myworkdayjobs.com",
+    "tenant": "fox",
+    "site": "Domestic"
+   }
   },
   {
    "rank": 215,
@@ -2685,10 +2779,10 @@
    "name": "Freeport-McMoRan",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://www.fcx.com/search/",
+   "career_site": "https://jobs.fcx.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.fcx.com"
+    "host": "jobs.fcx.com"
    }
   },
   {
@@ -2698,10 +2792,9 @@
    "weight_pct": null,
    "sector": "Consumer Discretionary",
    "career_site": "https://www.garmin.com/careers-home/jobs",
-   "adapter": "jibe",
-   "params": {
-    "host": "www.garmin.com"
-   }
+   "adapter": "none",
+   "params": {},
+   "known_issue": "Career site runs on jibe; its job search host was not found yet."
   },
   {
    "rank": 218,
@@ -2709,10 +2802,13 @@
    "name": "Gartner",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://gartner.wd5.myworkdayjobs.com/EXT",
+   "adapter": "workday",
+   "params": {
+    "host": "gartner.wd5.myworkdayjobs.com",
+    "tenant": "gartner",
+    "site": "EXT"
+   }
   },
   {
    "rank": 219,
@@ -2814,10 +2910,13 @@
    "name": "General Motors",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://search-careers.gm.com/en/?utm_source=gm.com&amp;utm_medium=referral&amp;utm_campaign=Home",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on paradox; no collector for it yet."
+   "career_site": "https://generalmotors.wd5.myworkdayjobs.com/Careers_GM",
+   "adapter": "workday",
+   "params": {
+    "host": "generalmotors.wd5.myworkdayjobs.com",
+    "tenant": "generalmotors",
+    "site": "Careers_GM"
+   }
   },
   {
    "rank": 227,
@@ -2864,10 +2963,13 @@
    "name": "Globe Life",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://careers.globelifeinsurance.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://globelife.wd5.myworkdayjobs.com/Globe-Life-Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "globelife.wd5.myworkdayjobs.com",
+    "tenant": "globelife",
+    "site": "Globe-Life-Careers"
+   }
   },
   {
    "rank": 231,
@@ -2961,10 +3063,13 @@
    "name": "Henry Schein",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://henryschein.wd1.myworkdayjobs.com/External_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "henryschein.wd1.myworkdayjobs.com",
+    "tenant": "henryschein",
+    "site": "External_Careers"
+   }
   },
   {
    "rank": 239,
@@ -3090,10 +3195,13 @@
    "name": "HP Inc.",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://jobs.hp.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://hp.wd5.myworkdayjobs.com/ExternalCareerSite",
+   "adapter": "workday",
+   "params": {
+    "host": "hp.wd5.myworkdayjobs.com",
+    "tenant": "hp",
+    "site": "ExternalCareerSite"
+   }
   },
   {
    "rank": 249,
@@ -3127,10 +3235,13 @@
    "name": "Huntington Bancshares",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://huntington-careers.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on paradox; no collector for it yet."
+   "career_site": "https://huntington.wd12.myworkdayjobs.com/HNBcareers",
+   "adapter": "workday",
+   "params": {
+    "host": "huntington.wd12.myworkdayjobs.com",
+    "tenant": "huntington",
+    "site": "HNBcareers"
+   }
   },
   {
    "rank": 252,
@@ -3138,10 +3249,10 @@
    "name": "Huntington Ingalls Industries",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.hii.com/search/",
+   "career_site": "https://careers.huntingtoningalls.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.hii.com"
+    "host": "careers.huntingtoningalls.com"
    }
   },
   {
@@ -3161,10 +3272,13 @@
    "name": "IDEX Corporation",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://idexcorp.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://idexcorp.wd5.myworkdayjobs.com/IDEX_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "idexcorp.wd5.myworkdayjobs.com",
+    "tenant": "idexcorp",
+    "site": "IDEX_Careers"
+   }
   },
   {
    "rank": 255,
@@ -3211,10 +3325,10 @@
    "name": "Incyte",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://incyte.com/careers-home/jobs",
+   "career_site": "https://careers.incyte.com/jobs",
    "adapter": "jibe",
    "params": {
-    "host": "incyte.com"
+    "host": "careers.incyte.com"
    }
   },
   {
@@ -3260,10 +3374,10 @@
    "name": "Intercontinental Exchange",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.ice.com/careers-home/jobs",
+   "career_site": "https://careers.ice.com/jobs",
    "adapter": "jibe",
    "params": {
-    "host": "www.ice.com"
+    "host": "careers.ice.com"
    }
   },
   {
@@ -3272,10 +3386,13 @@
    "name": "International Flavors & Fragrances",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://iff.wd5.myworkdayjobs.com/IFF_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "iff.wd5.myworkdayjobs.com",
+    "tenant": "iff",
+    "site": "IFF_Careers"
+   }
   },
   {
    "rank": 264,
@@ -3307,10 +3424,13 @@
    "name": "Intuitive Surgical",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.intuitive.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://intuitive.wd1.myworkdayjobs.com/irtc_careers",
+   "adapter": "workday",
+   "params": {
+    "host": "intuitive.wd1.myworkdayjobs.com",
+    "tenant": "intuitive",
+    "site": "irtc_careers"
+   }
   },
   {
    "rank": 267,
@@ -3318,10 +3438,13 @@
    "name": "Invesco",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://careers.invesco.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://invesco.wd1.myworkdayjobs.com/IVZ",
+   "adapter": "workday",
+   "params": {
+    "host": "invesco.wd1.myworkdayjobs.com",
+    "tenant": "invesco",
+    "site": "IVZ"
+   }
   },
   {
    "rank": 268,
@@ -3357,10 +3480,13 @@
    "name": "Iron Mountain",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": "https://ironmountain.jobs/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://ironmountain.wd5.myworkdayjobs.com/iron-mountain-jobs",
+   "adapter": "workday",
+   "params": {
+    "host": "ironmountain.wd5.myworkdayjobs.com",
+    "tenant": "ironmountain",
+    "site": "iron-mountain-jobs"
+   }
   },
   {
    "rank": 271,
@@ -3505,10 +3631,13 @@
    "name": "Kimberly-Clark",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://kimberlyclark.wd1.myworkdayjobs.com/GLOBAL",
+   "adapter": "workday",
+   "params": {
+    "host": "kimberlyclark.wd1.myworkdayjobs.com",
+    "tenant": "kimberlyclark",
+    "site": "GLOBAL"
+   }
   },
   {
    "rank": 282,
@@ -3630,10 +3759,13 @@
    "name": "Las Vegas Sands",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://sands.wd1.myworkdayjobs.com/sands_careers",
+   "adapter": "workday",
+   "params": {
+    "host": "sands.wd1.myworkdayjobs.com",
+    "tenant": "sands",
+    "site": "sands_careers"
+   }
   },
   {
    "rank": 292,
@@ -3641,10 +3773,13 @@
    "name": "Leidos",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.leidos.com/careers/faqs",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://leidos.wd5.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "leidos.wd5.myworkdayjobs.com",
+    "tenant": "leidos",
+    "site": "External"
+   }
   },
   {
    "rank": 293,
@@ -3790,10 +3925,13 @@
    "name": "Marathon Petroleum",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://mpc.wd1.myworkdayjobs.com/MPCCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "mpc.wd1.myworkdayjobs.com",
+    "tenant": "mpc",
+    "site": "MPCCareers"
+   }
   },
   {
    "rank": 305,
@@ -3872,10 +4010,10 @@
    "name": "McCormick & Company",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": "https://www.mccormickcorporation.com/search/",
+   "career_site": "https://careers.mccormick.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.mccormickcorporation.com"
+    "host": "careers.mccormick.com"
    }
   },
   {
@@ -3910,10 +4048,13 @@
    "name": "Medtronic",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.medtronic.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://medtronic.wd1.myworkdayjobs.com/MedtronicCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "medtronic.wd1.myworkdayjobs.com",
+    "tenant": "medtronic",
+    "site": "MedtronicCareers"
+   }
   },
   {
    "rank": 314,
@@ -4019,10 +4160,13 @@
    "name": "Monolithic Power Systems",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.monolithicpower.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://monolithicpower.wd12.myworkdayjobs.com/MPS_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "monolithicpower.wd12.myworkdayjobs.com",
+    "tenant": "monolithicpower",
+    "site": "MPS_Careers"
+   }
   },
   {
    "rank": 323,
@@ -4055,10 +4199,13 @@
    "name": "Morgan Stanley",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.morganstanley.com/careers/career-opportunities-search?opportunity=sg",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://ms.wd5.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "ms.wd5.myworkdayjobs.com",
+    "tenant": "ms",
+    "site": "External"
+   }
   },
   {
    "rank": 326,
@@ -4080,10 +4227,13 @@
    "name": "Motorola Solutions",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://motorolasolutions.wd5.myworkdayjobs.com/Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "motorolasolutions.wd5.myworkdayjobs.com",
+    "tenant": "motorolasolutions",
+    "site": "Careers"
+   }
   },
   {
    "rank": 328,
@@ -4133,10 +4283,13 @@
    "name": "Netflix",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": "http://about.netflix.com/en",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://netflix.wd108.myworkdayjobs.com/Netflix",
+   "adapter": "workday",
+   "params": {
+    "host": "netflix.wd108.myworkdayjobs.com",
+    "tenant": "netflix",
+    "site": "Netflix"
+   }
   },
   {
    "rank": 332,
@@ -4171,10 +4324,10 @@
    "name": "NextEra Energy",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://www.nexteraenergy.com/search/",
+   "career_site": "https://jobs.nexteraenergy.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.nexteraenergy.com"
+    "host": "jobs.nexteraenergy.com"
    }
   },
   {
@@ -4222,10 +4375,10 @@
    "name": "Norfolk Southern",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.norfolksouthern.com/search/",
+   "career_site": "https://jobs.nscorp.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.norfolksouthern.com"
+    "host": "jobs.nscorp.com"
    }
   },
   {
@@ -4281,10 +4434,10 @@
    "name": "Nucor",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://nucor.com/search/",
+   "career_site": "https://jobs.nucor.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "nucor.com"
+    "host": "jobs.nucor.com"
    }
   },
   {
@@ -4304,10 +4457,13 @@
    "name": "NXP Semiconductors",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://nxp.wd3.myworkdayjobs.com/careers",
+   "adapter": "workday",
+   "params": {
+    "host": "nxp.wd3.myworkdayjobs.com",
+    "tenant": "nxp",
+    "site": "careers"
+   }
   },
   {
    "rank": 346,
@@ -4417,10 +4573,10 @@
    "name": "Paccar",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.paccar.com/search/",
+   "career_site": "https://jobs.paccar.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.paccar.com"
+    "host": "jobs.paccar.com"
    }
   },
   {
@@ -4531,10 +4687,13 @@
    "name": "Pfizer",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://pfizer.wd1.myworkdayjobs.com/PfizerCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "pfizer.wd1.myworkdayjobs.com",
+    "tenant": "pfizer",
+    "site": "PfizerCareers"
+   }
   },
   {
    "rank": 364,
@@ -4565,10 +4724,10 @@
    "name": "Phillips 66",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://www.phillips66.com/search/",
+   "career_site": "https://careers.phillips66.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.phillips66.com"
+    "host": "careers.phillips66.com"
    }
   },
   {
@@ -4639,10 +4798,13 @@
    "name": "Procter & Gamble",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://pg.wd5.myworkdayjobs.com/1000",
+   "adapter": "workday",
+   "params": {
+    "host": "pg.wd5.myworkdayjobs.com",
+    "tenant": "pg",
+    "site": "1000"
+   }
   },
   {
    "rank": 373,
@@ -4661,10 +4823,13 @@
    "name": "Prologis",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://prologis.wd5.myworkdayjobs.com/Prologis_External_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "prologis.wd5.myworkdayjobs.com",
+    "tenant": "prologis",
+    "site": "Prologis_External_Careers"
+   }
   },
   {
    "rank": 375,
@@ -4672,10 +4837,13 @@
    "name": "Prudential Financial",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://jobs.prudential.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://prudential.wd3.myworkdayjobs.com/prudential",
+   "adapter": "workday",
+   "params": {
+    "host": "prudential.wd3.myworkdayjobs.com",
+    "tenant": "prudential",
+    "site": "prudential"
+   }
   },
   {
    "rank": 376,
@@ -4723,10 +4891,13 @@
    "name": "PulteGroup",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://pultegroup.wd1.myworkdayjobs.com/PGI",
+   "adapter": "workday",
+   "params": {
+    "host": "pultegroup.wd1.myworkdayjobs.com",
+    "tenant": "pultegroup",
+    "site": "PGI"
+   }
   },
   {
    "rank": 380,
@@ -4799,10 +4970,13 @@
    "name": "Raymond James Financial",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://raymondjames.wd1.myworkdayjobs.com/RaymondJamesCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "raymondjames.wd1.myworkdayjobs.com",
+    "tenant": "raymondjames",
+    "site": "RaymondJamesCareers"
+   }
   },
   {
    "rank": 386,
@@ -4846,10 +5020,13 @@
    "name": "Regeneron Pharmaceuticals",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://regeneron.wd1.myworkdayjobs.com/Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "regeneron.wd1.myworkdayjobs.com",
+    "tenant": "regeneron",
+    "site": "Careers"
+   }
   },
   {
    "rank": 390,
@@ -4899,10 +5076,13 @@
    "name": "Revvity",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://jobs.revvity.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on talentbrew; no collector for it yet."
+   "career_site": "https://revvity.wd103.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "revvity.wd103.myworkdayjobs.com",
+    "tenant": "revvity",
+    "site": "External"
+   }
   },
   {
    "rank": 394,
@@ -4969,10 +5149,10 @@
    "name": "Royal Caribbean Group",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://careers.royalcaribbeangroup.com/search/",
+   "career_site": "https://jobs.royalcaribbeangroup.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "careers.royalcaribbeangroup.com"
+    "host": "jobs.royalcaribbeangroup.com"
    }
   },
   {
@@ -5009,10 +5189,13 @@
    "name": "Salesforce",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.salesforce.com/company/careers/university/?bc=OTH",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://salesforce.wd12.myworkdayjobs.com/External_Career_Site",
+   "adapter": "workday",
+   "params": {
+    "host": "salesforce.wd12.myworkdayjobs.com",
+    "tenant": "salesforce",
+    "site": "External_Career_Site"
+   }
   },
   {
    "rank": 403,
@@ -5056,10 +5239,10 @@
    "name": "Seagate Technology",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.seagate.com/search/",
+   "career_site": "https://seagatecareers.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.seagate.com"
+    "host": "seagatecareers.com"
    }
   },
   {
@@ -5128,10 +5311,10 @@
    "name": "Skyworks Solutions",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.skyworksinc.com/search/",
+   "career_site": "https://careers.skyworksinc.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.skyworksinc.com"
+    "host": "careers.skyworksinc.com"
    }
   },
   {
@@ -5560,10 +5743,13 @@
    "name": "Travelers Companies (The)",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://careers.travelers.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://travelers.wd5.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "travelers.wd5.myworkdayjobs.com",
+    "tenant": "travelers",
+    "site": "External"
+   }
   },
   {
    "rank": 447,
@@ -5571,10 +5757,13 @@
    "name": "Trimble Inc.",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.trimble.com/en/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://trimble.wd1.myworkdayjobs.com/TrimbleCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "trimble.wd1.myworkdayjobs.com",
+    "tenant": "trimble",
+    "site": "TrimbleCareers"
+   }
   },
   {
    "rank": 448,
@@ -5845,10 +6034,13 @@
    "name": "Vertex Pharmaceuticals",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://vrtx.wd501.myworkdayjobs.com/Vertex_Careers",
+   "adapter": "workday",
+   "params": {
+    "host": "vrtx.wd501.myworkdayjobs.com",
+    "tenant": "vrtx",
+    "site": "Vertex_Careers"
+   }
   },
   {
    "rank": 470,
@@ -6016,10 +6208,10 @@
    "name": "WEC Energy Group",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://www.wecenergygroup.com/search/",
+   "career_site": "https://careers.wecenergygroup.com/search/",
    "adapter": "successfactors",
    "params": {
-    "host": "www.wecenergygroup.com"
+    "host": "careers.wecenergygroup.com"
    }
   },
   {
@@ -6051,10 +6243,9 @@
    "weight_pct": null,
    "sector": "Health Care",
    "career_site": "https://www.westpharma.com/search/",
-   "adapter": "successfactors",
-   "params": {
-    "host": "www.westpharma.com"
-   }
+   "adapter": "none",
+   "params": {},
+   "known_issue": "Career site runs on successfactors; its job search host was not found yet."
   },
   {
    "rank": 487,
@@ -6150,10 +6341,13 @@
    "name": "Xcel Energy",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://xcelenergy.wd1.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "xcelenergy.wd1.myworkdayjobs.com",
+    "tenant": "xcelenergy",
+    "site": "External"
+   }
   },
   {
    "rank": 495,

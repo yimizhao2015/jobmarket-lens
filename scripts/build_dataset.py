@@ -6,10 +6,13 @@ Inputs:  data/lens.db (from collector runs) and data/seed/*.jsonl (page-read sam
          companies with no successful collector run yet).
 Outputs: web/data.json (compact, for the dashboard), data/normalized/postings.csv (analyst-friendly).
 """
+import base64
 import csv
+import gzip
 import json
 import sys
 from collections import Counter
+from multiprocessing import Pool
 from datetime import date
 from pathlib import Path
 
@@ -116,13 +119,21 @@ def main():
             if col.get("use_seed_sample") and s["co"] not in collected:
                 seed_rows.append(seed_to_raw(s))
 
-    out, dropped = [], Counter()
+    dropped, undated, keep = Counter(), Counter(), []
     for r in rows + seed_rows:
-        n = normalize(r)
-        if not n["posted"] or not (col["posted_from"] <= n["posted"] <= col["posted_to"]):
-            dropped[n["co"]] += 1
+        posted = r.get("posted_date")
+        if not posted:  # no posting date on the site: can't place it in the date window
+            undated[r["company"]] += 1
             continue
-        out.append(n)
+        if r.get("first_seen") and posted > r["first_seen"]:
+            posted = r["first_seen"]  # same clamp normalize() applies
+        if not (col["posted_from"] <= posted[:10] <= col["posted_to"]):
+            dropped[r["company"]] += 1
+            continue
+        keep.append(r)
+    # Normalizing is regex-heavy; spread it over the machine's cores.
+    with Pool() as pool:
+        out = pool.map(normalize, keep, chunksize=200)
 
     # Compact encoding: repeated strings become indexes into lookup tables.
     skill_names = sorted({s for n in out for s in n["skills"]})
@@ -147,6 +158,7 @@ def main():
         "fields": fields + ["skills", "lic"],
         "rows": [[n[f] for f in fields] + [[sk_ix[s] for s in n["skills"]], [lic_ix[s] for s in n["lic"]]] for n in out],
         "dropped_outside_window": dict(dropped),
+        "dropped_undated": dict(undated),
     }
     (ROOT / "web").mkdir(exist_ok=True)
     (ROOT / "web/data.json").write_text(json.dumps(data, separators=(",", ":"), ensure_ascii=False))
@@ -154,7 +166,8 @@ def main():
     # Dashboard pages with the data inlined: index.html opens straight from disk; artifact.html is the
     # body-only variant used for publishing.
     tpl = (ROOT / "web/template.html").read_text()
-    payload = json.dumps(data, separators=(",", ":"), ensure_ascii=False).replace("</", "<\\/")
+    raw_json = json.dumps(data, separators=(",", ":"), ensure_ascii=False).encode()
+    payload = json.dumps(base64.b64encode(gzip.compress(raw_json, 9)).decode())
     body = tpl.replace("/*DATA*/null", payload)
     (ROOT / "web/artifact.html").write_text(body)
     (ROOT / "web/index.html").write_text(

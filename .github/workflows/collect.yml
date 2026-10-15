@@ -45,14 +45,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gzip -kf data/lens.db
-          gh release view data >/dev/null 2>&1 || gh release create data --title "Posting history" --notes "SQLite history used by the collector. Replaced on every run."
-          gh release upload data data/lens.db.gz --clobber
+          gzip -kf data/lens.db data/normalized/postings.csv
+          gh release view data >/dev/null 2>&1 || gh release create data --title "Posting history" --notes "SQLite history used by the collector (lens.db.gz) and the normalized postings (postings.csv.gz). Replaced on every run."
+          gh release upload data data/lens.db.gz data/normalized/postings.csv.gz --clobber
       - name: Commit dashboard
         run: |
           git config user.name "jobmarket-lens bot"
           git config user.email "actions@users.noreply.github.com"
-          git add web/ data/normalized/
+          git add web/index.html config/
           git commit -m "Data refresh $(date -u +%F)" || echo "nothing to commit"
           git push
       - uses: actions/upload-pages-artifact@v3

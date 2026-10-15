@@ -146,7 +146,7 @@ a { color: var(--accent); }
 
   <section class="grid">
     <div class="panel"><div><h2>Openings by occupation group</h2><p class="sub">SOC 2018 major groups, assigned from job titles</p></div><div class="bars" id="c-soc"></div></div>
-    <div class="panel"><div><h2>Openings by company</h2><p class="sub">Postings in view, by index-weight rank</p></div><div class="bars" id="c-co"></div></div>
+    <div class="panel"><div><h2>Openings by company</h2><p class="sub">Top 20 companies by postings in view; pick a company in the filter to see any other</p></div><div class="bars" id="c-co"></div></div>
     <div class="panel"><div><h2>Job level</h2><p class="sub">From title keywords, the company's own level label, then years required</p></div><div class="bars" id="c-lvl"></div></div>
     <div class="panel"><div><h2>Minimum degree required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
     <div class="panel"><div><h2>Experience required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
@@ -192,6 +192,12 @@ const EMBEDDED = /*DATA*/null;
 const NS = "Not specified";
 
 async function load() {
+  if (typeof EMBEDDED === "string") {
+    // gzip + base64: keeps the self-contained page small enough to publish with every posting inlined
+    const bytes = Uint8Array.from(atob(EMBEDDED), c => c.charCodeAt(0));
+    const text = await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
+    return JSON.parse(text);
+  }
   if (EMBEDDED) return EMBEDDED;
   const r = await fetch("data.json");
   return r.json();
@@ -315,7 +321,7 @@ load().then(D => {
     document.getElementById("kpis").innerHTML = kpis.map(([v, l, n]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div><div class="n">${n}</div></div>`).join("");
 
     bars("c-soc", count(R, "soc"), N, { label: k => `${k} ${socName[k]}` });
-    bars("c-co", count(R, "co"), N, { label: k => coName[k] || k, order: order.co });
+    bars("c-co", count(R, "co"), N, { label: k => coName[k] || k, limit: 20 });
     bars("c-lvl", count(R, "lvl"), N, { order: order.lvl });
     bars("c-deg", count(R, "deg"), N, { order: ["High school", "Associate", "Bachelor's", "Master's", "Doctorate", "Enrolled student", NS] });
     bars("c-yrs", count(R, "yrs_b"), N, { order: ["0-1 yrs", "2-4 yrs", "5-7 yrs", "8-10 yrs", "10+ yrs", NS] });

@@ -3,3 +3,7 @@ __pycache__/
 # Large or regenerated data: the posting history lives in a GitHub release asset (see collect.yml)
 data/lens.db
 data/raw/
+# Regenerated on every build; the dashboard inlines the data, and the CSV is attached to the "data" release
+web/data.json
+web/artifact.html
+data/normalized/postings.csv
