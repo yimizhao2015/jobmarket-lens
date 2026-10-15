@@ -50,7 +50,7 @@ h1 .lens { color: var(--accent); }
 .meta { font: 12px/1.5 var(--f-mono); color: var(--ink-3); text-align: right; }
 h2 { font: 600 15px/1.3 var(--f-body); margin: 0; text-wrap: balance; }
 .sub { color: var(--ink-3); font-size: 12px; margin: 2px 0 0; }
-.intro { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 90ch; }
+.intro { margin: 0; color: var(--ink-2); font-size: 15px; }
 .notice { border: 1px solid var(--warn); background: var(--warn-bg); color: var(--ink); border-radius: 8px; padding: 12px 14px; }
 .notice b { color: var(--warn); }
 .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; padding: 12px; background: var(--panel);
@@ -109,13 +109,17 @@ a { color: var(--accent); }
 .pill.pending { color: var(--ink-2); background: var(--mute-bg); }
 .pill.blocked { color: var(--bad); background: var(--bad-bg); }
 .tag { display: inline-block; font-size: 11px; background: var(--chip); color: var(--ink-2); border-radius: 4px; padding: 0 6px; margin: 1px 2px 1px 0; }
-.method { color: var(--ink-2); font-size: 13px; display: grid; gap: 6px; max-width: 80ch; }
+.method { color: var(--ink-2); font-size: 13px; display: grid; gap: 6px; }
 .method p { margin: 0; }
 @media (max-width: 700px) { .filters { position: static; } .meta { text-align: left; } }
 #tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); font-size: 12px; padding: 6px 9px;
   border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .1s; }
 @media (prefers-reduced-motion: reduce) { #tip { transition: none; } }
 .more { font-size: 12px; color: var(--ink-3); }
+.pager { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-2); }
+.pager button { font: 500 12.5px var(--f-body); color: var(--accent); background: transparent; border: 1px solid var(--line);
+  border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.pager button:disabled { color: var(--ink-3); cursor: default; }
 </style>
 
 <div class="wrap">
@@ -147,6 +151,11 @@ a { color: var(--accent); }
   <section class="grid">
     <div class="panel"><div><h2>Openings by occupation group</h2><p class="sub">SOC 2018 major groups, assigned from job titles</p></div><div class="bars" id="c-soc"></div></div>
     <div class="panel"><div><h2>Openings by company</h2><p class="sub">Top 20 companies by postings in view; pick a company in the filter to see any other</p></div><div class="bars" id="c-co"></div></div>
+    <div class="panel">
+      <div class="panel-head"><div><h2>Top skills</h2><p class="sub">Share of postings mentioning each skill</p></div>
+        <select class="inline" id="skill-soc" aria-label="Skills for occupation group"></select></div>
+      <div class="bars" id="c-skills"></div>
+    </div>
     <div class="panel"><div><h2>Job level</h2><p class="sub">From title keywords, the company's own level label, then years required</p></div><div class="bars" id="c-lvl"></div></div>
     <div class="panel"><div><h2>Minimum degree required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
     <div class="panel"><div><h2>Experience required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
@@ -157,30 +166,27 @@ a { color: var(--accent); }
       <div class="panel-head"><div><h2>Pay ranges by occupation group</h2><p class="sub">Median posted range, annualized USD (hourly × 2,080). Only postings that disclose pay in USD.</p></div></div>
       <div id="c-pay"></div>
     </div>
-    <div class="panel">
-      <div class="panel-head"><div><h2>Top skills</h2><p class="sub">Share of postings mentioning each skill</p></div>
-        <select class="inline" id="skill-soc" aria-label="Skills for occupation group"></select></div>
-      <div class="bars" id="c-skills"></div>
-    </div>
     <div class="panel"><div><h2>Where the jobs are</h2><p class="sub">Primary location, by country</p></div><div class="bars" id="c-country"></div></div>
     <div class="panel"><div><h2>US states</h2><p class="sub">Primary location of US postings</p></div><div class="bars" id="c-state"></div></div>
     <div class="panel wide"><div><h2>Postings over time</h2><p class="sub">By month posted. History fills in as scheduled collection runs accumulate.</p></div><div id="c-month"></div></div>
   </section>
 
   <section class="panel wide" aria-labelledby="cov-h">
-    <div><h2 id="cov-h">Source coverage</h2><p class="sub">The 20 largest S&amp;P 500 companies by index weight and the state of collection from each official career site</p></div>
+    <div><h2 id="cov-h">Source coverage</h2><p class="sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
     <div class="tbl-wrap"><table id="cov"></table></div>
+    <div class="pager" id="cov-pager"></div>
   </section>
 
   <section class="panel wide" aria-labelledby="tbl-h">
     <div class="panel-head"><div><h2 id="tbl-h">Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
     <div class="tbl-wrap"><table id="tbl"></table></div>
-    <div class="more" id="tbl-more"></div>
+    <div class="pager" id="tbl-pager"></div>
   </section>
 
   <section class="panel wide method" aria-labelledby="m-h">
-    <h2 id="m-h">How the numbers are made</h2>
-    <p>Postings come only from each company's official career site. Collectors call the site's own job API where one exists (Workday, Oracle Recruiting, Eightfold, SmartRecruiters, Jibe, amazon.jobs) and otherwise read the schema.org JobPosting data on each posting page. Sites that refuse automated access are listed as blocked, not estimated.</p>
+    <h2 id="m-h">Notes*</h2>
+    <p>* Data sources: job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Coverage by company is listed under Source coverage above.</p>
+    <p>Postings come only from each company's official career site. Collectors call the site's own job API where one exists (Workday, Oracle Recruiting, SuccessFactors, Eightfold, Jibe, amazon.jobs) and otherwise read the schema.org JobPosting data on each posting page. Postings without a date on the site are left out. Sites that refuse automated access are listed as blocked, not estimated.</p>
     <p>Each collection run is a snapshot. A posting keeps the date it was first seen; one that disappears from a later run is counted as closed. Only postings dated October 1, 2026 or later are included. A posting dated after the day it was collected (a scheduled start date on some sites) is dated to the collection day.</p>
     <p>Occupation groups follow the 2018 Standard Occupational Classification major groups, assigned by auditable title rules with the company's own job family as a fallback. Pay is the posted range, annualized for comparison; it is not actual earnings. Skills and licenses are matched against a fixed dictionary, so a skill the dictionary lacks will not appear. "Not specified" means the posting does not say.</p>
   </section>
@@ -214,11 +220,15 @@ load().then(D => {
   const money = v => "$" + (v >= 1000 ? Math.round(v / 1000) + "k" : Math.round(v));
 
   // ---- header + intro
+  const longDate = d => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+  const runDates = (D.snapshots || []).filter(x => x.status === "ok" && /^\d{4}-\d{2}-\d{2}$/.test(x.run_date)).map(x => x.run_date).sort();
+  const lastRun = longDate(runDates.length ? runDates[runDates.length - 1] : D.generated);
   const sampleCos = [...new Set(rows.filter(r => r.src === "page-read").map(r => r.co))];
   const nCos = new Set(rows.map(r => r.co)).size;
   const since = new Date(D.posted_from + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
   document.getElementById("meta").innerHTML =
-    `Universe: S&amp;P 500, excluding Berkshire Hathaway<br>Constituents as of ${D.universe.retrieved}<br>Dataset built ${D.generated}`;
+    `Data sources: job postings of S&amp;P 500 companies*<br>Data last updated: ${lastRun}`;
+  document.getElementById("n-const").textContent = longDate(D.universe.retrieved);
   document.getElementById("intro").textContent =
     `${fmt(rows.length)} job postings from the official career sites of ${fmt(nCos)} S&P 500 companies, posted since ${since}. ` +
     `Filter by year, company, occupation, level, schedule, experience and location to see where demand is, which skills employers ask for, and how pay and requirements differ.`;
@@ -364,17 +374,36 @@ load().then(D => {
         (mk.length < 3 ? `<p class="sub">Only ${mk.length} month${mk.length > 1 ? "s" : ""} of postings so far; the trend line becomes meaningful after a few monthly runs.</p>` : "");
     }
 
-    // table
+    // table: newest first, 50 per page; a filter change goes back to page 1
+    tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || ""));
+    tblPage = 0;
+    document.getElementById("tbl-sub").textContent = `${fmt(N)} postings match the filters, newest first`;
+    drawTable();
+  }
+
+  const PAGE = 50;
+  let tblList = [], tblPage = 0;
+  function pager(id, total, page, go) {
+    const el = document.getElementById(id);
+    const pages = Math.max(1, Math.ceil(total / PAGE));
+    if (total <= PAGE) { el.innerHTML = ""; return; }
+    el.innerHTML = `<button type="button" data-p="0" ${page === 0 ? "disabled" : ""}>First</button>` +
+      `<button type="button" data-p="${page - 1}" ${page === 0 ? "disabled" : ""}>Previous</button>` +
+      `<span>Page ${fmt(page + 1)} of ${fmt(pages)} · ${fmt(page * PAGE + 1)}–${fmt(Math.min(total, (page + 1) * PAGE))} of ${fmt(total)}</span>` +
+      `<button type="button" data-p="${page + 1}" ${page >= pages - 1 ? "disabled" : ""}>Next</button>` +
+      `<button type="button" data-p="${pages - 1}" ${page >= pages - 1 ? "disabled" : ""}>Last</button>`;
+    el.querySelectorAll("button").forEach(b => b.addEventListener("click", () => go(+b.dataset.p)));
+  }
+  function drawTable() {
     const tb = document.getElementById("tbl");
-    const LIM = 150;
-    document.getElementById("tbl-sub").textContent = `${fmt(N)} postings match the filters` + (N > LIM ? `; showing the newest ${LIM}` : "");
-    const list = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || "")).slice(0, LIM);
+    const list = tblList.slice(tblPage * PAGE, (tblPage + 1) * PAGE);
     tb.innerHTML = `<thead><tr><th>Title</th><th>Company</th><th>SOC group</th><th>Level</th><th>Job type</th><th>Location</th><th>Posted</th><th>Pay</th><th>Degree</th><th>Yrs</th><th>Skills</th></tr></thead><tbody>` +
       list.map(r => `<tr><td><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></td><td>${coName[r.co]}</td><td>${socName[r.soc]}</td><td>${r.lvl}</td><td>${r.sched}</td>
         <td>${[r.city, r.state, r.country !== NS ? r.country : null].filter(Boolean).join(", ") || NS}${r.nloc > 1 ? ` <span class="more">+${r.nloc - 1}</span>` : ""}</td>
         <td class="num">${r.posted || ""}</td><td class="num">${postedPay(r)}</td>
         <td>${r.deg}${r.deg_equiv ? " or equiv." : ""}</td><td class="num">${r.yrs ?? ""}</td>
         <td>${r.skills.slice(0, 5).map(i => `<span class="tag">${skillNames[i]}</span>`).join("")}</td></tr>`).join("") + "</tbody>";
+    pager("tbl-pager", tblList.length, tblPage, p => { tblPage = p; drawTable(); document.getElementById("tbl-h").scrollIntoView({ block: "start" }); });
   }
 
   // Pay as the posting states it: the original amounts and period, not annualized.
@@ -391,21 +420,29 @@ load().then(D => {
   const latest = {};
   (D.snapshots || []).forEach(s => latest[s.company] = s);
   const byCo = count(rows, "co");
-  document.getElementById("cov").innerHTML = `<thead><tr><th>#</th><th>Company</th><th>Weight</th><th>Career site</th><th>Platform</th><th>Status</th><th>Postings</th><th>Notes</th></tr></thead><tbody>` +
-    D.companies.map(c => {
+  const covHead = `<thead><tr><th>#</th><th>Company</th><th>Career site</th><th>Platform</th><th>Status</th><th>Postings</th><th>Notes</th></tr></thead>`;
+  const covRows = D.companies.map(c => {
       const s = latest[c.ticker];
       let pill;
       if (s && s.status === "ok") pill = `<span class="pill ok">Collected ${s.run_date}</span>`;
       else if (s && s.status === "blocked") pill = `<span class="pill blocked">Blocked by site</span>`;
       else if (sampleCos.includes(c.ticker)) pill = `<span class="pill sample">Page-read sample</span>`;
-      else if (c.adapter === "none") pill = `<span class="pill pending">No company-wide site</span>`;
+      else if (s && s.status === "empty") pill = `<span class="pill pending">No postings returned</span>`;
+      else if (s && s.status === "error") pill = `<span class="pill blocked">Collector error</span>`;
+      else if (c.adapter === "none") pill = `<span class="pill pending">Not collected yet</span>`;
       else pill = `<span class="pill pending">Collector ready, not yet run</span>`;
       const note = (s && s.detail) || c.known_issue || "";
       const host = c.career_site ? new URL(c.career_site).hostname : "";
-      return `<tr><td class="num">${c.rank}</td><td>${c.name} <span class="more">${c.ticker}</span></td><td class="num">${c.weight_pct != null ? c.weight_pct.toFixed(2) + "%" : ""}</td>
+      return `<tr><td class="num">${c.rank}</td><td>${c.name} <span class="more">${c.ticker}</span></td>
         <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
         <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td><td class="more">${note}</td></tr>`;
-    }).join("") + "</tbody>";
+    });
+  let covPage = 0;
+  function drawCov() {
+    document.getElementById("cov").innerHTML = covHead + "<tbody>" + covRows.slice(covPage * PAGE, (covPage + 1) * PAGE).join("") + "</tbody>";
+    pager("cov-pager", covRows.length, covPage, p => { covPage = p; drawCov(); document.getElementById("cov-h").scrollIntoView({ block: "start" }); });
+  }
+  drawCov();
 
   render();
 });
