@@ -406,12 +406,11 @@ load().then(D => {
   function drawTable() {
     const tb = document.getElementById("tbl");
     const list = tblList.slice(tblPage * PAGE, (tblPage + 1) * PAGE);
-    tb.innerHTML = `<thead><tr><th>Title</th><th>Company</th><th>SOC group</th><th>Level</th><th>Job type</th><th>Location</th><th>Posted</th><th>Pay</th><th>Degree</th><th>Yrs</th><th>Skills</th></tr></thead><tbody>` +
+    tb.innerHTML = `<thead><tr><th>Title</th><th>Company</th><th>SOC group</th><th>Level</th><th>Job type</th><th>Location</th><th>Posted</th><th>Pay</th><th>Degree</th><th>Yrs</th></tr></thead><tbody>` +
       list.map(r => `<tr><td><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></td><td>${coName[r.co]}</td><td>${socName[r.soc]}</td><td>${r.lvl}</td><td>${r.sched}</td>
         <td>${[r.city, r.state, r.country !== NS ? r.country : null].filter(Boolean).join(", ") || NS}${r.nloc > 1 ? ` <span class="more">+${r.nloc - 1}</span>` : ""}</td>
         <td class="num">${r.posted || ""}</td><td class="num">${postedPay(r)}</td>
-        <td>${r.deg}${r.deg_equiv ? " or equiv." : ""}</td><td class="num">${r.yrs ?? ""}</td>
-        <td>${r.skills.slice(0, 5).map(i => `<span class="tag">${skillNames[i]}</span>`).join("")}</td></tr>`).join("") + "</tbody>";
+        <td>${r.deg}${r.deg_equiv ? " or equiv." : ""}</td><td class="num">${r.yrs ?? ""}</td></tr>`).join("") + "</tbody>";
     pager("tbl-pager", tblList.length, tblPage, p => { tblPage = p; drawTable(); document.getElementById("tbl-h").scrollIntoView({ block: "start" }); });
   }
 
