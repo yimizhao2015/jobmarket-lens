@@ -111,6 +111,8 @@ a { color: var(--accent); }
 .tag { display: inline-block; font-size: 11px; background: var(--chip); color: var(--ink-2); border-radius: 4px; padding: 0 6px; margin: 1px 2px 1px 0; }
 .method { color: var(--ink-2); font-size: 13px; display: grid; gap: 6px; }
 .method p { margin: 0; }
+.closed-title { color: var(--ink-3); }
+.pill.closed { color: var(--ink-3); background: var(--bg); border: 1px solid var(--line); white-space: nowrap; }
 .copyright { text-align: center; color: var(--ink-3); font-size: 12px; padding: 4px 0 8px; }
 @media (max-width: 700px) { .filters { position: static; } .meta { text-align: left; } }
 #tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); font-size: 12px; padding: 6px 9px;
@@ -136,6 +138,7 @@ a { color: var(--accent); }
 
   <div class="filters" role="group" aria-label="Filters">
     <label for="f-year">Year posted<select id="f-year"></select></label>
+    <label for="f-status">Status<select id="f-status"></select></label>
     <label for="f-co">Company<select id="f-co"></select></label>
     <label for="f-soc">Occupation (SOC)<select id="f-soc"></select></label>
     <label for="f-lvl">Job level<select id="f-lvl"></select></label>
@@ -188,7 +191,7 @@ a { color: var(--accent); }
     <h2 id="m-h">Data Sources and Methodology:</h2>
     <p>* Data sources: job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Coverage by company is listed under Source Coverage above.</p>
     <p>Postings come only from each company's official career site. Collectors call the site's own job API where one exists (Workday, Oracle Recruiting, SuccessFactors, Eightfold, Jibe, amazon.jobs) and otherwise read the schema.org JobPosting data on each posting page. Postings without a date on the site are left out. Sites that refuse automated access are listed as blocked, not estimated.</p>
-    <p>Each collection run is a snapshot. A posting keeps the date it was first seen; one that disappears from a later run is counted as closed. Only postings dated October 1, 2026 or later are included. A posting dated after the day it was collected (a scheduled start date on some sites) is dated to the collection day.</p>
+    <p>Each collection run is a snapshot. A posting keeps the date it was first seen; one that disappears from a later run is counted as closed, and its title is greyed out with the date it was last seen instead of linking to a page that no longer exists. Only postings dated October 1, 2026 or later are included. A posting dated after the day it was collected (a scheduled start date on some sites) is dated to the collection day.</p>
     <p>Occupation groups follow the 2018 Standard Occupational Classification (SOC) major groups, assigned by auditable title rules with the company's own job family as a fallback. Pay is the posted range, annualized for comparison; it is not actual earnings. Skills and licenses are matched against a fixed dictionary, so a skill the dictionary lacks will not appear. "Not specified" means the posting does not specify.</p>
   </section>
   <footer class="copyright">© 2026 Yimi Zhao</footer>
@@ -214,6 +217,7 @@ async function load() {
 load().then(D => {
   const F = D.fields;
   const rows = D.rows.map(r => Object.fromEntries(F.map((f, i) => [f, r[i]])));
+  rows.forEach(r => r.status = r.open ? "Open" : "Closed");
   const coName = Object.fromEntries(D.companies.map(c => [c.ticker, c.name]));
   const socName = D.soc_major;
   const skillNames = D.skills.map(s => s.name);
@@ -243,6 +247,7 @@ load().then(D => {
   // ---- filters
   const defs = [
     ["f-year", "year", "All years", v => v],
+    ["f-status", "status", "Open and closed", v => v === "Open" ? "Open now" : "Closed"],
     ["f-co", "co", "All companies", v => coName[v] || v],
     ["f-soc", "soc", "All groups", v => `${v}-0000 ${socName[v]}`],
     ["f-lvl", "lvl", "All levels", v => v],
@@ -253,6 +258,7 @@ load().then(D => {
   ];
   const order = {
     co: D.companies.map(c => c.ticker),
+    status: ["Open", "Closed"],
     lvl: [...D.levels, NS],
     yrs_b: ["0-1 yrs", "2-4 yrs", "5-7 yrs", "8-10 yrs", "10+ yrs", NS],
   };
@@ -409,7 +415,7 @@ load().then(D => {
     const tb = document.getElementById("tbl");
     const list = tblList.slice(tblPage * PAGE, (tblPage + 1) * PAGE);
     tb.innerHTML = `<thead><tr><th>Title</th><th>Company</th><th>SOC group</th><th>Level</th><th>Job type</th><th>Location</th><th>Posted</th><th>Pay</th><th>Degree</th><th>Yrs</th></tr></thead><tbody>` +
-      list.map(r => `<tr><td><a href="${r.url}" target="_blank" rel="noopener">${r.title}</a></td><td>${coName[r.co]}</td><td>${socName[r.soc]}</td><td>${r.lvl}</td><td>${r.sched}</td>
+      list.map(r => `<tr><td>${r.open ? `<a href="${r.url}" target="_blank" rel="noopener">${r.title}</a>` : `<span class="closed-title" title="This posting is no longer on the company's career site">${r.title}</span> <span class="pill closed">Closed${r.last_seen ? ` · last seen ${shortDate(r.last_seen)}` : ""}</span>`}</td><td>${coName[r.co]}</td><td>${socName[r.soc]}</td><td>${r.lvl}</td><td>${r.sched}</td>
         <td>${[r.city, r.state, r.country !== NS ? r.country : null].filter(Boolean).join(", ") || NS}${r.nloc > 1 ? ` <span class="more">+${r.nloc - 1}</span>` : ""}</td>
         <td class="num">${r.posted || ""}</td><td class="num">${postedPay(r)}</td>
         <td>${r.deg}${r.deg_equiv ? " or equiv." : ""}</td><td class="num">${r.yrs ?? ""}</td></tr>`).join("") + "</tbody>";

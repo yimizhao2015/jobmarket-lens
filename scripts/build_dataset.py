@@ -142,7 +142,7 @@ def main():
     lic_ix = {s: i for i, s in enumerate(lic_names)}
     fields = ["id", "co", "title", "url", "posted", "year", "month", "open", "soc", "sched", "arr", "deg",
               "deg_equiv", "yrs", "yrs_b", "lvl", "pay_min", "pay_max", "pay_lo", "pay_hi", "pay_period", "pay_cur", "country",
-              "state", "city", "nloc", "src", "first_seen"]
+              "state", "city", "nloc", "src", "first_seen", "last_seen"]
     data = {
         "generated": date.today().isoformat(),
         "posted_from": col["posted_from"],
