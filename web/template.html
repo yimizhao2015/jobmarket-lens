@@ -230,8 +230,8 @@ load().then(D => {
     `Data sources: job postings of S&amp;P 500 companies*<br>Data last updated: ${lastRun}`;
   document.getElementById("n-const").textContent = longDate(D.universe.retrieved);
   document.getElementById("intro").textContent =
-    `${fmt(rows.length)} job postings from the official career sites of ${fmt(nCos)} S&P 500 companies, posted since ${since}. ` +
-    `Filter by year, company, occupation, level, schedule, experience and location to see where demand is, which skills employers ask for, and how pay and requirements differ.`;
+    "JobMarket Lens tracks what America's largest employers are hiring for, using job postings published since October 2026 on the official career sites of S&P 500 companies. " +
+    "Explore where demand is concentrated, which skills and credentials employers ask for, and how pay, experience and work arrangements differ by occupation, company and location.";
 
   // ---- filters
   const defs = [
