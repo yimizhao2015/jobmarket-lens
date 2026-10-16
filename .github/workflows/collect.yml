@@ -41,7 +41,12 @@ jobs:
         run: |
           # Without the private history the run would forget when postings were first seen.
           [ -n "$GH_TOKEN" ] || { echo "::error::DATA_REPO_TOKEN secret is not set"; exit 1; }
-          gh release download data -R "$DATA_REPO" -p lens.db.gz -D data
+          if ! gh release download data -R "$DATA_REPO" -p lens.db.gz -D data; then
+            # First run: start from the seed history committed to the data repo in parts.
+            git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${DATA_REPO}" seed-repo
+            cat seed-repo/seed/lens.db.gz.part-* > data/lens.db.gz
+            rm -rf seed-repo
+          fi
           gunzip -f data/lens.db.gz
       - name: Collect
         run: python -m collector.run ${{ github.event.inputs.max && format('--max {0}', github.event.inputs.max) || '' }}
@@ -52,6 +57,7 @@ jobs:
           GH_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
         run: |
           gzip -kf data/lens.db data/normalized/postings.csv
+          gh release view data -R "$DATA_REPO" >/dev/null 2>&1 || gh release create data -R "$DATA_REPO" --title "Posting history" --notes "SQLite history (lens.db.gz) and normalized postings (postings.csv.gz) for JobMarket Lens. Replaced on every weekly run."
           gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
       - name: Commit dashboard
         run: |
