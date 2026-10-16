@@ -1,6 +1,8 @@
 """Eightfold career sites (Microsoft). Tries the v2 apply API, then the newer PCSX API."""
 from datetime import datetime, timezone
 
+import requests
+
 from .common import html_to_text, raw_posting
 
 
@@ -51,8 +53,11 @@ def _pcsx(company, host, domain, http, max_jobs, stats):
         if not pos:
             break
         for p in pos:
-            d = http.get(f"https://{host}/api/pcsx/position_details",
-                         params={"position_id": p["id"], "domain": domain}).json()
+            try:
+                d = http.get(f"https://{host}/api/pcsx/position_details",
+                             params={"position_id": p["id"], "domain": domain}).json()
+            except requests.HTTPError:  # closed between the search and the detail request; skip it
+                continue
             d = d.get("data", d)
             yield raw_posting(
                 company, p.get("displayJobId") or p["id"], f"https://{host}/careers/job/{p['id']}",
