@@ -91,8 +91,8 @@ h2 { font: 600 15px/1.3 var(--f-body); margin: 0; text-wrap: balance; }
 .axis { display: grid; grid-template-columns: minmax(0, 38%) 1fr 120px; gap: 8px; font: 10.5px var(--f-mono); color: var(--ink-3); }
 .axis .ticks { display: flex; justify-content: space-between; }
 .cols { display: flex; align-items: end; gap: 6px; height: 140px; border-bottom: 1px solid var(--line); padding-top: 14px; overflow-x: auto; }
-.col { flex: 1 0 28px; display: grid; justify-items: center; align-content: end; gap: 3px; height: 100%; }
-.col .c { width: 70%; background: var(--bar); border-radius: 4px 4px 0 0; min-height: 2px; }
+.col { flex: 1 0 28px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 3px; height: 100%; }
+.col .c { width: 70%; max-width: 72px; background: var(--bar); border-radius: 4px 4px 0 0; min-height: 2px; }
 .col .cv { font: 10.5px var(--f-mono); color: var(--ink-2); }
 .col-labels { display: flex; gap: 6px; font: 10.5px var(--f-mono); color: var(--ink-3); overflow: hidden; }
 .col-labels span { flex: 1 0 28px; text-align: center; }
@@ -168,7 +168,7 @@ a { color: var(--accent); }
     </div>
     <div class="panel"><div><h2>Where the jobs are</h2><p class="sub">Primary location, by country</p></div><div class="bars" id="c-country"></div></div>
     <div class="panel"><div><h2>US states</h2><p class="sub">Primary location of US postings</p></div><div class="bars" id="c-state"></div></div>
-    <div class="panel wide"><div><h2>Postings over time</h2><p class="sub">By month posted. History fills in as scheduled collection runs accumulate.</p></div><div id="c-month"></div></div>
+    <div class="panel wide"><div><h2>Postings over time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></div>
   </section>
 
   <section class="panel wide" aria-labelledby="cov-h">
@@ -178,7 +178,7 @@ a { color: var(--accent); }
   </section>
 
   <section class="panel wide" aria-labelledby="tbl-h">
-    <div class="panel-head"><div><h2 id="tbl-h">Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
+    <div class="panel-head"><div><h2 id="tbl-h">Job postings</h2><p class="sub" id="tbl-sub"></p></div></div>
     <div class="tbl-wrap"><table id="tbl"></table></div>
     <div class="pager" id="tbl-pager"></div>
   </section>
@@ -222,7 +222,12 @@ load().then(D => {
   // ---- header + intro
   const longDate = d => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
   const runDates = (D.snapshots || []).filter(x => x.status === "ok" && /^\d{4}-\d{2}-\d{2}$/.test(x.run_date)).map(x => x.run_date).sort();
-  const lastRun = longDate(runDates.length ? runDates[runDates.length - 1] : D.generated);
+  const lastRunISO = runDates.length ? runDates[runDates.length - 1] : String(D.generated).slice(0, 10);
+  const lastRun = longDate(lastRunISO);
+  // Weekly bars until three full months have been collected, then monthly.
+  const monthly = (() => { const d = new Date(D.posted_from + "T00:00:00Z"); d.setUTCMonth(d.getUTCMonth() + 3); return lastRunISO >= d.toISOString().slice(0, 10); })();
+  const shortDate = d => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+  const weekOf = d => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() - (t.getUTCDay() + 6) % 7); const w = t.toISOString().slice(0, 10); return w < D.posted_from ? D.posted_from : w; };
   const sampleCos = [...new Set(rows.filter(r => r.src === "page-read").map(r => r.co))];
   const nCos = new Set(rows.map(r => r.co)).size;
   const since = new Date(D.posted_from + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
@@ -362,26 +367,30 @@ load().then(D => {
         `</div><div class="axis"><span></span><span class="ticks">${ticks.map(t => `<span>${money(t)}</span>`).join("")}</span><span></span></div>`;
     }
 
-    // months
-    const months = count(R.filter(r => r.month), "month");
-    const mk = Object.keys(months).sort();
+    // over time: weekly (week starting Monday) until three months are collected, then monthly
+    document.getElementById("month-sub").textContent = monthly
+      ? "By month posted. History fills in as scheduled collection runs accumulate."
+      : "By week posted (weeks start Monday; the latest week may be partial). Switches to months once three months of data are collected.";
+    const periods = {};
+    for (const r of R) { if (!r.posted) continue; const k = monthly ? r.posted.slice(0, 7) : weekOf(r.posted); periods[k] = (periods[k] || 0) + 1; }
+    const mk = Object.keys(periods).sort();
+    const pLabel = k => monthly ? k : shortDate(k);
     const mEl = document.getElementById("c-month");
     if (!mk.length) mEl.innerHTML = `<div class="empty">No dated postings in view.</div>`;
     else {
-      const mmax = Math.max(...Object.values(months));
-      mEl.innerHTML = `<div class="cols">${mk.map(m => `<div class="col" data-tip="${m}: ${fmt(months[m])} postings"><span class="cv">${fmt(months[m])}</span><span class="c" style="height:${85 * months[m] / mmax}%"></span></div>`).join("")}</div>
-        <div class="col-labels">${mk.map(m => `<span>${m}</span>`).join("")}</div>` +
-        (mk.length < 3 ? `<p class="sub">Only ${mk.length} month${mk.length > 1 ? "s" : ""} of postings so far; the trend line becomes meaningful after a few monthly runs.</p>` : "");
+      const mmax = Math.max(...Object.values(periods));
+      mEl.innerHTML = `<div class="cols">${mk.map(m => `<div class="col" data-tip="${monthly ? m : "Week of " + pLabel(m)}: ${fmt(periods[m])} postings"><span class="cv">${fmt(periods[m])}</span><span class="c" style="height:${85 * periods[m] / mmax}%"></span></div>`).join("")}</div>
+        <div class="col-labels">${mk.map(m => `<span>${pLabel(m)}</span>`).join("")}</div>`;
     }
 
-    // table: newest first, 50 per page; a filter change goes back to page 1
+    // table: newest first, 25 per page; a filter change goes back to page 1
     tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || ""));
     tblPage = 0;
     document.getElementById("tbl-sub").textContent = `${fmt(N)} postings match the filters, newest first`;
     drawTable();
   }
 
-  const PAGE = 50;
+  const PAGE = 25;
   let tblList = [], tblPage = 0;
   function pager(id, total, page, go) {
     const el = document.getElementById(id);
