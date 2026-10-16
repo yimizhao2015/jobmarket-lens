@@ -29,6 +29,7 @@ collector/                   one adapter per career-site platform + polite HTTP 
 normalize/                   SOC mapping, skills & license dictionaries, field parsers
 scripts/build_dataset.py     normalize everything -> web/data.json, web/index.html, data/normalized/postings.csv
 scripts/export_csv.py        Source coverage and Job postings tables -> "data/data source.csv", "data/Job postings.csv"
+scripts/run_local.sh         run the weekly collection on your own computer (caffeinate -i ./scripts/run_local.sh)
 data/seed/                   119 postings read by hand from 4 career sites on 2026-10-14 (pilot sample)
 data/raw/<date>/             raw JSONL per company per run + run_log.json
 data/lens.db                 history: first_seen / last_seen per posting, per-run totals (kept in the private repo yimizhao2015/jobmarket-lens-data, not here)
