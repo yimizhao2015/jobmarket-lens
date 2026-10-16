@@ -38,7 +38,7 @@ Only postings dated October 1, 2026 or later are analyzed (`posted_from` in conf
 ## How the data is collected and stored
 
 ```
-Weekly run (GitHub Actions on Mondays 06:00 UTC, or scripts/run_local.sh on your own computer)
+Weekly run (GitHub Actions on Mondays at 2:00 a.m. Eastern Time, or scripts/run_local.sh on your own computer)
   1. download the posting history (lens.db.gz) from the private repo yimizhao2015/jobmarket-lens-data
   2. collect every company's current postings from its career site       -> data/raw/<date>/
   3. add them to the history: first seen / last seen per posting          -> data/lens.db
@@ -72,7 +72,7 @@ scripts/export_csv.py        "data/data source.csv" and "data/Job postings.csv"
 scripts/run_local.sh         the whole weekly run on your own computer
 data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
-.github/workflows/collect.yml weekly collection (Mondays 06:00 UTC, or run it by hand from the Actions tab)
+.github/workflows/collect.yml weekly collection (Mondays 2:00 a.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  republishes the site whenever web/ changes
 ```
 

@@ -6,7 +6,9 @@ name: Collect and publish
 
 on:
   schedule:
-    - cron: "0 6 * * 1"   # Mondays 06:00 UTC
+    # Mondays 2:00 a.m. New York time. GitHub schedules in UTC, so both 06:00 (EDT) and 07:00 (EST)
+    # are scheduled and the gate job lets through only the one that is 2 a.m. in New York.
+    - cron: "0 6,7 * * 1"
   workflow_dispatch:
     inputs:
       max:
@@ -26,7 +28,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.check.outputs.go }}
+    steps:
+      - id: check
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ] || [ "$(TZ=America/New_York date +%H)" = "02" ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          fi
   collect:
+    needs: gate
+    if: needs.gate.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
