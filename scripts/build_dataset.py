@@ -188,6 +188,10 @@ def main():
     print("SOC:", Counter(n["soc"] for n in out).most_common())
     print("unclassified titles:", [n["title"] for n in out if n["soc"] == "00"][:20])
 
+    # CSV copies of the Source coverage and Job postings tables, kept in the repo.
+    import export_csv
+    export_csv.main()
+
 
 if __name__ == "__main__":
     main()
