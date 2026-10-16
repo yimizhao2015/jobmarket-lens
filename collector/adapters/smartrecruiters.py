@@ -4,7 +4,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from .common import html_to_text, raw_posting
+from .common import html_to_text, raw_posting, seen_before
 
 API = "https://api.smartrecruiters.com/v1/companies/{cid}/postings"
 
@@ -20,6 +20,13 @@ def collect(company, params, http, max_jobs, stats):
         if not items:
             break
         for p in items:
+            rec = seen_before(company, http, source_id=p.get("refNumber") or p["id"])
+            if rec:  # already in the history: no detail request
+                yield rec
+                seen += 1
+                if seen >= max_jobs:
+                    return
+                continue
             d = http.get(API.format(cid=cid) + "/" + p["id"]).json()
             sec = (d.get("jobAd") or {}).get("sections") or {}
             desc = "\n".join(filter(None, [html_to_text((sec.get(k) or {}).get("text"))
@@ -69,6 +76,13 @@ def collect_site(company, params, http, max_jobs, stats):
     seen = 0
     for jid in sorted(urls, key=int, reverse=True):
         url = urls[jid]
+        rec = seen_before(company, http, source_id=jid)
+        if rec:  # already in the history: no detail request
+            yield rec
+            seen += 1
+            if seen >= max_jobs:
+                return
+            continue
         try:
             page = BeautifulSoup(http.get(url).text, "html.parser")
         except requests.HTTPError:

@@ -7,7 +7,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from .common import find_jobposting_jsonld, html_to_text, jobposting_to_raw, raw_posting
+from .common import find_jobposting_jsonld, html_to_text, jobposting_to_raw, raw_posting, seen_before
 from .html_sites import _sitemap_entries, _text
 from .successfactors import _parse_date
 
@@ -53,6 +53,14 @@ def collect(company, params, http, max_jobs, stats):
     seen = 0
     for url in urls:
         jid = re.search(r"/(\d+)/?$", url).group(1)
+        # Pages without JSON-LD give their own Job ID, so a stored posting is matched by its url.
+        rec = seen_before(company, http, url=url)
+        if rec:  # already in the history: no detail request
+            yield rec
+            seen += 1
+            if seen >= max_jobs:
+                return
+            continue
         try:
             rec = _detail(company, jid, url, _text(http.get(url)))
         except requests.HTTPError:  # closed since the sitemap was written

@@ -1,5 +1,5 @@
 """Oracle Recruiting Cloud candidate-experience REST API (JPMorgan Chase)."""
-from .common import html_to_text, raw_posting
+from .common import html_to_text, raw_posting, seen_before
 
 LIST = ("https://{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions"
         "?onlyData=true&expand=requisitionList.secondaryLocations"
@@ -21,6 +21,13 @@ def collect(company, params, http, max_jobs, stats):
             break
         for q in reqs:
             jid = q.get("Id")
+            rec = seen_before(company, http, source_id=jid)
+            if rec:  # already in the history: no detail request
+                yield rec
+                seen += 1
+                if seen >= max_jobs:
+                    return
+                continue
             try:
                 d = (http.get(DETAIL.format(host=host, site=site, id=jid)).json().get("items") or [{}])[0]
             except Exception:

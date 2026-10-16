@@ -47,6 +47,14 @@ Weekly run (GitHub Actions on Mondays at 2:00 a.m. Eastern Time, or scripts/run_
   6. commit the dashboard and CSV files here; GitHub Pages republishes the site
 ```
 
+Collection is incremental. Each company's career site is still listed every week, but a posting already in
+the history is not read again: it is written as a short "seen" line and only its last-seen date moves, while
+its stored text, fields and first-seen date stay. Only new postings have their detail page requested
+(`run_log.json` shows `collected`, all postings listed, and `fetched`, those read in full). The cap of 800
+per company counts seen postings too, so the open set is the same as a full re-read would give;
+`python -m collector.run --full` re-reads everything. Companies run 48 at a time, each with its own paced
+client, longest-running first (by their last run's postings and site delay).
+
 The history holds the full text of every posting, so it is kept in the **private** repo
 `jobmarket-lens-data` (release `data`) and never in this public repo. The GitHub workflow reaches it with
 the `DATA_REPO_TOKEN` secret (a fine-grained token with Contents read/write on that repo); a local run uses

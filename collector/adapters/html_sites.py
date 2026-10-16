@@ -13,7 +13,7 @@ import requests
 from urllib.parse import urljoin
 
 from ..http import BlockedError
-from .common import find_jobposting_jsonld, html_to_text, jobposting_to_raw, raw_posting
+from .common import find_jobposting_jsonld, html_to_text, jobposting_to_raw, raw_posting, seen_before
 
 
 def _text(r):
@@ -41,6 +41,14 @@ def _listing(company, http, max_jobs, page_url, link_re, id_group=1, detail=None
             break
         for jid, url in new:
             ids.add(jid)
+            # The record carries the listed id (Apple's positionId is that same number), or the url maps back to it.
+            rec = seen_before(company, http, source_id=jid, url=url)
+            if rec:  # already in the history: no detail request
+                yield rec
+                seen += 1
+                if seen >= max_jobs:
+                    return
+                continue
             yield (detail or _detail)(company, jid, url, http)
             seen += 1
             if seen >= max_jobs:
@@ -125,6 +133,13 @@ def collect_sitemap(company, params, http, max_jobs, stats):
     seen = 0
     for u in urls:
         jid = (re.search(params.get("id_pattern", r"(\d{5,})"), u) or [None, u])[1]
+        rec = seen_before(company, http, source_id=jid)
+        if rec:  # already in the history: no detail request
+            yield rec
+            seen += 1
+            if seen >= max_jobs:
+                return
+            continue
         try:
             rec = _detail(company, jid, u, http)
         except requests.HTTPError:  # sitemaps lag behind closed postings; skip pages that are gone

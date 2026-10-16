@@ -7,7 +7,7 @@ requisition in __NEXT_DATA__. Requisition ids rise over time, so the newest are 
 import json
 import re
 
-from .common import html_to_text, raw_posting
+from .common import html_to_text, raw_posting, seen_before
 from .html_sites import _text
 
 SITEMAP = "https://careers.walmart.com/sitemap.xml"
@@ -25,6 +25,14 @@ def collect(company, params, http, max_jobs, stats):
     stats["site_total"] = len(urls)
     seen = 0
     for url, _ in urls:
+        # The record's id (jobId) comes from the page, so a stored posting is matched by its url.
+        rec = seen_before(company, http, url=url)
+        if rec:  # already in the history: no detail request
+            yield rec
+            seen += 1
+            if seen >= max_jobs:
+                return
+            continue
         m = NEXT_RE.search(_text(http.get(url)))
         if not m:
             stats["no_data"] = stats.get("no_data", 0) + 1

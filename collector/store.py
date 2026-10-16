@@ -3,6 +3,8 @@
 postings:  one row per (company, source_id) with first_seen / last_seen and the latest raw record.
 snapshots: one row per (run_date, company) with collected count and the site's reported total.
 A posting missing from the latest successful run of its company is treated as closed.
+A raw line marked seen_only (listed again, detail page not re-read) only moves last_seen; the stored
+record and first_seen stay.
 """
 import json
 import sqlite3
@@ -24,11 +26,27 @@ def connect(root):
     return db
 
 
+def known_postings(root):
+    """Postings already in the history, {company: {source_id: url}}, and each company's collected count in
+    its latest successful run. Both are empty when there is no history yet."""
+    if not (Path(root) / "data/lens.db").exists():
+        return {}, {}
+    db = connect(root)
+    known = {}
+    for company, sid, url in db.execute("SELECT company, source_id, json_extract(raw, '$.url') FROM postings"):
+        known.setdefault(company, {})[sid] = url
+    last = dict(db.execute("""SELECT company, collected FROM snapshots s WHERE status = 'ok' AND run_date =
+                              (SELECT MAX(run_date) FROM snapshots WHERE company = s.company AND status = 'ok')"""))
+    db.close()
+    return known, last
+
+
 def ingest_run(root, run_date):
     root = Path(root)
     run_dir = root / "data/raw" / run_date
     log = json.loads((run_dir / "run_log.json").read_text())
     db = connect(root)
+    missing = 0
     for t, e in log.items():
         db.execute("INSERT OR REPLACE INTO snapshots VALUES (?,?,?,?,?,?)",
                    (run_date, t, e.get("status"), e.get("collected", 0), e.get("site_total"), e.get("detail")))
@@ -37,11 +55,18 @@ def ingest_run(root, run_date):
             continue
         for line in f.open():
             r = json.loads(line)
+            if r.get("seen_only"):
+                cur = db.execute("UPDATE postings SET last_seen=? WHERE company=? AND source_id=?",
+                                 (run_date, t, r["source_id"]))
+                missing += cur.rowcount == 0
+                continue
             db.execute("""INSERT INTO postings VALUES (?,?,?,?,?)
                           ON CONFLICT(company, source_id) DO UPDATE SET last_seen=excluded.last_seen, raw=excluded.raw""",
                        (t, r["source_id"], run_date, run_date, line))
     db.commit()
     db.close()
+    if missing:  # only if the history changed during the run; those postings are re-read next run
+        print(f"{missing} seen_only postings were not in the history")
 
 
 def load_postings(root):

@@ -6,7 +6,7 @@ from datetime import datetime
 
 from bs4 import BeautifulSoup
 
-from .common import find_jobposting_jsonld, html_to_text, jobposting_to_raw, raw_posting
+from .common import find_jobposting_jsonld, html_to_text, jobposting_to_raw, raw_posting, seen_before
 
 
 def collect(company, params, http, max_jobs, stats):
@@ -31,6 +31,13 @@ def collect(company, params, http, max_jobs, stats):
                 continue
             url = f"https://{host}" + a["href"] if a["href"].startswith("/") else a["href"]
             jid = (re.search(r"/(\d+)/?$", url) or [None, url])[1]
+            rec = seen_before(company, http, source_id=jid)
+            if rec:  # already in the history: no detail request
+                yield rec
+                seen += 1
+                if seen >= max_jobs:
+                    return
+                continue
             page = http.get(url).text
             jp = find_jobposting_jsonld(page)
             if jp:
@@ -128,6 +135,13 @@ def _from_sitemap(company, host, http, max_jobs, stats):
     seen = 0
     for url in urls:
         jid = (re.search(r"/(\d+)/?$", url) or [None, url])[1]
+        rec = seen_before(company, http, source_id=jid)
+        if rec:  # already in the history: no detail request
+            yield rec
+            seen += 1
+            if seen >= max_jobs:
+                return
+            continue
         try:
             page = _text(http.get(url))
         except requests.HTTPError:

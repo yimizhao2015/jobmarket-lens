@@ -1,4 +1,4 @@
-"""Shared helpers for adapters: the raw posting record and schema.org JobPosting parsing."""
+"""Shared helpers for adapters: the raw posting record, already-collected postings and schema.org JobPosting parsing."""
 import html
 import json
 import re
@@ -28,6 +28,21 @@ def raw_posting(company, source_id, url, title, **kw):
         if isinstance(rec[k], list):  # JSON-LD allows lists here; downstream expects text
             rec[k] = ", ".join(str(x) for x in rec[k] if x) or None
     return rec
+
+
+def seen_before(company, http, source_id=None, url=None):
+    """A minimal "seen" record when this posting is already in the history, else None.
+
+    run.py puts the company's stored postings on http.known / http.known_urls. A listed posting that is
+    already stored needs no detail request: its fields stay as stored and only last_seen moves. Adapters
+    pass the source_id the full record would carry, or the posting's url when that id only comes from
+    the detail page (the url then maps back to the stored source_id)."""
+    sid = str(source_id) if source_id is not None else None
+    if sid not in http.known:
+        sid = http.known_urls.get(url) if url else None
+    if sid is None:
+        return None
+    return {"company": company, "source_id": sid, "url": url or http.known[sid], "seen_only": True}
 
 
 def html_to_text(s):

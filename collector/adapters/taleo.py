@@ -11,7 +11,7 @@ import re
 from datetime import datetime
 from urllib.parse import unquote
 
-from .common import html_to_text, raw_posting
+from .common import html_to_text, raw_posting, seen_before
 
 _DATE = re.compile(r"^([A-Z][a-z]{2}\.? \d{1,2}, \d{4}|\d{1,2}/\d{1,2}/\d{4})")
 
@@ -60,6 +60,10 @@ def collect(company, params, http, max_jobs, stats):
     for q in reqs[:max_jobs]:
         cols = q.get("column") or []
         url = f"https://{host}/careersection/{section}/jobdetail.ftl?job={q['contestNo']}&lang=en"
+        rec = seen_before(company, http, source_id=q["contestNo"])
+        if rec:  # already in the history: no detail request
+            yield rec
+            continue
         parts = _history(http.get(url).text)
         rich = list(dict.fromkeys(p[3:] for p in parts if p.startswith("!*!")))  # each rich field appears twice
         locs = []

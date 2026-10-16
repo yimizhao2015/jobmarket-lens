@@ -19,6 +19,9 @@ class Http:
         self.timeout = timeout
         self._robots = {}
         self._last = 0.0
+        # Postings of this company already in the history, {source_id: url} and {url: source_id}; run.py
+        # fills them so adapters can skip detail pages they have read before (adapters.common.seen_before).
+        self.known, self.known_urls = {}, {}
 
     def _allowed(self, url):
         if not self.respect_robots:

@@ -4,7 +4,7 @@ import re
 
 import requests
 
-from .common import find_jobposting_jsonld, jobposting_to_raw
+from .common import find_jobposting_jsonld, jobposting_to_raw, seen_before
 from .html_sites import _sitemap_entries, _text
 
 
@@ -17,6 +17,13 @@ def collect(company, params, http, max_jobs, stats):
         stats["site_total"] = stats.get("site_total", 0) + len(urls)
         for url in urls:
             jid = re.search(r"/jobs/(\d+)/", url).group(1)
+            rec = seen_before(company, http, source_id=jid)
+            if rec:  # already in the history: no detail request
+                yield rec
+                seen += 1
+                if seen >= max_jobs:
+                    return
+                continue
             try:
                 jp = find_jobposting_jsonld(_text(http.get(url, params={"in_iframe": 1})))
             except requests.HTTPError:  # closed since the sitemap was written
