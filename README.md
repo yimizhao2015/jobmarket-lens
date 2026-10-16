@@ -31,7 +31,7 @@ scripts/build_dataset.py     normalize everything -> web/data.json, web/index.ht
 scripts/export_csv.py        Source coverage and Job postings tables -> "data/data source.csv", "data/Job postings.csv"
 data/seed/                   119 postings read by hand from 4 career sites on 2026-10-14 (pilot sample)
 data/raw/<date>/             raw JSONL per company per run + run_log.json
-data/lens.db                 history: first_seen / last_seen per posting, per-run totals
+data/lens.db                 history: first_seen / last_seen per posting, per-run totals (kept in the private repo yimizhao2015/jobmarket-lens-data, not here)
 web/index.html               the dashboard (open directly in a browser)
 ```
 

@@ -1,6 +1,7 @@
 # Weekly: collect postings, rebuild the dashboard, commit it, and publish the site.
-# The SQLite history (data/lens.db) is too large for git, so it is kept as the asset of a
-# release named "data" and restored before each run.
+# The SQLite history (data/lens.db) holds the full text of every posting, so it is kept out of
+# this public repo: it lives as the asset of a release named "data" in the private repo
+# DATA_REPO, read and written with the DATA_REPO_TOKEN secret, and restored before each run.
 name: Collect and publish
 
 on:
@@ -11,6 +12,9 @@ on:
       max:
         description: "Max postings per company (blank = config default)"
         required: false
+
+env:
+  DATA_REPO: yimizhao2015/jobmarket-lens-data
 
 permissions:
   contents: write
@@ -33,21 +37,22 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Restore history
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
         run: |
-          gh release download data -p lens.db.gz -D data || echo "no history yet"
-          [ -f data/lens.db.gz ] && gunzip -f data/lens.db.gz || true
+          # Without the private history the run would forget when postings were first seen.
+          [ -n "$GH_TOKEN" ] || { echo "::error::DATA_REPO_TOKEN secret is not set"; exit 1; }
+          gh release download data -R "$DATA_REPO" -p lens.db.gz -D data
+          gunzip -f data/lens.db.gz
       - name: Collect
         run: python -m collector.run ${{ github.event.inputs.max && format('--max {0}', github.event.inputs.max) || '' }}
       - name: Build dataset
         run: python scripts/build_dataset.py
       - name: Save history
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
         run: |
           gzip -kf data/lens.db data/normalized/postings.csv
-          gh release view data >/dev/null 2>&1 || gh release create data --title "Posting history" --notes "SQLite history used by the collector (lens.db.gz) and the normalized postings (postings.csv.gz). Replaced on every run."
-          gh release upload data data/lens.db.gz data/normalized/postings.csv.gz --clobber
+          gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
       - name: Commit dashboard
         run: |
           git config user.name "jobmarket-lens bot"
