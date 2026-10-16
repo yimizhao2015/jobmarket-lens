@@ -149,43 +149,43 @@ a { color: var(--accent); }
   <section class="kpis" id="kpis" aria-label="Summary"></section>
 
   <section class="grid">
-    <div class="panel"><div><h2>Openings by occupation group</h2><p class="sub">SOC 2018 major groups, assigned from job titles</p></div><div class="bars" id="c-soc"></div></div>
-    <div class="panel"><div><h2>Openings by company</h2><p class="sub">Top 20 companies by postings in view; pick a company in the filter to see any other</p></div><div class="bars" id="c-co"></div></div>
+    <div class="panel"><div><h2>Openings by Occupation Group</h2><p class="sub">SOC 2018 major groups, assigned from job titles</p></div><div class="bars" id="c-soc"></div></div>
+    <div class="panel"><div><h2>Openings by Company</h2><p class="sub">Top 20 companies by postings in view; pick a company in the filter to see any other</p></div><div class="bars" id="c-co"></div></div>
     <div class="panel">
-      <div class="panel-head"><div><h2>Top skills</h2><p class="sub">Share of postings mentioning each skill</p></div>
+      <div class="panel-head"><div><h2>Top Skills</h2><p class="sub">Share of postings mentioning each skill</p></div>
         <select class="inline" id="skill-soc" aria-label="Skills for occupation group"></select></div>
       <div class="bars" id="c-skills"></div>
     </div>
-    <div class="panel"><div><h2>Job level</h2><p class="sub">From title keywords, the company's own level label, then years required</p></div><div class="bars" id="c-lvl"></div></div>
-    <div class="panel"><div><h2>Minimum degree required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
-    <div class="panel"><div><h2>Experience required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
-    <div class="panel"><div><h2>Work arrangement</h2><p class="sub">Remote, hybrid or on-site as the posting states it</p></div><div class="bars" id="c-arr"></div></div>
-    <div class="panel"><div><h2>Full-time or part-time</h2><p class="sub">Employment type field, then title</p></div><div class="bars" id="c-sched"></div></div>
-    <div class="panel"><div><h2>Licenses and certifications</h2><p class="sub">Share of postings in view naming each</p></div><div class="bars" id="c-lic"></div></div>
+    <div class="panel"><div><h2>Job Level</h2><p class="sub">From title keywords, the company's own level label, then years required</p></div><div class="bars" id="c-lvl"></div></div>
+    <div class="panel"><div><h2>Minimum Degree Required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
+    <div class="panel"><div><h2>Experience Required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
+    <div class="panel"><div><h2>Work Arrangement</h2><p class="sub">Remote, hybrid or on-site as the posting states it</p></div><div class="bars" id="c-arr"></div></div>
+    <div class="panel"><div><h2>Full-Time or Part-Time</h2><p class="sub">Employment type field, then title</p></div><div class="bars" id="c-sched"></div></div>
+    <div class="panel"><div><h2>Licenses and Certifications</h2><p class="sub">Share of postings in view naming each</p></div><div class="bars" id="c-lic"></div></div>
     <div class="panel wide">
-      <div class="panel-head"><div><h2>Pay ranges by occupation group</h2><p class="sub">Median posted range, annualized USD (hourly × 2,080). Only postings that disclose pay in USD.</p></div></div>
+      <div class="panel-head"><div><h2>Pay Ranges by Occupation Group</h2><p class="sub">Median posted range, annualized USD (hourly × 2,080). Only postings that disclose pay in USD.</p></div></div>
       <div id="c-pay"></div>
     </div>
-    <div class="panel"><div><h2>Where the jobs are</h2><p class="sub">Primary location, by country</p></div><div class="bars" id="c-country"></div></div>
-    <div class="panel"><div><h2>US states</h2><p class="sub">Primary location of US postings</p></div><div class="bars" id="c-state"></div></div>
-    <div class="panel wide"><div><h2>Postings over time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></div>
+    <div class="panel"><div><h2>Where the Jobs Are</h2><p class="sub">Primary location, by country</p></div><div class="bars" id="c-country"></div></div>
+    <div class="panel"><div><h2>US States</h2><p class="sub">Primary location of US postings</p></div><div class="bars" id="c-state"></div></div>
+    <div class="panel wide"><div><h2>Postings over Time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></div>
   </section>
 
   <section class="panel wide" aria-labelledby="cov-h">
-    <div><h2 id="cov-h">Source coverage</h2><p class="sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
+    <div><h2 id="cov-h">Source Coverage</h2><p class="sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
     <div class="tbl-wrap"><table id="cov"></table></div>
     <div class="pager" id="cov-pager"></div>
   </section>
 
   <section class="panel wide" aria-labelledby="tbl-h">
-    <div class="panel-head"><div><h2 id="tbl-h">Job postings</h2><p class="sub" id="tbl-sub"></p></div></div>
+    <div class="panel-head"><div><h2 id="tbl-h">Job Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
     <div class="tbl-wrap"><table id="tbl"></table></div>
     <div class="pager" id="tbl-pager"></div>
   </section>
 
   <section class="panel wide method" aria-labelledby="m-h">
     <h2 id="m-h">Notes*</h2>
-    <p>* Data sources: job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Coverage by company is listed under Source coverage above.</p>
+    <p>* Data sources: job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Coverage by company is listed under Source Coverage above.</p>
     <p>Postings come only from each company's official career site. Collectors call the site's own job API where one exists (Workday, Oracle Recruiting, SuccessFactors, Eightfold, Jibe, amazon.jobs) and otherwise read the schema.org JobPosting data on each posting page. Postings without a date on the site are left out. Sites that refuse automated access are listed as blocked, not estimated.</p>
     <p>Each collection run is a snapshot. A posting keeps the date it was first seen; one that disappears from a later run is counted as closed. Only postings dated October 1, 2026 or later are included. A posting dated after the day it was collected (a scheduled start date on some sites) is dated to the collection day.</p>
     <p>Occupation groups follow the 2018 Standard Occupational Classification major groups, assigned by auditable title rules with the company's own job family as a fallback. Pay is the posted range, annualized for comparison; it is not actual earnings. Skills and licenses are matched against a fixed dictionary, so a skill the dictionary lacks will not appear. "Not specified" means the posting does not say.</p>
@@ -429,7 +429,7 @@ load().then(D => {
   const latest = {};
   (D.snapshots || []).forEach(s => latest[s.company] = s);
   const byCo = count(rows, "co");
-  const covHead = `<thead><tr><th>#</th><th>Company</th><th>Career site</th><th>Platform</th><th>Status</th><th>Postings</th><th>Notes</th></tr></thead>`;
+  const covHead = `<thead><tr><th>#</th><th>Company</th><th>Career site</th><th>Platform</th><th>Status</th><th>Postings</th></tr></thead>`;
   const covRows = D.companies.map(c => {
       const s = latest[c.ticker];
       let pill;
@@ -440,11 +440,10 @@ load().then(D => {
       else if (s && s.status === "error") pill = `<span class="pill blocked">Collector error</span>`;
       else if (c.adapter === "none") pill = `<span class="pill pending">Not collected yet</span>`;
       else pill = `<span class="pill pending">Collector ready, not yet run</span>`;
-      const note = (s && s.detail) || c.known_issue || "";
       const host = c.career_site ? new URL(c.career_site).hostname : "";
       return `<tr><td class="num">${c.rank}</td><td>${c.name} <span class="more">${c.ticker}</span></td>
         <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
-        <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td><td class="more">${note}</td></tr>`;
+        <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td></tr>`;
     });
   let covPage = 0;
   function drawCov() {
