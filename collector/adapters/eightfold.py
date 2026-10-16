@@ -64,7 +64,7 @@ def _pcsx(company, host, domain, http, max_jobs, stats):
                 p.get("name"),
                 description=html_to_text(d.get("jobDescription")),
                 locations=p.get("standardizedLocations") or p.get("locations") or [],
-                posted_date=_iso(p.get("postedTs")),
+                posted_date=_iso(p.get("postedTs") or p.get("creationTs")),  # postedTs is 0 on some sites
                 employment_type=(d.get("efcustomTextTimeType") or d.get("type")),
                 remote_hint=p.get("workLocationOption"),
                 category=p.get("department"),

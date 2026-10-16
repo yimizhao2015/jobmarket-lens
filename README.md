@@ -64,7 +64,10 @@ collector/                   one adapter per career-site platform + polite HTTP 
   adapters/eightfold.py      Eightfold (Microsoft and others)
   adapters/jibe.py           Jibe / iCIMS career sites
   adapters/html_sites.py     any site with a job sitemap + schema.org JobPosting; Apple; refused sites
-  adapters/amazon.py, walmart.py, smartrecruiters.py   single-company collectors
+  adapters/greenhouse.py, lever.py, ashby.py   public job-board APIs
+  adapters/icims.py, taleo.py, avature.py, talentbrew.py, jobvite.py   other hosted career sites
+  adapters/smartrecruiters.py SmartRecruiters (posting API for Visa; others from their career pages)
+  adapters/amazon.py, walmart.py   single-company collectors
   run.py                     runs all companies in parallel, writes data/raw/<date>/run_log.json
 normalize/                   SOC mapping, skills & license dictionaries, field parsers
 scripts/build_dataset.py     normalize everything -> web/index.html (data embedded), data/normalized/postings.csv
@@ -121,8 +124,10 @@ python -m collector.run --only AAPL,MSFT --max 20 --date test   # small test run
 
 ## Known gaps
 
-- 156 companies have no collector yet: their career platform wasn't identified automatically, or it is
-  one without a collector here (Taleo, Avature, iCIMS classic, UltiPro, Greenhouse and others).
+- 63 companies are not collected. Each one's `known_issue` in `config/companies.json` says why. Usually
+  the site refuses scripted requests (HTTP 403, a bot check, or robots.txt, as on UKG/UltiPro search),
+  renders its jobs only in the browser, or runs on a platform without a collector here (Dayforce,
+  BrassRing, Paradox, JazzHR, ADP).
 - Google (robots.txt disallows its job search), Meta (its robots.txt prohibits automated collection) and
   Tesla (HTTP 403) are recorded as blocked.
 - Collection keeps the newest 800 postings per company (`max_postings_per_company`).

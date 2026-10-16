@@ -45,7 +45,11 @@ def collect(company, params, http, max_jobs, stats):
                     posted = datetime.strptime(date_el.get_text(strip=True), "%b %d, %Y").date().isoformat()
                 except (AttributeError, ValueError):
                     posted = None
-                loc_el = row.select_one(".jobLocation")
+                if not posted:  # sites that hide the date column still mark it up on the detail page
+                    meta = dsoup.select_one('[itemprop="datePosted"]')
+                    posted = _parse_date(meta.get("content")) if meta else None
+                # table rows mark the location .jobLocation; job tiles put it in a labeled "location" field
+                loc_el = row.select_one(".jobLocation") or row.select_one('.section-field.location div[id$="-value"]')
                 yield raw_posting(company, jid, url, a.get_text(strip=True), posted_date=posted, description=desc,
                                   locations=[loc_el.get_text(strip=True)] if loc_el else [], source_method="html")
             seen += 1
@@ -110,6 +114,15 @@ def _from_sitemap(company, host, http, max_jobs, stats):
     import requests
     entries = {u: m for u, m in _sitemap_entries(http, f"https://{host}/sitemap.xml") if "/job/" in u}
     urls = sorted(entries, key=lambda u: entries[u] or "", reverse=True)
+    feed_locs = {}
+    if not urls:  # some sites serve their job feed (RSS, one <item><link> per job) at /sitemap.xml instead
+        import html
+        feed = _text(http.get(f"https://{host}/sitemap.xml"))
+        for item in re.findall(r"<item>(.*?)</item>", feed, re.S):
+            link, loc = re.search(r"<link>\s*([^<\s]+)", item), re.search(r"<g:location>\s*([^<]+?)\s*</g:location>", item)
+            if link and "/job/" in link.group(1):
+                urls.append(html.unescape(link.group(1)))
+                feed_locs[urls[-1]] = html.unescape(loc.group(1)) if loc else None
     stats["site_total"] = len(urls)
     stats["method"] = "sitemap"
     seen = 0
@@ -121,7 +134,10 @@ def _from_sitemap(company, host, http, max_jobs, stats):
             stats["gone"] = stats.get("gone", 0) + 1
             continue
         jp = find_jobposting_jsonld(page)
-        yield jobposting_to_raw(company, jid, url, jp) if jp else _microdata(company, jid, url, page)
+        rec = jobposting_to_raw(company, jid, url, jp) if jp else _microdata(company, jid, url, page)
+        if not rec["locations"] and feed_locs.get(url):  # the job feed names the location the page leaves out
+            rec["locations"] = [feed_locs[url]]
+        yield rec
         seen += 1
         if seen >= max_jobs:
             return

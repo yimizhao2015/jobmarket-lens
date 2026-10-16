@@ -76,7 +76,7 @@ def _place(loc):
 def _salary_text(bs):
     if not isinstance(bs, dict):
         return None
-    v = bs.get("value", {})
+    v = bs.get("value", bs)  # some sites (iCIMS) put minValue/maxValue on baseSalary itself
     cur = bs.get("currency", "")
     if isinstance(v, dict):
         lo, hi, unit = v.get("minValue"), v.get("maxValue"), v.get("unitText", "")
@@ -88,13 +88,22 @@ def _salary_text(bs):
     return None
 
 
+def _iso_date(v):
+    """datePosted as YYYY-MM-DD; some sites write it as MM/DD/YYYY."""
+    v = (v or "").strip()
+    m = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})", v)
+    if m:
+        return f"{m.group(3)}-{int(m.group(1)):02d}-{int(m.group(2)):02d}"
+    return v[:10] or None
+
+
 def jobposting_to_raw(company, source_id, url, jp, **kw):
     locs = jp.get("jobLocation") or []
     locs = locs if isinstance(locs, list) else [locs]
     et = jp.get("employmentType")
     if isinstance(et, list):
         et = ", ".join(et)
-    posted = (jp.get("datePosted") or "")[:10] or None
+    posted = _iso_date(jp.get("datePosted"))
     return raw_posting(
         company, source_id, url, jp.get("title"),
         description=html_to_text(jp.get("description")),

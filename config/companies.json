@@ -389,9 +389,11 @@
    "weight_pct": null,
    "sector": "Consumer Discretionary",
    "career_site": "https://careers.airbnb.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "airbnb"
+   },
+   "known_issue": null
   },
   {
    "rank": 30,
@@ -399,10 +401,10 @@
    "name": "Akamai Technologies",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
+   "career_site": "https://jobs.akamai.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (jobs.akamai.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 31,
@@ -427,7 +429,7 @@
    "career_site": "https://www.are.com/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "No online job board was found on its official site; not collected."
   },
   {
    "rank": 33,
@@ -438,7 +440,7 @@
    "career_site": "https://jobs.aligntech.com",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its job site (jobs.aligntech.com) is a client-rendered front end and the Workday tenant behind it answers HTTP 401; not collected."
   },
   {
    "rank": 34,
@@ -542,10 +544,13 @@
    "name": "American Express",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.americanexpress.com/en-us/careers/?inav=en_us_footer_About_Careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://careers.americanexpress.com/en/sites/CX_1/jobs",
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "egug.fa.us2.oraclecloud.com",
+    "site_number": "CX_1"
+   },
+   "known_issue": null
   },
   {
    "rank": 42,
@@ -567,10 +572,13 @@
    "name": "American Tower",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": "https://careers.americantower.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://hdsn.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs",
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "hdsn.fa.us6.oraclecloud.com",
+    "site_number": "CX_1"
+   },
+   "known_issue": null
   },
   {
    "rank": 44,
@@ -633,7 +641,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 49,
@@ -708,10 +716,12 @@
    "name": "AppLovin",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": "https://www.applovin.com/en/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://boards.greenhouse.io/applovin",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "applovin"
+   },
+   "known_issue": null
   },
   {
    "rank": 55,
@@ -750,7 +760,7 @@
    "career_site": "https://www.adm.com/en-us/culture-and-careers/total-rewards/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on brassring; no collector for it yet."
+   "known_issue": "Its BrassRing site pages results through session-bound requests and shows only a last-updated date; no collector for it."
   },
   {
    "rank": 58,
@@ -775,7 +785,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its careers pages link to no job board that serves openings to scripted requests; not collected."
   },
   {
    "rank": 60,
@@ -851,10 +861,10 @@
    "name": "Automatic Data Processing",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
+   "career_site": "https://jobs.adp.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (jobs.adp.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 66,
@@ -863,9 +873,12 @@
    "weight_pct": null,
    "sector": "Consumer Discretionary",
    "career_site": "https://careers.autozone.com/hcmUI/CandidateExperience/en/sites/CX_1",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "egud.fa.us2.oraclecloud.com",
+    "site_number": "CX_1"
+   },
+   "known_issue": null
   },
   {
    "rank": 67,
@@ -873,10 +886,12 @@
    "name": "Avery Dennison",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://www.averydennison.com/en/home/careers/employee-stories/lily-xie.html",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on smartrecruiters; no collector for it yet."
+   "career_site": "https://careers.smartrecruiters.com/AveryDennison",
+   "adapter": "smartrecruiters_site",
+   "params": {
+    "company_id": "AveryDennison"
+   },
+   "known_issue": null
   },
   {
    "rank": 68,
@@ -885,9 +900,11 @@
    "weight_pct": null,
    "sector": "Industrials",
    "career_site": "https://www.axon.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "axon"
+   },
+   "known_issue": null
   },
   {
    "rank": 69,
@@ -921,10 +938,14 @@
    "name": "Bank of America",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://careers.bankofamerica.com/en-us",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on avature; no collector for it yet."
+   "career_site": "https://ghr.wd1.myworkdayjobs.com/lateral-us",
+   "adapter": "workday",
+   "params": {
+    "host": "ghr.wd1.myworkdayjobs.com",
+    "tenant": "ghr",
+    "site": "lateral-us"
+   },
+   "known_issue": null
   },
   {
    "rank": 72,
@@ -963,7 +984,7 @@
    "career_site": "https://careers.bestbuy.com/bby",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site renders listings in the browser and the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 75,
@@ -1028,9 +1049,11 @@
    "weight_pct": null,
    "sector": "Financials",
    "career_site": "https://block.xyz/careers/jobs",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "block"
+   },
+   "known_issue": null
   },
   {
    "rank": 80,
@@ -1079,10 +1102,12 @@
    "name": "Booking Holdings",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.bookingholdings.com/careers/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.booking.com/booking/jobs",
+   "adapter": "jibe",
+   "params": {
+    "host": "jobs.booking.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 84,
@@ -1141,7 +1166,7 @@
   {
    "rank": 88,
    "ticker": "BF.B",
-   "name": "Brown–Forman",
+   "name": "Brown\u2013Forman",
    "weight_pct": null,
    "sector": "Consumer Staples",
    "career_site": "https://bf.wd5.myworkdayjobs.com/USA_Canada",
@@ -1252,10 +1277,13 @@
    "name": "Carnival Corporation",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.carnivalcorp.com/our-company/careers/career-and-development-pathways/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on talentbrew; no collector for it yet."
+   "career_site": "https://jobs.carnivalcorp.com/",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://jobs.carnivalcorp.com/sitemap.xml",
+    "url_pattern": "/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 97,
@@ -1277,10 +1305,12 @@
    "name": "Carvana",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://www.carvana.com/careers",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "carvana"
+   },
+   "known_issue": null
   },
   {
    "rank": 99,
@@ -1291,7 +1321,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 100,
@@ -1299,10 +1329,14 @@
    "name": "Caterpillar Inc.",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://cat.wd5.myworkdayjobs.com/CaterpillarCareers",
+   "adapter": "workday",
+   "params": {
+    "host": "cat.wd5.myworkdayjobs.com",
+    "tenant": "cat",
+    "site": "CaterpillarCareers"
+   },
+   "known_issue": null
   },
   {
    "rank": 101,
@@ -1327,7 +1361,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
   },
   {
    "rank": 103,
@@ -1415,10 +1449,13 @@
    "name": "Charles Schwab Corporation",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://www.schwabjobs.com/",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://www.schwabjobs.com/sitemap.xml",
+    "url_pattern": "/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 110,
@@ -1426,10 +1463,13 @@
    "name": "Charter Communications",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.spectrum.com/",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://jobs.spectrum.com/sitemap.xml",
+    "url_pattern": "/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 111,
@@ -1523,7 +1563,7 @@
    "career_site": "https://www.cinfin.com/cincinnati-insurance-careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on taleo; no collector for it yet."
+   "known_issue": "Its Taleo career section lists openings without any posted date, so postings cannot be dated; not collected."
   },
   {
    "rank": 118,
@@ -1585,10 +1625,14 @@
    "name": "Clorox",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": "https://www.thecloroxcompany.com/careers/entry-level/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://wd1.myworkdaysite.com/recruiting/clorox/Clorox",
+   "adapter": "workday",
+   "params": {
+    "host": "wd1.myworkdaysite.com",
+    "tenant": "clorox",
+    "site": "Clorox"
+   },
+   "known_issue": null
   },
   {
    "rank": 123,
@@ -1610,10 +1654,12 @@
    "name": "CMS Energy",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.consumersenergy.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "careers.consumersenergy.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 125,
@@ -1621,10 +1667,14 @@
    "name": "Coca-Cola Company (The)",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": "https://www.coca-colacompany.com/search/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on successfactors; its job search host was not found yet."
+   "career_site": "https://coke.wd1.myworkdayjobs.com/coca-cola-careers",
+   "adapter": "workday",
+   "params": {
+    "host": "coke.wd1.myworkdayjobs.com",
+    "tenant": "coke",
+    "site": "coca-cola-careers"
+   },
+   "known_issue": null
   },
   {
    "rank": 126,
@@ -1632,10 +1682,10 @@
    "name": "Cognizant",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.cognizant.com/us/en",
+   "career_site": "https://careers.cognizant.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (careers.cognizant.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 127,
@@ -1656,10 +1706,12 @@
    "name": "Coinbase",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://www.coinbase.com/careers/positions",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "coinbase"
+   },
+   "known_issue": null
   },
   {
    "rank": 129,
@@ -1667,10 +1719,12 @@
    "name": "Colgate-Palmolive",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.colgate.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "jobs.colgate.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 130,
@@ -1678,10 +1732,13 @@
    "name": "Comcast",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": "https://corporate.comcast.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.comcast.com/",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://jobs.comcast.com/sitemap.xml",
+    "url_pattern": "/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 131,
@@ -1785,10 +1842,12 @@
    "name": "Corning Inc.",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://corningjobs.corning.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "corningjobs.corning.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 139,
@@ -1867,7 +1926,7 @@
    "career_site": "https://www.crowncastle.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on ultipro; no collector for it yet."
+   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected."
   },
   {
    "rank": 145,
@@ -1878,7 +1937,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 146,
@@ -1913,10 +1972,13 @@
    "name": "D. R. Horton",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.drhorton.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on taleo; no collector for it yet."
+   "career_site": "https://drhorton.taleo.net/careersection/2/jobsearch.ftl?lang=en",
+   "adapter": "taleo",
+   "params": {
+    "host": "drhorton.taleo.net",
+    "section": "2"
+   },
+   "known_issue": null
   },
   {
    "rank": 149,
@@ -1941,7 +2003,7 @@
    "career_site": "https://www.darden.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on paradox; no collector for it yet."
+   "known_issue": "Its restaurant hiring runs through Paradox chat-driven apply flows with no public job list; not collected."
   },
   {
    "rank": 151,
@@ -1950,9 +2012,11 @@
    "weight_pct": null,
    "sector": "Information Technology",
    "career_site": "https://careers.datadoghq.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "datadog"
+   },
+   "known_issue": null
   },
   {
    "rank": 152,
@@ -2003,9 +2067,12 @@
    "weight_pct": null,
    "sector": "Information Technology",
    "career_site": "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "enterpriseplatform.dell.com",
+    "site_number": "careers"
+   },
+   "known_issue": null
   },
   {
    "rank": 156,
@@ -2016,7 +2083,7 @@
    "career_site": "https://www.delta.com/us/en/careers/overview",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on avature; no collector for it yet."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
   },
   {
    "rank": 157,
@@ -2024,10 +2091,10 @@
    "name": "Devon Energy",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://www.devonenergy.com/careers/alumni-u-s",
+   "career_site": "https://careers.devonenergy.com/search/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its SuccessFactors site (careers.devonenergy.com) serves an incomplete TLS certificate chain, so verified HTTPS requests fail; not collected."
   },
   {
    "rank": 158,
@@ -2062,10 +2129,10 @@
    "name": "Digital Realty",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": null,
+   "career_site": "https://careers.digitalrealty.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (careers.digitalrealty.com) fails TLS certificate verification; not collected."
   },
   {
    "rank": 161,
@@ -2112,10 +2179,10 @@
    "name": "Domino's",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": null,
+   "career_site": "https://jobs.dominos.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (jobs.dominos.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 165,
@@ -2123,10 +2190,12 @@
    "name": "DoorDash",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careersatdoordash.com/",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "doordashusa"
+   },
+   "known_issue": null
   },
   {
    "rank": 166,
@@ -2162,10 +2231,12 @@
    "name": "DTE Energy",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://www.dteenergy.com/search/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on successfactors; its job search host was not found yet."
+   "career_site": "https://careers.dteenergy.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "careers.dteenergy.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 169,
@@ -2261,7 +2332,7 @@
    "career_site": "https://www.edisoncareers.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (edisoncareers.com) links to a SuccessFactors portal that is not reachable without a browser session; not collected."
   },
   {
    "rank": 176,
@@ -2297,10 +2368,12 @@
    "name": "Emcor",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://emcorgroup.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on icims; no collector for it yet."
+   "career_site": "https://careers-emcorgroup.icims.com/jobs/search",
+   "adapter": "icims",
+   "params": {
+    "host": "careers-emcorgroup.icims.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 179,
@@ -2336,7 +2409,7 @@
    "career_site": "https://www.eogresources.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its custom ASP job search has no sitemap, posted dates or public feed; not collected."
   },
   {
    "rank": 182,
@@ -2345,9 +2418,11 @@
    "weight_pct": null,
    "sector": "Energy",
    "career_site": "https://www.eqt.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on greenhouse; no collector for it yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "eqtcorporation"
+   },
+   "known_issue": null
   },
   {
    "rank": 183,
@@ -2355,10 +2430,14 @@
    "name": "Equifax",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.equifax.com/about-equifax/culture-careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://equifax.wd5.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "equifax.wd5.myworkdayjobs.com",
+    "tenant": "equifax",
+    "site": "External"
+   },
+   "known_issue": null
   },
   {
    "rank": 184,
@@ -2403,7 +2482,7 @@
   {
    "rank": 187,
    "ticker": "EL",
-   "name": "Estée Lauder Companies (The)",
+   "name": "Est\u00e9e Lauder Companies (The)",
    "weight_pct": null,
    "sector": "Consumer Staples",
    "career_site": "https://app.eightfold.ai/careers",
@@ -2419,10 +2498,14 @@
    "name": "Everest Group",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.everestglobal.com/us-en/career-opportunities/overview",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://wd5.myworkdaysite.com/recruiting/everestre/careers",
+   "adapter": "workday",
+   "params": {
+    "host": "wd5.myworkdaysite.com",
+    "tenant": "everestre",
+    "site": "careers"
+   },
+   "known_issue": null
   },
   {
    "rank": 189,
@@ -2433,7 +2516,7 @@
    "career_site": "https://www.evergy.com/careers/careers-and-internships",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on taleo; no collector for it yet."
+   "known_issue": "Its legacy Taleo career section has no JSON search service and pages results through browser-side session state; no collector for it."
   },
   {
    "rank": 190,
@@ -2441,10 +2524,12 @@
    "name": "Everpure",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.everpuredata.com/company/careers.html",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on greenhouse; no collector for it yet."
+   "career_site": "https://job-boards.greenhouse.io/purestorage",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "purestorage"
+   },
+   "known_issue": null
   },
   {
    "rank": 191,
@@ -2506,10 +2591,12 @@
    "name": "Expeditors International",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.expeditors.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.smartrecruiters.com/Expeditors",
+   "adapter": "smartrecruiters_site",
+   "params": {
+    "company_id": "Expeditors"
+   },
+   "known_issue": null
   },
   {
    "rank": 196,
@@ -2576,7 +2663,7 @@
    "career_site": "https://careers.fastenal.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its custom job site (careers.fastenal.com) has no job sitemap or public job data feed; not collected."
   },
   {
    "rank": 201,
@@ -2584,10 +2671,12 @@
    "name": "Federal Realty Investment Trust",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": "https://www.federalrealty.com/about/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on icims; no collector for it yet."
+   "career_site": "https://careers-federalrealty.icims.com/jobs/intro",
+   "adapter": "icims",
+   "params": {
+    "host": "careers-federalrealty.icims.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 202,
@@ -2651,10 +2740,14 @@
    "name": "Fifth Third Bancorp",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.53.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://fifththird.wd5.myworkdayjobs.com/53careers",
+   "adapter": "workday",
+   "params": {
+    "host": "fifththird.wd5.myworkdayjobs.com",
+    "tenant": "fifththird",
+    "site": "53careers"
+   },
+   "known_issue": null
   },
   {
    "rank": 207,
@@ -2675,10 +2768,13 @@
    "name": "FirstEnergy",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://www.firstenergycorp.com/careers.html",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.firstenergycorp.com/#en/sites/FirstEnergyCareers/jobs",
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "fa-etjd-saasfaprod1.fa.ocs.oraclecloud.com",
+    "site_number": "FirstEnergyCareers"
+   },
+   "known_issue": null
   },
   {
    "rank": 209,
@@ -2742,9 +2838,12 @@
    "weight_pct": null,
    "sector": "Industrials",
    "career_site": "https://careers.fortive.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "adapter": "eightfold",
+   "params": {
+    "host": "fortive.eightfold.ai",
+    "domain": "fortive.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 214,
@@ -2792,10 +2891,12 @@
    "name": "Garmin",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.garmin.com/careers-home/jobs",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on jibe; its job search host was not found yet."
+   "career_site": "https://careers.garmin.com/jobs",
+   "adapter": "jibe",
+   "params": {
+    "host": "careers.garmin.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 218,
@@ -2862,9 +2963,11 @@
    "weight_pct": null,
    "sector": "Information Technology",
    "career_site": "https://jobs.ashbyhq.com/gen-digital",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on ashby; no collector for it yet."
+   "adapter": "ashby",
+   "params": {
+    "board": "gen-digital"
+   },
+   "known_issue": null
   },
   {
    "rank": 223,
@@ -2889,7 +2992,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 225,
@@ -2953,10 +3056,14 @@
    "name": "Global Payments",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://jobs.globalpayments.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://tsys.wd1.myworkdayjobs.com/TSYS",
+   "adapter": "workday",
+   "params": {
+    "host": "tsys.wd1.myworkdayjobs.com",
+    "tenant": "tsys",
+    "site": "TSYS"
+   },
+   "known_issue": null
   },
   {
    "rank": 230,
@@ -2992,10 +3099,10 @@
    "name": "Goldman Sachs",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.goldmansachs.com/careers",
+   "career_site": "https://higher.gs.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on avature; no collector for it yet."
+   "known_issue": "Its career site (higher.gs.com) allows only individual /roles/ pages in robots.txt; the job list and sitemap are disallowed, so openings cannot be discovered."
   },
   {
    "rank": 233,
@@ -3031,10 +3138,12 @@
    "name": "Hasbro",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.hasbro.com/en-us",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "hasbro"
+   },
+   "known_issue": null
   },
   {
    "rank": 236,
@@ -3042,10 +3151,10 @@
    "name": "HCA Healthcare",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.hcahealthcare.com/nurses/nursing-careers",
+   "career_site": "https://careers.hcahealthcare.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (careers.hcahealthcare.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 237,
@@ -3053,10 +3162,10 @@
    "name": "Healthpeak Properties",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": "https://healthpeak.com/careers/available-positions/",
+   "career_site": "https://healthpeak.applytojob.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its openings are on JazzHR (healthpeak.applytojob.com), which has no collector yet."
   },
   {
    "rank": 238,
@@ -3145,10 +3254,13 @@
    "name": "Honeywell Technologies",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.honeywell.com/us/en/careers/retiree-log-in",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on phenom; no collector for it yet."
+   "career_site": "https://careers.honeywell.com/en/sites/Honeywell/jobs",
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "ibqbjb.fa.ocs.oraclecloud.com",
+    "site_number": "CX_1"
+   },
+   "known_issue": null
   },
   {
    "rank": 245,
@@ -3265,7 +3377,7 @@
    "career_site": "https://www.ibm.com/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
   },
   {
    "rank": 254,
@@ -3288,9 +3400,13 @@
    "weight_pct": null,
    "sector": "Health Care",
    "career_site": "https://careers.idexx.com/us/en",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on phenom; no collector for it yet."
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://careers.idexx.com/us/en/sitemap.xml",
+    "url_pattern": "/us/en/job/",
+    "id_pattern": "/job/(J-\\d+)/"
+   },
+   "known_issue": null
   },
   {
    "rank": 256,
@@ -3367,7 +3483,7 @@
    "career_site": "https://www.interactivebrokers.com/en/general/about/careers-splash.php",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on dayforce; no collector for it yet."
+   "known_issue": "Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected."
   },
   {
    "rank": 262,
@@ -3414,10 +3530,13 @@
    "name": "Intuit",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.intuit.com/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on talentbrew; no collector for it yet."
+   "career_site": "https://jobs.intuit.com/",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://jobs.intuit.com/sitemap.xml",
+    "url_pattern": "/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 266,
@@ -3554,7 +3673,7 @@
    "career_site": "https://www.jacobs.com/careers-jacobs",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on avature; no collector for it yet."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
   },
   {
    "rank": 276,
@@ -3649,7 +3768,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 283,
@@ -3671,10 +3790,12 @@
    "name": "KKR & Co.",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.kkr.com/careers/citizenship",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on greenhouse; no collector for it yet."
+   "career_site": "https://www.kkr.com/careers/career-opportunities",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "stage"
+   },
+   "known_issue": null
   },
   {
    "rank": 285,
@@ -3696,10 +3817,13 @@
    "name": "Kraft Heinz",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": "https://careers.kraftheinzcompany.com",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.kraftheinz.com/careers",
+   "adapter": "eightfold",
+   "params": {
+    "host": "jobs.kraftheinz.com",
+    "domain": "kraftheinz.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 287,
@@ -3708,9 +3832,12 @@
    "weight_pct": null,
    "sector": "Consumer Staples",
    "career_site": "https://www.krogerfamilycareers.com/en/sites/CX_2001",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "eluq.fa.us2.oraclecloud.com",
+    "site_number": "CX_2001"
+   },
+   "known_issue": null
   },
   {
    "rank": 288,
@@ -3802,10 +3929,10 @@
    "name": "Lennox International",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.lennox.com/careers/",
+   "career_site": "https://globalcareers-lennox.icims.com/jobs/search",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on icims; no collector for it yet."
+   "known_issue": "Its iCIMS portal (globalcareers-lennox.icims.com) disallows all crawling in robots.txt; recorded as not collected."
   },
   {
    "rank": 295,
@@ -3813,10 +3940,10 @@
    "name": "Linde plc",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://www.lindecareers.com/en/",
+   "career_site": "https://us.lindecareers.com/en/search-jobs",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on ultipro; no collector for it yet."
+   "known_issue": "Its US jobs are posted on ADP and UKG/UltiPro boards whose search services are client-side or disallowed by robots.txt; not collected."
   },
   {
    "rank": 296,
@@ -3838,10 +3965,13 @@
    "name": "Lockheed Martin",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.lockheedmartin.com/en-us/careers/index.html",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://lockheedmartin.eightfold.ai/careers",
+   "adapter": "eightfold",
+   "params": {
+    "host": "lockheedmartin.eightfold.ai",
+    "domain": "lockheedmartin.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 298,
@@ -3849,10 +3979,14 @@
    "name": "Loews Corporation",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://loewscorp.wd1.myworkdayjobs.com/loewscorp",
+   "adapter": "workday",
+   "params": {
+    "host": "loewscorp.wd1.myworkdayjobs.com",
+    "tenant": "loewscorp",
+    "site": "loewscorp"
+   },
+   "known_issue": null
   },
   {
    "rank": 299,
@@ -3878,7 +4012,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its Avature job pages carry no posted date and its RSS feed holds only 20 items, so a dated, complete list is not available; not collected."
   },
   {
    "rank": 301,
@@ -3970,10 +4104,13 @@
    "name": "Martin Marietta Materials",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://jobs.jobvite.com/martinmarietta",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.jobvite.com/martinmarietta/jobs",
+   "adapter": "jobvite",
+   "params": {
+    "company_id": "qpNaVfw1",
+    "site": "martinmarietta"
+   },
+   "known_issue": null
   },
   {
    "rank": 308,
@@ -4078,9 +4215,12 @@
    "weight_pct": null,
    "sector": "Financials",
    "career_site": "https://www.metlifecareers.com/en_US/ml",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on avature; no collector for it yet."
+   "adapter": "avature",
+   "params": {
+    "sitemap": "https://www.metlifecareers.com/ml/sitemap_index.xml",
+    "url_pattern": "/en_US/ml/JobDetail/"
+   },
+   "known_issue": null
   },
   {
    "rank": 316,
@@ -4089,9 +4229,13 @@
    "weight_pct": null,
    "sector": "Health Care",
    "career_site": "https://careers.mt.com/en_US/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on talentbrew; no collector for it yet."
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://careers.mt.com/careers/sitemap_index.xml",
+    "url_pattern": "/en_US/careers/JobDetail/",
+    "id_pattern": "/JobDetail/\\d+/(\\d+)"
+   },
+   "known_issue": null
   },
   {
    "rank": 317,
@@ -4102,7 +4246,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 318,
@@ -4110,10 +4254,14 @@
    "name": "Microchip Technology",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://wd5.myworkdaysite.com/recruiting/microchiphr/External",
+   "adapter": "workday",
+   "params": {
+    "host": "wd5.myworkdaysite.com",
+    "tenant": "microchiphr",
+    "site": "External"
+   },
+   "known_issue": null
   },
   {
    "rank": 319,
@@ -4150,10 +4298,14 @@
    "name": "Mondelez International",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": "https://www.mondelezinternational.com:443/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://mdlz.wd3.myworkdayjobs.com/External",
+   "adapter": "workday",
+   "params": {
+    "host": "mdlz.wd3.myworkdayjobs.com",
+    "tenant": "mdlz",
+    "site": "External"
+   },
+   "known_issue": null
   },
   {
    "rank": 322,
@@ -4178,7 +4330,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 324,
@@ -4317,7 +4469,7 @@
    "career_site": "https://careers.newscorp.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (careers.newscorp.com) renders listings in the browser and serves no job data server-side; not collected."
   },
   {
    "rank": 334,
@@ -4365,10 +4517,14 @@
    "name": "Nordson Corporation",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://nordsonhcm.wd501.myworkdayjobs.com/nordsoncareers",
+   "adapter": "workday",
+   "params": {
+    "host": "nordsonhcm.wd501.myworkdayjobs.com",
+    "tenant": "nordsonhcm",
+    "site": "nordsoncareers"
+   },
+   "known_issue": null
   },
   {
    "rank": 338,
@@ -4402,10 +4558,13 @@
    "name": "Northrop Grumman",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.northropgrumman.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://jobs.northropgrumman.com/careers",
+   "adapter": "eightfold",
+   "params": {
+    "host": "jobs.northropgrumman.com",
+    "domain": "ngc.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 341,
@@ -4416,7 +4575,7 @@
    "career_site": "https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2FNCLHCareersShipboard%2F",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "No official job board was found (the listed career link points to a social media page); not collected."
   },
   {
    "rank": 342,
@@ -4424,10 +4583,12 @@
    "name": "NRG Energy",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.nrgenergy.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "careers.nrgenergy.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 343,
@@ -4447,10 +4608,15 @@
    "name": "NVR, Inc.",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.nvrcareers.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on taleo; no collector for it yet."
+   "career_site": "https://phg.tbe.taleo.net/phg01/ats/careers/v2/jobSearch?org=NVRINC&cws=52",
+   "adapter": "taleo_be",
+   "params": {
+    "host": "phg.tbe.taleo.net",
+    "dc": "phg01",
+    "org": "NVRINC",
+    "cws": "52"
+   },
+   "known_issue": null
   },
   {
    "rank": 345,
@@ -4517,7 +4683,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its careers page (omc.com/careers) returns 404 and no job board was found; not collected."
   },
   {
    "rank": 350,
@@ -4525,10 +4691,13 @@
    "name": "ON Semiconductor",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://hctz.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001",
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "hctz.fa.us2.oraclecloud.com",
+    "site_number": "CX_1001"
+   },
+   "known_issue": null
   },
   {
    "rank": 351,
@@ -4563,10 +4732,14 @@
    "name": "Otis Worldwide",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://otis.wd504.myworkdayjobs.com/REC_Ext_Gateway",
+   "adapter": "workday",
+   "params": {
+    "host": "otis.wd504.myworkdayjobs.com",
+    "tenant": "otis",
+    "site": "REC_Ext_Gateway"
+   },
+   "known_issue": null
   },
   {
    "rank": 354,
@@ -4589,7 +4762,7 @@
    "career_site": "https://careers.packagingcorp.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its custom job search shows ten postings at a time through a browser-side search with no job sitemap; not collected."
   },
   {
    "rank": 356,
@@ -4598,9 +4771,11 @@
    "weight_pct": null,
    "sector": "Information Technology",
    "career_site": "https://www.palantir.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on lever; no collector for it yet."
+   "adapter": "lever",
+   "params": {
+    "site": "palantir"
+   },
+   "known_issue": null
   },
   {
    "rank": 357,
@@ -4625,7 +4800,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (parkercareers.ttcportals.com) sits behind a Cloudflare bot challenge; not collected."
   },
   {
    "rank": 359,
@@ -4647,10 +4822,14 @@
    "name": "PayPal",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://paypal.wd1.myworkdayjobs.com/jobs",
+   "adapter": "workday",
+   "params": {
+    "host": "paypal.wd1.myworkdayjobs.com",
+    "tenant": "paypal",
+    "site": "jobs"
+   },
+   "known_issue": null
   },
   {
    "rank": 361,
@@ -4714,10 +4893,13 @@
    "name": "Philip Morris International",
    "weight_pct": null,
    "sector": "Consumer Staples",
-   "career_site": "https://www.pmi.com/careers/overview",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on phenom; no collector for it yet."
+   "career_site": "https://join.pmicareers.com/",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://join.pmicareers.com/sitemap.xml",
+    "url_pattern": "/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 366,
@@ -4737,10 +4919,12 @@
    "name": "Pinnacle West Capital",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.aps.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "careers.aps.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 368,
@@ -4776,10 +4960,10 @@
    "name": "PPL Corporation",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://www.pplweb.com/blog/category/careers/",
+   "career_site": "https://careers-pplweb.icims.com/jobs/intro",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on icims; no collector for it yet."
+   "known_issue": "Its iCIMS portal (careers-pplweb.icims.com) disallows all crawling in robots.txt; recorded as not collected."
   },
   {
    "rank": 371,
@@ -4813,10 +4997,10 @@
    "name": "Progressive Corporation",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
+   "career_site": "https://careers.progressive.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (careers.progressive.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 374,
@@ -4937,9 +5121,11 @@
    "weight_pct": null,
    "sector": "Industrials",
    "career_site": "https://careers-quanta.icims.com/jobs/intro?hashed=-435625279",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on icims; no collector for it yet."
+   "adapter": "icims",
+   "params": {
+    "host": "careers-quanta.icims.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 383,
@@ -4963,7 +5149,7 @@
    "career_site": "https://www.ralphlauren.com/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (careers.ralphlauren.com) fails TLS verification behind a redirect; not collected."
   },
   {
    "rank": 385,
@@ -4999,10 +5185,12 @@
    "name": "Reddit",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": "https://www.reddit.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://www.redditinc.com/careers",
+   "adapter": "greenhouse",
+   "params": {
+    "token": "reddit"
+   },
+   "known_issue": null
   },
   {
    "rank": 388,
@@ -5013,7 +5201,7 @@
    "career_site": "https://www.regencycenters.com/regency/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected."
   },
   {
    "rank": 389,
@@ -5092,9 +5280,11 @@
    "weight_pct": null,
    "sector": "Financials",
    "career_site": "https://careers.robinhood.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "robinhood"
+   },
+   "known_issue": null
   },
   {
    "rank": 395,
@@ -5131,7 +5321,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 398,
@@ -5140,9 +5330,13 @@
    "weight_pct": null,
    "sector": "Consumer Discretionary",
    "career_site": "https://jobs.rossstores.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on avature; no collector for it yet."
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://jobs.rossstores.com/sitemap.xml",
+    "url_pattern": "/jobdetails/",
+    "id_pattern": "/jobdetails/[^/]+/([0-9a-f-]{36})"
+   },
+   "known_issue": null
   },
   {
    "rank": 399,
@@ -5207,7 +5401,7 @@
    "career_site": "https://www.sandisk.com/careers/jobs-at-sandisk",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its careers page links to no job board that serves openings to scripted requests (its SmartRecruiters account has no jobs); not collected."
   },
   {
    "rank": 404,
@@ -5232,7 +5426,7 @@
    "career_site": "https://careers.slb.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its job listing (careers.slb.com) renders in the browser with no server-side job data or job sitemap; not collected."
   },
   {
    "rank": 406,
@@ -5255,7 +5449,7 @@
    "career_site": "https://sempra.com/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its openings are on ADP Recruiting, whose job list is loaded by browser-side requests; not collected."
   },
   {
    "rank": 408,
@@ -5263,10 +5457,12 @@
    "name": "ServiceNow",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.smartrecruiters.com/ServiceNow",
+   "adapter": "smartrecruiters_site",
+   "params": {
+    "company_id": "ServiceNow"
+   },
+   "known_issue": null
   },
   {
    "rank": 409,
@@ -5301,10 +5497,12 @@
    "name": "Skydance Corporation",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.paramount.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "careers.paramount.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 412,
@@ -5324,10 +5522,10 @@
    "name": "Smurfit Westrock",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://www.smurfitwestrock.com/careers",
+   "career_site": "https://westrockta.avature.net/en_US/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on avature; no collector for it yet."
+   "known_issue": "Its Avature site (westrockta.avature.net) disallows its job sitemap in robots.txt and has no other server-side job list; not collected."
   },
   {
    "rank": 414,
@@ -5335,10 +5533,12 @@
    "name": "Snap-on",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://www.snapon.com/EN/Careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on icims; no collector for it yet."
+   "career_site": "https://careers-snapon.icims.com/jobs/search",
+   "adapter": "icims",
+   "params": {
+    "host": "careers-snapon.icims.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 415,
@@ -5346,10 +5546,14 @@
    "name": "Solventum",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.solventum.com/en-us/home/our-company/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://healthcare.wd1.myworkdayjobs.com/Search",
+   "adapter": "workday",
+   "params": {
+    "host": "healthcare.wd1.myworkdayjobs.com",
+    "tenant": "healthcare",
+    "site": "Search"
+   },
+   "known_issue": null
   },
   {
    "rank": 416,
@@ -5357,10 +5561,10 @@
    "name": "Southern Company",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://southerncompany.jobs/?vs=2925&utm_source=southerncompany.com-DE&utm_medium=Other&utm_campaign=southerncompany.com&_ga=2.18922104.1393374614.1612792799-630953019.1598387569",
+   "career_site": "https://southerncompany.jobs/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its job site (southerncompany.jobs) renders listings in the browser and serves no job data or JobPosting markup server-side; not collected."
   },
   {
    "rank": 417,
@@ -5382,10 +5586,14 @@
    "name": "Stanley Black & Decker",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://sbdinc.wd1.myworkdayjobs.com/Stanley_Black_Decker_Career_Site",
+   "adapter": "workday",
+   "params": {
+    "host": "sbdinc.wd1.myworkdayjobs.com",
+    "tenant": "sbdinc",
+    "site": "Stanley_Black_Decker_Career_Site"
+   },
+   "known_issue": null
   },
   {
    "rank": 419,
@@ -5393,10 +5601,13 @@
    "name": "Starbucks",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://careers.starbucks.com/discover-opportunities/international-careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://apply.starbucks.com/careers",
+   "adapter": "eightfold",
+   "params": {
+    "host": "apply.starbucks.com",
+    "domain": "starbucks.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 420,
@@ -5418,10 +5629,19 @@
    "name": "Steel Dynamics",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://www.steeldynamics.com/careersnew/",
+   "adapter": "icims",
+   "params": {
+    "hosts": [
+     "careers-steeldynamics.icims.com",
+     "careers-omnisource.icims.com",
+     "careers-newmillennium.icims.com",
+     "careers-aluminumdynamics.icims.com",
+     "careers-sdilafarga.icims.com",
+     "careers-biocarbonsolutions.icims.com"
+    ]
+   },
+   "known_issue": null
   },
   {
    "rank": 422,
@@ -5542,9 +5762,11 @@
    "weight_pct": null,
    "sector": "Communication Services",
    "career_site": "https://careers.take2games.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "taketwo"
+   },
+   "known_issue": null
   },
   {
    "rank": 431,
@@ -5569,7 +5791,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 433,
@@ -5630,9 +5852,12 @@
    "weight_pct": null,
    "sector": "Information Technology",
    "career_site": "https://careers.ti.com/en/sites/CX",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "edbz.fa.us2.oraclecloud.com",
+    "site_number": "CX"
+   },
+   "known_issue": null
   },
   {
    "rank": 438,
@@ -5643,7 +5868,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "No online job board was found on its official site; not collected."
   },
   {
    "rank": 439,
@@ -5651,10 +5876,13 @@
    "name": "Textron",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://careersblog.textron.com/how-one-textron-employee-makes-room-for-big-adventures/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on taleo; no collector for it yet."
+   "career_site": "https://textron.taleo.net/careersection/textron/jobsearch.ftl?lang=en",
+   "adapter": "taleo",
+   "params": {
+    "host": "textron.taleo.net",
+    "section": "textron"
+   },
+   "known_issue": null
   },
   {
    "rank": 440,
@@ -5709,7 +5937,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site timed out or answered HTTP 503 during testing; not collected."
   },
   {
    "rank": 444,
@@ -5736,7 +5964,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 446,
@@ -5786,10 +6014,13 @@
    "name": "Twilio",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.twilio.com/en-us/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on eightfold; no collector for it yet."
+   "career_site": "https://jobs.twilio.com/careers",
+   "adapter": "eightfold",
+   "params": {
+    "host": "jobs.twilio.com",
+    "domain": "twilio.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 450,
@@ -5797,10 +6028,13 @@
    "name": "Tyler Technologies",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.tylertech.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.jobvite.com/tylertech/jobs",
+   "adapter": "jobvite",
+   "params": {
+    "company_id": "q6NaVfwI",
+    "site": "tylertech"
+   },
+   "known_issue": null
   },
   {
    "rank": 451,
@@ -5837,10 +6071,10 @@
    "name": "Uber",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
+   "career_site": "https://www.uber.com/us/en/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (jobs.uber.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 454,
@@ -5851,7 +6085,7 @@
    "career_site": "https://www.udr.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on ultipro; no collector for it yet."
+   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected."
   },
   {
    "rank": 455,
@@ -5899,10 +6133,14 @@
    "name": "United Parcel Service",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://www.jobs-ups.com/us/en",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://www.jobs-ups.com/us/en/sitemap.xml",
+    "url_pattern": "/us/en/job/",
+    "id_pattern": "/job/([A-Z0-9]+)/"
+   },
+   "known_issue": null
   },
   {
    "rank": 459,
@@ -5924,10 +6162,13 @@
    "name": "UnitedHealth Group",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.unitedhealthgroup.com/careers/en/work.html",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on talentbrew; no collector for it yet."
+   "career_site": "https://careers.unitedhealthgroup.com/",
+   "adapter": "jsonld_sitemap",
+   "params": {
+    "sitemap": "https://careers.unitedhealthgroup.com/sitemap.xml",
+    "url_pattern": "/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 461,
@@ -5949,10 +6190,13 @@
    "name": "Valero Energy",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://www.valero.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on taleo; no collector for it yet."
+   "career_site": "https://valero.taleo.net/careersection/2/jobsearch.ftl?lang=en",
+   "adapter": "taleo",
+   "params": {
+    "host": "valero.taleo.net",
+    "section": "2"
+   },
+   "known_issue": null
   },
   {
    "rank": 463,
@@ -5960,10 +6204,12 @@
    "name": "Veeva Systems",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://careers.veeva.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.veeva.com/job-search-results/",
+   "adapter": "lever",
+   "params": {
+    "site": "veeva"
+   },
+   "known_issue": null
   },
   {
    "rank": 464,
@@ -6001,9 +6247,11 @@
    "weight_pct": null,
    "sector": "Information Technology",
    "career_site": "https://www.verisign.com/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on greenhouse; no collector for it yet."
+   "adapter": "greenhouse",
+   "params": {
+    "token": "verisign"
+   },
+   "known_issue": null
   },
   {
    "rank": 467,
@@ -6024,10 +6272,10 @@
    "name": "Verizon",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": "https://www.verizon.com/",
+   "career_site": "https://mycareer.verizon.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its career site (mycareer.verizon.com) answers scripted requests with HTTP 403; not collected."
   },
   {
    "rank": 469,
@@ -6079,7 +6327,7 @@
    "career_site": "https://viciproperties.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "No online job board was found on its official site; not collected."
   },
   {
    "rank": 473,
@@ -6104,7 +6352,7 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "No online job board was found on its official site; not collected."
   },
   {
    "rank": 475,
@@ -6112,10 +6360,13 @@
    "name": "Vulcan Materials Company",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://www.vulcanmaterials.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.vulcanmaterials.com/hcmUI/CandidateExperience/en/sites/careers/jobs",
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "careers.vulcanmaterials.com",
+    "site_number": "CX_1"
+   },
+   "known_issue": null
   },
   {
    "rank": 476,
@@ -6137,10 +6388,12 @@
    "name": "W. R. Berkley Corporation",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": "https://www.berkley.com/about-us/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on icims; no collector for it yet."
+   "career_site": "https://careers-berkley.icims.com/jobs/intro",
+   "adapter": "icims",
+   "params": {
+    "host": "careers-berkley.icims.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 478,
@@ -6174,10 +6427,13 @@
    "name": "Walt Disney Company (The)",
    "weight_pct": null,
    "sector": "Communication Services",
-   "career_site": "https://www.disneycareers.com/en?k=2023004%E5%A4%A7%E4%B9%90%E9%80%8F%E5%BC%80%E5%A5%96%E7%BB%93%E6%9E%9C%EF%BC%88%E7%BD%91%E5%9D%80%EF%BC%9A7008.top%EF%BC%89.gwr",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on talentbrew; no collector for it yet."
+   "career_site": "https://www.disneycareers.com/en/",
+   "adapter": "talentbrew",
+   "params": {
+    "sitemap": "https://www.disneycareers.com/sitemap.xml",
+    "url_pattern": "/en/job/"
+   },
+   "known_issue": null
   },
   {
    "rank": 481,
@@ -6198,10 +6454,12 @@
    "name": "Waters Corporation",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://uscareers-waters.icims.com/jobs/search",
+   "adapter": "icims",
+   "params": {
+    "host": "uscareers-waters.icims.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 483,
@@ -6221,10 +6479,14 @@
    "name": "Wells Fargo",
    "weight_pct": null,
    "sector": "Financials",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs",
+   "adapter": "workday",
+   "params": {
+    "host": "wd1.myworkdaysite.com",
+    "tenant": "wf",
+    "site": "WellsFargoJobs"
+   },
+   "known_issue": null
   },
   {
    "rank": 485,
@@ -6235,7 +6497,7 @@
    "career_site": "https://welltower.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on ultipro; no collector for it yet."
+   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected."
   },
   {
    "rank": 486,
@@ -6243,10 +6505,12 @@
    "name": "West Pharmaceutical Services",
    "weight_pct": null,
    "sector": "Health Care",
-   "career_site": "https://www.westpharma.com/search/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site runs on successfactors; its job search host was not found yet."
+   "career_site": "https://careers.westpharma.com/search/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "careers.westpharma.com"
+   },
+   "known_issue": null
   },
   {
    "rank": 487,
@@ -6254,10 +6518,12 @@
    "name": "Western Digital",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.westerndigital.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://careers.smartrecruiters.com/WesternDigital",
+   "adapter": "smartrecruiters_site",
+   "params": {
+    "company_id": "WesternDigital"
+   },
+   "known_issue": null
   },
   {
    "rank": 488,
@@ -6268,7 +6534,7 @@
    "career_site": "https://www.weyerhaeuser.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site runs on taleo; no collector for it yet."
+   "known_issue": "Its legacy Taleo career section has no JSON search service and pages results through browser-side session state; no collector for it."
   },
   {
    "rank": 489,
@@ -6334,7 +6600,7 @@
    "career_site": "https://www.wynnresorts.com/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "known_issue": "Its careers page renders listings in the browser and the job platform behind it could not be identified; not collected."
   },
   {
    "rank": 494,
@@ -6370,10 +6636,13 @@
    "name": "Yum! Brands",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.yum.com/wps/portal/yumbrands/Yumbrands/careers/yum-digital-tech",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Career site platform not identified yet."
+   "career_site": "https://jobs.yum.com/",
+   "adapter": "oracle_hcm",
+   "params": {
+    "host": "eczd.fa.us2.oraclecloud.com",
+    "site_number": "CX_1"
+   },
+   "known_issue": null
   },
   {
    "rank": 497,

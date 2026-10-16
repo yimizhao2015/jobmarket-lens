@@ -1,4 +1,5 @@
-from . import amazon, eightfold, html_sites, jibe, oracle_hcm, smartrecruiters, successfactors, walmart, workday
+from . import (amazon, ashby, avature, eightfold, greenhouse, html_sites, icims, jibe, jobvite, lever, oracle_hcm,
+               smartrecruiters, successfactors, taleo, talentbrew, walmart, workday)
 
 ADAPTERS = {
     "workday": workday.collect,
@@ -6,8 +7,18 @@ ADAPTERS = {
     "oracle_hcm": oracle_hcm.collect,
     "eightfold": eightfold.collect,
     "smartrecruiters": smartrecruiters.collect,
+    "smartrecruiters_site": smartrecruiters.collect_site,
     "jibe": jibe.collect,
     "successfactors": successfactors.collect,
+    "greenhouse": greenhouse.collect,
+    "lever": lever.collect,
+    "ashby": ashby.collect,
+    "icims": icims.collect,
+    "taleo": taleo.collect,
+    "taleo_be": taleo.collect_business_edition,
+    "avature": avature.collect,
+    "jobvite": jobvite.collect,
+    "talentbrew": talentbrew.collect,
     "apple": html_sites.collect_apple,
     "google": html_sites.collect_google,
     "jsonld_sitemap": html_sites.collect_sitemap,

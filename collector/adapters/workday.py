@@ -9,7 +9,8 @@ from .common import html_to_text, raw_posting
 def collect(company, params, http, max_jobs, stats):
     host, tenant, site = params["host"], params["tenant"], params["site"]
     base = f"https://{host}/wday/cxs/{tenant}/{site}"
-    public = f"https://{host}/{site}"
+    # Shared hosts (wd1.myworkdaysite.com) serve the public site under /recruiting/{tenant}/{site}.
+    public = f"https://{host}/recruiting/{tenant}/{site}" if host.startswith("wd") else f"https://{host}/{site}"
     offset, seen = 0, 0
     while seen < max_jobs:
         r = http.post(base + "/jobs", json={"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": ""})
