@@ -56,7 +56,8 @@ def main():
             with lock:
                 log[t] = entry
             return
-        http = Http(col["user_agent"], col["request_delay_seconds"], col["respect_robots_txt"])
+        delay = col.get("request_delay_by_adapter", {}).get(c["adapter"], col["request_delay_seconds"])
+        http = Http(col["user_agent"], delay, col["respect_robots_txt"])
         stats, n, t0 = {}, 0, time.time()
         try:
             with open(out / f"{t}.jsonl", "w") as f:

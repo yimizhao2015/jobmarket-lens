@@ -127,7 +127,7 @@ def main():
             continue
         if r.get("first_seen") and posted > r["first_seen"]:
             posted = r["first_seen"]  # same clamp normalize() applies
-        if not (col["posted_from"] <= posted[:10] <= col["posted_to"]):
+        if not (col["posted_from"] <= posted[:10] <= (col.get("posted_to") or "9999-12-31")):
             dropped[r["company"]] += 1
             continue
         keep.append(r)

@@ -2,73 +2,130 @@
 
 *See demand. Understand skills. Track change.*
 
-Collects job postings from the official career sites of S&P 500 companies, normalizes them, and shows
-hiring demand by occupation (SOC major group), skills, education, experience, pay, seniority, schedule,
-work arrangement and geography. Live site: https://yimizhao2015.github.io/jobmarket-lens/
+JobMarket Lens tracks what America's largest employers are hiring for. It collects job postings from the
+official career sites of S&P 500 companies every week, normalizes them, and shows hiring demand by
+occupation (SOC major group), skills, education, experience, pay, job level, schedule, work arrangement
+and location.
+
+- **Live site:** https://yimizhao2015.github.io/jobmarket-lens/
+- **Data files:** [`data/data source.csv`](data/data%20source.csv) (one row per company and its collection
+  status) and [`data/Job postings.csv`](data/Job%20postings.csv) (every posting on the dashboard, newest first)
+
+© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
+
+## What the dashboard shows
+
+- Filters: year posted, status (open now or closed), company, occupation, job level, work arrangement,
+  full/part-time, years of experience, country and title text.
+- Summary tiles: postings in view, share disclosing pay, median pay, degree requirements, remote/hybrid
+  share, full-time share and median years of experience.
+- Charts: openings by occupation group and by company, top skills (filterable by occupation), job level,
+  minimum degree, experience, work arrangement, full/part-time, licenses, pay ranges, countries, US states,
+  and postings over time (weekly bars, switching to monthly once three months are collected).
+- Source Coverage: every company in scope and the state of collection from its career site (25 per page).
+- Job Postings: the matching postings, newest first (25 per page). A posting that has disappeared from
+  the company's site is greyed out with the date it was last seen instead of linking to a dead page.
 
 ## Universe
 
-All S&P 500 companies except Berkshire Hathaway (no company-wide career site), from the Wikipedia
-constituents list read 2026-10-15; companies with two share classes count once (499 companies). The
-first 20 are the original pilot companies in index-weight order. Each company's career site and the
+All S&P 500 companies except Berkshire Hathaway, from the Wikipedia constituents list read 2026-10-15;
+companies with two share classes count once (499 companies). Each company's career site and the
 collector it uses are in `config/companies.json`; companies without a working collector carry a
-`known_issue` and show as "not collected" on the dashboard.
+`known_issue` and show as "Not collected yet".
+
+Only postings dated October 1, 2026 or later are analyzed (`posted_from` in config).
+
+## How the data is collected and stored
+
+```
+Weekly run (GitHub Actions on Mondays 06:00 UTC, or scripts/run_local.sh on your own computer)
+  1. download the posting history (lens.db.gz) from the private repo yimizhao2015/jobmarket-lens-data
+  2. collect every company's current postings from its career site       -> data/raw/<date>/
+  3. add them to the history: first seen / last seen per posting          -> data/lens.db
+  4. normalize and rebuild the dashboard and CSV files                    -> web/index.html, data/*.csv
+  5. upload the updated history back to the private repo
+  6. commit the dashboard and CSV files here; GitHub Pages republishes the site
+```
+
+The history holds the full text of every posting, so it is kept in the **private** repo
+`jobmarket-lens-data` (release `data`) and never in this public repo. The GitHub workflow reaches it with
+the `DATA_REPO_TOKEN` secret (a fine-grained token with Contents read/write on that repo); a local run uses
+your own `gh` login.
 
 ## Layout
 
 ```
-config/companies.json        companies, weights, career sites, which collector each uses
+config/companies.json        companies, career sites, collector per company, collection settings
 collector/                   one adapter per career-site platform + polite HTTP client + SQLite history
+  http.py                    request pacing, retries, robots.txt (RFC 9309), blocked-site detection
   adapters/workday.py        Workday career sites (most companies)
   adapters/oracle_hcm.py     Oracle Recruiting Cloud
   adapters/successfactors.py SAP SuccessFactors (search pages, or sitemap + page markup)
   adapters/eightfold.py      Eightfold (Microsoft and others)
   adapters/jibe.py           Jibe / iCIMS career sites
-  adapters/html_sites.py     any site with a job sitemap + schema.org JobPosting; Apple; blocked sites
+  adapters/html_sites.py     any site with a job sitemap + schema.org JobPosting; Apple; refused sites
   adapters/amazon.py, walmart.py, smartrecruiters.py   single-company collectors
+  run.py                     runs all companies in parallel, writes data/raw/<date>/run_log.json
 normalize/                   SOC mapping, skills & license dictionaries, field parsers
-scripts/build_dataset.py     normalize everything -> web/data.json, web/index.html, data/normalized/postings.csv
-scripts/export_csv.py        Source coverage and Job postings tables -> "data/data source.csv", "data/Job postings.csv"
-scripts/run_local.sh         run the weekly collection on your own computer (caffeinate -i ./scripts/run_local.sh)
-data/seed/                   119 postings read by hand from 4 career sites on 2026-10-14 (pilot sample)
-data/raw/<date>/             raw JSONL per company per run + run_log.json
-data/lens.db                 history: first_seen / last_seen per posting, per-run totals (kept in the private repo yimizhao2015/jobmarket-lens-data, not here)
-web/index.html               the dashboard (open directly in a browser)
+scripts/build_dataset.py     normalize everything -> web/index.html (data embedded), data/normalized/postings.csv
+scripts/export_csv.py        "data/data source.csv" and "data/Job postings.csv"
+scripts/run_local.sh         the whole weekly run on your own computer
+data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
+web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
+.github/workflows/collect.yml weekly collection (Mondays 06:00 UTC, or run it by hand from the Actions tab)
+.github/workflows/pages.yml  republishes the site whenever web/ changes
 ```
 
-## Run
+Not in this repo: `data/lens.db` and `data/raw/` (private history), `web/data.json` (build output).
 
-Needs Python 3.10+ with `requests` and `beautifulsoup4`, and network access to the career sites.
+## Run it yourself
+
+On a Mac (Homebrew), once:
 
 ```
-pip install requests beautifulsoup4
-python -m collector.run --max 50          # quick smoke test, 50 postings per company
-python -m collector.run                   # full run (cap per company in config, default 800)
-python scripts/build_dataset.py           # rebuild dashboard data
-open web/index.html
+brew install python git gh
+gh auth login            # GitHub.com, HTTPS, log in with a web browser
+gh auth setup-git
+git clone https://github.com/yimizhao2015/jobmarket-lens.git
 ```
 
-Run the collector on a schedule (weekly or monthly) to build the "track change" history: each run is a
-snapshot; postings missing from a later run are marked closed.
+Then, from the `jobmarket-lens` folder, with the computer plugged in and the lid open:
+
+```
+caffeinate -i ./scripts/run_local.sh
+```
+
+It takes about 1 to 2 hours and needs about 2 GB of disk space. When it prints "Done", the site redeploys
+within a few minutes.
+
+For development without touching the history:
+
+```
+pip install -r requirements.txt
+python -m collector.run --only AAPL,MSFT --max 20 --date test   # small test run
+```
 
 ## Rules the pipeline keeps
 
-- Official career sites only. robots.txt is honored; a site that refuses (robots, 403, bot wall) is
-  logged as **blocked** in `run_log.json` and shown as blocked on the dashboard. Nothing is estimated
-  or filled in for it.
-- Only postings dated 2026-10-01 to 2026-12-31 are analyzed (`posted_from` / `posted_to` in config). A posted date later than
-  the day the posting was first collected is replaced by that day.
+- Official career sites only. robots.txt is honored using the standard rules (RFC 9309: the most specific
+  rule wins), and a site's Crawl-delay is respected. Requests are paced per site (0.6 s by default, 2 s for
+  sitemap-based sites, 1.5 s for SuccessFactors).
+- A site that refuses (robots.txt, HTTP 401/403, bot wall) is recorded as **blocked** and shown as blocked
+  on the dashboard. Nothing is estimated or filled in for it, and its postings keep the date they were
+  last seen instead of being marked closed.
+- A posting missing from a later successful run of its company is marked closed.
+- A posted date later than the day the posting was first collected is replaced by that day. Postings with
+  no date on the career site are left out.
 - Every derived field says "Not specified" when the posting does not state it.
-- Postings with no date on the career site are left out, since they can't be placed in the date window.
-- The hand-read seed sample in `data/seed/` is not used (`use_seed_sample: false`).
+- Pay is the posted range, annualized for comparison; it is not actual earnings.
 
 ## Known gaps
 
-- About 150 companies have no collector yet: their career platform wasn't identified automatically, or
-  it is one without a collector here (Taleo, Avature, iCIMS classic, UltiPro, Greenhouse and others).
-- Google (robots.txt disallows its job search), Meta (robots.txt prohibits automated collection) and
+- 156 companies have no collector yet: their career platform wasn't identified automatically, or it is
+  one without a collector here (Taleo, Avature, iCIMS classic, UltiPro, Greenhouse and others).
+- Google (robots.txt disallows its job search), Meta (its robots.txt prohibits automated collection) and
   Tesla (HTTP 403) are recorded as blocked.
 - Collection keeps the newest 800 postings per company (`max_postings_per_company`).
-- Career sites show *currently open* postings; history starts with the first run.
-- SOC groups are assigned by title rules (`normalize/soc.py`), not by a trained coder. Skills come from a
-  fixed dictionary (`normalize/skills.py`).
+- Career sites show only *currently open* postings, so history starts with the first run (October 14, 2026).
+- SOC groups are assigned by title rules (`normalize/soc.py`), not by a trained coder. Skills and licenses
+  come from fixed dictionaries (`normalize/skills.py`), so a skill the dictionary lacks will not appear.
