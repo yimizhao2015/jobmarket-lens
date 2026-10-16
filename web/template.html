@@ -185,11 +185,11 @@ a { color: var(--accent); }
   </section>
 
   <section class="panel wide method" aria-labelledby="m-h">
-    <h2 id="m-h">Data Sources and Methodology*</h2>
+    <h2 id="m-h">Data Sources and Methodology:</h2>
     <p>* Data sources: job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Coverage by company is listed under Source Coverage above.</p>
     <p>Postings come only from each company's official career site. Collectors call the site's own job API where one exists (Workday, Oracle Recruiting, SuccessFactors, Eightfold, Jibe, amazon.jobs) and otherwise read the schema.org JobPosting data on each posting page. Postings without a date on the site are left out. Sites that refuse automated access are listed as blocked, not estimated.</p>
     <p>Each collection run is a snapshot. A posting keeps the date it was first seen; one that disappears from a later run is counted as closed. Only postings dated October 1, 2026 or later are included. A posting dated after the day it was collected (a scheduled start date on some sites) is dated to the collection day.</p>
-    <p>Occupation groups follow the 2018 Standard Occupational Classification major groups, assigned by auditable title rules with the company's own job family as a fallback. Pay is the posted range, annualized for comparison; it is not actual earnings. Skills and licenses are matched against a fixed dictionary, so a skill the dictionary lacks will not appear. "Not specified" means the posting does not say.</p>
+    <p>Occupation groups follow the 2018 Standard Occupational Classification (SOC) major groups, assigned by auditable title rules with the company's own job family as a fallback. Pay is the posted range, annualized for comparison; it is not actual earnings. Skills and licenses are matched against a fixed dictionary, so a skill the dictionary lacks will not appear. "Not specified" means the posting does not specify.</p>
   </section>
   <footer class="copyright">© 2026 JobMarket Lens. All rights reserved. Job postings remain the property of the companies that published them.</footer>
 </div>
