@@ -10,7 +10,10 @@
   "posted_to": null,
   "max_postings_per_company": 800,
   "request_delay_seconds": 0.6,
-  "request_delay_by_adapter": {"jsonld_sitemap": 2.0, "successfactors": 1.5},
+  "request_delay_by_adapter": {
+   "jsonld_sitemap": 2.0,
+   "successfactors": 1.5
+  },
   "user_agent": "JobMarketLens/0.1 (research pilot; contact: see README)",
   "respect_robots_txt": true,
   "use_seed_sample": false
@@ -1025,7 +1028,8 @@
    "params": {
     "sitemaps": [
      "https://careers.blackrock.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -1166,7 +1170,7 @@
   {
    "rank": 88,
    "ticker": "BF.B",
-   "name": "Brown\u2013Forman",
+   "name": "Brown–Forman",
    "weight_pct": null,
    "sector": "Consumer Staples",
    "career_site": "https://bf.wd5.myworkdayjobs.com/USA_Canada",
@@ -1296,7 +1300,8 @@
    "params": {
     "sitemaps": [
      "https://jobs.carrier.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -1482,7 +1487,8 @@
    "params": {
     "sitemaps": [
      "https://careers.chevron.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -2482,7 +2488,7 @@
   {
    "rank": 187,
    "ticker": "EL",
-   "name": "Est\u00e9e Lauder Companies (The)",
+   "name": "Estée Lauder Companies (The)",
    "weight_pct": null,
    "sector": "Consumer Staples",
    "career_site": "https://app.eightfold.ai/careers",
@@ -2815,7 +2821,8 @@
    "params": {
     "sitemaps": [
      "https://www.careers.ford.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -3661,7 +3668,8 @@
    "params": {
     "sitemaps": [
      "https://careers.jackhenry.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -3714,7 +3722,8 @@
    "params": {
     "sitemaps": [
      "https://careers.keurigdrpepper.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -4343,7 +4352,8 @@
    "params": {
     "sitemaps": [
      "https://careers.moodys.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -4427,7 +4437,8 @@
    "params": {
     "sitemaps": [
      "https://careers.netapp.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -5696,7 +5707,8 @@
    "params": {
     "sitemaps": [
      "https://www.synchronycareers.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {
@@ -5710,7 +5722,8 @@
    "params": {
     "sitemaps": [
      "https://careers.synopsys.com/sitemap.xml"
-    ]
+    ],
+    "id_pattern": "/\\d+/(\\d{9,})/?$"
    }
   },
   {

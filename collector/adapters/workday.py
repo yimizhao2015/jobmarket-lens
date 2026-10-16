@@ -20,6 +20,9 @@ def collect(company, params, http, max_jobs, stats):
         posts = data.get("jobPostings") or []
         if not posts:
             break
+        # Past the site's total, Workday keeps returning earlier postings again; stop there.
+        if stats.get("site_total") and offset >= stats["site_total"]:
+            break
         for p in posts:
             path = p.get("externalPath")
             if not path:
