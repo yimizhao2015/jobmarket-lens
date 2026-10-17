@@ -162,11 +162,11 @@ a { color: var(--accent); }
         <select class="inline" id="skill-soc" aria-label="Skills for occupation group"></select></div>
       <div class="bars" id="c-skills"></div>
     </div>
+    <div class="panel"><div><h2>Full-Time or Part-Time</h2><p class="sub">Employment type field, then title</p></div><div class="bars" id="c-sched"></div></div>
     <div class="panel"><div><h2>Job Level</h2><p class="sub">From title keywords, the company's own level label, then years required</p></div><div class="bars" id="c-lvl"></div></div>
+    <div class="panel"><div><h2>Work Arrangement</h2><p class="sub">Remote, hybrid or on-site as the posting states it</p></div><div class="bars" id="c-arr"></div></div>
     <div class="panel"><div><h2>Minimum Degree Required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
     <div class="panel"><div><h2>Experience Required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
-    <div class="panel"><div><h2>Work Arrangement</h2><p class="sub">Remote, hybrid or on-site as the posting states it</p></div><div class="bars" id="c-arr"></div></div>
-    <div class="panel"><div><h2>Full-Time or Part-Time</h2><p class="sub">Employment type field, then title</p></div><div class="bars" id="c-sched"></div></div>
     <div class="panel"><div><h2>Licenses and Certifications</h2><p class="sub">Share of postings in view naming each</p></div><div class="bars" id="c-lic"></div></div>
     <div class="panel wide">
       <div class="panel-head"><div><h2>Pay Ranges by Occupation Group</h2><p class="sub">Median posted range, annualized USD (hourly × 2,080). Only postings that disclose pay in USD.</p></div></div>
@@ -358,7 +358,7 @@ load().then(D => {
     bars("c-state", count(R.filter(r => r.state), "state"), R.filter(r => r.state).length, { limit: 12, emptyText: "No US postings in view." });
     const sk = skillSel.value;
     const RS = sk ? R.filter(r => r.soc === sk) : R;
-    bars("c-skills", countMulti(RS, "skills", skillNames), RS.length, { share: true, limit: 15, emptyText: "No dictionary skills found in postings in view." });
+    bars("c-skills", countMulti(RS, "skills", skillNames), RS.length, { share: true, limit: 20, emptyText: "No dictionary skills found in postings in view." });
 
     // pay ranges per SOC group
     const groups = {};
