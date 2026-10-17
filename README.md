@@ -16,7 +16,7 @@ and location.
 ## What the dashboard shows
 
 - Filters: year posted, status (open now or closed), company, occupation, job level, work arrangement,
-  full/part-time, years of experience, country and title text.
+  full/part-time, years of experience, minimum degree, license or certification, country and title text.
 - Summary tiles: postings in view, share disclosing pay, median pay, degree requirements, remote/hybrid
   share, full-time share and median years of experience.
 - Charts: openings by occupation group and by company, top skills (filterable by occupation), job level,
