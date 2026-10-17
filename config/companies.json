@@ -8,7 +8,7 @@
  "collection": {
   "posted_from": "2026-10-01",
   "posted_to": null,
-  "max_postings_per_company": 800,
+  "max_postings_per_company": 3000,
   "request_delay_seconds": 0.6,
   "request_delay_by_adapter": {
    "jsonld_sitemap": 2.0,
