@@ -1,283 +1,283 @@
 Rank,Ticker,Company,Sector,Career site,Platform,Status,Last collected,Postings in dashboard,Listed on site,Notes
 1,NVDA,NVIDIA,Information Technology,https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite,workday,Collected,2026-10-17,777,2000,
-2,AAPL,Apple,Information Technology,https://jobs.apple.com/en-us/search,apple,Collected,2026-10-17,929,,
-3,MSFT,Microsoft,Information Technology,https://apply.careers.microsoft.com/careers,eightfold,Collected,2026-10-17,1571,2500,
-4,AMZN,Amazon,Consumer Discretionary,https://www.amazon.jobs,amazon,Collected,2026-10-17,3082,10000,
+2,AAPL,Apple,Information Technology,https://jobs.apple.com/en-us/search,apple,Collected,2026-10-17,930,,
+3,MSFT,Microsoft,Information Technology,https://apply.careers.microsoft.com/careers,eightfold,Collected,2026-10-17,1580,2465,
+4,AMZN,Amazon,Consumer Discretionary,https://www.amazon.jobs,amazon,Collected,2026-10-17,3084,10000,
 5,GOOGL,Alphabet (Google),Communication Services,https://www.google.com/about/careers/applications/jobs/results/,google,Blocked by site,2026-10-17,0,,robots.txt disallows https://www.google.com/about/careers/applications/jobs/results/?sort_by=date&page=1
 6,META,Meta Platforms,Communication Services,https://www.metacareers.com/jobs,refused_by_terms,Blocked by site,2026-10-17,0,,metacareers.com/robots.txt states that collection through automated means is prohibited without Meta's express written permission
 7,AVGO,Broadcom,Information Technology,https://broadcom.wd1.myworkdayjobs.com/External_Career,workday,Collected,2026-10-17,124,361,
 8,TSLA,Tesla,Consumer Discretionary,https://www.tesla.com/careers/search/,tesla,Blocked by site,2026-10-17,0,,HTTP 403 from https://www.tesla.com/cua-api/apps/careers/state
-9,LLY,Eli Lilly,Health Care,https://lilly.wd115.myworkdayjobs.com/LLY,workday,Collected,2026-10-17,355,740,
+9,LLY,Eli Lilly,Health Care,https://lilly.wd115.myworkdayjobs.com/LLY,workday,Collector error,2026-10-17,355,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 10,MU,Micron Technology,Information Technology,https://micron.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,777,3175,
-11,AMD,Advanced Micro Devices,Information Technology,https://careers.amd.com/careers-home/jobs,jibe,Collected,2026-10-17,377,1280,
+11,AMD,Advanced Micro Devices,Information Technology,https://careers.amd.com/careers-home/jobs,jibe,Collected,2026-10-17,377,1279,
 12,WMT,Walmart,Consumer Staples,https://careers.walmart.com,walmart,Collected,2026-10-17,2233,15561,
-13,JPM,JPMorgan Chase,Financials,https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/jobs,oracle_hcm,Collected,2026-10-17,2721,7272,
-14,V,Visa,Financials,https://corporate.visa.com/en/jobs/,workday,Collected,2026-10-17,367,833,
-15,XOM,ExxonMobil,Energy,https://jobs.exxonmobil.com/search/,successfactors,Collected,2026-10-17,329,528,
-16,JNJ,Johnson & Johnson,Health Care,https://jj.wd5.myworkdayjobs.com/JJ,workday,Collected,2026-10-17,1446,2026,
-17,MA,Mastercard,Financials,https://mastercard.wd1.myworkdayjobs.com/CorporateCareers,workday,Collected,2026-10-17,599,1113,
-18,INTC,Intel,Information Technology,https://intel.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,383,734,
+13,JPM,JPMorgan Chase,Financials,https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/jobs,oracle_hcm,Collected,2026-10-17,2729,7256,
+14,V,Visa,Financials,https://corporate.visa.com/en/jobs/,workday,Collected,2026-10-17,367,832,
+15,XOM,ExxonMobil,Energy,https://jobs.exxonmobil.com/search/,successfactors,Collected,2026-10-17,329,527,
+16,JNJ,Johnson & Johnson,Health Care,https://jj.wd5.myworkdayjobs.com/JJ,workday,Collected,2026-10-17,1446,1995,
+17,MA,Mastercard,Financials,https://mastercard.wd1.myworkdayjobs.com/CorporateCareers,workday,Collected,2026-10-17,600,1114,
+18,INTC,Intel,Information Technology,https://intel.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,384,735,
 19,ABBV,AbbVie,Health Care,https://careers.abbvie.com/en/jobs,jsonld_sitemap,Collected,2026-10-17,800,1692,Its Workday endpoint returns HTTP 401; the adapter reads the career site sitemap + JobPosting JSON-LD.
 20,MMM,3M,Industrials,https://3m.wd1.myworkdayjobs.com/Search,workday,Collected,2026-10-17,248,745,
 21,AOS,A. O. Smith,Industrials,https://jobs.aosmith.com/search/,successfactors,Collected,2026-10-17,55,,
-22,ABT,Abbott Laboratories,Health Care,https://abbott.wd5.myworkdayjobs.com/abbottcareers,workday,Collected,2026-10-17,1114,2000,
-23,ACN,Accenture,Information Technology,https://accenture.wd103.myworkdayjobs.com/AccentureCareers,workday,Collector error,2026-10-17,879,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+22,ABT,Abbott Laboratories,Health Care,https://abbott.wd5.myworkdayjobs.com/abbottcareers,workday,Collected,2026-10-17,1115,2000,
+23,ACN,Accenture,Information Technology,https://accenture.wd103.myworkdayjobs.com/AccentureCareers,workday,Collected,2026-10-17,2024,2000,
 24,ADBE,Adobe Inc.,Information Technology,https://adobe.wd5.myworkdayjobs.com/external_experienced,workday,Collected,2026-10-17,69,305,
-25,AES,AES Corporation,Utilities,https://aes.wd1.myworkdayjobs.com/AES_US,workday,Collected,2026-10-17,74,160,
-26,AFL,Aflac,Financials,https://careers.aflac.com/search/,successfactors,Collected,2026-10-17,25,29,
+25,AES,AES Corporation,Utilities,https://aes.wd1.myworkdayjobs.com/AES_US,workday,Collected,2026-10-17,74,159,
+26,AFL,Aflac,Financials,https://careers.aflac.com/search/,successfactors,Collected,2026-10-17,25,25,
 27,A,Agilent Technologies,Health Care,https://agilent.wd5.myworkdayjobs.com/Agilent_Careers,workday,Collected,2026-10-17,134,373,
-28,APD,Air Products,Materials,https://airproducts.wd5.myworkdayjobs.com/AP0001,workday,Collected,2026-10-17,132,407,
+28,APD,Air Products,Materials,https://airproducts.wd5.myworkdayjobs.com/AP0001,workday,Collected,2026-10-17,132,406,
 29,ABNB,Airbnb,Consumer Discretionary,https://careers.airbnb.com/,greenhouse,Collected,2026-10-17,4,173,
 30,AKAM,Akamai Technologies,Information Technology,https://jobs.akamai.com/,none,Not collected yet,2026-10-17,0,,Its career site (jobs.akamai.com) answers scripted requests with HTTP 403; not collected.
 31,ALB,Albemarle Corporation,Materials,https://albemarle.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,39,78,
 32,ARE,Alexandria Real Estate Equities,Real Estate,https://www.are.com/careers,none,Not collected yet,2026-10-17,0,,No online job board was found on its official site; not collected.
 33,ALGN,Align Technology,Health Care,https://jobs.aligntech.com,none,Not collected yet,2026-10-17,0,,Its job site (jobs.aligntech.com) is a client-rendered front end and the Workday tenant behind it answers HTTP 401; not collected.
 34,ALLE,Allegion,Industrials,https://allegion.wd5.myworkdayjobs.com/careers,workday,Collected,2026-10-17,91,322,
-35,LNT,Alliant Energy,Utilities,https://alliantenergy.wd1.myworkdayjobs.com/alliant,workday,Collected,2026-10-17,16,36,
+35,LNT,Alliant Energy,Utilities,https://alliantenergy.wd1.myworkdayjobs.com/alliant,workday,Collected,2026-10-17,16,35,
 36,ALL,Allstate,Financials,https://allstate.wd5.myworkdayjobs.com/allstate_careers,workday,Collected,2026-10-17,208,422,
 37,MO,Altria,Consumer Staples,https://careers.altria.com/search/,successfactors,Collected,2026-10-17,0,90,
 38,AMCR,Amcor,Materials,https://amcor.wd5.myworkdayjobs.com/Amcor_External_Career_Site,workday,Collected,2026-10-17,206,759,
-39,AEE,Ameren,Utilities,https://ameren.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,29,86,
-40,AEP,American Electric Power,Utilities,https://aep.wd1.myworkdayjobs.com/AEPCareerSite,workday,Collected,2026-10-17,318,331,
-41,AXP,American Express,Financials,https://careers.americanexpress.com/en/sites/CX_1/jobs,oracle_hcm,Collector error,2026-10-17,344,,"HTTPError: 503 Server Error: Service Unavailable for url: https://egug.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+39,AEE,Ameren,Utilities,https://ameren.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,29,84,
+40,AEP,American Electric Power,Utilities,https://aep.wd1.myworkdayjobs.com/AEPCareerSite,workday,Collected,2026-10-17,318,316,
+41,AXP,American Express,Financials,https://careers.americanexpress.com/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,344,482,
 42,AIG,American International Group,Financials,https://aig.wd1.myworkdayjobs.com/aig,workday,Collected,2026-10-17,90,450,
 43,AMT,American Tower,Real Estate,https://hdsn.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,16,37,
 44,AWK,American Water Works,Utilities,https://jobs.amwater.com/search/,successfactors,Collected,2026-10-17,46,106,
-45,AMP,Ameriprise Financial,Financials,https://ameriprise.wd5.myworkdayjobs.com/Ameriprise,workday,Collected,2026-10-17,172,244,
-46,AME,Ametek,Industrials,https://jobs.ametek.com/search/,successfactors,Collected,2026-10-17,474,777,
-47,AMGN,Amgen,Health Care,https://amgen.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,457,1691,
+45,AMP,Ameriprise Financial,Financials,https://ameriprise.wd5.myworkdayjobs.com/Ameriprise,workday,Collected,2026-10-17,172,233,
+46,AME,Ametek,Industrials,https://jobs.ametek.com/search/,successfactors,Collected,2026-10-17,476,778,
+47,AMGN,Amgen,Health Care,https://amgen.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,460,1694,
 48,APH,Amphenol,Information Technology,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
-49,ADI,Analog Devices,Information Technology,https://analogdevices.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,203,818,
+49,ADI,Analog Devices,Information Technology,https://analogdevices.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,209,824,
 50,AON,Aon plc,Financials,https://jobs.aon.com,jsonld_sitemap,Collected,2026-10-17,392,1096,
 51,APA,APA Corporation,Energy,https://careers.apachecorp.com/search/,successfactors,Collected,2026-10-17,0,25,
 52,APO,Apollo Global Management,Financials,https://athene.wd5.myworkdayjobs.com/Apollo_Careers,workday,Collected,2026-10-17,7,55,
-53,AMAT,Applied Materials,Information Technology,https://app.eightfold.ai/careers,eightfold,Collector error,2026-10-17,612,2042,HTTPError: 405 Client Error: Not Allowed for url: https://app.eightfold.ai/api/pcsx/search?domain=appliedmaterials.com&start=1820&num=10&sort_by=timestamp&query=
+53,AMAT,Applied Materials,Information Technology,https://app.eightfold.ai/careers,eightfold,Collected,2026-10-17,624,2039,
 54,APP,AppLovin,Communication Services,https://boards.greenhouse.io/applovin,greenhouse,Collected,2026-10-17,5,42,
 55,APTV,Aptiv,Consumer Discretionary,https://aptiv.wd5.myworkdayjobs.com/APTIV_CAREERS,workday,Collected,2026-10-17,198,801,
 56,ACGL,Arch Capital Group,Financials,https://archgroup.wd1.myworkdayjobs.com/careers,workday,Collected,2026-10-17,69,204,
 57,ADM,Archer Daniels Midland,Consumer Staples,https://www.adm.com/en-us/culture-and-careers/total-rewards/,none,Not collected yet,2026-10-17,0,,Its BrassRing site pages results through session-bound requests and shows only a last-updated date; no collector for it.
 58,ARES,Ares Management,Financials,https://aresmgmt.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,92,239,
 59,ANET,Arista Networks,Information Technology,,none,Not collected yet,2026-10-17,0,,Its careers pages link to no job board that serves openings to scripted requests; not collected.
-60,AJG,Arthur J. Gallagher & Co.,Financials,https://jobs.ajg.com/jobs,jibe,Collected,2026-10-17,399,1236,
-61,AIZ,Assurant,Financials,https://assurant.wd1.myworkdayjobs.com/Assurant_Careers,workday,Collected,2026-10-17,74,134,
-62,T,AT&T,Communication Services,https://att.wd1.myworkdayjobs.com/ATTGeneral,workday,Collected,2026-10-17,690,1200,
-63,ATO,Atmos Energy,Utilities,https://atmosenergy.wd108.myworkdayjobs.com/External_Career_Site,workday,Collected,2026-10-17,22,34,
-64,ADSK,Autodesk,Information Technology,https://autodesk.wd1.myworkdayjobs.com/Ext,workday,Collected,2026-10-17,154,384,
+60,AJG,Arthur J. Gallagher & Co.,Financials,https://jobs.ajg.com/jobs,jibe,Collected,2026-10-17,399,1235,
+61,AIZ,Assurant,Financials,https://assurant.wd1.myworkdayjobs.com/Assurant_Careers,workday,Collected,2026-10-17,74,125,
+62,T,AT&T,Communication Services,https://att.wd1.myworkdayjobs.com/ATTGeneral,workday,Collected,2026-10-17,691,1201,
+63,ATO,Atmos Energy,Utilities,https://atmosenergy.wd108.myworkdayjobs.com/External_Career_Site,workday,Collector error,2026-10-17,22,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+64,ADSK,Autodesk,Information Technology,https://autodesk.wd1.myworkdayjobs.com/Ext,workday,Collected,2026-10-17,154,355,
 65,ADP,Automatic Data Processing,Industrials,https://jobs.adp.com/,none,Not collected yet,2026-10-17,0,,Its career site (jobs.adp.com) answers scripted requests with HTTP 403; not collected.
-66,AZO,AutoZone,Consumer Discretionary,https://careers.autozone.com/hcmUI/CandidateExperience/en/sites/CX_1,oracle_hcm,Collector error,2026-10-17,993,11607,"HTTPError: 503 Server Error: Service Unavailable for url: https://egud.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=2200,sortBy=POSTING_DATES_DESC"
+66,AZO,AutoZone,Consumer Discretionary,https://careers.autozone.com/hcmUI/CandidateExperience/en/sites/CX_1,oracle_hcm,Collected,2026-10-17,2964,11656,
 67,AVY,Avery Dennison,Materials,https://careers.smartrecruiters.com/AveryDennison,smartrecruiters_site,Collected,2026-10-17,172,490,
 68,AXON,Axon Enterprise,Industrials,https://www.axon.com/careers,greenhouse,Collected,2026-10-17,43,480,
-69,BKR,Baker Hughes,Energy,https://bakerhughes.wd5.myworkdayjobs.com/BakerHughes,workday,Collected,2026-10-17,463,723,
-70,BALL,Ball Corporation,Materials,https://jobs.ball.com/search/,successfactors,Collected,2026-10-17,211,278,
-71,BAC,Bank of America,Financials,https://ghr.wd1.myworkdayjobs.com/lateral-us,workday,Collected,2026-10-17,720,1946,
-72,BAX,Baxter International,Health Care,https://baxter.wd1.myworkdayjobs.com/baxter,workday,Collected,2026-10-17,269,494,
+69,BKR,Baker Hughes,Energy,https://bakerhughes.wd5.myworkdayjobs.com/BakerHughes,workday,Collected,2026-10-17,463,716,
+70,BALL,Ball Corporation,Materials,https://jobs.ball.com/search/,successfactors,Collected,2026-10-17,211,266,
+71,BAC,Bank of America,Financials,https://ghr.wd1.myworkdayjobs.com/lateral-us,workday,Collected,2026-10-17,720,1944,
+72,BAX,Baxter International,Health Care,https://baxter.wd1.myworkdayjobs.com/baxter,workday,Collected,2026-10-17,269,492,
 73,BDX,Becton Dickinson,Health Care,https://bdx.wd1.myworkdayjobs.com/EXTERNAL_CAREER_SITE_USA,workday,Collected,2026-10-17,322,660,
 74,BBY,Best Buy,Consumer Discretionary,https://careers.bestbuy.com/bby,none,Not collected yet,2026-10-17,0,,Its career site renders listings in the browser and the job platform behind it could not be identified; not collected.
 75,TECH,Bio-Techne,Health Care,https://biotechne.wd5.myworkdayjobs.com/Biotechne,workday,Collected,2026-10-17,18,87,
 76,BIIB,Biogen,Health Care,https://biibhr.wd3.myworkdayjobs.com/external,workday,Collected,2026-10-17,113,269,
-77,BLK,BlackRock,Financials,https://careers.blackrock.com,jsonld_sitemap,Collected,2026-10-17,119,306,
+77,BLK,BlackRock,Financials,https://careers.blackrock.com,jsonld_sitemap,Collected,2026-10-17,119,303,
 78,BX,Blackstone Inc.,Financials,https://blackstone.wd1.myworkdayjobs.com/Blackstone_Careers,workday,Collected,2026-10-17,42,160,
 79,XYZ,"Block, Inc.",Financials,https://block.xyz/careers/jobs,greenhouse,Collected,2026-10-17,39,221,
 80,BE,Bloom Energy,Industrials,https://bloomenergy.wd1.myworkdayjobs.com/BloomEnergyCareers,workday,Collected,2026-10-17,57,184,
 81,BNY,BNY Mellon,Financials,https://eofe.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/BNY/jobs,oracle_hcm,Collected,2026-10-17,394,1381,
-82,BA,Boeing,Industrials,https://boeing.wd1.myworkdayjobs.com/EXTERNAL_CAREERS,workday,Collected,2026-10-17,711,786,
+82,BA,Boeing,Industrials,https://boeing.wd1.myworkdayjobs.com/EXTERNAL_CAREERS,workday,Collected,2026-10-17,712,774,
 83,BKNG,Booking Holdings,Consumer Discretionary,https://jobs.booking.com/booking/jobs,jibe,Collected,2026-10-17,46,136,
-84,BSX,Boston Scientific,Health Care,https://jobs.bostonscientific.com/search/,successfactors,Collected,2026-10-17,378,530,
-85,BMY,Bristol Myers Squibb,Health Care,https://bristolmyerssquibb.wd5.myworkdayjobs.com/BMS,workday,Collected,2026-10-17,349,662,
+84,BSX,Boston Scientific,Health Care,https://jobs.bostonscientific.com/search/,successfactors,Collected,2026-10-17,378,523,
+85,BMY,Bristol Myers Squibb,Health Care,https://bristolmyerssquibb.wd5.myworkdayjobs.com/BMS,workday,Collected,2026-10-17,349,655,
 86,BR,Broadridge Financial Solutions,Industrials,https://broadridge.wd5.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,131,324,
-87,BRO,Brown & Brown,Financials,https://bbinsurance.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,208,269,
+87,BRO,Brown & Brown,Financials,https://bbinsurance.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,208,279,
 88,BF.B,Brown–Forman,Consumer Staples,https://bf.wd5.myworkdayjobs.com/USA_Canada,workday,Collected,2026-10-17,10,26,
-89,BG,Bunge Global,Consumer Staples,https://jobs.bunge.com/search/,successfactors,Collected,2026-10-17,480,808,
+89,BG,Bunge Global,Consumer Staples,https://jobs.bunge.com/search/,successfactors,Collected,2026-10-17,480,805,
 90,BXP,"BXP, Inc.",Real Estate,https://edxn.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_4001/jobs,oracle_hcm,Collected,2026-10-17,5,30,
 91,CHRW,C.H. Robinson,Industrials,https://chrobinson.wd5.myworkdayjobs.com/CHRobinson,workday,Collected,2026-10-17,65,167,
 92,CDNS,Cadence Design Systems,Information Technology,https://cadence.wd1.myworkdayjobs.com/External_Careers,workday,Collected,2026-10-17,184,659,
-93,CPT,Camden Property Trust,Real Estate,https://ehap.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs,oracle_hcm,Collector error,2026-10-17,30,,"HTTPError: 503 Server Error: Service Unavailable for url: https://ehap.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
-94,COF,Capital One,Financials,https://capitalone.wd12.myworkdayjobs.com/Capital_One,workday,Collected,2026-10-17,724,1976,
-95,CAH,Cardinal Health,Health Care,https://cardinalhealth.wd1.myworkdayjobs.com/EXT,workday,Collected,2026-10-17,449,828,
+93,CPT,Camden Property Trust,Real Estate,https://ehap.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs,oracle_hcm,Collected,2026-10-17,32,66,
+94,COF,Capital One,Financials,https://capitalone.wd12.myworkdayjobs.com/Capital_One,workday,Collector error,2026-10-17,724,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+95,CAH,Cardinal Health,Health Care,https://cardinalhealth.wd1.myworkdayjobs.com/EXT,workday,Collected,2026-10-17,451,829,
 96,CCL,Carnival Corporation,Consumer Discretionary,https://jobs.carnivalcorp.com/,jsonld_sitemap,Collected,2026-10-17,60,228,
-97,CARR,Carrier Global,Industrials,https://jobs.carrier.com,jsonld_sitemap,Collected,2026-10-17,699,1026,
+97,CARR,Carrier Global,Industrials,https://jobs.carrier.com,jsonld_sitemap,Collected,2026-10-17,720,1044,
 98,CVNA,Carvana,Consumer Discretionary,https://www.carvana.com/careers,greenhouse,Collected,2026-10-17,410,1752,
 99,CASY,Casey's,Consumer Staples,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
-100,CAT,Caterpillar Inc.,Industrials,https://cat.wd5.myworkdayjobs.com/CaterpillarCareers,workday,Collected,2026-10-17,747,957,
+100,CAT,Caterpillar Inc.,Industrials,https://cat.wd5.myworkdayjobs.com/CaterpillarCareers,workday,Collected,2026-10-17,747,937,
 101,CBOE,Cboe Global Markets,Financials,https://careers.cboe.com,jsonld_sitemap,Collected,2026-10-17,64,119,
 102,CBRE,CBRE Group,Real Estate,,none,Not collected yet,2026-10-17,0,,Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.
 103,CDW,CDW Corporation,Information Technology,https://cdw.wd5.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,90,162,
-104,COR,Cencora,Health Care,https://myhrabc.wd5.myworkdayjobs.com/Global,workday,Collected,2026-10-17,433,1014,
-105,CNC,Centene Corporation,Health Care,https://centene.wd5.myworkdayjobs.com/Centene_External,workday,Collected,2026-10-17,244,366,
+104,COR,Cencora,Health Care,https://myhrabc.wd5.myworkdayjobs.com/Global,workday,Collected,2026-10-17,433,1006,
+105,CNC,Centene Corporation,Health Care,https://centene.wd5.myworkdayjobs.com/Centene_External,workday,Collected,2026-10-17,245,353,
 106,CNP,CenterPoint Energy,Utilities,https://careers.centerpointenergy.com/search/,successfactors,Collected,2026-10-17,16,20,
 107,CF,CF Industries,Materials,https://cfindustries.wd1.myworkdayjobs.com/careers,workday,Collected,2026-10-17,12,59,
 108,CRL,Charles River Laboratories,Health Care,https://careers.criver.com/search/,successfactors,Collected,2026-10-17,219,314,
-109,SCHW,Charles Schwab Corporation,Financials,https://www.schwabjobs.com/,jsonld_sitemap,Collected,2026-10-17,266,383,
-110,CHTR,Charter Communications,Communication Services,https://jobs.spectrum.com/,jsonld_sitemap,Collected,2026-10-17,1134,1603,
-111,CVX,Chevron Corporation,Energy,https://careers.chevron.com,jsonld_sitemap,Collected,2026-10-17,124,154,
-112,CMG,Chipotle Mexican Grill,Consumer Discretionary,https://jobs.chipotle.com,jsonld_sitemap,Collected,2026-10-17,589,8289,
-113,CB,Chubb Limited,Financials,https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/jobs,oracle_hcm,Collector error,2026-10-17,209,,"HTTPError: 503 Server Error: Service Unavailable for url: https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_2001,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+109,SCHW,Charles Schwab Corporation,Financials,https://www.schwabjobs.com/,jsonld_sitemap,Collected,2026-10-17,267,346,
+110,CHTR,Charter Communications,Communication Services,https://jobs.spectrum.com/,jsonld_sitemap,Collected,2026-10-17,1135,1601,
+111,CVX,Chevron Corporation,Energy,https://careers.chevron.com,jsonld_sitemap,Collected,2026-10-17,124,153,
+112,CMG,Chipotle Mexican Grill,Consumer Discretionary,https://jobs.chipotle.com,jsonld_sitemap,Collected,2026-10-17,592,8290,
+113,CB,Chubb Limited,Financials,https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/jobs,oracle_hcm,Collected,2026-10-17,209,719,
 114,CHD,Church & Dwight,Consumer Staples,https://churchdwight.wd1.myworkdayjobs.com/chdcareers,workday,Collected,2026-10-17,46,100,
-115,CIEN,Ciena,Information Technology,https://ciena.wd5.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,45,151,
-116,CI,Cigna,Health Care,https://cigna.wd5.myworkdayjobs.com/cignacareers,workday,Collected,2026-10-17,269,529,
+115,CIEN,Ciena,Information Technology,https://ciena.wd5.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,45,149,
+116,CI,Cigna,Health Care,https://cigna.wd5.myworkdayjobs.com/cignacareers,workday,Collected,2026-10-17,269,526,
 117,CINF,Cincinnati Financial,Financials,https://www.cinfin.com/cincinnati-insurance-careers,none,Not collected yet,2026-10-17,0,,"Its Taleo career section lists openings without any posted date, so postings cannot be dated; not collected."
-118,CTAS,Cintas,Industrials,https://careers.cintas.com/search/,successfactors,Collected,2026-10-17,1837,2906,
-119,CSCO,Cisco,Information Technology,https://careers.cisco.com,jsonld_sitemap,Collected,2026-10-17,1000,2816,
-120,C,Citigroup,Financials,https://citi.wd5.myworkdayjobs.com/2,workday,Collected,2026-10-17,1424,2000,
-121,CFG,Citizens Financial Group,Financials,https://hcgn.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collector error,2026-10-17,235,,"HTTPError: 502 Server Error: Bad Gateway for url: https://hcgn.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+118,CTAS,Cintas,Industrials,https://careers.cintas.com/search/,successfactors,Collected,2026-10-17,1837,2887,
+119,CSCO,Cisco,Information Technology,https://careers.cisco.com,jsonld_sitemap,Collected,2026-10-17,1005,2775,
+120,C,Citigroup,Financials,https://citi.wd5.myworkdayjobs.com/2,workday,Collected,2026-10-17,1425,2000,
+121,CFG,Citizens Financial Group,Financials,https://hcgn.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,No postings returned,2026-10-17,235,,
 122,CLX,Clorox,Consumer Staples,https://wd1.myworkdaysite.com/recruiting/clorox/Clorox,workday,Collected,2026-10-17,85,193,
 123,CME,CME Group,Financials,https://cmegroup.wd1.myworkdayjobs.com/cme_careers,workday,Collected,2026-10-17,31,63,
-124,CMS,CMS Energy,Utilities,https://careers.consumersenergy.com/search/,successfactors,Collected,2026-10-17,40,43,
-125,KO,Coca-Cola Company (The),Consumer Staples,https://coke.wd1.myworkdayjobs.com/coca-cola-careers,workday,Collected,2026-10-17,190,232,
+124,CMS,CMS Energy,Utilities,https://careers.consumersenergy.com/search/,successfactors,Collected,2026-10-17,40,41,
+125,KO,Coca-Cola Company (The),Consumer Staples,https://coke.wd1.myworkdayjobs.com/coca-cola-careers,workday,Collected,2026-10-17,190,209,
 126,CTSH,Cognizant,Information Technology,https://careers.cognizant.com/,none,Not collected yet,2026-10-17,0,,Its career site (careers.cognizant.com) answers scripted requests with HTTP 403; not collected.
-127,COHR,Coherent Corp.,Information Technology,https://hcwp.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,64,310,
+127,COHR,Coherent Corp.,Information Technology,https://hcwp.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collector error,2026-10-17,64,,"HTTPError: 503 Server Error: Service Unavailable for url: https://hcwp.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
 128,COIN,Coinbase,Financials,https://www.coinbase.com/careers/positions,greenhouse,Collected,2026-10-17,40,226,
 129,CL,Colgate-Palmolive,Consumer Staples,https://jobs.colgate.com/search/,successfactors,Collected,2026-10-17,96,536,
-130,CMCSA,Comcast,Communication Services,https://jobs.comcast.com/,jsonld_sitemap,Collected,2026-10-17,347,673,
+130,CMCSA,Comcast,Communication Services,https://jobs.comcast.com/,jsonld_sitemap,Collected,2026-10-17,351,659,
 131,FIX,Comfort Systems USA,Industrials,https://comfortsystemsusa.wd1.myworkdayjobs.com/Corpcareers,workday,Collected,2026-10-17,56,176,
 132,COP,ConocoPhillips,Energy,https://conocophillips.wd1.myworkdayjobs.com/eQuest,workday,Collected,2026-10-17,4,4,
-133,ED,Consolidated Edison,Utilities,https://ejcu.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1033/jobs,oracle_hcm,Collector error,2026-10-17,37,,"HTTPError: 503 Server Error: Service Unavailable for url: https://ejcu.fa.us6.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1033,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+133,ED,Consolidated Edison,Utilities,https://ejcu.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1033/jobs,oracle_hcm,Collected,2026-10-17,37,51,
 134,STZ,Constellation Brands,Consumer Staples,https://cbrands.wd5.myworkdayjobs.com/CBI_External_Careers,workday,Collected,2026-10-17,32,83,
 135,CEG,Constellation Energy,Utilities,https://jobs.constellationenergy.com,jsonld_sitemap,Collected,2026-10-17,126,351,
 136,COO,Cooper Companies (The),Health Care,https://hcjy.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,88,218,
-137,CPRT,Copart,Industrials,https://copart.wd12.myworkdayjobs.com/Copart,workday,Collected,2026-10-17,144,390,
-138,GLW,Corning Inc.,Information Technology,https://corningjobs.corning.com/search/,successfactors,Collected,2026-10-17,779,1226,
-139,CPAY,Corpay,Financials,https://corpay.wd103.myworkdayjobs.com/Ext_001,workday,Collector error,2026-10-17,42,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+137,CPRT,Copart,Industrials,https://copart.wd12.myworkdayjobs.com/Copart,workday,Collector error,2026-10-17,144,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+138,GLW,Corning Inc.,Information Technology,https://corningjobs.corning.com/search/,successfactors,Collected,2026-10-17,779,1225,
+139,CPAY,Corpay,Financials,https://corpay.wd103.myworkdayjobs.com/Ext_001,workday,Collected,2026-10-17,43,109,
 140,CSGP,CoStar Group,Real Estate,https://costar.wd1.myworkdayjobs.com/CoStarCareers,workday,Collected,2026-10-17,142,439,
 141,COST,Costco,Consumer Staples,https://careers.costco.com,jsonld_sitemap,Collected,2026-10-17,1,20465,
 142,CRH,CRH plc,Materials,https://jobs.crh.com/search/,successfactors,Collected,2026-10-17,456,1718,
-143,CRWD,CrowdStrike,Information Technology,https://crowdstrike.wd5.myworkdayjobs.com/crowdstrikecareers,workday,Collected,2026-10-17,147,356,
+143,CRWD,CrowdStrike,Information Technology,https://crowdstrike.wd5.myworkdayjobs.com/crowdstrikecareers,workday,Collected,2026-10-17,148,356,
 144,CCI,Crown Castle,Real Estate,https://www.crowncastle.com/careers/,none,Not collected yet,2026-10-17,0,,Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected.
 145,CSX,CSX Corporation,Industrials,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
-146,CMI,Cummins,Industrials,https://fa-espx-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,496,1227,
-147,CVS,CVS Health,Health Care,https://cvshealth.wd1.myworkdayjobs.com/CVS_Health_Careers,workday,Collected,2026-10-17,3036,19587,
+146,CMI,Cummins,Industrials,https://fa-espx-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collector error,2026-10-17,496,,"HTTPError: 503 Server Error: Service Unavailable for url: https://fa-espx-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+147,CVS,CVS Health,Health Care,https://cvshealth.wd1.myworkdayjobs.com/CVS_Health_Careers,workday,Collected,2026-10-17,3042,19489,
 148,DHI,D. R. Horton,Consumer Discretionary,https://drhorton.taleo.net/careersection/2/jobsearch.ftl?lang=en,taleo,Collected,2026-10-17,128,535,
-149,DHR,Danaher Corporation,Health Care,https://danaher.wd1.myworkdayjobs.com/DanaherJobs,workday,Collected,2026-10-17,551,1443,
+149,DHR,Danaher Corporation,Health Care,https://danaher.wd1.myworkdayjobs.com/DanaherJobs,workday,Collected,2026-10-17,551,1441,
 150,DRI,Darden Restaurants,Consumer Discretionary,https://www.darden.com/careers/,none,Not collected yet,2026-10-17,0,,Its restaurant hiring runs through Paradox chat-driven apply flows with no public job list; not collected.
 151,DDOG,Datadog,Information Technology,https://careers.datadoghq.com/,greenhouse,Collected,2026-10-17,55,433,
-152,DVA,DaVita,Health Care,https://davita.wd1.myworkdayjobs.com/DKC_External,workday,Collected,2026-10-17,1549,3403,
-153,DECK,Deckers Brands,Consumer Discretionary,https://deckers.wd5.myworkdayjobs.com/Deckers,workday,Collected,2026-10-17,61,394,
+152,DVA,DaVita,Health Care,https://davita.wd1.myworkdayjobs.com/DKC_External,workday,Collected,2026-10-17,1549,3382,
+153,DECK,Deckers Brands,Consumer Discretionary,https://deckers.wd5.myworkdayjobs.com/Deckers,workday,Collected,2026-10-17,61,393,
 154,DE,Deere & Company,Industrials,https://careers.deere.com,jsonld_sitemap,Collected,2026-10-17,208,328,
-155,DELL,Dell Technologies,Information Technology,https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers,oracle_hcm,Collected,2026-10-17,247,459,
+155,DELL,Dell Technologies,Information Technology,https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers,oracle_hcm,Collected,2026-10-17,247,454,
 156,DAL,Delta Air Lines,Industrials,https://www.delta.com/us/en/careers/overview,none,Not collected yet,2026-10-17,0,,Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.
 157,DVN,Devon Energy,Energy,https://careers.devonenergy.com/search/,none,Not collected yet,2026-10-17,0,,"Its SuccessFactors site (careers.devonenergy.com) serves an incomplete TLS certificate chain, so verified HTTPS requests fail; not collected."
 158,DXCM,Dexcom,Health Care,https://careers.dexcom.com/careers,eightfold,Collected,2026-10-17,118,273,
-159,FANG,Diamondback Energy,Energy,https://diamondbackenergy.wd12.myworkdayjobs.com/DBE,workday,Collected,2026-10-17,5,31,
+159,FANG,Diamondback Energy,Energy,https://diamondbackenergy.wd12.myworkdayjobs.com/DBE,workday,Collector error,2026-10-17,5,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 160,DLR,Digital Realty,Real Estate,https://careers.digitalrealty.com/,none,Not collected yet,2026-10-17,0,,Its career site (careers.digitalrealty.com) fails TLS certificate verification; not collected.
 161,DG,Dollar General,Consumer Staples,https://ibxwjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,1044,91049,
-162,DLTR,Dollar Tree,Consumer Staples,https://dollartree.wd5.myworkdayjobs.com/dollartreeus,workday,Collected,2026-10-17,3060,24994,
-163,D,Dominion Energy,Utilities,https://careers.dominionenergy.com/search/,successfactors,Collected,2026-10-17,120,155,
+162,DLTR,Dollar Tree,Consumer Staples,https://dollartree.wd5.myworkdayjobs.com/dollartreeus,workday,Collected,2026-10-17,3066,24984,
+163,D,Dominion Energy,Utilities,https://careers.dominionenergy.com/search/,successfactors,Collected,2026-10-17,120,138,
 164,DPZ,Domino's,Consumer Discretionary,https://jobs.dominos.com/,none,Not collected yet,2026-10-17,0,,Its career site (jobs.dominos.com) answers scripted requests with HTTP 403; not collected.
-165,DASH,DoorDash,Consumer Discretionary,https://careersatdoordash.com/,greenhouse,Collected,2026-10-17,81,454,
-166,DOV,Dover Corporation,Industrials,https://dover.wd103.myworkdayjobs.com/Dover,workday,Collector error,2026-10-17,308,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
-167,DOW,Dow Inc.,Materials,https://dow.wd1.myworkdayjobs.com/ExternalCareers,workday,Collected,2026-10-17,146,196,
-168,DTE,DTE Energy,Utilities,https://careers.dteenergy.com/search/,successfactors,Collected,2026-10-17,54,79,
-169,DUK,Duke Energy,Utilities,https://dukeenergy.wd1.myworkdayjobs.com/Search,workday,Collected,2026-10-17,98,91,
+165,DASH,DoorDash,Consumer Discretionary,https://careersatdoordash.com/,greenhouse,Collected,2026-10-17,82,455,
+166,DOV,Dover Corporation,Industrials,https://dover.wd103.myworkdayjobs.com/Dover,workday,Collected,2026-10-17,310,688,
+167,DOW,Dow Inc.,Materials,https://dow.wd1.myworkdayjobs.com/ExternalCareers,workday,Collected,2026-10-17,146,188,
+168,DTE,DTE Energy,Utilities,https://careers.dteenergy.com/search/,successfactors,Collected,2026-10-17,54,78,
+169,DUK,Duke Energy,Utilities,https://dukeenergy.wd1.myworkdayjobs.com/Search,workday,Collected,2026-10-17,98,79,
 170,DD,DuPont,Industrials,https://dupont.wd5.myworkdayjobs.com/Jobs,workday,Collected,2026-10-17,51,191,
-171,ETN,Eaton Corporation,Industrials,https://eaton.eightfold.ai,jsonld_sitemap,Collected,2026-10-17,833,2342,
+171,ETN,Eaton Corporation,Industrials,https://eaton.eightfold.ai,jsonld_sitemap,Collected,2026-10-17,870,2342,
 172,EBAY,eBay Inc.,Consumer Discretionary,https://ebay.wd5.myworkdayjobs.com/apply,workday,Collected,2026-10-17,83,277,
 173,ECHO,EchoStar,Communication Services,https://efgz-dev2.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,No postings returned,2026-10-17,0,19,
-174,ECL,Ecolab,Materials,https://jobs.ecolab.com,jsonld_sitemap,Collected,2026-10-17,516,3007,
+174,ECL,Ecolab,Materials,https://jobs.ecolab.com,jsonld_sitemap,Collected,2026-10-17,520,2971,
 175,EIX,Edison International,Utilities,https://www.edisoncareers.com/,none,Not collected yet,2026-10-17,0,,Its career site (edisoncareers.com) links to a SuccessFactors portal that is not reachable without a browser session; not collected.
 176,EW,Edwards Lifesciences,Health Care,https://edwards.wd5.myworkdayjobs.com/EdwardsCareers,workday,Collected,2026-10-17,166,397,
-177,ELV,Elevance Health,Health Care,https://elevancehealth.wd1.myworkdayjobs.com/ANT,workday,Collected,2026-10-17,226,240,
+177,ELV,Elevance Health,Health Care,https://elevancehealth.wd1.myworkdayjobs.com/ANT,workday,Collected,2026-10-17,226,236,
 178,EME,Emcor,Industrials,https://careers-emcorgroup.icims.com/jobs/search,icims,Collected,2026-10-17,439,1581,
 179,EMR,Emerson Electric,Industrials,https://hdjq.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,472,1127,
-180,ETR,Entergy,Utilities,https://jobs.entergy.com/search/,successfactors,Collected,2026-10-17,246,383,
+180,ETR,Entergy,Utilities,https://jobs.entergy.com/search/,successfactors,Collected,2026-10-17,246,382,
 181,EOG,EOG Resources,Energy,https://www.eogresources.com/careers/,none,Not collected yet,2026-10-17,0,,"Its custom ASP job search has no sitemap, posted dates or public feed; not collected."
 182,EQT,EQT Corporation,Energy,https://www.eqt.com/careers,greenhouse,Collected,2026-10-17,18,59,
 183,EFX,Equifax,Industrials,https://equifax.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,90,183,
-184,EQIX,Equinix,Real Estate,https://careers.equinix.com,jsonld_sitemap,Collected,2026-10-17,16,285,
-185,ERIE,Erie Indemnity,Financials,https://jobs.erieinsurance.com/search/,successfactors,Collected,2026-10-17,25,45,
+184,EQIX,Equinix,Real Estate,https://careers.equinix.com,jsonld_sitemap,Collected,2026-10-17,21,285,
+185,ERIE,Erie Indemnity,Financials,https://jobs.erieinsurance.com/search/,successfactors,Collected,2026-10-17,25,43,
 186,ESS,Essex Property Trust,Real Estate,https://essex.wd5.myworkdayjobs.com/essexcareers,workday,Collected,2026-10-17,34,75,
-187,EL,Estée Lauder Companies (The),Consumer Staples,https://app.eightfold.ai/careers,eightfold,Collector error,2026-10-17,771,2153,HTTPError: 405 Client Error: Not Allowed for url: https://app.eightfold.ai/api/pcsx/search?domain=elcompanies.com&start=940&num=10&sort_by=timestamp&query=
+187,EL,Estée Lauder Companies (The),Consumer Staples,https://app.eightfold.ai/careers,eightfold,Collected,2026-10-17,773,2154,
 188,EG,Everest Group,Financials,https://wd5.myworkdaysite.com/recruiting/everestre/careers,workday,Collected,2026-10-17,18,46,
 189,EVRG,Evergy,Utilities,https://www.evergy.com/careers/careers-and-internships,none,Not collected yet,2026-10-17,0,,Its legacy Taleo career section has no JSON search service and pages results through browser-side session state; no collector for it.
-190,P,Everpure,Information Technology,https://job-boards.greenhouse.io/purestorage,greenhouse,Collected,2026-10-17,98,371,
-191,ES,Eversource Energy,Utilities,https://eversource.wd1.myworkdayjobs.com/ExternalSite,workday,Collected,2026-10-17,80,241,
-192,EXC,Exelon,Utilities,https://jobs.exeloncorp.com,jsonld_sitemap,Collected,2026-10-17,55,119,
-193,EXE,Expand Energy,Energy,https://jobs.expandenergy.com/search/,successfactors,Collected,2026-10-17,23,34,
-194,EXPE,Expedia Group,Consumer Discretionary,https://expedia.wd108.myworkdayjobs.com/search,workday,Collected,2026-10-17,163,181,
-195,EXPD,Expeditors International,Industrials,https://careers.smartrecruiters.com/Expeditors,smartrecruiters_site,Collected,2026-10-17,211,497,
+190,P,Everpure,Information Technology,https://job-boards.greenhouse.io/purestorage,greenhouse,Collected,2026-10-17,98,370,
+191,ES,Eversource Energy,Utilities,https://eversource.wd1.myworkdayjobs.com/ExternalSite,workday,Collected,2026-10-17,80,238,
+192,EXC,Exelon,Utilities,https://jobs.exeloncorp.com,jsonld_sitemap,Collected,2026-10-17,55,113,
+193,EXE,Expand Energy,Energy,https://jobs.expandenergy.com/search/,successfactors,Collected,2026-10-17,23,33,
+194,EXPE,Expedia Group,Consumer Discretionary,https://expedia.wd108.myworkdayjobs.com/search,workday,Collector error,2026-10-17,163,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+195,EXPD,Expeditors International,Industrials,https://careers.smartrecruiters.com/Expeditors,smartrecruiters_site,Collected,2026-10-17,211,496,
 196,EXR,Extra Space Storage,Real Estate,https://careers.extraspace.com,jsonld_sitemap,Collected,2026-10-17,63,481,
 197,FFIV,"F5, Inc.",Information Technology,https://ffive.wd5.myworkdayjobs.com/f5jobs,workday,Collected,2026-10-17,128,237,
-198,FDS,FactSet,Financials,https://factset.wd108.myworkdayjobs.com/FactSetCareers,workday,Collected,2026-10-17,43,93,
+198,FDS,FactSet,Financials,https://factset.wd108.myworkdayjobs.com/FactSetCareers,workday,Collector error,2026-10-17,43,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 199,FICO,Fair Isaac,Information Technology,https://fico.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,21,75,
 200,FAST,Fastenal,Industrials,https://careers.fastenal.com/,none,Not collected yet,2026-10-17,0,,Its custom job site (careers.fastenal.com) has no job sitemap or public job data feed; not collected.
 201,FRT,Federal Realty Investment Trust,Real Estate,https://careers-federalrealty.icims.com/jobs/intro,icims,Collected,2026-10-17,0,12,
-202,FDX,FedEx,Industrials,https://fedex.wd1.myworkdayjobs.com/FXE-LAC_External_Career_Site,workday,Collected,2026-10-17,56,114,
-203,FDXF,FedEx Freight,Industrials,https://fedex.wd1.myworkdayjobs.com/FXE-LAC_External_Career_Site,workday,Collected,2026-10-17,56,114,
+202,FDX,FedEx,Industrials,https://fedex.wd1.myworkdayjobs.com/FXE-LAC_External_Career_Site,workday,Collected,2026-10-17,56,113,
+203,FDXF,FedEx Freight,Industrials,https://fedex.wd1.myworkdayjobs.com/FXE-LAC_External_Career_Site,workday,Collected,2026-10-17,56,113,
 204,FERG,Ferguson Enterprises,Industrials,https://ferguson.wd1.myworkdayjobs.com/Ferguson_Experienced,workday,Collected,2026-10-17,280,448,
-205,FIS,Fidelity National Information Services,Financials,https://careers.fisglobal.com,jsonld_sitemap,Collected,2026-10-17,271,542,
-206,FITB,Fifth Third Bancorp,Financials,https://fifththird.wd5.myworkdayjobs.com/53careers,workday,Collected,2026-10-17,559,995,
-207,FSLR,First Solar,Information Technology,https://fa-esbv-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collector error,2026-10-17,74,,"HTTPError: 503 Server Error: Service Unavailable for url: https://fa-esbv-saasfaprod1.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
-208,FE,FirstEnergy,Utilities,https://careers.firstenergycorp.com/#en/sites/FirstEnergyCareers/jobs,oracle_hcm,Collected,2026-10-17,73,336,
-209,FISV,Fiserv,Financials,https://fiserv.wd5.myworkdayjobs.com/EXT,workday,Collected,2026-10-17,301,359,
-210,FLEX,Flex Ltd.,Information Technology,https://flextronics.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,874,1459,
-211,F,Ford Motor Company,Consumer Discretionary,https://www.careers.ford.com,jsonld_sitemap,Collected,2026-10-17,392,893,
+205,FIS,Fidelity National Information Services,Financials,https://careers.fisglobal.com,jsonld_sitemap,Collected,2026-10-17,271,510,
+206,FITB,Fifth Third Bancorp,Financials,https://fifththird.wd5.myworkdayjobs.com/53careers,workday,Collected,2026-10-17,559,986,
+207,FSLR,First Solar,Information Technology,https://fa-esbv-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,74,252,
+208,FE,FirstEnergy,Utilities,https://careers.firstenergycorp.com/#en/sites/FirstEnergyCareers/jobs,oracle_hcm,Collected,2026-10-17,73,334,
+209,FISV,Fiserv,Financials,https://fiserv.wd5.myworkdayjobs.com/EXT,workday,Collected,2026-10-17,301,355,
+210,FLEX,Flex Ltd.,Information Technology,https://flextronics.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,874,1458,
+211,F,Ford Motor Company,Consumer Discretionary,https://www.careers.ford.com,jsonld_sitemap,Collected,2026-10-17,398,890,
 212,FTNT,Fortinet,Information Technology,https://edel.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs,oracle_hcm,Collected,2026-10-17,201,1027,
 213,FTV,Fortive,Industrials,https://careers.fortive.com/,eightfold,Collected,2026-10-17,89,278,
-214,FOXA,Fox Corporation(Class A),Communication Services,https://fox.wd1.myworkdayjobs.com/Domestic,workday,Collected,2026-10-17,97,319,
+214,FOXA,Fox Corporation(Class A),Communication Services,https://fox.wd1.myworkdayjobs.com/Domestic,workday,Collected,2026-10-17,97,318,
 215,BEN,Franklin Resources,Financials,https://franklintempleton.wd5.myworkdayjobs.com/Primary-External-1,workday,No postings returned,2026-10-17,0,,
 216,FCX,Freeport-McMoRan,Materials,https://jobs.fcx.com/search/,successfactors,Collected,2026-10-17,221,,
-217,GRMN,Garmin,Consumer Discretionary,https://careers.garmin.com/jobs,jibe,Collected,2026-10-17,94,420,
-218,IT,Gartner,Information Technology,https://gartner.wd5.myworkdayjobs.com/EXT,workday,Collected,2026-10-17,259,785,
-219,GE,GE Aerospace,Industrials,https://careers.geaerospace.com,jsonld_sitemap,Collected,2026-10-17,529,595,
-220,GEHC,GE HealthCare,Health Care,https://gehc.wd5.myworkdayjobs.com/GEHC_ExternalSite,workday,Collected,2026-10-17,419,973,
-221,GEV,GE Vernova,Industrials,https://gevernova.wd5.myworkdayjobs.com/Vernova_ExternalSite,workday,Collected,2026-10-17,1009,2248,
+217,GRMN,Garmin,Consumer Discretionary,https://careers.garmin.com/jobs,jibe,Collected,2026-10-17,94,419,
+218,IT,Gartner,Information Technology,https://gartner.wd5.myworkdayjobs.com/EXT,workday,Collected,2026-10-17,267,795,
+219,GE,GE Aerospace,Industrials,https://careers.geaerospace.com,jsonld_sitemap,Blocked by site,2026-10-17,529,589,HTTP 403 from https://careers.geaerospace.com/global/en/job/GAOGAYGLOBALR5041439EXTERNALENGLOBAL/LEAN-Assistant-Intern
+220,GEHC,GE HealthCare,Health Care,https://gehc.wd5.myworkdayjobs.com/GEHC_ExternalSite,workday,Collected,2026-10-17,419,971,
+221,GEV,GE Vernova,Industrials,https://gevernova.wd5.myworkdayjobs.com/Vernova_ExternalSite,workday,Collected,2026-10-17,1009,2233,
 222,GEN,Gen Digital,Information Technology,https://jobs.ashbyhq.com/gen-digital,ashby,Collected,2026-10-17,30,123,
 223,GNRC,Generac,Industrials,https://www.generacdealercareers.com,jsonld_sitemap,Collected,2026-10-17,28,64,
 224,GD,General Dynamics,Industrials,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
 225,GIS,General Mills,Consumer Staples,https://genmills.wd1.myworkdayjobs.com/GMI_External_Careers,workday,Collected,2026-10-17,107,365,
-226,GM,General Motors,Consumer Discretionary,https://generalmotors.wd5.myworkdayjobs.com/Careers_GM,workday,Collected,2026-10-17,457,830,
+226,GM,General Motors,Consumer Discretionary,https://generalmotors.wd5.myworkdayjobs.com/Careers_GM,workday,Collected,2026-10-17,459,825,
 227,GPC,Genuine Parts Company,Consumer Discretionary,https://genpt.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,1049,2000,
 228,GILD,Gilead Sciences,Health Care,https://gilead.wd1.myworkdayjobs.com/gileadcareers,workday,Collected,2026-10-17,145,413,
 229,GPN,Global Payments,Financials,https://tsys.wd1.myworkdayjobs.com/TSYS,workday,Collected,2026-10-17,388,407,
 230,GL,Globe Life,Financials,https://globelife.wd5.myworkdayjobs.com/Globe-Life-Careers,workday,Collected,2026-10-17,15,27,
-231,GDDY,GoDaddy,Information Technology,https://careers.godaddy,jsonld_sitemap,Collected,2026-10-17,8,36,
+231,GDDY,GoDaddy,Information Technology,https://careers.godaddy,jsonld_sitemap,Collected,2026-10-17,10,36,
 232,GS,Goldman Sachs,Financials,https://higher.gs.com/,none,Not collected yet,2026-10-17,0,,"Its career site (higher.gs.com) allows only individual /roles/ pages in robots.txt; the job list and sitemap are disallowed, so openings cannot be discovered."
-233,HAL,Halliburton,Energy,https://careers.halliburton.com,jsonld_sitemap,Collected,2026-10-17,194,511,
-234,HIG,Hartford (The),Financials,https://thehartford.wd5.myworkdayjobs.com/Careers_External,workday,Collected,2026-10-17,97,253,
+233,HAL,Halliburton,Energy,https://careers.halliburton.com,jsonld_sitemap,Collected,2026-10-17,194,510,
+234,HIG,Hartford (The),Financials,https://thehartford.wd5.myworkdayjobs.com/Careers_External,workday,Collected,2026-10-17,97,252,
 235,HAS,Hasbro,Consumer Discretionary,https://jobs.hasbro.com/en-us,greenhouse,Collected,2026-10-17,25,108,
 236,HCA,HCA Healthcare,Health Care,https://careers.hcahealthcare.com/,none,Not collected yet,2026-10-17,0,,Its career site (careers.hcahealthcare.com) answers scripted requests with HTTP 403; not collected.
 237,DOC,Healthpeak Properties,Real Estate,https://healthpeak.applytojob.com/,none,Not collected yet,2026-10-17,0,,"Its openings are on JazzHR (healthpeak.applytojob.com), which has no collector yet."
 238,HSIC,Henry Schein,Health Care,https://henryschein.wd1.myworkdayjobs.com/External_Careers,workday,Collected,2026-10-17,92,255,
 239,HSY,Hershey Company (The),Consumer Staples,https://careers.thehersheycompany.com/search/,successfactors,Collected,2026-10-17,214,319,
 240,HPE,Hewlett Packard Enterprise,Information Technology,https://hpe.wd5.myworkdayjobs.com/Jobsathpe,workday,Collected,2026-10-17,570,1575,
-241,HLT,Hilton Worldwide,Consumer Discretionary,https://efet.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collector error,2026-10-17,990,4486,"HTTPError: 503 Server Error: Service Unavailable for url: https://efet.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=1050,sortBy=POSTING_DATES_DESC"
-242,HD,Home Depot (The),Consumer Discretionary,https://careers.homedepot.com,jsonld_sitemap,Blocked by site,2026-10-17,0,,HTTP 403 from https://careers.homedepot.com/jobsitemap
-243,HONA,Honeywell Aerospace,Industrials,https://icfcjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/Aerospace/jobs,oracle_hcm,Collected,2026-10-17,256,829,
-244,HON,Honeywell Technologies,Industrials,https://careers.honeywell.com/en/sites/Honeywell/jobs,oracle_hcm,Collected,2026-10-17,455,1236,
-245,HRL,Hormel Foods,Consumer Staples,https://ekkh.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2002/jobs,oracle_hcm,Collector error,2026-10-17,108,,"HTTPError: 503 Server Error: Service Unavailable for url: https://ekkh.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_2002,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+241,HLT,Hilton Worldwide,Consumer Discretionary,https://efet.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,1904,4464,
+242,HD,Home Depot (The),Consumer Discretionary,https://careers.homedepot.com,jsonld_sitemap,Collected,2026-10-17,0,25297,
+243,HONA,Honeywell Aerospace,Industrials,https://icfcjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/Aerospace/jobs,oracle_hcm,Collector error,2026-10-17,256,,"HTTPError: 503 Server Error: Service Unavailable for url: https://icfcjb.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=Aerospace,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+244,HON,Honeywell Technologies,Industrials,https://careers.honeywell.com/en/sites/Honeywell/jobs,oracle_hcm,Collector error,2026-10-17,455,,"HTTPError: 503 Server Error: Service Unavailable for url: https://ibqbjb.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+245,HRL,Hormel Foods,Consumer Staples,https://ekkh.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2002/jobs,oracle_hcm,Collected,2026-10-17,108,243,
 246,HST,Host Hotels & Resorts,Real Estate,https://hosthotels.wd5.myworkdayjobs.com/HostHotels,workday,Collected,2026-10-17,0,5,
 247,HWM,Howmet Aerospace,Industrials,https://fa-exty-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,232,790,
 248,HPQ,HP Inc.,Information Technology,https://hp.wd5.myworkdayjobs.com/ExternalCareerSite,workday,Collected,2026-10-17,300,838,
-249,HUBB,Hubbell Incorporated,Industrials,https://careers.hubbell.com/search/,successfactors,Collected,2026-10-17,421,675,
+249,HUBB,Hubbell Incorporated,Industrials,https://careers.hubbell.com/search/,successfactors,Collected,2026-10-17,421,672,
 250,HUM,Humana,Health Care,https://humana.wd5.myworkdayjobs.com/CenterWell_External_Career_Site,workday,Collected,2026-10-17,658,1807,
-251,HBAN,Huntington Bancshares,Financials,https://huntington.wd12.myworkdayjobs.com/HNBcareers,workday,Collected,2026-10-17,319,667,
-252,HII,Huntington Ingalls Industries,Industrials,https://careers.huntingtoningalls.com/search/,successfactors,Collected,2026-10-17,341,426,
+251,HBAN,Huntington Bancshares,Financials,https://huntington.wd12.myworkdayjobs.com/HNBcareers,workday,Collector error,2026-10-17,319,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+252,HII,Huntington Ingalls Industries,Industrials,https://careers.huntingtoningalls.com/search/,successfactors,Collected,2026-10-17,342,409,
 253,IBM,IBM,Information Technology,https://www.ibm.com/careers,none,Not collected yet,2026-10-17,0,,Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.
 254,IEX,IDEX Corporation,Industrials,https://idexcorp.wd5.myworkdayjobs.com/IDEX_Careers,workday,Collected,2026-10-17,68,227,
-255,IDXX,Idexx Laboratories,Health Care,https://careers.idexx.com/us/en,jsonld_sitemap,Collected,2026-10-17,82,191,
+255,IDXX,Idexx Laboratories,Health Care,https://careers.idexx.com/us/en,jsonld_sitemap,Blocked by site,2026-10-17,82,191,HTTP 403 from https://careers.idexx.com/us/en/job/J-055160/Customer-Support-Consultant-Hematology
 256,ITW,Illinois Tool Works,Industrials,https://itw.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,250,770,
 257,ILMN,"Illumina, Inc.",Health Care,https://illumina.wd1.myworkdayjobs.com/illumina-careers,workday,Collected,2026-10-17,71,164,
 258,INCY,Incyte,Health Care,https://careers.incyte.com/jobs,jibe,Collected,2026-10-17,47,144,
 259,IR,Ingersoll Rand,Industrials,https://careers.irco.com/search/,successfactors,Collected,2026-10-17,174,264,
-260,PODD,Insulet Corporation,Health Care,https://insulet.wd5.myworkdayjobs.com/insuletcareers,workday,Collected,2026-10-17,102,202,
+260,PODD,Insulet Corporation,Health Care,https://insulet.wd5.myworkdayjobs.com/insuletcareers,workday,Collected,2026-10-17,102,199,
 261,IBKR,Interactive Brokers,Financials,https://www.interactivebrokers.com/en/general/about/careers-splash.php,none,Not collected yet,2026-10-17,0,,Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected.
 262,ICE,Intercontinental Exchange,Financials,https://careers.ice.com/jobs,jibe,Collected,2026-10-17,87,302,
-263,IFF,International Flavors & Fragrances,Materials,https://iff.wd5.myworkdayjobs.com/IFF_Careers,workday,Collected,2026-10-17,207,394,
-264,IP,International Paper,Materials,https://iazbqy.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,204,460,
+263,IFF,International Flavors & Fragrances,Materials,https://iff.wd5.myworkdayjobs.com/IFF_Careers,workday,Collected,2026-10-17,207,391,
+264,IP,International Paper,Materials,https://iazbqy.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collector error,2026-10-17,204,,"HTTPError: 503 Server Error: Service Unavailable for url: https://iazbqy.fa.ocs.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
 265,INTU,Intuit,Information Technology,https://jobs.intuit.com/,jsonld_sitemap,Collected,2026-10-17,148,592,
 266,ISRG,Intuitive Surgical,Health Care,https://intuitive.wd1.myworkdayjobs.com/irtc_careers,workday,Collected,2026-10-17,11,35,
 267,IVZ,Invesco,Financials,https://invesco.wd1.myworkdayjobs.com/IVZ,workday,Collected,2026-10-17,73,236,
-268,INVH,Invitation Homes,Real Estate,https://invitationhomes.wd503.myworkdayjobs.com/INVH,workday,Collected,2026-10-17,28,60,
-269,IQV,IQVIA,Health Care,https://iqvia.wd1.myworkdayjobs.com/IQVIA,workday,Collected,2026-10-17,687,1860,
-270,IRM,Iron Mountain,Real Estate,https://ironmountain.wd5.myworkdayjobs.com/iron-mountain-jobs,workday,Collected,2026-10-17,204,356,
-271,JBHT,J.B. Hunt,Industrials,https://jbhunt.wd501.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,262,495,
+268,INVH,Invitation Homes,Real Estate,https://invitationhomes.wd503.myworkdayjobs.com/INVH,workday,Collector error,2026-10-17,28,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+269,IQV,IQVIA,Health Care,https://iqvia.wd1.myworkdayjobs.com/IQVIA,workday,Collected,2026-10-17,687,1858,
+270,IRM,Iron Mountain,Real Estate,https://ironmountain.wd5.myworkdayjobs.com/iron-mountain-jobs,workday,Collected,2026-10-17,204,355,
+271,JBHT,J.B. Hunt,Industrials,https://jbhunt.wd501.myworkdayjobs.com/Careers,workday,Collector error,2026-10-17,262,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 272,SJM,J.M. Smucker Company (The),Consumer Staples,https://smucker.wd5.myworkdayjobs.com/US_External_Careers,workday,Collected,2026-10-17,39,123,
-273,JBL,Jabil,Information Technology,https://jabil.wd5.myworkdayjobs.com/Jabil_Careers,workday,Collected,2026-10-17,682,2000,
-274,JKHY,Jack Henry & Associates,Financials,https://careers.jackhenry.com,jsonld_sitemap,Collected,2026-10-17,27,84,
+273,JBL,Jabil,Information Technology,https://jabil.wd5.myworkdayjobs.com/Jabil_Careers,workday,Collected,2026-10-17,685,2000,
+274,JKHY,Jack Henry & Associates,Financials,https://careers.jackhenry.com,jsonld_sitemap,Collected,2026-10-17,27,85,
 275,J,Jacobs Solutions,Industrials,https://www.jacobs.com/careers-jacobs,none,Not collected yet,2026-10-17,0,,Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.
 276,JCI,Johnson Controls,Industrials,https://jci.wd5.myworkdayjobs.com/JCI,workday,Collected,2026-10-17,989,2699,
-277,KVUE,Kenvue,Consumer Staples,https://kenvue.wd5.myworkdayjobs.com/kenvue,workday,Collected,2026-10-17,118,160,
+277,KVUE,Kenvue,Consumer Staples,https://kenvue.wd5.myworkdayjobs.com/kenvue,workday,Collected,2026-10-17,118,159,
 278,KDP,Keurig Dr Pepper,Consumer Staples,https://careers.keurigdrpepper.com,jsonld_sitemap,Collected,2026-10-17,268,707,
-279,KEY,KeyCorp,Financials,https://keybank.wd5.myworkdayjobs.com/External_Career_Site,workday,Collected,2026-10-17,239,574,
+279,KEY,KeyCorp,Financials,https://keybank.wd5.myworkdayjobs.com/External_Career_Site,workday,Collected,2026-10-17,239,566,
 280,KEYS,Keysight Technologies,Information Technology,https://careers.keysight.com,jsonld_sitemap,Collected,2026-10-17,175,717,
 281,KMB,Kimberly-Clark,Consumer Staples,https://kimberlyclark.wd1.myworkdayjobs.com/GLOBAL,workday,Collected,2026-10-17,88,160,
 282,KIM,Kimco Realty,Real Estate,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
@@ -285,91 +285,91 @@ Rank,Ticker,Company,Sector,Career site,Platform,Status,Last collected,Postings i
 284,KKR,KKR & Co.,Financials,https://www.kkr.com/careers/career-opportunities,greenhouse,Collected,2026-10-17,20,130,
 285,KLAC,KLA Corporation,Information Technology,https://kla.wd1.myworkdayjobs.com/Search,workday,Collected,2026-10-17,293,1085,
 286,KHC,Kraft Heinz,Consumer Staples,https://jobs.kraftheinz.com/careers,eightfold,Collected,2026-10-17,234,794,
-287,KR,Kroger,Consumer Staples,https://www.krogerfamilycareers.com/en/sites/CX_2001,oracle_hcm,Collector error,2026-10-17,965,,"HTTPError: 503 Server Error: Service Unavailable for url: https://eluq.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_2001,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
-288,LHX,L3Harris,Industrials,https://careers.l3harris.com,jsonld_sitemap,Collected,2026-10-17,770,2204,
-289,LH,Labcorp,Health Care,https://careers.labcorp.com,jsonld_sitemap,Collected,2026-10-17,1021,1811,
+287,KR,Kroger,Consumer Staples,https://www.krogerfamilycareers.com/en/sites/CX_2001,oracle_hcm,Collected,2026-10-17,3007,11506,
+288,LHX,L3Harris,Industrials,https://careers.l3harris.com,jsonld_sitemap,Collected,2026-10-17,771,2205,
+289,LH,Labcorp,Health Care,https://careers.labcorp.com,jsonld_sitemap,Collected,2026-10-17,1063,1818,
 290,LRCX,Lam Research,Information Technology,https://careers.lamresearch.com,jsonld_sitemap,Collected,2026-10-17,328,1385,
 291,LVS,Las Vegas Sands,Consumer Discretionary,https://sands.wd1.myworkdayjobs.com/sands_careers,workday,Collected,2026-10-17,4,18,
 292,LDOS,Leidos,Industrials,https://leidos.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,794,2000,
 293,LEN,Lennar,Consumer Discretionary,https://careers.lennar.com,jsonld_sitemap,Collected,2026-10-17,256,459,
 294,LII,Lennox International,Industrials,https://globalcareers-lennox.icims.com/jobs/search,none,Not collected yet,2026-10-17,0,,Its iCIMS portal (globalcareers-lennox.icims.com) disallows all crawling in robots.txt; recorded as not collected.
 295,LIN,Linde plc,Materials,https://us.lindecareers.com/en/search-jobs,none,Not collected yet,2026-10-17,0,,Its US jobs are posted on ADP and UKG/UltiPro boards whose search services are client-side or disallowed by robots.txt; not collected.
-296,LYV,Live Nation Entertainment,Communication Services,https://livenation.wd503.myworkdayjobs.com/LNExternalSite,workday,Collected,2026-10-17,99,1326,
-297,LMT,Lockheed Martin,Industrials,https://lockheedmartin.eightfold.ai/careers,eightfold,Collector error,2026-10-17,810,6227,HTTPError: 405 Client Error: Not Allowed for url: https://lockheedmartin.eightfold.ai/api/pcsx/search?domain=lockheedmartin.com&start=1190&num=10&sort_by=timestamp&query=
+296,LYV,Live Nation Entertainment,Communication Services,https://livenation.wd503.myworkdayjobs.com/LNExternalSite,workday,Collector error,2026-10-17,99,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+297,LMT,Lockheed Martin,Industrials,https://lockheedmartin.eightfold.ai/careers,eightfold,Collected,2026-10-17,1833,6226,
 298,L,Loews Corporation,Financials,https://loewscorp.wd1.myworkdayjobs.com/loewscorp,workday,Collected,2026-10-17,0,2,
-299,LOW,Lowe's,Consumer Discretionary,https://talent.lowes.com,jsonld_sitemap,Collected,2026-10-17,3111,3822,
+299,LOW,Lowe's,Consumer Discretionary,https://talent.lowes.com,jsonld_sitemap,Collected,2026-10-17,3489,3926,
 300,LULU,Lululemon Athletica,Consumer Discretionary,,none,Not collected yet,2026-10-17,0,,"Its Avature job pages carry no posted date and its RSS feed holds only 20 items, so a dated, complete list is not available; not collected."
 301,LITE,Lumentum,Information Technology,https://lumentum.wd5.myworkdayjobs.com/LITE,workday,Collected,2026-10-17,110,274,
-302,LYB,LyondellBasell,Materials,https://careers.lyondellbasell.com/search/,successfactors,Collected,2026-10-17,124,179,
-303,MTB,M&T Bank,Financials,https://mtb.wd5.myworkdayjobs.com/MTB,workday,Collected,2026-10-17,312,781,
-304,MPC,Marathon Petroleum,Energy,https://mpc.wd1.myworkdayjobs.com/MPCCareers,workday,Collected,2026-10-17,93,129,
-305,MAR,Marriott International,Consumer Discretionary,https://mymvw.wd5.myworkdayjobs.com/MVW,workday,Collected,2026-10-17,254,525,
-306,MRSH,Marsh McLennan,Financials,https://careers.marsh.com,jsonld_sitemap,Collected,2026-10-17,757,3568,
+302,LYB,LyondellBasell,Materials,https://careers.lyondellbasell.com/search/,successfactors,Collected,2026-10-17,124,169,
+303,MTB,M&T Bank,Financials,https://mtb.wd5.myworkdayjobs.com/MTB,workday,Collected,2026-10-17,312,780,
+304,MPC,Marathon Petroleum,Energy,https://mpc.wd1.myworkdayjobs.com/MPCCareers,workday,Collected,2026-10-17,93,123,
+305,MAR,Marriott International,Consumer Discretionary,https://mymvw.wd5.myworkdayjobs.com/MVW,workday,Collected,2026-10-17,256,527,
+306,MRSH,Marsh McLennan,Financials,https://careers.marsh.com,jsonld_sitemap,Collected,2026-10-17,760,3781,
 307,MLM,Martin Marietta Materials,Materials,https://jobs.jobvite.com/martinmarietta/jobs,jobvite,Collected,2026-10-17,103,323,
 308,MRVL,Marvell Technology,Information Technology,https://marvell.wd1.myworkdayjobs.com/MarvellCareers,workday,Collected,2026-10-17,113,327,
-309,MAS,Masco,Industrials,https://jobs.masco.com,jsonld_sitemap,Collected,2026-10-17,40,154,
-310,MKC,McCormick & Company,Consumer Staples,https://careers.mccormick.com/search/,successfactors,Collected,2026-10-17,142,226,
+309,MAS,Masco,Industrials,https://jobs.masco.com,jsonld_sitemap,Blocked by site,2026-10-17,40,154,HTTP 403 from https://jobs.masco.com/behrpaint/us/en/job/REQ54689/Pro-Sales-Associate-Marina-Del-Rey
+310,MKC,McCormick & Company,Consumer Staples,https://careers.mccormick.com/search/,successfactors,Collector error,2026-10-17,142,226,HTTPError: 504 Server Error: Gateway Time-out for url: https://careers.mccormick.com/search/?q=&sortColumn=referencedate&sortDirection=desc&startrow=1798
 311,MCD,McDonald's,Consumer Discretionary,https://jobs.mcdonalds.com/search/,successfactors,Collected,2026-10-17,124,199,
 312,MCK,McKesson,Health Care,https://careers.mckesson.com,jsonld_sitemap,Collected,2026-10-17,249,659,
-313,MDT,Medtronic,Health Care,https://medtronic.wd1.myworkdayjobs.com/MedtronicCareers,workday,Collected,2026-10-17,698,1092,
-314,MRK,Merck & Co.,Health Care,https://msd.wd5.myworkdayjobs.com/SearchJobs,workday,Collected,2026-10-17,734,995,
+313,MDT,Medtronic,Health Care,https://medtronic.wd1.myworkdayjobs.com/MedtronicCareers,workday,Collected,2026-10-17,698,1057,
+314,MRK,Merck & Co.,Health Care,https://msd.wd5.myworkdayjobs.com/SearchJobs,workday,Collected,2026-10-17,735,971,
 315,MET,MetLife,Financials,https://www.metlifecareers.com/en_US/ml,avature,Collected,2026-10-17,136,417,
 316,MTD,Mettler Toledo,Health Care,https://careers.mt.com/en_US/careers,jsonld_sitemap,Collected,2026-10-17,77,548,
 317,MGM,MGM Resorts,Consumer Discretionary,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
 318,MCHP,Microchip Technology,Information Technology,https://wd5.myworkdaysite.com/recruiting/microchiphr/External,workday,Collected,2026-10-17,154,529,
-319,MAA,Mid-America Apartment Communities,Real Estate,https://careers.maac.com,jsonld_sitemap,Collected,2026-10-17,60,271,
+319,MAA,Mid-America Apartment Communities,Real Estate,https://careers.maac.com,jsonld_sitemap,Collected,2026-10-17,60,272,
 320,MRNA,Moderna,Health Care,https://modernatx.wd1.myworkdayjobs.com/M_tx,workday,Collected,2026-10-17,107,268,
-321,MDLZ,Mondelez International,Consumer Staples,https://mdlz.wd3.myworkdayjobs.com/External,workday,Collected,2026-10-17,722,1364,
-322,MPWR,Monolithic Power Systems,Information Technology,https://monolithicpower.wd12.myworkdayjobs.com/MPS_Careers,workday,Collected,2026-10-17,21,237,
+321,MDLZ,Mondelez International,Consumer Staples,https://mdlz.wd3.myworkdayjobs.com/External,workday,Collected,2026-10-17,724,1366,
+322,MPWR,Monolithic Power Systems,Information Technology,https://monolithicpower.wd12.myworkdayjobs.com/MPS_Careers,workday,Collector error,2026-10-17,21,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 323,MNST,Monster Beverage,Consumer Staples,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
-324,MCO,Moody's Corporation,Financials,https://careers.moodys.com,jsonld_sitemap,Collected,2026-10-17,24,350,
+324,MCO,Moody's Corporation,Financials,https://careers.moodys.com,jsonld_sitemap,Collected,2026-10-17,24,349,
 325,MS,Morgan Stanley,Financials,https://ms.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,400,1260,
-326,MOS,Mosaic Company (The),Materials,https://mosaic.wd5.myworkdayjobs.com/mosaic,workday,Collected,2026-10-17,45,106,
+326,MOS,Mosaic Company (The),Materials,https://mosaic.wd5.myworkdayjobs.com/mosaic,workday,Collected,2026-10-17,45,105,
 327,MSI,Motorola Solutions,Information Technology,https://motorolasolutions.wd5.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,291,915,
 328,MSCI,MSCI,Financials,https://careers.msci.com,jsonld_sitemap,Collected,2026-10-17,113,135,
 329,NDAQ,"Nasdaq, Inc.",Financials,https://nasdaq.wd1.myworkdayjobs.com/Global_External_Site,workday,Collected,2026-10-17,57,164,
 330,NTAP,NetApp,Information Technology,https://careers.netapp.com,jsonld_sitemap,Collected,2026-10-17,100,304,
-331,NFLX,Netflix,Communication Services,https://netflix.wd108.myworkdayjobs.com/Netflix,workday,Collected,2026-10-17,154,568,
-332,NEM,Newmont,Materials,https://jobs.newmont.com,jsonld_sitemap,Collected,2026-10-17,85,328,
+331,NFLX,Netflix,Communication Services,https://netflix.wd108.myworkdayjobs.com/Netflix,workday,Collector error,2026-10-17,154,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+332,NEM,Newmont,Materials,https://jobs.newmont.com,jsonld_sitemap,Blocked by site,2026-10-17,85,324,HTTP 403 from https://jobs.newmont.com/ca/fr/job/45089/Advisor-People-Case-Management
 333,NWSA,News Corp(Class A),Communication Services,https://careers.newscorp.com/,none,Not collected yet,2026-10-17,0,,Its career site (careers.newscorp.com) renders listings in the browser and serves no job data server-side; not collected.
-334,NEE,NextEra Energy,Utilities,https://jobs.nexteraenergy.com/search/,successfactors,Collected,2026-10-17,162,282,
-335,NKE,"Nike, Inc.",Consumer Discretionary,https://nike.wd1.myworkdayjobs.com/nke,workday,Collected,2026-10-17,346,828,
-336,NI,NiSource,Utilities,https://nisource.wd1.myworkdayjobs.com/NiSource,workday,Collected,2026-10-17,32,45,
-337,NDSN,Nordson Corporation,Industrials,https://nordsonhcm.wd501.myworkdayjobs.com/nordsoncareers,workday,Collected,2026-10-17,85,230,
+334,NEE,NextEra Energy,Utilities,https://jobs.nexteraenergy.com/search/,successfactors,Collected,2026-10-17,162,280,
+335,NKE,"Nike, Inc.",Consumer Discretionary,https://nike.wd1.myworkdayjobs.com/nke,workday,Collected,2026-10-17,346,826,
+336,NI,NiSource,Utilities,https://nisource.wd1.myworkdayjobs.com/NiSource,workday,Collected,2026-10-17,33,46,
+337,NDSN,Nordson Corporation,Industrials,https://nordsonhcm.wd501.myworkdayjobs.com/nordsoncareers,workday,Collector error,2026-10-17,85,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 338,NSC,Norfolk Southern,Industrials,https://jobs.nscorp.com/search/,successfactors,Collected,2026-10-17,65,,
 339,NTRS,Northern Trust,Financials,https://ntrs.wd1.myworkdayjobs.com/northerntrust,workday,Collected,2026-10-17,236,608,
-340,NOC,Northrop Grumman,Industrials,https://jobs.northropgrumman.com/careers,eightfold,Collector error,2026-10-17,848,3847,HTTPError: 405 Client Error: Not Allowed for url: https://jobs.northropgrumman.com/api/pcsx/search?domain=ngc.com&start=1050&num=10&sort_by=timestamp&query=
+340,NOC,Northrop Grumman,Industrials,https://jobs.northropgrumman.com/careers,eightfold,Collected,2026-10-17,1690,3848,
 341,NCLH,Norwegian Cruise Line Holdings,Consumer Discretionary,https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2FNCLHCareersShipboard%2F,none,Not collected yet,2026-10-17,0,,No official job board was found (the listed career link points to a social media page); not collected.
 342,NRG,NRG Energy,Utilities,https://careers.nrgenergy.com/search/,successfactors,Collected,2026-10-17,156,231,
-343,NUE,Nucor,Materials,https://jobs.nucor.com/search/,successfactors,Collected,2026-10-17,227,333,
+343,NUE,Nucor,Materials,https://jobs.nucor.com/search/,successfactors,Collected,2026-10-17,227,321,
 344,NVR,"NVR, Inc.",Consumer Discretionary,https://phg.tbe.taleo.net/phg01/ats/careers/v2/jobSearch?org=NVRINC&cws=52,taleo_be,Collected,2026-10-17,107,217,
-345,NXPI,NXP Semiconductors,Information Technology,https://nxp.wd3.myworkdayjobs.com/careers,workday,Collected,2026-10-17,185,808,
-346,ORLY,O'Reilly Automotive,Consumer Discretionary,https://careers.oreillyauto.com,jsonld_sitemap,Blocked by site,2026-10-17,897,14867,HTTP 403 from https://careers.oreillyauto.com/us/en/job/R199870/Delivery-Specialist
+345,NXPI,NXP Semiconductors,Information Technology,https://nxp.wd3.myworkdayjobs.com/careers,workday,Collected,2026-10-17,186,809,
+346,ORLY,O'Reilly Automotive,Consumer Discretionary,https://careers.oreillyauto.com,jsonld_sitemap,Blocked by site,2026-10-17,897,13009,HTTP 403 from https://careers.oreillyauto.com/us/en/job/R206904/Parts-Specialist
 347,OXY,Occidental Petroleum,Energy,https://oxy.wd5.myworkdayjobs.com/Corporate,workday,Collected,2026-10-17,8,48,
-348,ODFL,Old Dominion,Industrials,https://odfl.wd1.myworkdayjobs.com/ODFL_Careers,workday,Collected,2026-10-17,99,228,
+348,ODFL,Old Dominion,Industrials,https://odfl.wd1.myworkdayjobs.com/ODFL_Careers,workday,Collected,2026-10-17,99,227,
 349,OMC,Omnicom Group,Communication Services,,none,Not collected yet,2026-10-17,0,,Its careers page (omc.com/careers) returns 404 and no job board was found; not collected.
 350,ON,ON Semiconductor,Information Technology,https://hctz.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001,oracle_hcm,Collected,2026-10-17,156,696,
 351,OKE,Oneok,Energy,https://oneok.wd1.myworkdayjobs.com/ONEOK,workday,Collected,2026-10-17,57,91,
-352,ORCL,Oracle Corporation,Information Technology,https://eeho.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch/jobs,oracle_hcm,Collector error,2026-10-17,676,,"HTTPError: 503 Server Error: Service Unavailable for url: https://eeho.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=jobsearch,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+352,ORCL,Oracle Corporation,Information Technology,https://eeho.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch/jobs,oracle_hcm,Collected,2026-10-17,677,2368,
 353,OTIS,Otis Worldwide,Industrials,https://otis.wd504.myworkdayjobs.com/REC_Ext_Gateway,workday,Collected,2026-10-17,438,1384,
-354,PCAR,Paccar,Industrials,https://jobs.paccar.com/search/,successfactors,Collected,2026-10-17,145,221,
+354,PCAR,Paccar,Industrials,https://jobs.paccar.com/search/,successfactors,Collected,2026-10-17,145,219,
 355,PKG,Packaging Corporation of America,Materials,https://careers.packagingcorp.com/,none,Not collected yet,2026-10-17,0,,Its custom job search shows ten postings at a time through a browser-side search with no job sitemap; not collected.
 356,PLTR,Palantir Technologies,Information Technology,https://www.palantir.com/careers,lever,Collected,2026-10-17,7,310,
 357,PANW,Palo Alto Networks,Information Technology,https://paloaltonetworks.wd5.myworkdayjobs.com/panwexternalcareers,workday,Collected,2026-10-17,327,1436,
 358,PH,Parker Hannifin,Industrials,,none,Not collected yet,2026-10-17,0,,Its career site (parkercareers.ttcportals.com) sits behind a Cloudflare bot challenge; not collected.
 359,PAYX,Paychex,Industrials,https://careers.paychex.com,jsonld_sitemap,Collected,2026-10-17,184,498,
 360,PYPL,PayPal,Financials,https://paypal.wd1.myworkdayjobs.com/jobs,workday,Collected,2026-10-17,137,335,
-361,PNR,Pentair,Industrials,https://careers.pentair.com,jsonld_sitemap,Collected,2026-10-17,81,420,
+361,PNR,Pentair,Industrials,https://careers.pentair.com,jsonld_sitemap,Blocked by site,2026-10-17,81,420,HTTP 403 from https://careers.pentair.com/es/es/job/R24035/Sr-Offerings-Manager-Data-Centers
 362,PEP,PepsiCo,Consumer Staples,https://www.pepsicojobs.com,jsonld_sitemap,Collected,2026-10-17,894,2779,
-363,PFE,Pfizer,Health Care,https://pfizer.wd1.myworkdayjobs.com/PfizerCareers,workday,Collected,2026-10-17,351,577,
+363,PFE,Pfizer,Health Care,https://pfizer.wd1.myworkdayjobs.com/PfizerCareers,workday,Collected,2026-10-17,351,566,
 364,PCG,PG&E Corporation,Utilities,https://careers.pge.com/search/,successfactors,Collected,2026-10-17,155,171,
-365,PM,Philip Morris International,Consumer Staples,https://join.pmicareers.com/,jsonld_sitemap,Collected,2026-10-17,758,757,
-366,PSX,Phillips 66,Energy,https://careers.phillips66.com/search/,successfactors,Collected,2026-10-17,72,90,
-367,PNW,Pinnacle West Capital,Utilities,https://careers.aps.com/search/,successfactors,Collected,2026-10-17,52,84,
-368,PNC,PNC Financial Services,Financials,https://pnc.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,812,2000,
-369,PPG,PPG Industries,Materials,https://ppg.wd5.myworkdayjobs.com/PPG_CAREERS,workday,Collected,2026-10-17,227,673,
+365,PM,Philip Morris International,Consumer Staples,https://join.pmicareers.com/,jsonld_sitemap,Collected,2026-10-17,761,750,
+366,PSX,Phillips 66,Energy,https://careers.phillips66.com/search/,successfactors,Collected,2026-10-17,72,88,
+367,PNW,Pinnacle West Capital,Utilities,https://careers.aps.com/search/,successfactors,Collector error,2026-10-17,52,84,"ReadTimeout: HTTPSConnectionPool(host='careers.aps.com', port=443): Read timed out. (read timeout=30)"
+368,PNC,PNC Financial Services,Financials,https://pnc.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,816,2000,
+369,PPG,PPG Industries,Materials,https://ppg.wd5.myworkdayjobs.com/PPG_CAREERS,workday,Collected,2026-10-17,227,671,
 370,PPL,PPL Corporation,Utilities,https://careers-pplweb.icims.com/jobs/intro,none,Not collected yet,2026-10-17,0,,Its iCIMS portal (careers-pplweb.icims.com) disallows all crawling in robots.txt; recorded as not collected.
-371,PFG,Principal Financial Group,Financials,https://careers.principal.com/careers-home/jobs,jibe,Collected,2026-10-17,74,156,
+371,PFG,Principal Financial Group,Financials,https://careers.principal.com/careers-home/jobs,jibe,Collected,2026-10-17,74,155,
 372,PG,Procter & Gamble,Consumer Staples,https://pg.wd5.myworkdayjobs.com/1000,workday,Collected,2026-10-17,307,845,
 373,PGR,Progressive Corporation,Financials,https://careers.progressive.com/,none,Not collected yet,2026-10-17,0,,Its career site (careers.progressive.com) answers scripted requests with HTTP 403; not collected.
 374,PLD,Prologis,Real Estate,https://prologis.wd5.myworkdayjobs.com/Prologis_External_Careers,workday,Collected,2026-10-17,52,96,
@@ -378,111 +378,111 @@ Rank,Ticker,Company,Sector,Career site,Platform,Status,Last collected,Postings i
 377,PEG,Public Service Enterprise Group,Utilities,https://jobs.pseg.com/search/,successfactors,Collected,2026-10-17,24,,
 378,PSA,Public Storage,Real Estate,https://www.publicstoragejobs.com,jsonld_sitemap,Collected,2026-10-17,589,571,
 379,PHM,PulteGroup,Consumer Discretionary,https://pultegroup.wd1.myworkdayjobs.com/PGI,workday,Collected,2026-10-17,40,135,
-380,Q,Qnity Electronics,Information Technology,https://careers.qnityelectronics.com,jsonld_sitemap,Blocked by site,2026-10-17,124,1302,HTTP 403 from https://careers.qnityelectronics.com/kr/ko/job/DEJDEGUS250442WEXTERNALKOKR/QC-Technician
-381,QCOM,Qualcomm,Information Technology,https://careers.qualcomm.com,jsonld_sitemap,Collected,2026-10-17,503,2100,
+380,Q,Qnity Electronics,Information Technology,https://careers.qnityelectronics.com,jsonld_sitemap,Blocked by site,2026-10-17,124,1299,HTTP 403 from https://careers.qnityelectronics.com/cz/cz/job/DEJDEGUS251783WEXTERNALCZCZ/Field-Application-Engineer-Mechanical-Southeast-Region
+381,QCOM,Qualcomm,Information Technology,https://careers.qualcomm.com,jsonld_sitemap,Collected,2026-10-17,505,2100,
 382,PWR,Quanta Services,Industrials,https://careers-quanta.icims.com/jobs/intro?hashed=-435625279,icims,Collected,2026-10-17,90,537,
-383,DGX,Quest Diagnostics,Health Care,https://hdox.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,877,2165,
+383,DGX,Quest Diagnostics,Health Care,https://hdox.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,877,2164,
 384,RL,Ralph Lauren Corporation,Consumer Discretionary,https://www.ralphlauren.com/careers,none,Not collected yet,2026-10-17,0,,Its career site (careers.ralphlauren.com) fails TLS verification behind a redirect; not collected.
 385,RJF,Raymond James Financial,Financials,https://raymondjames.wd1.myworkdayjobs.com/RaymondJamesCareers,workday,Collected,2026-10-17,116,321,
-386,O,Realty Income,Real Estate,https://realtyincome.wd108.myworkdayjobs.com/realty_income_careers,workday,Collected,2026-10-17,11,19,
+386,O,Realty Income,Real Estate,https://realtyincome.wd108.myworkdayjobs.com/realty_income_careers,workday,Collector error,2026-10-17,11,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 387,RDDT,Reddit,Communication Services,https://www.redditinc.com/careers,greenhouse,Collected,2026-10-17,22,146,
 388,REG,Regency Centers,Real Estate,https://www.regencycenters.com/regency/careers,none,Not collected yet,2026-10-17,0,,Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected.
-389,REGN,Regeneron Pharmaceuticals,Health Care,https://regeneron.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,285,588,
-390,RF,Regions Financial Corporation,Financials,https://careers.regions.com,jsonld_sitemap,Collected,2026-10-17,316,472,
-391,RSG,Republic Services,Industrials,https://jobs.republicservices.com,jsonld_sitemap,Blocked by site,2026-10-17,851,1476,HTTP 403 from https://jobs.republicservices.com/us/en/job/ROURSAUSR183060EXTERNALENUS/Landfill-Heavy-Equip-Operator
+389,REGN,Regeneron Pharmaceuticals,Health Care,https://regeneron.wd1.myworkdayjobs.com/Careers,workday,Collected,2026-10-17,286,589,
+390,RF,Regions Financial Corporation,Financials,https://careers.regions.com,jsonld_sitemap,Blocked by site,2026-10-17,316,469,HTTP 403 from https://careers.regions.com/us/en/job/R106913/Relationship-Banker-II-Mascoutah
+391,RSG,Republic Services,Industrials,https://jobs.republicservices.com,jsonld_sitemap,Blocked by site,2026-10-17,851,1355,HTTP 403 from https://jobs.republicservices.com/us/en/job/ROURSAUSR184935EXTERNALENUS/Roll-Off-Driver-CDL-B
 392,RMD,ResMed|,Health Care,https://resmed.wd3.myworkdayjobs.com/Resmed_External_Careers,workday,Collected,2026-10-17,89,268,
-393,RVTY,Revvity,Health Care,https://revvity.wd103.myworkdayjobs.com/External,workday,Collector error,2026-10-17,52,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+393,RVTY,Revvity,Health Care,https://revvity.wd103.myworkdayjobs.com/External,workday,Collected,2026-10-17,52,132,
 394,HOOD,Robinhood Markets,Financials,https://careers.robinhood.com/,greenhouse,Collected,2026-10-17,32,153,
-395,ROK,Rockwell Automation,Industrials,https://rockwellautomation.wd1.myworkdayjobs.com/External_Rockwell_Automation,workday,Collected,2026-10-17,215,406,
-396,ROL,"Rollins, Inc.",Industrials,https://careers.rollins.com/careers-home/jobs,jibe,Collected,2026-10-17,302,1260,
+395,ROK,Rockwell Automation,Industrials,https://rockwellautomation.wd1.myworkdayjobs.com/External_Rockwell_Automation,workday,Collected,2026-10-17,215,402,
+396,ROL,"Rollins, Inc.",Industrials,https://careers.rollins.com/careers-home/jobs,jibe,Collected,2026-10-17,302,1257,
 397,ROP,Roper Technologies,Information Technology,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
 398,ROST,Ross Stores,Consumer Discretionary,https://jobs.rossstores.com/,jsonld_sitemap,Collected,2026-10-17,108,7173,
 399,RCL,Royal Caribbean Group,Consumer Discretionary,https://jobs.royalcaribbeangroup.com/search/,successfactors,Collected,2026-10-17,139,254,
-400,RTX,RTX Corporation,Industrials,https://globalhr.wd5.myworkdayjobs.com/REC_RTX_Ext_Gateway,workday,Collected,2026-10-17,1940,4903,
-401,SPGI,S&P Global,Financials,https://spgi.wd5.myworkdayjobs.com/SPGI_Careers,workday,Collected,2026-10-17,152,291,
-402,CRM,Salesforce,Information Technology,https://salesforce.wd12.myworkdayjobs.com/External_Career_Site,workday,Collected,2026-10-17,715,1567,
+400,RTX,RTX Corporation,Industrials,https://globalhr.wd5.myworkdayjobs.com/REC_RTX_Ext_Gateway,workday,Collected,2026-10-17,1942,4877,
+401,SPGI,S&P Global,Financials,https://spgi.wd5.myworkdayjobs.com/SPGI_Careers,workday,Collected,2026-10-17,155,293,
+402,CRM,Salesforce,Information Technology,https://salesforce.wd12.myworkdayjobs.com/External_Career_Site,workday,Collector error,2026-10-17,715,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 403,SNDK,Sandisk,Information Technology,https://www.sandisk.com/careers/jobs-at-sandisk,none,Not collected yet,2026-10-17,0,,Its careers page links to no job board that serves openings to scripted requests (its SmartRecruiters account has no jobs); not collected.
 404,SBAC,SBA Communications,Real Estate,https://sbasite.wd5.myworkdayjobs.com/SBA_Communications_Careers,workday,Collected,2026-10-17,25,49,
 405,SLB,Schlumberger,Energy,https://careers.slb.com/,none,Not collected yet,2026-10-17,0,,Its job listing (careers.slb.com) renders in the browser with no server-side job data or job sitemap; not collected.
 406,STX,Seagate Technology,Information Technology,https://seagatecareers.com/search/,successfactors,Collected,2026-10-17,100,283,
 407,SRE,Sempra,Utilities,https://sempra.com/careers,none,Not collected yet,2026-10-17,0,,"Its openings are on ADP Recruiting, whose job list is loaded by browser-side requests; not collected."
 408,NOW,ServiceNow,Information Technology,https://careers.smartrecruiters.com/ServiceNow,smartrecruiters_site,Collected,2026-10-17,307,697,
-409,SHW,Sherwin-Williams,Materials,https://ejhp.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2/jobs,oracle_hcm,Collected,2026-10-17,1108,2336,
+409,SHW,Sherwin-Williams,Materials,https://ejhp.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2/jobs,oracle_hcm,Collected,2026-10-17,1108,2320,
 410,SPG,Simon Property Group,Real Estate,https://signetjewelers.wd1.myworkdayjobs.com/signetjeweleryretailsales,workday,Collected,2026-10-17,1462,1624,
 411,SKYD,Skydance Corporation,Communication Services,https://careers.paramount.com/search/,successfactors,Collected,2026-10-17,162,,
 412,SWKS,Skyworks Solutions,Information Technology,https://careers.skyworksinc.com/search/,successfactors,Collected,2026-10-17,73,370,
 413,SW,Smurfit Westrock,Materials,https://westrockta.avature.net/en_US/careers,none,Not collected yet,2026-10-17,0,,Its Avature site (westrockta.avature.net) disallows its job sitemap in robots.txt and has no other server-side job list; not collected.
 414,SNA,Snap-on,Industrials,https://careers-snapon.icims.com/jobs/search,icims,Collected,2026-10-17,55,204,
-415,SOLV,Solventum,Health Care,https://healthcare.wd1.myworkdayjobs.com/Search,workday,Collected,2026-10-17,129,431,
+415,SOLV,Solventum,Health Care,https://healthcare.wd1.myworkdayjobs.com/Search,workday,Collected,2026-10-17,129,430,
 416,SO,Southern Company,Utilities,https://southerncompany.jobs/,none,Not collected yet,2026-10-17,0,,Its job site (southerncompany.jobs) renders listings in the browser and serves no job data or JobPosting markup server-side; not collected.
-417,LUV,Southwest Airlines,Industrials,https://swa.wd1.myworkdayjobs.com/external,workday,Collected,2026-10-17,49,53,
-418,SWK,Stanley Black & Decker,Industrials,https://sbdinc.wd1.myworkdayjobs.com/Stanley_Black_Decker_Career_Site,workday,Collected,2026-10-17,268,640,
-419,SBUX,Starbucks,Consumer Discretionary,https://apply.starbucks.com/careers,eightfold,Collector error,2026-10-17,813,21651,HTTPError: 405 Client Error: Not Allowed for url: https://apply.starbucks.com/api/pcsx/search?domain=starbucks.com&start=830&num=10&sort_by=timestamp&query=
-420,STT,State Street Corporation,Financials,https://statestreet.wd1.myworkdayjobs.com/Global,workday,Collected,2026-10-17,765,1269,
-421,STLD,Steel Dynamics,Materials,https://www.steeldynamics.com/careersnew/,icims,Collected,2026-10-17,32,415,
-422,STE,Steris,Health Care,https://careers.steris.com,jsonld_sitemap,Blocked by site,2026-10-17,303,2053,HTTP 403 from https://careers.steris.com/it/it/job/SCZSCCUS54388EXTERNALITIT/Machinist-Night-Shift
+417,LUV,Southwest Airlines,Industrials,https://swa.wd1.myworkdayjobs.com/external,workday,Collected,2026-10-17,49,41,
+418,SWK,Stanley Black & Decker,Industrials,https://sbdinc.wd1.myworkdayjobs.com/Stanley_Black_Decker_Career_Site,workday,Collected,2026-10-17,268,638,
+419,SBUX,Starbucks,Consumer Discretionary,https://apply.starbucks.com/careers,eightfold,Collected,2026-10-17,3001,21570,
+420,STT,State Street Corporation,Financials,https://statestreet.wd1.myworkdayjobs.com/Global,workday,Collected,2026-10-17,765,1262,
+421,STLD,Steel Dynamics,Materials,https://www.steeldynamics.com/careersnew/,icims,Collected,2026-10-17,32,414,
+422,STE,Steris,Health Care,https://careers.steris.com,jsonld_sitemap,Blocked by site,2026-10-17,303,2053,HTTP 403 from https://careers.steris.com/it/it/job/SCZSCCUS55271EXTERNALITIT/Sterile-Services-Technician-I-1
 423,SYK,Stryker Corporation,Health Care,https://stryker.wd1.myworkdayjobs.com/StrykerCareers,workday,Collected,2026-10-17,549,1481,
-424,SMCI,Supermicro,Information Technology,https://jobs.supermicro.com/search/,successfactors,Collected,2026-10-17,594,1033,
-425,SYF,Synchrony Financial,Financials,https://www.synchronycareers.com,jsonld_sitemap,Collected,2026-10-17,28,42,
-426,SNPS,Synopsys,Information Technology,https://careers.synopsys.com,jsonld_sitemap,Collected,2026-10-17,174,631,
-427,SYY,Sysco,Consumer Staples,https://careers.sysco.com,jsonld_sitemap,Collected,2026-10-17,474,1495,
+424,SMCI,Supermicro,Information Technology,https://jobs.supermicro.com/search/,successfactors,Collected,2026-10-17,594,1034,
+425,SYF,Synchrony Financial,Financials,https://www.synchronycareers.com,jsonld_sitemap,Collected,2026-10-17,29,51,
+426,SNPS,Synopsys,Information Technology,https://careers.synopsys.com,jsonld_sitemap,Collected,2026-10-17,179,633,
+427,SYY,Sysco,Consumer Staples,https://careers.sysco.com,jsonld_sitemap,Collected,2026-10-17,474,1493,
 428,TMUS,T-Mobile US,Communication Services,https://tmobile.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,1285,2000,
 429,TROW,T. Rowe Price,Financials,https://troweprice.wd5.myworkdayjobs.com/TRowePrice,workday,Collected,2026-10-17,50,134,
 430,TTWO,Take-Two Interactive,Communication Services,https://careers.take2games.com/,greenhouse,Collected,2026-10-17,6,34,
-431,TPR,"Tapestry, Inc.",Consumer Discretionary,https://tapestry.wd108.myworkdayjobs.com/Tapestry_Careers,workday,Collected,2026-10-17,848,2000,
+431,TPR,"Tapestry, Inc.",Consumer Discretionary,https://tapestry.wd108.myworkdayjobs.com/Tapestry_Careers,workday,Collector error,2026-10-17,848,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
 432,TRGP,Targa Resources,Energy,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
 433,TGT,Target Corporation,Consumer Staples,https://target.wd5.myworkdayjobs.com/targetcareers,workday,Collected,2026-10-17,1020,2000,
-434,TEL,TE Connectivity,Information Technology,https://careers.te.com/search/,successfactors,Collected,2026-10-17,424,2264,
+434,TEL,TE Connectivity,Information Technology,https://careers.te.com/search/,successfactors,Collected,2026-10-17,424,2263,
 435,TDY,Teledyne Technologies,Information Technology,https://flir.wd1.myworkdayjobs.com/flircareers,workday,Collected,2026-10-17,202,740,
 436,TER,Teradyne,Information Technology,https://jobs.teradyne.com/search/,successfactors,Collected,2026-10-17,360,542,
-437,TXN,Texas Instruments,Information Technology,https://careers.ti.com/en/sites/CX,oracle_hcm,Collector error,2026-10-17,160,,"HTTPError: 503 Server Error: Service Unavailable for url: https://edbz.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+437,TXN,Texas Instruments,Information Technology,https://careers.ti.com/en/sites/CX,oracle_hcm,Collected,2026-10-17,160,851,
 438,TPL,Texas Pacific Land Corporation,Energy,,none,Not collected yet,2026-10-17,0,,No online job board was found on its official site; not collected.
-439,TXT,Textron,Industrials,https://textron.taleo.net/careersection/textron/jobsearch.ftl?lang=en,taleo,Collected,2026-10-17,123,718,
-440,TMO,Thermo Fisher Scientific,Health Care,https://thermofisher.wd5.myworkdayjobs.com/ThermoFisherCareers,workday,Collected,2026-10-17,1202,3002,
-441,TJX,TJX Companies,Consumer Discretionary,https://jobs.tjx.com,jsonld_sitemap,Blocked by site,2026-10-17,860,25415,HTTP 403 from https://jobs.tjx.com/pl/pl/job/REQ166231/Store-Associate-Full-Time-Homesense-South-Surrey
+439,TXT,Textron,Industrials,https://textron.taleo.net/careersection/textron/jobsearch.ftl?lang=en,taleo,Collected,2026-10-17,123,717,
+440,TMO,Thermo Fisher Scientific,Health Care,https://thermofisher.wd5.myworkdayjobs.com/ThermoFisherCareers,workday,Collected,2026-10-17,1202,2999,
+441,TJX,TJX Companies,Consumer Discretionary,https://jobs.tjx.com,jsonld_sitemap,Blocked by site,2026-10-17,860,24612,HTTP 403 from https://jobs.tjx.com/pl/pl/job/REQ168817/Seasonal-Cashier-Sales-Associate
 442,TKO,TKO Group Holdings,Communication Services,https://wwecorp.wd5.myworkdayjobs.com/TKO,workday,Collected,2026-10-17,21,72,
 443,TSCO,Tractor Supply,Consumer Discretionary,,none,Not collected yet,2026-10-17,0,,Its career site timed out or answered HTTP 503 during testing; not collected.
-444,TT,Trane Technologies,Industrials,https://careers.tranetechnologies.com,jsonld_sitemap,Blocked by site,2026-10-17,218,4507,HTTP 403 from https://careers.tranetechnologies.com/global/es/job/TRTEGLOBALJR17262EXTERNALESGLOBAL/Welding-PQE
+444,TT,Trane Technologies,Industrials,https://careers.tranetechnologies.com,jsonld_sitemap,Blocked by site,2026-10-17,218,4736,HTTP 403 from https://careers.tranetechnologies.com/global/fr/job/JR-9810/HVAC-Service-Controls-Technician
 445,TDG,TransDigm Group,Industrials,,none,Not collected yet,2026-10-17,0,,"Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
 446,TRV,Travelers Companies (The),Financials,https://travelers.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,182,402,
 447,TRMB,Trimble Inc.,Information Technology,https://trimble.wd1.myworkdayjobs.com/TrimbleCareers,workday,Collected,2026-10-17,83,200,
-448,TFC,Truist Financial,Financials,https://careers.truist.com,jsonld_sitemap,Collected,2026-10-17,891,1488,
+448,TFC,Truist Financial,Financials,https://careers.truist.com,jsonld_sitemap,Collected,2026-10-17,910,1483,
 449,TWLO,Twilio,Information Technology,https://jobs.twilio.com/careers,eightfold,Collected,2026-10-17,30,132,
 450,TYL,Tyler Technologies,Information Technology,https://jobs.jobvite.com/tylertech/jobs,jobvite,Collected,2026-10-17,80,268,
-451,TSN,Tyson Foods,Consumer Staples,https://tysonfoods.wd5.myworkdayjobs.com/TSN,workday,Collected,2026-10-17,681,728,
-452,USB,U.S. Bancorp,Financials,https://careers.usbank.com,jsonld_sitemap,Blocked by site,2026-10-17,749,1312,HTTP 403 from https://careers.usbank.com/global/en/job/UBNAGLOBAL20260028225EXTERNALENGLOBAL/Risk-Manager-Wealth-Corporate-Commercial-and-Institutional-Banking
+451,TSN,Tyson Foods,Consumer Staples,https://tysonfoods.wd5.myworkdayjobs.com/TSN,workday,Collected,2026-10-17,682,701,
+452,USB,U.S. Bancorp,Financials,https://careers.usbank.com,jsonld_sitemap,Blocked by site,2026-10-17,749,1319,HTTP 403 from https://careers.usbank.com/global/en/job/UBNAGLOBAL20260026633EXTERNALENGLOBAL/Private-Wealth-Management-Private-Wealth-Advisor
 453,UBER,Uber,Industrials,https://www.uber.com/us/en/careers/,none,Not collected yet,2026-10-17,0,,Its career site (jobs.uber.com) answers scripted requests with HTTP 403; not collected.
 454,UDR,"UDR, Inc.",Real Estate,https://www.udr.com/careers/,none,Not collected yet,2026-10-17,0,,Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected.
 455,ULTA,Ulta Beauty,Consumer Discretionary,https://careers.ulta.com,jsonld_sitemap,Collected,2026-10-17,3003,12374,
-456,UNP,Union Pacific Corporation,Industrials,https://up.jobs/search/,successfactors,Collected,2026-10-17,71,91,
-457,UAL,United Airlines Holdings,Industrials,https://careers.united.com,jsonld_sitemap,Collected,2026-10-17,139,150,
-458,UPS,United Parcel Service,Industrials,https://www.jobs-ups.com/us/en,jsonld_sitemap,Collected,2026-10-17,1933,2041,
-459,URI,United Rentals,Industrials,https://ur.wd1.myworkdayjobs.com/URcareers,workday,Collected,2026-10-17,420,1298,
-460,UNH,UnitedHealth Group,Health Care,https://careers.unitedhealthgroup.com/,jsonld_sitemap,Collected,2026-10-17,2148,5614,
+456,UNP,Union Pacific Corporation,Industrials,https://up.jobs/search/,successfactors,Collected,2026-10-17,71,89,
+457,UAL,United Airlines Holdings,Industrials,https://careers.united.com,jsonld_sitemap,Collected,2026-10-17,140,151,
+458,UPS,United Parcel Service,Industrials,https://www.jobs-ups.com/us/en,jsonld_sitemap,Collected,2026-10-17,1998,2035,
+459,URI,United Rentals,Industrials,https://ur.wd1.myworkdayjobs.com/URcareers,workday,Collected,2026-10-17,421,1299,
+460,UNH,UnitedHealth Group,Health Care,https://careers.unitedhealthgroup.com/,jsonld_sitemap,Collected,2026-10-17,2165,5614,
 461,UHS,Universal Health Services,Health Care,https://jobs.uhs.com,jsonld_sitemap,Collected,2026-10-17,1655,6724,
 462,VLO,Valero Energy,Energy,https://valero.taleo.net/careersection/2/jobsearch.ftl?lang=en,taleo,Collected,2026-10-17,13,39,
 463,VEEV,Veeva Systems,Health Care,https://careers.veeva.com/job-search-results/,lever,Collected,2026-10-17,70,938,
-464,VTR,Ventas,Real Estate,https://ventas.wd503.myworkdayjobs.com/ventas_careers,workday,Collected,2026-10-17,2,7,
-465,VLTO,Veralto,Industrials,https://jobs.veralto.com,jsonld_sitemap,Collected,2026-10-17,162,844,
+464,VTR,Ventas,Real Estate,https://ventas.wd503.myworkdayjobs.com/ventas_careers,workday,Collector error,2026-10-17,2,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+465,VLTO,Veralto,Industrials,https://jobs.veralto.com,jsonld_sitemap,Collected,2026-10-17,163,844,
 466,VRSN,Verisign,Information Technology,https://www.verisign.com/careers/,greenhouse,Collected,2026-10-17,2,18,
 467,VRSK,Verisk Analytics,Industrials,https://fa-ewmy-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,71,159,
 468,VZ,Verizon,Communication Services,https://mycareer.verizon.com/,none,Not collected yet,2026-10-17,0,,Its career site (mycareer.verizon.com) answers scripted requests with HTTP 403; not collected.
-469,VRTX,Vertex Pharmaceuticals,Health Care,https://vrtx.wd501.myworkdayjobs.com/Vertex_Careers,workday,Collected,2026-10-17,96,304,
-470,VRT,Vertiv,Industrials,https://egup.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs,oracle_hcm,Collector error,2026-10-17,649,,"HTTPError: 503 Server Error: Service Unavailable for url: https://egup.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+469,VRTX,Vertex Pharmaceuticals,Health Care,https://vrtx.wd501.myworkdayjobs.com/Vertex_Careers,workday,Collector error,2026-10-17,96,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+470,VRT,Vertiv,Industrials,https://egup.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/jobs,oracle_hcm,Collected,2026-10-17,649,2318,
 471,VTRS,Viatris,Health Care,https://viatris.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,87,356,
 472,VICI,Vici Properties,Real Estate,https://viciproperties.com/careers/,none,Not collected yet,2026-10-17,0,,No online job board was found on its official site; not collected.
 473,VST,Vistra Corp.,Utilities,https://vst.wd5.myworkdayjobs.com/vistra_careers,workday,Collected,2026-10-17,43,152,
 474,VMRK,Vivmark Residential,Real Estate,,none,Not collected yet,2026-10-17,0,,No online job board was found on its official site; not collected.
-475,VMC,Vulcan Materials Company,Materials,https://careers.vulcanmaterials.com/hcmUI/CandidateExperience/en/sites/careers/jobs,oracle_hcm,Collector error,2026-10-17,109,,"ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
-476,VYLR,Vylor,Consumer Staples,https://corteva.wd5.myworkdayjobs.com/Corteva,workday,Collected,2026-10-17,31,77,
+475,VMC,Vulcan Materials Company,Materials,https://careers.vulcanmaterials.com/hcmUI/CandidateExperience/en/sites/careers/jobs,oracle_hcm,Collected,2026-10-17,109,341,
+476,VYLR,Vylor,Consumer Staples,https://corteva.wd5.myworkdayjobs.com/Corteva,workday,Collected,2026-10-17,31,73,
 477,WRB,W. R. Berkley Corporation,Financials,https://careers-berkley.icims.com/jobs/intro,icims,Collected,2026-10-17,87,222,
-478,GWW,W. W. Grainger,Industrials,https://jobs.grainger.com/search/,successfactors,Collected,2026-10-17,250,341,
+478,GWW,W. W. Grainger,Industrials,https://jobs.grainger.com/search/,successfactors,Collected,2026-10-17,250,337,
 479,WAB,Wabtec,Industrials,https://careers.wabtec.com,jsonld_sitemap,Collected,2026-10-17,295,746,
 480,DIS,Walt Disney Company (The),Communication Services,https://www.disneycareers.com/en/,talentbrew,Collected,2026-10-17,423,700,
-481,WM,Waste Management,Industrials,https://emcm.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/WMCareers/jobs,oracle_hcm,Collector error,2026-10-17,534,,"HTTPError: 503 Server Error: Service Unavailable for url: https://emcm.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=WMCareers,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
+481,WM,Waste Management,Industrials,https://emcm.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/WMCareers/jobs,oracle_hcm,Collected,2026-10-17,534,1196,
 482,WAT,Waters Corporation,Health Care,https://uscareers-waters.icims.com/jobs/search,icims,Collected,2026-10-17,37,169,
 483,WEC,WEC Energy Group,Utilities,https://careers.wecenergygroup.com/search/,successfactors,Collected,2026-10-17,70,,
-484,WFC,Wells Fargo,Financials,https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs,workday,Collected,2026-10-17,1269,1607,
+484,WFC,Wells Fargo,Financials,https://wd1.myworkdaysite.com/recruiting/wf/WellsFargoJobs,workday,Collected,2026-10-17,1270,1558,
 485,WELL,Welltower,Real Estate,https://welltower.com/careers/,none,Not collected yet,2026-10-17,0,,Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected.
 486,WST,West Pharmaceutical Services,Health Care,https://careers.westpharma.com/search/,successfactors,Collected,2026-10-17,159,270,
 487,WDC,Western Digital,Information Technology,https://careers.smartrecruiters.com/WesternDigital,smartrecruiters_site,Collected,2026-10-17,102,334,
@@ -490,11 +490,11 @@ Rank,Ticker,Company,Sector,Career site,Platform,Status,Last collected,Postings i
 489,WMB,Williams Companies,Energy,https://williams.wd5.myworkdayjobs.com/External,workday,Collected,2026-10-17,66,102,
 490,WSM,"Williams-Sonoma, Inc.",Consumer Discretionary,https://ehac.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs,oracle_hcm,Collected,2026-10-17,159,1547,
 491,WTW,Willis Towers Watson,Financials,https://careers.wtwco.com,jsonld_sitemap,Collected,2026-10-17,183,665,
-492,WDAY,"Workday, Inc.",Information Technology,https://workday.wd5.myworkdayjobs.com/Workday,workday,Collected,2026-10-17,197,392,
+492,WDAY,"Workday, Inc.",Information Technology,https://workday.wd5.myworkdayjobs.com/Workday,workday,Collected,2026-10-17,197,389,
 493,WYNN,Wynn Resorts,Consumer Discretionary,https://www.wynnresorts.com/careers,none,Not collected yet,2026-10-17,0,,Its careers page renders listings in the browser and the job platform behind it could not be identified; not collected.
-494,XEL,Xcel Energy,Utilities,https://xcelenergy.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,134,200,
-495,XYL,Xylem Inc.,Industrials,https://xylem.wd5.myworkdayjobs.com/xylem-careers,workday,Collected,2026-10-17,147,476,
-496,YUM,Yum! Brands,Consumer Discretionary,https://jobs.yum.com/,oracle_hcm,Collector error,2026-10-17,35,,"HTTPError: 503 Server Error: Service Unavailable for url: https://eczd.fa.us2.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true&expand=requisitionList.secondaryLocations&finder=findReqs;siteNumber=CX_1,limit=25,offset=0,sortBy=POSTING_DATES_DESC"
-497,ZBRA,Zebra Technologies,Information Technology,https://zebra.wd501.myworkdayjobs.com/Zebra_careers,workday,Collected,2026-10-17,102,238,
-498,ZBH,Zimmer Biomet,Health Care,https://careers.zimmerbiomet.com,jsonld_sitemap,Blocked by site,2026-10-17,268,1287,HTTP 403 from https://careers.zimmerbiomet.com/it/it/job/12269/Robotics-Clinical-Sr-Sales-Representative
-499,ZTS,Zoetis,Health Care,https://zoetis.wd5.myworkdayjobs.com/zoetis,workday,Collected,2026-10-17,89,127,
+494,XEL,Xcel Energy,Utilities,https://xcelenergy.wd1.myworkdayjobs.com/External,workday,Collected,2026-10-17,134,181,
+495,XYL,Xylem Inc.,Industrials,https://xylem.wd5.myworkdayjobs.com/xylem-careers,workday,Collected,2026-10-17,147,475,
+496,YUM,Yum! Brands,Consumer Discretionary,https://jobs.yum.com/,oracle_hcm,Collected,2026-10-17,35,155,
+497,ZBRA,Zebra Technologies,Information Technology,https://zebra.wd501.myworkdayjobs.com/Zebra_careers,workday,Collector error,2026-10-17,102,,RuntimeError: Workday maintenance page (https://community.workday.com/maintenance-page); try again later
+498,ZBH,Zimmer Biomet,Health Care,https://careers.zimmerbiomet.com,jsonld_sitemap,Blocked by site,2026-10-17,268,1281,HTTP 403 from https://careers.zimmerbiomet.com/it/it/job/12043/Medical-Education-Specialist
+499,ZTS,Zoetis,Health Care,https://zoetis.wd5.myworkdayjobs.com/zoetis,workday,Collected,2026-10-17,89,124,
