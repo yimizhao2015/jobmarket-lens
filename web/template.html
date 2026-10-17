@@ -147,6 +147,8 @@ a { color: var(--accent); }
     <label for="f-arr">Work arrangement<select id="f-arr"></select></label>
     <label for="f-sched">Full/part-time<select id="f-sched"></select></label>
     <label for="f-yrs">Years of experience<select id="f-yrs"></select></label>
+    <label for="f-deg">Minimum degree required<select id="f-deg"></select></label>
+    <label for="f-lic">Licenses and certifications<select id="f-lic"></select></label>
     <label for="f-country">Country<select id="f-country"></select></label>
     <label for="f-q">Title contains<input id="f-q" type="search" placeholder="e.g. engineer"></label>
     <button id="f-reset" type="button">Reset</button>
@@ -257,6 +259,8 @@ load().then(D => {
     ["f-arr", "arr", "All arrangements", v => v],
     ["f-sched", "sched", "All types", v => v],
     ["f-yrs", "yrs_b", "All experience", v => v],
+    ["f-deg", "deg", "All degrees", v => v],
+    ["f-lic", "lic", "All licenses", v => D.licenses[v], true],
     ["f-country", "country", "All countries", v => v],
   ];
   const order = {
@@ -264,11 +268,13 @@ load().then(D => {
     status: ["Open", "Closed"],
     lvl: [...D.levels, NS],
     yrs_b: ["0-1 yrs", "2-4 yrs", "5-7 yrs", "8-10 yrs", "10+ yrs", NS],
+    deg: ["High school", "Associate", "Bachelor's", "Master's", "Doctorate", "Enrolled student", NS],
   };
-  for (const [id, key, all, label] of defs) {
+  for (const [id, key, all, label, multi] of defs) {
     const sel = document.getElementById(id);
-    let vals = [...new Set(rows.map(r => r[key]).filter(v => v != null))];
-    if (order[key]) vals.sort((a, b) => order[key].indexOf(a) - order[key].indexOf(b));
+    let vals = [...new Set(rows.flatMap(r => multi ? r[key] : [r[key]]).filter(v => v != null))];
+    if (multi) vals.sort((a, b) => label(a).localeCompare(label(b)));  // a posting can name several
+    else if (order[key]) vals.sort((a, b) => order[key].indexOf(a) - order[key].indexOf(b));
     else vals.sort();
     sel.innerHTML = `<option value="">${all}</option>` + vals.map(v => `<option value="${v}">${label(v)}</option>`).join("");
     sel.addEventListener("change", render);
@@ -286,9 +292,9 @@ load().then(D => {
 
   function filtered() {
     const q = document.getElementById("f-q").value.trim().toLowerCase();
-    return rows.filter(r => defs.every(([id, key]) => {
+    return rows.filter(r => defs.every(([id, key, , , multi]) => {
       const v = document.getElementById(id).value;
-      return !v || String(r[key]) === v;
+      return !v || (multi ? r[key].includes(+v) : String(r[key]) === v);
     }) && (!q || r.title.toLowerCase().includes(q)));
   }
 
