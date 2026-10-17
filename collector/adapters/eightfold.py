@@ -1,4 +1,5 @@
 """Eightfold career sites (Microsoft). Tries the v2 apply API, then the newer PCSX API."""
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -48,11 +49,21 @@ def _v2(company, host, domain, http, max_jobs, stats):
         start += len(pos)
 
 
+def _search(http, host, params):
+    # After many requests the PCSX search answers 405 for a while; wait it out rather than lose the run.
+    for wait in (60, 180, 0):
+        try:
+            return http.get(f"https://{host}/api/pcsx/search", params=params).json()
+        except requests.HTTPError as e:
+            if e.response is None or e.response.status_code != 405 or not wait:
+                raise
+            time.sleep(wait)
+
+
 def _pcsx(company, host, domain, http, max_jobs, stats):
     start, seen = 0, 0
     while seen < max_jobs:
-        data = http.get(f"https://{host}/api/pcsx/search",
-                        params={"domain": domain, "start": start, "num": 10, "sort_by": "timestamp", "query": ""}).json()
+        data = _search(http, host, {"domain": domain, "start": start, "num": 10, "sort_by": "timestamp", "query": ""})
         data = data.get("data", data)
         if start == 0:
             stats["site_total"] = data.get("count")

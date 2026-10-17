@@ -2,7 +2,8 @@
 
 postings:  one row per (company, source_id) with first_seen / last_seen and the latest raw record.
 snapshots: one row per (run_date, company) with collected count and the site's reported total.
-A posting missing from the latest successful run of its company is treated as closed.
+A posting missing from the latest successful run of its company is treated as closed. A posting seen in a
+later run that failed partway (or an earlier run the same day) is still open.
 A raw line marked seen_only (listed again, detail page not re-read) only moves last_seen; the stored
 record and first_seen stay.
 """
@@ -75,7 +76,7 @@ def load_postings(root):
     rows = []
     for company, sid, first, last, raw in db.execute("SELECT * FROM postings"):
         r = json.loads(raw)
-        r.update(first_seen=first, last_seen=last, is_open=(last == latest.get(company)))
+        r.update(first_seen=first, last_seen=last, is_open=(last >= (latest.get(company) or "9999")))
         rows.append(r)
     snaps = [dict(zip(("run_date", "company", "status", "collected", "site_total", "detail"), s))
              for s in db.execute("SELECT * FROM snapshots ORDER BY run_date")]
