@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from collector import store  # noqa: E402
-from normalize import parse, skills, soc  # noqa: E402
+from normalize import majors, parse, skills, soc  # noqa: E402
 
 
 def seed_to_raw(s):
@@ -56,6 +56,7 @@ def normalize(r):
     for given in r.get("skills_given", []):  # page-read rows: map each listed skill to the dictionary
         sk += [s for s in skills.find_skills(given) if s not in sk]
     lic = skills.find_licenses(text + " " + " ".join(r.get("certs_given", [])))
+    major = majors.find_majors(text)
     locs = r.get("locations") or []
     country, state, city = parse.parse_location(locs[0]) if locs else (None, None, None)
     posted = r.get("posted_date")
@@ -100,6 +101,7 @@ def normalize(r):
         "nloc": len(locs),
         "skills": sk,
         "lic": lic,
+        "major": major,
         "src": r.get("source_method", "api"),
         "has_text": bool(r.get("description")),
     }
@@ -140,6 +142,7 @@ def main():
     lic_names = sorted({s for n in out for s in n["lic"]})
     sk_ix = {s: i for i, s in enumerate(skill_names)}
     lic_ix = {s: i for i, s in enumerate(lic_names)}
+    major_ix = {s: i for i, s in enumerate(majors.NAMES)}
     fields = ["id", "co", "title", "url", "posted", "year", "month", "open", "soc", "sched", "arr", "deg",
               "deg_equiv", "yrs", "yrs_b", "lvl", "pay_min", "pay_max", "pay_lo", "pay_hi", "pay_period", "pay_cur", "country",
               "state", "city", "nloc", "src", "first_seen", "last_seen"]
@@ -154,9 +157,11 @@ def main():
         "degree_order": parse.DEGREE_ORDER,
         "skills": [{"name": s, "family": skills.SKILL_FAMILY.get(s, "Other")} for s in skill_names],
         "licenses": lic_names,
+        "majors": majors.NAMES,
         "snapshots": snaps,
-        "fields": fields + ["skills", "lic"],
-        "rows": [[n[f] for f in fields] + [[sk_ix[s] for s in n["skills"]], [lic_ix[s] for s in n["lic"]]] for n in out],
+        "fields": fields + ["skills", "lic", "major"],
+        "rows": [[n[f] for f in fields] + [[sk_ix[s] for s in n["skills"]], [lic_ix[s] for s in n["lic"]],
+                                           [major_ix[s] for s in n["major"]]] for n in out],
         "dropped_outside_window": dict(dropped),
         "dropped_undated": dict(undated),
     }
@@ -181,7 +186,7 @@ def main():
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         for n in out:
-            w.writerow({**n, "skills": "; ".join(n["skills"]), "lic": "; ".join(n["lic"])})
+            w.writerow({**n, "skills": "; ".join(n["skills"]), "lic": "; ".join(n["lic"]), "major": "; ".join(n["major"])})
 
     by_co = Counter(n["co"] for n in out)
     print(f"{len(out)} postings in window; by company: {dict(by_co)}; dropped: {dict(dropped)}")

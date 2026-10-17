@@ -66,12 +66,13 @@ def main():
         w = csv.writer(f)
         w.writerow(["Posting ID", "Title", "Company", "Ticker", "SOC code", "SOC group", "Job level", "Job type",
                     "Work arrangement", "City", "State", "Country", "Number of locations", "Posted", "Pay",
-                    "Minimum degree", "Accepts equivalent experience", "Years of experience", "Skills",
+                    "Minimum degree", "Major", "Accepts equivalent experience", "Years of experience", "Skills",
                     "Licenses and certifications", "Status", "Last seen", "URL"])
         for r in rows:
             w.writerow([r["id"], r["title"], names.get(r["co"], r["co"]), r["co"], r["soc"], soc.get(r["soc"], ""),
                         r["lvl"], r["sched"], r["arr"], r["city"] or "", r["state"] or "", r["country"] or "",
-                        r["nloc"], r["posted"] or "", posted_pay(r), r["deg"], "Yes" if r["deg_equiv"] else "No",
+                        r["nloc"], r["posted"] or "", posted_pay(r), r["deg"],
+                        "; ".join(D.get("majors", [])[i] for i in r.get("major", [])), "Yes" if r["deg_equiv"] else "No",
                         "" if r["yrs"] is None else r["yrs"], "; ".join(skills[i] for i in r["skills"]),
                         "; ".join(D["licenses"][i] for i in r["lic"]),
                         "Open" if r["open"] else "Closed", r.get("last_seen") or "", r["url"]])
