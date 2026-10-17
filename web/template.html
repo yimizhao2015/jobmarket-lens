@@ -14,6 +14,7 @@
   --line: #dde3ea;
   --bar: #2a78d6;
   --bar-soft: #cde2fb;
+  --bar-ns: #c9cfd7;
   --accent: #1c5cab;
   --chip: #e8eef6;
   --good: #1f7a4d; --good-bg: #e3f3ea;
@@ -27,14 +28,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0f1419; --panel: #171e26; --ink: #e9eef4; --ink-2: #b2bcc8; --ink-3: #8390a0; --line: #2a3440;
-    --bar: #3987e5; --bar-soft: #1c3a5e; --accent: #86b6ef; --chip: #203041;
+    --bar: #3987e5; --bar-soft: #1c3a5e; --bar-ns: #4b5562; --accent: #86b6ef; --chip: #203041;
     --good: #6fd1a0; --good-bg: #173527; --warn: #f0c060; --warn-bg: #3a2e12; --bad: #f08a8a; --bad-bg: #3d1d1d;
     --mute-bg: #222b35; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0f1419; --panel: #171e26; --ink: #e9eef4; --ink-2: #b2bcc8; --ink-3: #8390a0; --line: #2a3440;
-  --bar: #3987e5; --bar-soft: #1c3a5e; --accent: #86b6ef; --chip: #203041;
+  --bar: #3987e5; --bar-soft: #1c3a5e; --bar-ns: #4b5562; --accent: #86b6ef; --chip: #203041;
   --good: #6fd1a0; --good-bg: #173527; --warn: #f0c060; --warn-bg: #3a2e12; --bad: #f08a8a; --bad-bg: #3d1d1d;
   --mute-bg: #222b35; color-scheme: dark;
 }
@@ -81,6 +82,7 @@ h2 { font: 600 15px/1.3 var(--f-body); margin: 0; text-wrap: balance; }
 .bar-row .val { font: 12px var(--f-mono); text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
 .bar-row:hover .lab { color: var(--ink); }
 .bar-row:hover .fill { filter: brightness(1.12); }
+.bar-row .fill.ns { background: var(--bar-ns); }
 .empty { color: var(--ink-3); font-size: 12.5px; padding: 8px 0; }
 .range-row { display: grid; grid-template-columns: minmax(0, 38%) 1fr 120px; gap: 8px; align-items: center; font-size: 12.5px; }
 .range-row .trk { height: 14px; position: relative; border-left: 1px solid var(--line); }
@@ -314,7 +316,7 @@ load().then(D => {
       const lab = opts.label ? opts.label(k) : k;
       const shown = opts.share ? pct(v, total) : fmt(v);
       return `<div class="bar-row" data-tip="${lab}: ${fmt(v)} postings (${pct(v, total)} of ${fmt(total)})">
-        <span class="lab">${lab}</span><span class="trk"><span class="fill" style="width:${100 * v / max}%"></span></span>
+        <span class="lab">${lab}</span><span class="trk"><span class="fill${k === NS ? " ns" : ""}" style="width:${100 * v / max}%"></span></span>
         <span class="val">${shown}</span></div>`;
     }).join("");
   }
