@@ -2,7 +2,9 @@
 
 Reads web/data.json (written by build_dataset.py) and writes:
   data/data source.csv   one row per S&P 500 company in scope, with its collection status
-  data/Job postings.csv  one row per posting shown on the dashboard, newest first
+  data/Job postings/Job postings YYYY-MM part N.csv
+                         one row per posting shown on the dashboard, newest first, one file per month posted
+                         (split into parts of at most ROWS_PER_FILE rows to stay under GitHub's 100 MB file limit)
 """
 import csv
 import json
@@ -10,6 +12,7 @@ from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+ROWS_PER_FILE = 75_000  # about 32 MB
 NS = "Not specified"
 
 
@@ -62,20 +65,32 @@ def main():
                         (s or {}).get("site_total") or "", (s and s.get("detail")) or c.get("known_issue") or ""])
 
     rows.sort(key=lambda r: r["posted"] or "", reverse=True)
-    with open(out_dir / "Job postings.csv", "w", newline="", encoding="utf-8") as f:
-        w = csv.writer(f)
-        w.writerow(["Posting ID", "Title", "Company", "Ticker", "SOC code", "SOC group", "Job level", "Job type",
-                    "Work arrangement", "City", "State", "Country", "Number of locations", "Posted", "Pay",
-                    "Minimum degree", "Major", "Accepts equivalent experience", "Years of experience", "Skills",
-                    "Licenses and certifications", "Status", "Last seen", "URL"])
-        for r in rows:
-            w.writerow([r["id"], r["title"], names.get(r["co"], r["co"]), r["co"], r["soc"], soc.get(r["soc"], ""),
-                        r["lvl"], r["sched"], r["arr"], r["city"] or "", r["state"] or "", r["country"] or "",
-                        r["nloc"], r["posted"] or "", posted_pay(r), r["deg"],
-                        "; ".join(D.get("majors", [])[i] for i in r.get("major", [])), "Yes" if r["deg_equiv"] else "No",
-                        "" if r["yrs"] is None else r["yrs"], "; ".join(skills[i] for i in r["skills"]),
-                        "; ".join(D["licenses"][i] for i in r["lic"]),
-                        "Open" if r["open"] else "Closed", r.get("last_seen") or "", r["url"]])
+    header = ["Posting ID", "Title", "Company", "Ticker", "SOC code", "SOC group", "Job level", "Job type",
+              "Work arrangement", "City", "State", "Country", "Number of locations", "Posted", "Pay",
+              "Minimum degree", "Major", "Accepts equivalent experience", "Years of experience", "Skills",
+              "Licenses and certifications", "Status", "Last seen", "URL"]
+    by_month = {}
+    for r in rows:
+        by_month.setdefault((r["posted"] or "undated")[:7], []).append(r)
+    post_dir = out_dir / "Job postings"
+    post_dir.mkdir(exist_ok=True)
+    for old in post_dir.glob("*.csv"):
+        old.unlink()
+    (out_dir / "Job postings.csv").unlink(missing_ok=True)  # the single file used before the split
+    for month, month_rows in by_month.items():
+        for part, start in enumerate(range(0, len(month_rows), ROWS_PER_FILE), 1):
+            with open(post_dir / f"Job postings {month} part {part}.csv", "w", newline="", encoding="utf-8") as f:
+                w = csv.writer(f)
+                w.writerow(header)
+                for r in month_rows[start:start + ROWS_PER_FILE]:
+                    w.writerow([r["id"], r["title"], names.get(r["co"], r["co"]), r["co"], r["soc"], soc.get(r["soc"], ""),
+                                r["lvl"], r["sched"], r["arr"], r["city"] or "", r["state"] or "", r["country"] or "",
+                                r["nloc"], r["posted"] or "", posted_pay(r), r["deg"],
+                                "; ".join(D.get("majors", [])[i] for i in r.get("major", [])),
+                                "Yes" if r["deg_equiv"] else "No",
+                                "" if r["yrs"] is None else r["yrs"], "; ".join(skills[i] for i in r["skills"]),
+                                "; ".join(D["licenses"][i] for i in r["lic"]),
+                                "Open" if r["open"] else "Closed", r.get("last_seen") or "", r["url"]])
     print(f"wrote {len(D['companies'])} companies and {len(rows)} postings to {out_dir}")
 
 
