@@ -77,7 +77,7 @@ collector/                   one adapter per career-site platform + polite HTTP 
   adapters/smartrecruiters.py SmartRecruiters (posting API for Visa; others from their career pages)
   adapters/amazon.py, walmart.py   single-company collectors
   run.py                     runs all companies in parallel, writes data/raw/<date>/run_log.json
-normalize/                   SOC mapping, skills & license dictionaries, field parsers
+normalize/                   SOC mapping, skills & license dictionaries, majors (fields of study), field parsers
 scripts/build_dataset.py     normalize everything -> web/index.html (data embedded), data/normalized/postings.csv
 scripts/export_csv.py        "data/data source.csv" and "data/Job postings.csv"
 scripts/run_local.sh         the whole weekly run on your own computer
@@ -144,3 +144,5 @@ python -m collector.run --only AAPL,MSFT --max 20 --date test   # small test run
 - Career sites show only *currently open* postings, so history starts with the first run (October 14, 2026).
 - SOC groups are assigned by title rules (`normalize/soc.py`), not by a trained coder. Skills and licenses
   come from fixed dictionaries (`normalize/skills.py`), so a skill the dictionary lacks will not appear.
+- Majors are read only from the phrase after a degree requirement ("degree in ...") and grouped into 30 broad
+  fields (`normalize/majors.py`); about 40% of postings that state a degree also name a major.
