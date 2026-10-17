@@ -22,8 +22,6 @@ env:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: collect
@@ -88,15 +86,3 @@ jobs:
           git commit -m "Data refresh $(date -u +%F)" || echo "nothing to commit"
           git pull --rebase -X theirs origin main
           git push
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: web
-  deploy:
-    needs: collect
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

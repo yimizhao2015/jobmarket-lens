@@ -7,7 +7,7 @@ official career sites of S&P 500 companies every week, normalizes them, and show
 occupation (SOC major group), skills, education, experience, pay, job level, schedule, work arrangement
 and location.
 
-- **Live site:** https://yimizhao2015.github.io/jobmarket-lens/
+- **Live site:** https://www.jobmarketlens.com/
 - **Data files:** [`data/data source.csv`](data/data%20source.csv) (one row per company and its collection
   status) and [`data/Job postings.csv`](data/Job%20postings.csv) (every posting on the dashboard, newest first)
 
@@ -44,7 +44,7 @@ Weekly run (GitHub Actions on Mondays at 2:00 a.m. Eastern Time, or scripts/run_
   3. add them to the history: first seen / last seen per posting          -> data/lens.db
   4. normalize and rebuild the dashboard and CSV files                    -> web/index.html, data/*.csv
   5. upload the updated history back to the private repo
-  6. commit the dashboard and CSV files here; GitHub Pages republishes the site
+  6. commit the dashboard and CSV files here; Vercel republishes the site
 ```
 
 Collection is incremental. Each company's career site is still listed every week, but a posting already in
@@ -84,7 +84,8 @@ scripts/run_local.sh         the whole weekly run on your own computer
 data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
 .github/workflows/collect.yml weekly collection (Mondays 2:00 a.m. Eastern, or run it by hand from the Actions tab)
-.github/workflows/pages.yml  republishes the site whenever web/ changes
+.github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
+vercel.json                  Vercel hosting: serves web/ as a static site, redeployed on every push
 ```
 
 Not in this repo: `data/lens.db` and `data/raw/` (private history), `web/data.json` (build output).
