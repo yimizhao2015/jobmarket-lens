@@ -121,7 +121,8 @@ python -m collector.run --only AAPL,MSFT --max 20 --date test   # small test run
 
 - Official career sites only. robots.txt is honored using the standard rules (RFC 9309: the most specific
   rule wins), and a site's Crawl-delay is respected. Requests are paced per site (0.6 s by default, 2 s for
-  sitemap-based sites, 1.5 s for SuccessFactors).
+  sitemap-based sites, 1.5 s for SuccessFactors). Career sites hosted by Phenom share one firewall, so at most
+  three of them are read at a time (`host_groups` in config).
 - A site that refuses (robots.txt, HTTP 401/403, bot wall) is recorded as **blocked** and shown as blocked
   on the dashboard. Nothing is estimated or filled in for it, and its postings keep the date they were
   last seen instead of being marked closed.

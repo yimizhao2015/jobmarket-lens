@@ -14,6 +14,12 @@
    "jsonld_sitemap": 2.0,
    "successfactors": 1.5
   },
+  "host_groups": {
+   "phenom": {
+    "max_concurrent": 3,
+    "note": "Phenom-hosted career sites share one firewall: when many are read at once it refuses all of them together (seen 2026-10-17), so only a few run at a time."
+   }
+  },
   "user_agent": "JobMarketLens/0.1 (research pilot; contact: see README)",
   "respect_robots_txt": true,
   "use_seed_sample": false
@@ -1355,7 +1361,8 @@
     "sitemaps": [
      "https://careers.cboe.com/us/en/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 102,
@@ -1596,7 +1603,8 @@
      "https://careers.cisco.com/ca/fr/sitemap_index.xml",
      "https://careers.cisco.com/global/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 120,
@@ -2327,7 +2335,8 @@
      "https://jobs.ecolab.com/global/en/sitemap_index.xml",
      "https://jobs.ecolab.com/global/es/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 175,
@@ -2738,7 +2747,8 @@
     "sitemaps": [
      "https://careers.fisglobal.com/us/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 206,
@@ -2933,7 +2943,8 @@
      "https://careers.geaerospace.com/global/en/sitemap_index.xml",
      "https://careers.geaerospace.com/cz/cz/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 220,
@@ -2988,7 +2999,8 @@
     "sitemaps": [
      "https://www.generacdealercareers.com/us/en/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 224,
@@ -3413,7 +3425,8 @@
     "url_pattern": "/us/en/job/",
     "id_pattern": "/job/(J-\\d+)/"
    },
-   "known_issue": null
+   "known_issue": null,
+   "host_group": "phenom"
   },
   {
    "rank": 256,
@@ -3874,7 +3887,8 @@
     "sitemaps": [
      "https://careers.labcorp.com/global/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 290,
@@ -4010,7 +4024,8 @@
      "https://talent.lowes.com/us/en/sitemap_index.xml",
      "https://talent.lowes.com/in/en/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 300,
@@ -4105,7 +4120,8 @@
      "https://careers.marsh.com/global/en/sitemap_index.xml",
      "https://careers.marsh.com/eu/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 307,
@@ -4149,7 +4165,8 @@
      "https://jobs.masco.com/behrpaint/us/en/sitemap.xml",
      "https://jobs.masco.com/deltafaucet/us/en/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 310,
@@ -4285,7 +4302,8 @@
      "https://careers.maac.com/us/en/sitemap.xml",
      "https://careers.maac.com/us/es/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 320,
@@ -4469,7 +4487,8 @@
      "https://jobs.newmont.com/us/en/sitemap.xml",
      "https://jobs.newmont.com/es/es/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 333,
@@ -4655,7 +4674,8 @@
     "sitemaps": [
      "https://careers.oreillyauto.com/us/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 347,
@@ -4856,7 +4876,8 @@
      "https://careers.pentair.com/it/it/sitemap.xml",
      "https://careers.pentair.com/es/es/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 362,
@@ -4910,7 +4931,8 @@
     "sitemap": "https://join.pmicareers.com/sitemap.xml",
     "url_pattern": "/job/"
    },
-   "known_issue": null
+   "known_issue": null,
+   "host_group": "phenom"
   },
   {
    "rank": 366,
@@ -5109,7 +5131,8 @@
      "https://careers.qnityelectronics.com/kr/ko/sitemap.xml",
      "https://careers.qnityelectronics.com/cz/cz/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 381,
@@ -5240,7 +5263,8 @@
     "sitemaps": [
      "https://careers.regions.com/us/en/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 391,
@@ -5254,7 +5278,8 @@
     "sitemaps": [
      "https://jobs.republicservices.com/us/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 392,
@@ -5668,7 +5693,8 @@
      "https://careers.steris.com/ca/fr/sitemap_index.xml",
      "https://careers.steris.com/us/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 423,
@@ -5925,7 +5951,8 @@
      "https://jobs.tjx.com/pl/pl/sitemap_index.xml",
      "https://jobs.tjx.com/global/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 442,
@@ -5966,7 +5993,8 @@
      "https://careers.tranetechnologies.com/global/en/sitemap_index.xml",
      "https://careers.tranetechnologies.com/global/es/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 445,
@@ -6019,7 +6047,8 @@
     "sitemaps": [
      "https://careers.truist.com/us/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 449,
@@ -6076,7 +6105,8 @@
      "https://careers.usbank.com/elavon/global/en/sitemap.xml",
      "https://careers.usbank.com/global/en/sitemap_index.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 453,
@@ -6138,7 +6168,8 @@
     "sitemaps": [
      "https://careers.united.com/us/en/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 458,
@@ -6153,7 +6184,8 @@
     "url_pattern": "/us/en/job/",
     "id_pattern": "/job/([A-Z0-9]+)/"
    },
-   "known_issue": null
+   "known_issue": null,
+   "host_group": "phenom"
   },
   {
    "rank": 459,
@@ -6251,7 +6283,8 @@
      "https://jobs.veralto.com/de/de/sitemap.xml",
      "https://jobs.veralto.com/global/en/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 466,
@@ -6685,7 +6718,8 @@
      "https://careers.zimmerbiomet.com/pl/pl/sitemap.xml",
      "https://careers.zimmerbiomet.com/th/th/sitemap.xml"
     ]
-   }
+   },
+   "host_group": "phenom"
   },
   {
    "rank": 499,

@@ -102,8 +102,16 @@ def main():
 
     # Slowest companies first, so none of them starts near the end of the run.
     todo = sorted((c for c in cfg["companies"] if not only or c["ticker"] in only), key=last_cost, reverse=True)
-    with ThreadPoolExecutor(max_workers=args.workers) as ex:
-        list(ex.map(one, todo))
+    # Companies sharing a host group (one platform's firewall) run in their own small pool, alongside the rest.
+    groups = col.get("host_groups", {})
+    pools = [ThreadPoolExecutor(max_workers=args.workers)]
+    pools += [ThreadPoolExecutor(max_workers=g["max_concurrent"]) for g in groups.values()]
+    pool_of = dict(zip(groups, pools[1:]))
+    futures = [pool_of.get(c.get("host_group"), pools[0]).submit(one, c) for c in todo]
+    for fut in futures:
+        fut.result()
+    for p in pools:
+        p.shutdown()
 
     log_path.write_text(json.dumps(log, indent=2))
     store.ingest_run(ROOT, args.date)
