@@ -261,7 +261,7 @@ load().then(D => {
   // ---- filters
   const defs = [
     ["f-year", "year", "All years", v => v],
-    ["f-status", "status", "Open and closed", v => v === "Open" ? "Open now" : "Closed"],
+    ["f-status", "status", "All status", v => v === "Open" ? "Open now" : "Closed"],
     ["f-co", "co", "All companies", v => coName[v] || v],
     ["f-soc", "soc", "All groups", v => `${v}-0000 ${socName[v]}`],
     ["f-lvl", "lvl", "All levels", v => v],
