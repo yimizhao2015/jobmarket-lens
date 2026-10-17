@@ -162,11 +162,15 @@ a { color: var(--accent); }
 
   <section class="grid">
     <div class="panel"><div><h2>Openings by Occupation Group</h2><p class="sub">SOC 2018 major groups, assigned from job titles</p></div><div class="bars" id="c-soc"></div></div>
-    <div class="panel"><div><h2>Openings by Company</h2><p class="sub">Top 20 companies by postings in view; pick a company in the filter to see any other</p></div><div class="bars" id="c-co"></div></div>
     <div class="panel">
       <div class="panel-head"><div><h2>Top Skills</h2><p class="sub">Share of postings mentioning each skill</p></div>
         <select class="inline" id="skill-soc" aria-label="Skills for occupation group"></select></div>
       <div class="bars" id="c-skills"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><div><h2>Major Required</h2><p class="sub">Fields of study named with the degree requirement; share of postings in view</p></div>
+        <select class="inline" id="major-soc" aria-label="Majors for occupation group"></select></div>
+      <div class="bars" id="c-major"></div>
     </div>
     <div class="panel"><div><h2>Full-Time or Part-Time</h2><p class="sub">Employment type field, then title</p></div><div class="bars" id="c-sched"></div></div>
     <div class="panel"><div><h2>Job Level</h2><p class="sub">From title keywords, the company's own level label, then years required</p></div><div class="bars" id="c-lvl"></div></div>
@@ -174,11 +178,11 @@ a { color: var(--accent); }
     <div class="panel"><div><h2>Minimum Degree Required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
     <div class="panel"><div><h2>Experience Required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
     <div class="panel"><div><h2>Licenses and Certifications</h2><p class="sub">Share of postings in view naming each</p></div><div class="bars" id="c-lic"></div></div>
-    <div class="panel"><div><h2>Major Required</h2><p class="sub">Fields of study named with the degree requirement; share of postings in view</p></div><div class="bars" id="c-major"></div></div>
     <div class="panel wide">
       <div class="panel-head"><div><h2>Pay Ranges by Occupation Group</h2><p class="sub">Median posted range, annualized USD (hourly × 2,080). Only postings that disclose pay in USD.</p></div></div>
       <div id="c-pay"></div>
     </div>
+    <div class="panel"><div><h2>Openings by Company</h2><p class="sub">Top 15 companies by postings in view; pick a company in the filter to see any other</p></div><div class="bars" id="c-co"></div></div>
     <div class="panel"><div><h2>Where the Jobs Are</h2><p class="sub">Primary location, by country</p></div><div class="bars" id="c-country"></div></div>
     <div class="panel"><div><h2>US States</h2><p class="sub">Primary location of US postings</p></div><div class="bars" id="c-state"></div></div>
     <div class="panel wide"><div><h2>Postings over Time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></div>
@@ -291,10 +295,13 @@ load().then(D => {
     document.getElementById("f-q").value = "";
     render();
   });
-  const skillSel = document.getElementById("skill-soc");
-  skillSel.innerHTML = `<option value="">All occupation groups</option>` +
+  const socOptions = `<option value="">All occupation groups</option>` +
     Object.keys(socName).filter(k => rows.some(r => r.soc === k)).map(k => `<option value="${k}">${socName[k]}</option>`).join("");
-  skillSel.addEventListener("change", render);
+  const skillSel = document.getElementById("skill-soc"), majorSel = document.getElementById("major-soc");
+  for (const sel of [skillSel, majorSel]) {
+    sel.innerHTML = socOptions;
+    sel.addEventListener("change", render);
+  }
 
   function filtered() {
     const q = document.getElementById("f-q").value.trim().toLowerCase();
@@ -359,14 +366,15 @@ load().then(D => {
     document.getElementById("kpis").innerHTML = kpis.map(([v, l, n]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l} <span class="n">${n}</span></div></div>`).join("");
 
     bars("c-soc", count(R, "soc"), N, { label: k => `${k} ${socName[k]}` });
-    bars("c-co", count(R, "co"), N, { label: k => coName[k] || k, limit: 20 });
+    bars("c-co", count(R, "co"), N, { label: k => coName[k] || k, limit: 15 });
     bars("c-lvl", count(R, "lvl"), N, { order: order.lvl });
     bars("c-deg", count(R, "deg"), N, { order: ["High school", "Associate", "Bachelor's", "Master's", "Doctorate", "Enrolled student", NS] });
     bars("c-yrs", count(R, "yrs_b"), N, { order: ["0-1 yrs", "2-4 yrs", "5-7 yrs", "8-10 yrs", "10+ yrs", NS] });
     bars("c-arr", count(R, "arr"), N, { order: ["On-site", "Hybrid", "Remote", NS] });
     bars("c-sched", count(R, "sched"), N, { order: ["Full-time", "Part-time", "Full- or part-time", "Temporary / Seasonal", "Internship", "Contract", NS] });
     bars("c-lic", countMulti(R, "lic", D.licenses), N, { share: true, limit: 10, emptyText: "No licenses or certifications named in postings in view." });
-    bars("c-major", countMulti(R, "major", D.majors), N, { share: true, limit: 15, emptyText: "No majors named in postings in view." });
+    const RM = majorSel.value ? R.filter(r => r.soc === majorSel.value) : R;
+    bars("c-major", countMulti(RM, "major", D.majors), RM.length, { share: true, limit: 15, emptyText: "No majors named in postings in view." });
     bars("c-country", count(R, "country"), N, { limit: 12 });
     bars("c-state", count(R.filter(r => r.state), "state"), R.filter(r => r.state).length, { limit: 12, emptyText: "No US postings in view." });
     const sk = skillSel.value;
