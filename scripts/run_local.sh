@@ -33,7 +33,7 @@ gzip -kf data/lens.db data/normalized/postings.csv
 gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
 
 echo "== Publishing dashboard"
-git add web/index.html config/ "data/data source.csv" "data/Job postings.csv"
+git add -A -- web/index.html config/ "data/data source.csv" "data/Job postings"
 git commit -m "Data refresh $(date -u +%F) (local run)" || echo "nothing to commit"
 git pull --rebase -X theirs origin main
 git push

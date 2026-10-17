@@ -9,7 +9,8 @@ and location.
 
 - **Live site:** https://www.jobmarketlens.com/
 - **Data files:** [`data/data source.csv`](data/data%20source.csv) (one row per company and its collection
-  status) and [`data/Job postings.csv`](data/Job%20postings.csv) (every posting on the dashboard, newest first)
+  status) and [`data/Job postings/`](data/Job%20postings) (every posting on the dashboard, newest first, one file per
+  month posted, split into parts of up to 75,000 rows to stay under GitHub's file size limit)
 
 © 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
 
@@ -79,7 +80,7 @@ collector/                   one adapter per career-site platform + polite HTTP 
   run.py                     runs all companies in parallel, writes data/raw/<date>/run_log.json
 normalize/                   SOC mapping, skills & license dictionaries, majors (fields of study), field parsers
 scripts/build_dataset.py     normalize everything -> web/index.html (data embedded), data/normalized/postings.csv
-scripts/export_csv.py        "data/data source.csv" and "data/Job postings.csv"
+scripts/export_csv.py        "data/data source.csv" and the monthly files in "data/Job postings/"
 scripts/run_local.sh         the whole weekly run on your own computer
 data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
