@@ -14,6 +14,9 @@ def collect(company, params, http, max_jobs, stats):
     offset, seen = 0, 0
     while seen < max_jobs:
         r = http.post(base + "/jobs", json={"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": ""})
+        # During Workday maintenance the API redirects to an HTML outage page; say so rather than fail on JSON.
+        if "maintenance" in r.url or "outage" in r.url:
+            raise RuntimeError(f"Workday maintenance page ({r.url}); try again later")
         data = r.json()
         if offset == 0:
             stats["site_total"] = data.get("total")
