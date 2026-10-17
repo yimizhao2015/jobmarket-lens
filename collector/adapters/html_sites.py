@@ -132,7 +132,11 @@ def collect_sitemap(company, params, http, max_jobs, stats):
     stats["site_total"] = len(urls)
     seen = 0
     for u in urls:
-        jid = (re.search(params.get("id_pattern", r"(\d{5,})"), u) or [None, u])[1]
+        if "id_pattern" in params:
+            m = re.search(params["id_pattern"], u)
+        else:  # TalentBrew urls end /<org id>/<job id>; elsewhere the first long number is the id
+            m = re.search(r"/\d+/(\d{9,})/?$", u) or re.search(r"(\d{5,})", u)
+        jid = m[1] if m else u
         rec = seen_before(company, http, source_id=jid)
         if rec:  # already in the history: no detail request
             yield rec
