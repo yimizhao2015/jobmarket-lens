@@ -115,11 +115,12 @@ a { color: var(--accent); }
 .closed-title { color: var(--ink-3); }
 .pill.closed { color: var(--ink-3); background: var(--bg); border: 1px solid var(--line); white-space: nowrap; }
 .copyright { text-align: center; color: var(--ink-3); font-size: 12px; padding: 4px 0 8px; }
-.site-nav { display: flex; flex-wrap: wrap; gap: 2px 14px; margin-top: 8px; font-size: 13px; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 13px; }
+.site-nav.head { gap: 4px 22px; font-size: 16px; font-weight: 500; justify-content: flex-end; padding-bottom: 4px; }
 .site-nav a { color: var(--ink-2); text-decoration: none; }
 .site-nav a:hover { color: var(--accent); }
 .site-nav.foot { justify-content: center; margin: 0 0 6px; }
-@media (max-width: 700px) { .filters { position: static; } }
+@media (max-width: 700px) { .filters { position: static; } .site-nav.head { justify-content: flex-start; } }
 #tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); font-size: 12px; padding: 6px 9px;
   border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .1s; }
 @media (prefers-reduced-motion: reduce) { #tip { transition: none; } }
@@ -135,8 +136,8 @@ a { color: var(--accent); }
     <div>
       <h1>JobMarket <span class="lens">Lens</span></h1>
       <p class="tagline">See demand. Understand skills. Track change.</p>
-      <nav class="site-nav" aria-label="Site"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a></nav>
     </div>
+    <nav class="site-nav head" aria-label="Site"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a></nav>
   </header>
 
   <p class="intro" id="intro"></p>

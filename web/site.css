@@ -39,7 +39,7 @@ body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.65 var(
 .site-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin-bottom: 28px; }
 .brand { font: 700 24px/1.1 var(--f-display); letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
 .brand span { color: var(--accent); }
-.site-nav { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 16px; font-weight: 500; }
 .site-nav a { color: var(--ink-2); text-decoration: none; }
 .site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--accent); }
 article { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: clamp(20px, 4vw, 40px); }
