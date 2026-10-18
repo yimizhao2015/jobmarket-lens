@@ -8,6 +8,9 @@ occupation (SOC major group), skills, education, experience, pay, job level, sch
 and location.
 
 - **Live site:** https://www.jobmarketlens.com/
+- **Pages:** [Insights](https://www.jobmarketlens.com/insights), [Methodology](https://www.jobmarketlens.com/methodology),
+  [About](https://www.jobmarketlens.com/about), [Privacy](https://www.jobmarketlens.com/privacy). Visitor counts come from
+  Vercel Web Analytics (cookieless).
 - **Data files:** [`data/data source.csv`](data/data%20source.csv) (one row per company and its collection
   status) and [`data/Job postings/`](data/Job%20postings) (every posting on the dashboard, newest first, one file per
   month posted, split into parts of up to 75,000 rows to stay under GitHub's file size limit)
@@ -84,6 +87,7 @@ scripts/export_csv.py        "data/data source.csv" and the monthly files in "da
 scripts/run_local.sh         the whole weekly run on your own computer
 data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
+web/about.html, methodology.html, privacy.html, insights/   text pages (shared style in web/site.css)
 .github/workflows/collect.yml weekly collection (Mondays 2:00 a.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
 vercel.json                  Vercel hosting: serves web/ as a static site, redeployed on every push

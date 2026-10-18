@@ -177,7 +177,10 @@ def main():
     (ROOT / "web/artifact.html").write_text(body)
     (ROOT / "web/index.html").write_text(
         '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
-        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head>\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
+        '<meta name="description" content="What America\'s largest employers are hiring for: S&amp;P 500 job postings by '
+        'occupation, skills, degree, major, pay and location, updated weekly.">'
+        '<script defer src="/_vercel/insights/script.js"></script></head>\n'
         '<body style="margin:0">\n' + body + "\n</body></html>\n")
 
     (ROOT / "data/normalized").mkdir(parents=True, exist_ok=True)
