@@ -478,7 +478,7 @@ load().then(D => {
         <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td></tr>`;
     });
   covRows.splice(COV_SAMPLE);
-  document.getElementById("cov-sub").innerHTML += `; showing ${fmt(covRows.length)} of ${fmt(D.companies.length)} companies.`;
+  document.getElementById("cov-sub").innerHTML += `; Showing ${fmt(covRows.length)} of ${fmt(D.companies.length)} companies.`;
   let covPage = 0;
   function drawCov() {
     document.getElementById("cov").innerHTML = covHead + "<tbody>" + covRows.slice(covPage * PAGE, (covPage + 1) * PAGE).join("") + "</tbody>";
