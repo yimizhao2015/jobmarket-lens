@@ -64,3 +64,4 @@ td.r, th.r { text-align: right; font-family: var(--f-mono); font-variant-numeric
 .site-foot { text-align: center; color: var(--ink-3); font-size: 12px; margin-top: 28px; }
 .site-foot nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 6px; font-size: 13px; }
 .site-foot a { color: var(--ink-2); }
+.site-nav a.support, .site-foot a.support { color: var(--accent); }
