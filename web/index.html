@@ -190,19 +190,20 @@ a { color: var(--accent); }
     <div class="panel"><div><h2>Openings by Company</h2><p class="sub">Top 15 companies by postings in view; pick a company in the filter to see any other</p></div><div class="bars" id="c-co"></div></div>
     <div class="panel"><div><h2>Where the Jobs Are</h2><p class="sub">Primary location, by country</p></div><div class="bars" id="c-country"></div></div>
     <div class="panel"><div><h2>US States</h2><p class="sub">Primary location of US postings</p></div><div class="bars" id="c-state"></div></div>
-    <div class="panel wide"><div><h2>Postings over Time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></div>
-  </section>
-
-  <section class="panel wide" aria-labelledby="cov-h">
-    <div><h2 id="cov-h">Source Coverage</h2><p class="sub" id="cov-sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
-    <div class="tbl-wrap"><table id="cov"></table></div>
-    <div class="pager" id="cov-pager"></div>
   </section>
 
   <section class="panel wide" aria-labelledby="tbl-h">
     <div class="panel-head"><div><h2 id="tbl-h">Job Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
     <div class="tbl-wrap"><table id="tbl"></table></div>
     <div class="pager" id="tbl-pager"></div>
+  </section>
+
+  <section class="panel wide"><div><h2>Postings over Time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></section>
+
+  <section class="panel wide" aria-labelledby="cov-h">
+    <div><h2 id="cov-h">Source Coverage</h2><p class="sub" id="cov-sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
+    <div class="tbl-wrap"><table id="cov"></table></div>
+    <div class="pager" id="cov-pager"></div>
   </section>
 
   <section class="panel wide method" aria-label="Note">
@@ -414,39 +415,35 @@ load().then(D => {
         <div class="col-labels">${mk.map(m => `<span>${pLabel(m)}</span>`).join("")}</div>`;
     }
 
-    // table: newest first, 10 per page; a filter change goes back to page 1
-    tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || "")).slice(0, POST_SAMPLE);
+    // table: every posting that matches the filters, newest first; a filter change goes back to page 1
+    tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || ""));
     tblPage = 0;
-    document.getElementById("tbl-sub").innerHTML = N > POST_SAMPLE
-      ? `Showing the latest ${fmt(POST_SAMPLE)} of ${fmt(N)} postings that match the filters. <a href="https://github.com/yimizhao2015/jobmarket-lens/tree/main/data/Job%20postings" target="_blank" rel="noopener">Download all postings</a>`
-      : `${fmt(N)} postings match the filters, newest first. <a href="https://github.com/yimizhao2015/jobmarket-lens/tree/main/data/Job%20postings" target="_blank" rel="noopener">Download all postings</a>`;
+    document.getElementById("tbl-sub").innerHTML = `${fmt(N)} ${N === 1 ? "posting matches" : "postings match"} the filters, newest first. <a href="https://github.com/yimizhao2015/jobmarket-lens/tree/main/data/Job%20postings" target="_blank" rel="noopener">Download all postings</a>`;
     drawTable();
   }
 
-  const PAGE = 10;
-  // The tables show a sample; the full lists are the CSV files in the repo.
-  const COV_SAMPLE = 50, POST_SAMPLE = 500;
+  const COV_PAGE = 10, POST_PAGE = 25;
   let tblList = [], tblPage = 0;
-  function pager(id, total, page, go) {
+  function pager(id, total, page, size, go) {
     const el = document.getElementById(id);
-    const pages = Math.max(1, Math.ceil(total / PAGE));
-    if (total <= PAGE) { el.innerHTML = ""; return; }
+    const pages = Math.max(1, Math.ceil(total / size));
+    if (total <= size) { el.innerHTML = ""; return; }
     el.innerHTML = `<button type="button" data-p="0" ${page === 0 ? "disabled" : ""}>First</button>` +
       `<button type="button" data-p="${page - 1}" ${page === 0 ? "disabled" : ""}>Previous</button>` +
-      `<span>Page ${fmt(page + 1)} of ${fmt(pages)} · ${fmt(page * PAGE + 1)}–${fmt(Math.min(total, (page + 1) * PAGE))} of ${fmt(total)}</span>` +
+      `<span>Page ${fmt(page + 1)} of ${fmt(pages)} · ${fmt(page * size + 1)}–${fmt(Math.min(total, (page + 1) * size))} of ${fmt(total)}</span>` +
       `<button type="button" data-p="${page + 1}" ${page >= pages - 1 ? "disabled" : ""}>Next</button>` +
       `<button type="button" data-p="${pages - 1}" ${page >= pages - 1 ? "disabled" : ""}>Last</button>`;
     el.querySelectorAll("button").forEach(b => b.addEventListener("click", () => go(+b.dataset.p)));
   }
   function drawTable() {
     const tb = document.getElementById("tbl");
-    const list = tblList.slice(tblPage * PAGE, (tblPage + 1) * PAGE);
+    const list = tblList.slice(tblPage * POST_PAGE, (tblPage + 1) * POST_PAGE);
     tb.innerHTML = `<thead><tr><th>Title</th><th>Company</th><th>SOC group</th><th>Level</th><th>Job type</th><th>Location</th><th>Posted</th><th>Pay</th><th>Degree</th><th>Yrs</th></tr></thead><tbody>` +
       list.map(r => `<tr><td>${r.open ? `<a href="${r.url}" target="_blank" rel="noopener">${r.title}</a>` : `<span class="closed-title" title="This posting is no longer on the company's career site">${r.title}</span> <span class="pill closed">Closed${r.last_seen ? ` · last seen ${shortDate(r.last_seen)}` : ""}</span>`}</td><td>${coName[r.co]}</td><td>${socName[r.soc]}</td><td>${r.lvl}</td><td>${r.sched}</td>
         <td>${[r.city, r.state, r.country !== NS ? r.country : null].filter(Boolean).join(", ") || NS}${r.nloc > 1 ? ` <span class="more">+${r.nloc - 1}</span>` : ""}</td>
         <td class="num">${r.posted || ""}</td><td class="num">${postedPay(r)}</td>
         <td>${r.deg}${r.deg_equiv ? " or equiv." : ""}</td><td class="num">${r.yrs ?? ""}</td></tr>`).join("") + "</tbody>";
-    pager("tbl-pager", tblList.length, tblPage, p => { tblPage = p; drawTable(); document.getElementById("tbl-h").scrollIntoView({ block: "start" }); });
+    pager("tbl-pager", tblList.length, tblPage, POST_PAGE, p => { tblPage = p; drawTable(); document.getElementById("tbl-h").scrollIntoView({ block: "start" }); });
   }
 
   // Pay as the posting states it: the original amounts and period, not annualized.
@@ -479,12 +476,11 @@ load().then(D => {
         <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
         <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td></tr>`;
     });
-  covRows.splice(COV_SAMPLE);
-  document.getElementById("cov-sub").innerHTML += `; Showing ${fmt(covRows.length)} of ${fmt(D.companies.length)} companies. <a href="https://github.com/yimizhao2015/jobmarket-lens/blob/main/data/data%20source.csv" target="_blank" rel="noopener">Download the full list</a>`;
+  document.getElementById("cov-sub").innerHTML += `; ${fmt(covRows.length)} companies. <a href="https://github.com/yimizhao2015/jobmarket-lens/blob/main/data/data%20source.csv" target="_blank" rel="noopener">Download the full list</a>`;
   let covPage = 0;
   function drawCov() {
-    document.getElementById("cov").innerHTML = covHead + "<tbody>" + covRows.slice(covPage * PAGE, (covPage + 1) * PAGE).join("") + "</tbody>";
-    pager("cov-pager", covRows.length, covPage, p => { covPage = p; drawCov(); document.getElementById("cov-h").scrollIntoView({ block: "start" }); });
+    document.getElementById("cov").innerHTML = covHead + "<tbody>" + covRows.slice(covPage * COV_PAGE, (covPage + 1) * COV_PAGE).join("") + "</tbody>";
+    pager("cov-pager", covRows.length, covPage, COV_PAGE, p => { covPage = p; drawCov(); document.getElementById("cov-h").scrollIntoView({ block: "start" }); });
   }
   drawCov();
 
