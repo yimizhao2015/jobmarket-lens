@@ -1,18 +1,26 @@
-"""Write the dashboard's Source coverage and Job postings tables as CSV files.
+"""Write the data products sold on the Get the Data page, and the free sample.
 
 Reads web/data.json (written by build_dataset.py) and writes:
   data/data source.csv   one row per S&P 500 company in scope, with its collection status
   data/Job postings/Job postings YYYY-MM part N.csv
-                         one row per posting shown on the dashboard, newest first, one file per month posted
-                         (split into parts of at most ROWS_PER_FILE rows to stay under GitHub's 100 MB file limit)
+                         one row per posting, newest first, one file per month posted, in parts of ROWS_PER_FILE
+  data/products/jobmarketlens-latest-week.zip    postings open in the latest run + data source.csv ($1.99)
+  data/products/jobmarketlens-full-archive.zip   every posting since October 1 + data source.csv ($19.99)
+  web/downloads/jobmarketlens-sample.csv         1,000 random postings, free on the site
+The CSV files under data/ and the zips are not committed to this public repo; the workflow uploads the zips to
+the private data repo. CSV files start with a UTF-8 byte order mark so Excel opens them with the right characters.
 """
 import csv
 import json
+import random
+import zipfile
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ROWS_PER_FILE = 75_000  # about 32 MB
+SAMPLE_ROWS = 1_000
+ENC = "utf-8-sig"
 NS = "Not specified"
 
 
@@ -54,7 +62,7 @@ def main():
     out_dir = ROOT / "data"
     out_dir.mkdir(exist_ok=True)
 
-    with open(out_dir / "data source.csv", "w", newline="", encoding="utf-8") as f:
+    with open(out_dir / "data source.csv", "w", newline="", encoding=ENC) as f:
         w = csv.writer(f)
         w.writerow(["Rank", "Ticker", "Company", "Sector", "Career site", "Platform", "Status",
                     "Last collected", "Postings in dashboard", "Listed on site", "Notes"])
@@ -77,20 +85,52 @@ def main():
     for old in post_dir.glob("*.csv"):
         old.unlink()
     (out_dir / "Job postings.csv").unlink(missing_ok=True)  # the single file used before the split
+    def row(r):
+        return [r["id"], r["title"], names.get(r["co"], r["co"]), r["co"], r["soc"], soc.get(r["soc"], ""),
+                r["lvl"], r["sched"], r["arr"], r["city"] or "", r["state"] or "", r["country"] or "",
+                r["nloc"], r["posted"] or "", posted_pay(r), r["deg"],
+                "; ".join(D.get("majors", [])[i] for i in r.get("major", [])),
+                "Yes" if r["deg_equiv"] else "No",
+                "" if r["yrs"] is None else r["yrs"], "; ".join(skills[i] for i in r["skills"]),
+                "; ".join(D["licenses"][i] for i in r["lic"]),
+                "Open" if r["open"] else "Closed", r.get("last_seen") or "", r["url"]]
+
+    def write(path, some):
+        with open(path, "w", newline="", encoding=ENC) as f:
+            w = csv.writer(f)
+            w.writerow(header)
+            w.writerows(row(r) for r in some)
+
     for month, month_rows in by_month.items():
         for part, start in enumerate(range(0, len(month_rows), ROWS_PER_FILE), 1):
-            with open(post_dir / f"Job postings {month} part {part}.csv", "w", newline="", encoding="utf-8") as f:
-                w = csv.writer(f)
-                w.writerow(header)
-                for r in month_rows[start:start + ROWS_PER_FILE]:
-                    w.writerow([r["id"], r["title"], names.get(r["co"], r["co"]), r["co"], r["soc"], soc.get(r["soc"], ""),
-                                r["lvl"], r["sched"], r["arr"], r["city"] or "", r["state"] or "", r["country"] or "",
-                                r["nloc"], r["posted"] or "", posted_pay(r), r["deg"],
-                                "; ".join(D.get("majors", [])[i] for i in r.get("major", [])),
-                                "Yes" if r["deg_equiv"] else "No",
-                                "" if r["yrs"] is None else r["yrs"], "; ".join(skills[i] for i in r["skills"]),
-                                "; ".join(D["licenses"][i] for i in r["lic"]),
-                                "Open" if r["open"] else "Closed", r.get("last_seen") or "", r["url"]])
+            write(post_dir / f"Job postings {month} part {part}.csv", month_rows[start:start + ROWS_PER_FILE])
+
+    # Products: latest week (postings open in the latest run) and the full archive, each with the coverage list.
+    run = max((s["run_date"] for s in latest.values() if s.get("run_date")), default="")
+    prod = out_dir / "products"
+    prod.mkdir(exist_ok=True)
+    readme = (f"JobMarket Lens data, www.jobmarketlens.com\nLatest collection: {run}\n"
+              "Job postings from the official career sites of S&P 500 companies, posted October 1, 2026 or later.\n"
+              "Field definitions: www.jobmarketlens.com/methodology\n"
+              "Job postings remain the property of the companies that published them.\n")
+    week = prod / "latest week.csv"
+    write(week, [r for r in rows if r["open"]])
+    with zipfile.ZipFile(prod / "jobmarketlens-latest-week.zip", "w", zipfile.ZIP_DEFLATED) as z:
+        z.write(week, f"Job postings {run}.csv")
+        z.write(out_dir / "data source.csv", "Source coverage.csv")
+        z.writestr("README.txt", readme)
+    week.unlink()
+    with zipfile.ZipFile(prod / "jobmarketlens-full-archive.zip", "w", zipfile.ZIP_DEFLATED) as z:
+        for p in sorted(post_dir.glob("*.csv")):
+            z.write(p, p.name)
+        z.write(out_dir / "data source.csv", "Source coverage.csv")
+        z.writestr("README.txt", readme)
+
+    # Free sample: 1,000 postings drawn at random (the same draw all week), sorted by company and date.
+    sample = random.Random(run).sample(rows, min(SAMPLE_ROWS, len(rows)))
+    sample.sort(key=lambda r: (names.get(r["co"], r["co"]), r["posted"] or ""))
+    (ROOT / "web/downloads").mkdir(exist_ok=True)
+    write(ROOT / "web/downloads/jobmarketlens-sample.csv", sample)
     print(f"wrote {len(D['companies'])} companies and {len(rows)} postings to {out_dir}")
 
 

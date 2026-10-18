@@ -9,11 +9,12 @@ and location.
 
 - **Live site:** https://www.jobmarketlens.com/
 - **Pages:** [Insights](https://www.jobmarketlens.com/insights), [Methodology](https://www.jobmarketlens.com/methodology),
-  [About](https://www.jobmarketlens.com/about), [Privacy](https://www.jobmarketlens.com/privacy). Visitor counts come from
+  [About](https://www.jobmarketlens.com/about), [Privacy](https://www.jobmarketlens.com/privacy), [Get the Data](https://www.jobmarketlens.com/data). Visitor counts come from
   Vercel Web Analytics (cookieless).
-- **Data files:** [`data/data source.csv`](data/data%20source.csv) (one row per company and its collection
-  status) and [`data/Job postings/`](data/Job%20postings) (every posting on the dashboard, newest first, one file per
-  month posted, split into parts of up to 75,000 rows to stay under GitHub's file size limit)
+- **Data:** sold on the [Get the Data](https://www.jobmarketlens.com/data) page: a free 1,000-record sample
+  (`web/downloads/jobmarketlens-sample.csv`), the latest weekly snapshot ($1.99) and the full archive since
+  October 1 ($19.99). `scripts/export_csv.py` builds the two zips each week and the workflow uploads them to the
+  private data repo's `data` release; the full CSV files are no longer committed to this public repo.
 
 © 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
 
@@ -26,8 +27,8 @@ and location.
 - Charts: openings by occupation group and by company, top skills (filterable by occupation), job level,
   minimum degree, experience, work arrangement, full/part-time, licenses, pay ranges, countries, US states,
   and postings over time (weekly bars, switching to monthly once three months are collected).
-- Source Coverage: every company in scope and the state of collection from its career site (10 per page, not affected by filters).
-- Job Postings: the matching postings, newest first (25 per page). A posting that has disappeared from
+- Source Coverage: a sample of 50 companies and the state of collection from each career site (10 per page, not affected by filters).
+- Job Postings: the latest 1,000 matching postings, newest first (25 per page). A posting that has disappeared from
   the company's site is greyed out with the date it was last seen instead of linking to a dead page.
 
 ## Universe
@@ -83,7 +84,7 @@ collector/                   one adapter per career-site platform + polite HTTP 
   run.py                     runs all companies in parallel, writes data/raw/<date>/run_log.json
 normalize/                   SOC mapping, skills & license dictionaries, majors (fields of study), field parsers
 scripts/build_dataset.py     normalize everything -> web/index.html (data embedded), data/normalized/postings.csv
-scripts/export_csv.py        "data/data source.csv" and the monthly files in "data/Job postings/"
+scripts/export_csv.py        data products (zips, not committed) and the free sample in web/downloads/
 scripts/run_local.sh         the whole weekly run on your own computer
 data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html

@@ -122,7 +122,7 @@ a { color: var(--accent); }
 .site-nav.head { gap: 4px 20px; font-size: 14px; font-weight: 500; justify-content: flex-end; padding-bottom: 4px; }
 .site-nav a { color: var(--ink-2); text-decoration: none; }
 .site-nav a:hover { color: var(--accent); }
-.site-nav a.support { color: var(--accent); }
+.site-nav a.cta { color: var(--accent); }
 .site-nav.foot { justify-content: center; margin: 0 0 6px; }
 @media (max-width: 700px) { .filters { position: static; } .site-nav.head { justify-content: flex-start; } }
 #tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); font-size: 12px; padding: 6px 9px;
@@ -141,7 +141,7 @@ a { color: var(--accent); }
       <h1>JobMarket <span class="lens">Lens</span></h1>
       <p class="tagline">See demand. Understand skills. Track change.</p>
     </div>
-    <nav class="site-nav head" aria-label="Site"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a><a class="support" href="https://buymeacoffee.com/yimizhao?ref=jobmarketlens" target="_blank" rel="noopener">Buy Me a Coffee</a></nav>
+    <nav class="site-nav head" aria-label="Site"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a></nav>
   </header>
 
   <p class="intro" id="intro"></p>
@@ -193,22 +193,22 @@ a { color: var(--accent); }
     <div class="panel wide"><div><h2>Postings over Time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></div>
   </section>
 
-  <section class="panel wide" aria-labelledby="tbl-h">
-    <div class="panel-head"><div><h2 id="tbl-h">Job Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
-    <div class="tbl-wrap"><table id="tbl"></table></div>
-    <div class="pager" id="tbl-pager"></div>
-  </section>
-
   <section class="panel wide" aria-labelledby="cov-h">
     <div><h2 id="cov-h">Source Coverage</h2><p class="sub" id="cov-sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
     <div class="tbl-wrap"><table id="cov"></table></div>
     <div class="pager" id="cov-pager"></div>
   </section>
 
+  <section class="panel wide" aria-labelledby="tbl-h">
+    <div class="panel-head"><div><h2 id="tbl-h">Job Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
+    <div class="tbl-wrap"><table id="tbl"></table></div>
+    <div class="pager" id="tbl-pager"></div>
+  </section>
+
   <section class="panel wide method" aria-label="Note">
     <p>Note. Data sources are job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Sites that refuse automated access are shown as blocked under Source Coverage, not estimated. Updated weekly, latest on <span id="n-run"></span>.</p>
   </section>
-  <footer class="copyright"><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a><a class="support" href="https://buymeacoffee.com/yimizhao?ref=jobmarketlens" target="_blank" rel="noopener">Buy Me a Coffee</a></nav>© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.</footer>
+  <footer class="copyright"><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a></nav>© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.</footer>
 </div>
 <div id="tip" role="tooltip"></div>
 
@@ -414,14 +414,18 @@ load().then(D => {
         <div class="col-labels">${mk.map(m => `<span>${pLabel(m)}</span>`).join("")}</div>`;
     }
 
-    // table: every posting that matches the filters, newest first; a filter change goes back to page 1
-    tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || ""));
+    // table: the latest postings that match the filters, newest first; a filter change goes back to page 1
+    tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || "")).slice(0, POST_SAMPLE);
     tblPage = 0;
-    document.getElementById("tbl-sub").innerHTML = `${fmt(N)} ${N === 1 ? "posting matches" : "postings match"} the filters, newest first. <a href="https://github.com/yimizhao2015/jobmarket-lens/tree/main/data/Job%20postings" target="_blank" rel="noopener">Download all postings</a>`;
+    document.getElementById("tbl-sub").innerHTML = (N > POST_SAMPLE
+      ? `Showing the latest ${fmt(POST_SAMPLE)} of ${fmt(N)} postings that match the filters. `
+      : `${fmt(N)} ${N === 1 ? "posting matches" : "postings match"} the filters, newest first. `) + `<a href="https://www.jobmarketlens.com/data">Get the Data</a>`;
     drawTable();
   }
 
   const COV_PAGE = 10, POST_PAGE = 25;
+  // The tables show a sample; the full data is on the Get the Data page.
+  const COV_SAMPLE = 50, POST_SAMPLE = 1000;
   let tblList = [], tblPage = 0;
   function pager(id, total, page, size, go) {
     const el = document.getElementById(id);
@@ -475,7 +479,9 @@ load().then(D => {
         <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
         <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td></tr>`;
     });
-  document.getElementById("cov-sub").innerHTML += `; ${fmt(covRows.length)} companies. <a href="https://github.com/yimizhao2015/jobmarket-lens/blob/main/data/data%20source.csv" target="_blank" rel="noopener">Download the full list</a>`;
+  const covTotal = covRows.length;
+  covRows.splice(COV_SAMPLE);
+  document.getElementById("cov-sub").innerHTML += `; Showing ${fmt(covRows.length)} of ${fmt(covTotal)} companies. <a href="https://www.jobmarketlens.com/data">Get the Data</a>`;
   let covPage = 0;
   function drawCov() {
     document.getElementById("cov").innerHTML = covHead + "<tbody>" + covRows.slice(covPage * COV_PAGE, (covPage + 1) * COV_PAGE).join("") + "</tbody>";

@@ -31,9 +31,10 @@ python scripts/build_dataset.py
 echo "== Saving history to $DATA_REPO"
 gzip -kf data/lens.db data/normalized/postings.csv
 gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
+gh release upload data -R "$DATA_REPO" "data/products/jobmarketlens-latest-week.zip" "data/products/jobmarketlens-full-archive.zip" --clobber
 
 echo "== Publishing dashboard"
-git add -A -- web/index.html config/ "data/data source.csv" "data/Job postings"
+git add -A -- web/index.html web/downloads config/
 git commit -m "Data refresh $(date -u +%F) (local run)" || echo "nothing to commit"
 git pull --rebase -X theirs origin main
 git push

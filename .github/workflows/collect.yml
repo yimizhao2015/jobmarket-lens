@@ -78,11 +78,13 @@ jobs:
           gzip -kf data/lens.db data/normalized/postings.csv
           gh release view data -R "$DATA_REPO" >/dev/null 2>&1 || gh release create data -R "$DATA_REPO" --title "Posting history" --notes "SQLite history (lens.db.gz) and normalized postings (postings.csv.gz) for JobMarket Lens. Replaced on every weekly run."
           gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
+          # Paid downloads (Get the Data page): replaced every week
+          gh release upload data -R "$DATA_REPO" "data/products/jobmarketlens-latest-week.zip" "data/products/jobmarketlens-full-archive.zip" --clobber
       - name: Commit dashboard
         run: |
           git config user.name "jobmarket-lens bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -A -- web/index.html config/ "data/data source.csv" "data/Job postings"
+          git add -A -- web/index.html web/downloads config/
           git commit -m "Data refresh $(date -u +%F)" || echo "nothing to commit"
           git pull --rebase -X theirs origin main
           git push

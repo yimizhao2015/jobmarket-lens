@@ -14,3 +14,8 @@ web/about.html
 web/methodology.html
 web/privacy.html
 web/insights/
+
+# Paid data products: built by scripts/export_csv.py and uploaded to the private data repo, never committed here
+data/data source.csv
+data/Job postings/
+data/products/

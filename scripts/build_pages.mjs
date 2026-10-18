@@ -7,7 +7,6 @@ import { marked } from "marked";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const SITE = "https://www.jobmarketlens.com";
-const COFFEE = "https://buymeacoffee.com/yimizhao?ref=jobmarketlens";
 
 const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -31,9 +30,8 @@ function render(md, lede) {
   return lede ? html.replace(/<p>/, '<p class="lede">') : html;
 }
 
-const NAV = [["/", "Dashboard"], ["/insights", "Insights"], ["/methodology", "Methodology"], ["/about", "About"], ["/privacy", "Privacy"]];
-const nav = current => NAV.map(([h, l]) => `<a href="${h}"${h === current ? ' aria-current="page"' : ""}>${l}</a>`).join("") +
-  `<a class="support" href="${COFFEE}" target="_blank" rel="noopener">Buy Me a Coffee</a>`;
+const NAV = [["/", "Dashboard"], ["/insights", "Insights"], ["/methodology", "Methodology"], ["/about", "About"], ["/privacy", "Privacy"], ["/data", "Get the Data"]];
+const nav = current => NAV.map(([h, l]) => `<a href="${h}"${h === "/data" ? ' class="cta"' : ""}${h === current ? ' aria-current="page"' : ""}>${l}</a>`).join("");
 
 function page({ title, description, path, current, og, article, share }) {
   const url = SITE + path;
@@ -86,6 +84,23 @@ for (const name of ["about", "methodology", "privacy"]) {
   }));
 }
 
+// Get the Data: the plans as cards; a plan without a checkout link shows its button as coming soon
+{
+  const d = read(join(ROOT, "content/pages/data.md"));
+  const card = p => `      <li class="plan">
+        <h2>${esc(p.name)}</h2>
+        <p class="price">${esc(p.price)}</p>
+        <ul>${(p.features || []).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
+        ${p.link ? `<a class="plan-btn" href="${esc(p.link)}"${p.link.startsWith("/downloads/") ? " download" : ""}>${esc(p.button)}</a>`
+                 : `<span class="plan-btn off" aria-disabled="true">${esc(p.button)}</span><span class="soon">Coming soon</span>`}
+      </li>`;
+  out("data.html", page({
+    title: d.page_title || d.title, description: d.description, path: "/data", current: "/data", og: "website",
+    article: `    <h1>${esc(d.title)}</h1>\n` + (d.intro ? `    <p class="lede">${esc(d.intro)}</p>\n` : "") +
+      `    <ul class="plans">\n${(d.plans || []).map(card).join("\n")}\n    </ul>\n` + render(d.body, false),
+  }));
+}
+
 // Insights articles, newest first; drafts are left out
 const dir = join(ROOT, "content/insights");
 const articles = readdirSync(dir).filter(f => f.endsWith(".md")).map(f => ({ slug: basename(f, ".md"), ...read(join(dir, f)) }))
@@ -112,4 +127,4 @@ out("insights/index.html", page({
         ${esc(a.summary || a.description)}</li>`).join("\n") + `\n    </ul>`,
 }));
 
-console.log(`Built 3 pages, the Insights index and ${articles.length} article(s).`);
+console.log(`Built 4 pages, the Insights index and ${articles.length} article(s).`);

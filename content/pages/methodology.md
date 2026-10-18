@@ -73,4 +73,4 @@ Whenever a posting does not state something, the field shows "Not specified". No
 
 ## Data files
 
-The company coverage list and all postings shown on the dashboard are published as CSV files in the project's [GitHub repository](https://github.com/yimizhao2015/jobmarket-lens/tree/main/data). The full text of postings is not republished.
+A free 1,000-record sample, the latest weekly snapshot and the full archive since October 1, 2026 are available on the [Get the Data](/data) page, with the company coverage list. The full text of postings is not republished.

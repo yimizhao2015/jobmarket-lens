@@ -6,7 +6,7 @@ description: "What JobMarket Lens is, where its data comes from and who makes it
 
 JobMarket Lens tracks what America's largest employers are hiring for, using the job postings they publish on their own career sites.
 
-Every week it collects the current openings of the S&P 500 companies, reads each posting, and turns the text into comparable fields: occupation, job level, required degree and major, years of experience, skills, licenses and certifications, pay, work arrangement and location. The [dashboard](/) lets you filter all of it by company, occupation, location and more, and download the underlying tables.
+Every week it collects the current openings of the S&P 500 companies, reads each posting, and turns the text into comparable fields: occupation, job level, required degree and major, years of experience, skills, licenses and certifications, pay, work arrangement and location. The [dashboard](/) lets you filter all of it by company, occupation, location and more, and the underlying data is available on the [Get the Data](/data) page.
 
 ## Why it exists
 
@@ -17,7 +17,7 @@ Job postings are one of the earliest public signals of where the economy is head
 - **Official sources only.** Every posting comes from the company's own career site, not from a job board or aggregator.
 - **Open about gaps.** When a site refuses automated access, it is shown as blocked. Nothing is estimated or filled in.
 - **History, not just a snapshot.** Each posting keeps the date it was first seen, and postings that disappear are marked closed, so hiring can be followed over time.
-- **Downloadable.** The company coverage list and every posting on the dashboard are published as CSV files.
+- **Ready to use.** A free 1,000-record sample and the full data, refreshed weekly, are available on the [Get the Data](/data) page.
 
 How each field is produced, and its limits, is described on the [Methodology](/methodology) page. Written summaries of what the data shows are under [Insights](/insights).
 

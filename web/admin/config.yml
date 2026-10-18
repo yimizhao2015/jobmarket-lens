@@ -75,6 +75,26 @@ collections:
           - { label: Description, name: description, widget: text }
           - { label: Effective date line, name: dateline, widget: string, hint: "e.g. Effective October 18, 2026. Update it when the policy changes." }
           - { label: Page text, name: body, widget: markdown, modes: [raw, rich_text] }
+      - name: data
+        label: Get the Data
+        file: content/pages/data.md
+        preview_path: data
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - { label: Browser tab title, name: page_title, widget: string }
+          - { label: Description, name: description, widget: text, hint: "For search results and link previews" }
+          - { label: Intro, name: intro, widget: text, hint: "One line above the plans" }
+          - label: Plans
+            name: plans
+            widget: list
+            summary: "{{name}} · {{price}}"
+            fields:
+              - { label: Plan name, name: name, widget: string }
+              - { label: Price, name: price, widget: string, hint: "e.g. Free or $1.99" }
+              - { label: Features, name: features, widget: list, field: { label: Feature, name: feature, widget: string } }
+              - { label: Button text, name: button, widget: string }
+              - { label: Button link, name: link, widget: string, required: false, hint: "Checkout or download link. Leave empty to show the button as Coming soon." }
+          - { label: Text below the plans, name: body, widget: markdown, modes: [raw, rich_text] }
       - name: insights_intro
         label: Insights page intro
         file: content/pages/insights.md
