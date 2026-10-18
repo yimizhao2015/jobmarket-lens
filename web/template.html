@@ -190,7 +190,7 @@ a { color: var(--accent); }
   </section>
 
   <section class="panel wide" aria-labelledby="cov-h">
-    <div><h2 id="cov-h">Source Coverage</h2><p class="sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
+    <div><h2 id="cov-h">Source Coverage</h2><p class="sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p><p class="sub" id="cov-sub"></p></div>
     <div class="tbl-wrap"><table id="cov"></table></div>
     <div class="pager" id="cov-pager"></div>
   </section>
@@ -413,13 +413,17 @@ load().then(D => {
     }
 
     // table: newest first, 25 per page; a filter change goes back to page 1
-    tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || ""));
+    tblList = [...R].sort((a, b) => (b.posted || "").localeCompare(a.posted || "")).slice(0, POST_SAMPLE);
     tblPage = 0;
-    document.getElementById("tbl-sub").textContent = `${fmt(N)} postings match the filters, newest first`;
+    document.getElementById("tbl-sub").innerHTML = N > POST_SAMPLE
+      ? `Showing the latest ${fmt(POST_SAMPLE)} of ${fmt(N)} postings that match the filters. <a href="https://github.com/yimizhao2015/jobmarket-lens/tree/main/data/Job%20postings" target="_blank" rel="noopener">Download all postings</a>`
+      : `${fmt(N)} postings match the filters, newest first`;
     drawTable();
   }
 
   const PAGE = 25;
+  // The tables show a sample; the full lists are the CSV files in the repo.
+  const COV_SAMPLE = 50, POST_SAMPLE = 500;
   let tblList = [], tblPage = 0;
   function pager(id, total, page, go) {
     const el = document.getElementById(id);
@@ -473,6 +477,8 @@ load().then(D => {
         <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
         <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td></tr>`;
     });
+  covRows.splice(COV_SAMPLE);
+  document.getElementById("cov-sub").innerHTML = `Showing ${fmt(covRows.length)} of ${fmt(D.companies.length)} companies. <a href="https://github.com/yimizhao2015/jobmarket-lens/tree/main/data/data%20source.csv" target="_blank" rel="noopener">Download the full list</a>`;
   let covPage = 0;
   function drawCov() {
     document.getElementById("cov").innerHTML = covHead + "<tbody>" + covRows.slice(covPage * PAGE, (covPage + 1) * PAGE).join("") + "</tbody>";
