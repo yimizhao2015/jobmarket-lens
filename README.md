@@ -87,13 +87,23 @@ scripts/export_csv.py        "data/data source.csv" and the monthly files in "da
 scripts/run_local.sh         the whole weekly run on your own computer
 data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
-web/about.html, methodology.html, privacy.html, insights/   text pages (shared style in web/site.css)
+content/pages/*.md, content/insights/*.md   About, Methodology, Privacy and Insights articles in Markdown (edit at /admin)
+scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Vercel deploy (npm run build)
+web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages
+web/site.css, web/share.js   shared style of the text pages; share buttons on articles
 .github/workflows/collect.yml weekly collection (Mondays 2:00 a.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
-vercel.json                  Vercel hosting: serves web/ as a static site, redeployed on every push
+vercel.json                  Vercel hosting: runs npm run build, serves web/, redeployed on every push
 ```
 
 Not in this repo: `data/lens.db` and `data/raw/` (private history), `web/data.json` (build output).
+
+## Admin area
+
+www.jobmarketlens.com/admin edits the Insights articles and the text pages. Sign in with **Sign In Using Access
+Token**: a GitHub fine-grained personal access token for `yimizhao2015/jobmarket-lens` with *Contents: Read and
+write*. Each save is a commit to `main`, and Vercel rebuilds the site in a minute or two. Mark an article as a
+draft to hide it without deleting it; deleting removes it from the site (it stays in the Git history).
 
 ## Run it yourself
 
