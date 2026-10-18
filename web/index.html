@@ -51,7 +51,6 @@ header { display: flex; flex-wrap: wrap; align-items: end; justify-content: spac
 h1 { font: 700 clamp(28px, 4vw, 40px)/1.05 var(--f-display); letter-spacing: -0.02em; margin: 0; }
 h1 .lens { color: var(--accent); }
 .tagline { margin: 6px 0 0; color: var(--ink-2); font-size: 15px; }
-.meta { font: 12px/1.5 var(--f-mono); color: var(--ink-3); text-align: right; }
 h2 { font: 600 15px/1.3 var(--f-body); margin: 0; text-wrap: balance; }
 .sub { color: var(--ink-3); font-size: 12px; margin: 2px 0 0; }
 .intro { margin: 0; color: var(--ink-2); font-size: 15px; }
@@ -123,7 +122,7 @@ a { color: var(--accent); }
 .site-nav a { color: var(--ink-2); text-decoration: none; }
 .site-nav a:hover { color: var(--accent); }
 .site-nav.foot { justify-content: center; margin: 0 0 6px; }
-@media (max-width: 700px) { .filters { position: static; } .meta { text-align: left; } }
+@media (max-width: 700px) { .filters { position: static; } }
 #tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); font-size: 12px; padding: 6px 9px;
   border-radius: 6px; max-width: 280px; opacity: 0; transition: opacity .1s; }
 @media (prefers-reduced-motion: reduce) { #tip { transition: none; } }
@@ -141,7 +140,6 @@ a { color: var(--accent); }
       <p class="tagline">See demand. Understand skills. Track change.</p>
       <nav class="site-nav" aria-label="Site"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a></nav>
     </div>
-    <div class="meta" id="meta"></div>
   </header>
 
   <p class="intro" id="intro"></p>
@@ -207,11 +205,8 @@ a { color: var(--accent); }
 
   <section class="panel wide method" aria-labelledby="m-h">
     <h2 id="m-h">Data Sources and Methodology:</h2>
-    <p>* Data sources: job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Coverage by company is listed under Source Coverage above.</p>
-    <p>Postings come only from each company's official career site. Collectors call the site's own job API where one exists (Workday, Oracle Recruiting, SuccessFactors, Eightfold, Jibe, amazon.jobs) and otherwise read the schema.org JobPosting data on each posting page. Postings without a date on the site are left out. Sites that refuse automated access are listed as blocked, not estimated.</p>
-    <p>Update schedule: the data is refreshed weekly. Collection starts every Monday at 2:00 a.m. Eastern Time (New York), and the dashboard updates when it finishes, usually a few hours later. The date in the top-right corner shows the latest update.</p>
-    <p>Each collection run is a snapshot. A posting keeps the date it was first seen; one that disappears from a later run is counted as closed, and its title is greyed out with the date it was last seen instead of linking to a page that no longer exists. Only postings dated October 1, 2026 or later are included. A posting dated after the day it was collected (a scheduled start date on some sites) is dated to the collection day.</p>
-    <p>Occupation groups follow the 2018 Standard Occupational Classification (SOC) major groups, assigned by auditable title rules with the company's own job family as a fallback. Pay is the posted range, annualized for comparison; it is not actual earnings. Skills and licenses are matched against a fixed dictionary, so a skill the dictionary lacks will not appear. "Not specified" means the posting does not specify.</p>
+    <p>Data sources: job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Updated weekly, latest on <span id="n-run"></span>. Sites that refuse automated access are shown as blocked under Source Coverage, not estimated.</p>
+    <p>Pay is the posted range, annualized for comparison; it is not actual earnings. "Not specified" means the posting does not specify. How each field is derived, and its limits, is explained on the <a href="https://www.jobmarketlens.com/methodology">Methodology</a> page.</p>
   </section>
   <footer class="copyright"><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/privacy">Privacy</a></nav>© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.</footer>
 </div>
@@ -256,8 +251,7 @@ load().then(D => {
   const sampleCos = [...new Set(rows.filter(r => r.src === "page-read").map(r => r.co))];
   const nCos = new Set(rows.map(r => r.co)).size;
   const since = new Date(D.posted_from + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
-  document.getElementById("meta").innerHTML =
-    `Data sources: job postings of S&amp;P 500 companies*<br>Updated weekly, latest on ${lastRun}`;
+  document.getElementById("n-run").textContent = lastRun;
   document.getElementById("n-const").textContent = longDate(D.universe.retrieved);
   document.getElementById("intro").textContent =
     "JobMarket Lens tracks what America's largest employers are hiring for, using job postings published since October 2026 on the official career sites of S&P 500 companies. " +
