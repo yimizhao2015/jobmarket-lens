@@ -65,3 +65,9 @@ td.r, th.r { text-align: right; font-family: var(--f-mono); font-variant-numeric
 .site-foot nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 6px; font-size: 13px; }
 .site-foot a { color: var(--ink-2); }
 .site-nav a.support, .site-foot a.support { color: var(--accent); }
+.byline { font: 13px var(--f-mono); color: var(--ink-3); margin: 0 0 12px; }
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 22px; }
+.share.end { margin: 32px 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
+.share-l { font-size: 13px; color: var(--ink-3); margin-right: 2px; }
+.share-b { font: 500 13px/1 var(--f-body); color: var(--ink-2); background: var(--chip); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; text-decoration: none; cursor: pointer; }
+.share-b:hover { color: var(--accent); border-color: var(--accent); }
