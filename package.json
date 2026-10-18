@@ -1,0 +1,8 @@
+{
+  "name": "jobmarket-lens-pages",
+  "private": true,
+  "type": "module",
+  "description": "Builds the text pages and Insights articles from content/ (edited in /admin).",
+  "scripts": { "build": "node scripts/build_pages.mjs" },
+  "dependencies": { "js-yaml": "4.1.0", "marked": "18.0.14" }
+}

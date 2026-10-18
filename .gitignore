@@ -7,3 +7,10 @@ data/raw/
 web/data.json
 web/artifact.html
 data/normalized/postings.csv
+
+# Built from content/ by scripts/build_pages.mjs on every deploy (edit the Markdown in content/ or use /admin)
+node_modules/
+web/about.html
+web/methodology.html
+web/privacy.html
+web/insights/

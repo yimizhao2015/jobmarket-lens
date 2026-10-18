@@ -1,0 +1,86 @@
+# Admin area for www.jobmarketlens.com/admin (Sveltia CMS). Every save is a commit to main; Vercel rebuilds the site.
+backend:
+  name: github
+  repo: yimizhao2015/jobmarket-lens
+  branch: main
+  commit_messages:
+    create: "Admin: add {{collection}} {{slug}}"
+    update: "Admin: edit {{collection}} {{slug}}"
+    delete: "Admin: delete {{collection}} {{slug}}"
+    uploadMedia: "Admin: upload {{path}}"
+    deleteMedia: "Admin: delete {{path}}"
+
+site_url: https://www.jobmarketlens.com
+display_url: https://www.jobmarketlens.com
+media_folder: web/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: insights
+    label: Insights articles
+    label_singular: Article
+    description: "Articles on www.jobmarketlens.com/insights. Format: title, byline, then an opening paragraph that starts with \"Based on data collected through <latest date>, ...\"."
+    folder: content/insights
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    summary: "{{title}} · {{date}}"
+    sortable_fields: [date, title]
+    preview_path: "insights/{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Publish date, name: date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - { label: Byline, name: author, widget: string, default: "JobMarketLens Reviews", hint: "Shown as: October 18, 2026 · By JobMarketLens Reviews" }
+      - { label: Card summary, name: summary, widget: text, hint: "One or two sentences shown on the Insights page" }
+      - { label: Description, name: description, widget: text, hint: "For search results and link previews on LinkedIn, Facebook and X" }
+      - { label: Draft, name: draft, widget: boolean, default: false, hint: "Drafts are saved but not shown on the site" }
+      - label: Article
+        name: body
+        widget: markdown
+        modes: [raw, rich_text]
+        default: "Based on data collected through "
+        hint: "The first paragraph is the opening (larger text). Use ## for section headings. Tables: | Column | Column |"
+
+  - name: pages
+    label: Pages
+    description: "The text pages. The dashboard itself is built from the data and is not edited here."
+    files:
+      - name: about
+        label: About
+        file: content/pages/about.md
+        preview_path: about
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - { label: Browser tab title, name: page_title, widget: string }
+          - { label: Description, name: description, widget: text, hint: "For search results and link previews" }
+          - { label: Page text, name: body, widget: markdown, modes: [raw, rich_text], hint: "The first paragraph is the opening (larger text)." }
+      - name: methodology
+        label: Methodology
+        file: content/pages/methodology.md
+        preview_path: methodology
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - { label: Browser tab title, name: page_title, widget: string }
+          - { label: Description, name: description, widget: text, hint: "For search results and link previews" }
+          - { label: Page text, name: body, widget: markdown, modes: [raw, rich_text], hint: "The first paragraph is the opening (larger text)." }
+      - name: privacy
+        label: Privacy
+        file: content/pages/privacy.md
+        preview_path: privacy
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - { label: Browser tab title, name: page_title, widget: string }
+          - { label: Description, name: description, widget: text }
+          - { label: Effective date line, name: dateline, widget: string, hint: "e.g. Effective October 18, 2026. Update it when the policy changes." }
+          - { label: Page text, name: body, widget: markdown, modes: [raw, rich_text] }
+      - name: insights_intro
+        label: Insights page intro
+        file: content/pages/insights.md
+        preview_path: insights
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - { label: Browser tab title, name: page_title, widget: string }
+          - { label: Description, name: description, widget: text }
+          - { label: Intro text, name: body, widget: markdown, modes: [raw, rich_text], hint: "Shown above the list of articles" }
