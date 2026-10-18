@@ -26,7 +26,7 @@ and location.
 - Charts: openings by occupation group and by company, top skills (filterable by occupation), job level,
   minimum degree, experience, work arrangement, full/part-time, licenses, pay ranges, countries, US states,
   and postings over time (weekly bars, switching to monthly once three months are collected).
-- Source Coverage: every company in scope and the state of collection from its career site (25 per page).
+- Source Coverage: every company in scope and the state of collection from its career site (10 per page, not affected by filters).
 - Job Postings: the matching postings, newest first (25 per page). A posting that has disappeared from
   the company's site is greyed out with the date it was last seen instead of linking to a dead page.
 
