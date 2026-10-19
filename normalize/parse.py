@@ -246,6 +246,34 @@ COUNTRIES = {
 }
 
 
+# Country names in other languages seen on career sites
+COUNTRIES.update({
+    "ESTADOS UNIDOS": "United States", "ÉTATS-UNIS": "United States", "ÉTATS-UNIS D'AMÉRIQUE": "United States",
+    "美國": "United States", "美国": "United States", "미국": "United States", "대한민국": "South Korea",
+    "JAPON": "Japan", "日本": "Japan", "中国": "China", "ČÍNA": "China", "ALEMANIA": "Germany", "MÉXICO": "Mexico",
+    "BÉLGICA": "Belgium", "POLONIA": "Poland", "HK": "Hong Kong", "HONG KONG": "Hong Kong",
+    "LT": "Lithuania", "LITHUANIA": "Lithuania", "EE": "Estonia", "ESTONIA": "Estonia", "INDONESIA": "Indonesia",
+    "KOREA": "South Korea", "INDE": "India",
+})
+_COUNTRY_NAMES = sorted((k for k in COUNTRIES if len(k) > 3), key=len, reverse=True)
+_NOT_A_CITY = re.compile(r"remote|multiple|various|work (at|from) hom|off-?site", re.I)
+
+
+def _state(p):
+    """US state code for an upper-case code ("TX", not "In") or a full name, else None."""
+    return p if p in US_STATES else _STATE_BY_NAME.get(p.lower())
+
+
+def _known(p):
+    return bool(_state(p)) or p.upper() in COUNTRIES
+
+
+def _city(c):
+    if not c or c.upper() in COUNTRIES or _NOT_A_CITY.search(c):
+        return None
+    return c.title() if c.isupper() and len(c) > 3 else c
+
+
 def parse_location(loc):
     """Return (country, us_state_code_or_None, city_or_None) from one location string."""
     if not loc:
@@ -254,29 +282,54 @@ def parse_location(loc):
     m = re.match(r"various locations within (.+)", s, re.I)
     if m:
         return COUNTRIES.get(m.group(1).strip().upper(), m.group(1).strip()), None, None
+    if s.upper() in COUNTRIES:                                     # "Korea (Republic of)"
+        return COUNTRIES[s.upper()], None, None
+    s = re.sub(r"\([^)]*\)", " ", s.split(" ~ ")[0])           # "(33018)", "~ 31 Lewis Rd ~ ..."
+    s = re.sub(r"\b\d{5}(-\d{4})?\b", " ", s)                     # US ZIP codes
+    s = re.sub(r"\s+", " ", s).strip(" ,-")
     parts = [p.strip() for p in re.split(r",| - |\|", s) if p.strip()]
+    # "FL-Tampa", "Irving-Texas-United States of America", "USA-TX Plano": split on bare hyphens
+    # only when that yields a known state or country, so "Winston-Salem" stays whole
+    if len(parts) == 1 and "-" in s:
+        hp = [p.strip() for p in s.split("-") if p.strip()]
+        if any(_known(p) for p in hp):
+            parts = hp
     parts = [p for p in parts if not re.fullmatch(r"[A-Z]?\d[\dA-Z ]{2,8}", p)]  # drop postal codes
     if not parts:
         return None, None, None
     up = [p.upper() for p in parts]
-    # "US, WA, Seattle" (Amazon/Workday style)
+    # "US, WA, Seattle" (Amazon/Workday style); "USA-TX Plano" puts the city after the state code
     if up[0] in ("US", "USA") and len(parts) >= 2:
-        st = up[1] if up[1] in US_STATES else _STATE_BY_NAME.get(parts[1].lower())
-        return "United States", st, parts[-1] if len(parts) >= 3 else None
+        m = re.fullmatch(r"([A-Z]{2}) (.+)", parts[1])
+        if len(parts) == 2 and m and m.group(1) in US_STATES:
+            return "United States", m.group(1), _city(m.group(2))
+        return "United States", _state(parts[1]), _city(parts[2]) if len(parts) >= 3 else None
     # "City, ST" with a US state and no country
-    if len(parts) == 2 and (parts[1] in US_STATES or parts[1].lower() in _STATE_BY_NAME):
-        return "United States", US_STATES.get(parts[1]) and parts[1] or _STATE_BY_NAME[parts[1].lower()], parts[0]
+    if len(parts) == 2 and _state(parts[1]):
+        return "United States", _state(parts[1]), _city(parts[0])
+    # "ST - City" or "Georgia - Atlanta": state first
+    if len(parts) == 2 and _state(parts[0]) and up[1] not in COUNTRIES:
+        return "United States", _state(parts[0]), _city(parts[1])
+    # "Irving Texas United States", "Pune Maharashtra India": no separators, country name at the end
+    if len(parts) == 1:
+        name = next((n for n in _COUNTRY_NAMES if up[0].endswith(" " + n)), None)
+        if name:
+            country, rest = COUNTRIES[name], parts[0][: -len(name)].strip()
+            if country == "United States":
+                st = next((n for n in sorted(_STATE_BY_NAME, key=len, reverse=True) if rest.lower().endswith(" " + n)), None)
+                if st:
+                    return country, _STATE_BY_NAME[st], _city(rest[: -len(st)].strip())
+            return country, None, _city(rest) if " " not in rest else None
     country = COUNTRIES.get(up[-1])
     if country is None:
         country = next((COUNTRIES[p] for p in up if p in COUNTRIES and len(p) > 3), None)
     state = None
     if country == "United States":
         for p in parts[1:-1] or parts[:-1]:
-            if p.upper() in US_STATES:
-                state = p.upper()
-            elif p.lower() in _STATE_BY_NAME:
-                state = _STATE_BY_NAME[p.lower()]
+            state = _state(p) or state
+    # "Boise, ID - Main Site": no country, but a US state after the city
+    i = next((i for i in range(1, len(parts)) if _state(parts[i])), None) if country is None else None
+    if i:
+        return "United States", _state(parts[i]), _city(parts[i - 1])
     city = parts[0] if (len(parts) > 1 or country is None) else None
-    if city and (city.upper() in COUNTRIES or re.search(r"remote|multiple|various", city, re.I)):
-        city = None
-    return country, state, city
+    return country, state, _city(city)

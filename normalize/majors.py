@@ -13,7 +13,7 @@ FIELDS = [
     ("Nursing", r"nursing|(?-i:\bBSN\b|\bADN\b|\bRN\b)"),
     ("Pharmacy", r"pharmacy|pharm\.?d"),
     ("Biomedical engineering", r"biomedical engineering|bioengineering"),
-    ("Electrical and computer engineering", r"electric|electronic|computer engineering|(?-i:\bECE\b|\bEE\b)"),
+    ("Electrical and computer engineering", r"electric|electronic|computer engineering|computer architecture|(?-i:\bECE\b|\bEE\b)"),
     ("Mechanical and aerospace engineering", r"mechanical|mechatronic|aerospace|aeronautic"),
     ("Chemical and materials engineering", r"chemical engineering|material|metallurg|polymer"),
     ("Civil and construction engineering", r"civil|structural|construction|surveying"),
@@ -42,8 +42,8 @@ FIELDS = [
                                        r"anthropolog|public policy|counsel"),
     ("Education", r"education|teaching"),
     ("Humanities", r"english|liberal arts|humanities|history|philosoph|language|linguistic|literature"),
-    ("Architecture and design", r"architect|design|fine art|graphic|\barts?\b"),
     ("Hospitality", r"hospitality|culinary|hotel|restaurant"),
+    ("Architecture and design", r"architect|design|fine art|graphic|\barts?\b"),
     ("Science or technical field (general)", r"\bstem\b|science|scientific|technical|technology"),
 ]
 _FIELDS = [(name, re.compile(rx, re.I)) for name, rx in FIELDS]
