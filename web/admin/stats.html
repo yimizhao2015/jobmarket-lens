@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Download Stats | JobMarket Lens Admin</title>
+<link rel="stylesheet" href="/site.css">
+<style>
+  .stats { max-width: 720px; }
+  .big { font: 600 40px var(--f-mono, monospace); margin: 4px 0 2px; }
+  .days { display: flex; align-items: end; gap: 3px; height: 120px; border-bottom: 1px solid var(--line, #ddd); margin-top: 18px; }
+  .days span { flex: 1; background: var(--bar, #2a78d6); min-height: 1px; border-radius: 2px 2px 0 0; }
+  .axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3, #888); margin-top: 4px; }
+  table { margin-top: 18px; }
+  .err { color: #b3261e; }
+  form { display: flex; gap: 8px; margin-top: 12px; }
+  form input { flex: 1; padding: 8px; font: inherit; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="site-head"><a class="brand" href="/admin">JobMarket <span>Lens</span> Admin</a>
+    <nav class="site-nav"><a href="/admin">Editor</a><a href="/admin/stats" aria-current="page">Download stats</a></nav></header>
+  <article class="stats">
+    <h1>Free Sample Downloads</h1>
+    <div id="out"><p>Loading…</p></div>
+  </article>
+</div>
+<script>
+// Uses the GitHub token from the /admin sign-in when it can find it; otherwise asks for one once.
+const out = document.getElementById("out");
+function savedToken() {
+  try { const t = localStorage.getItem("jml-stats-token"); if (t) return t; } catch (e) {}
+  try { const u = JSON.parse(localStorage.getItem("sveltia-cms.user") || "null"); if (u && u.token) return u.token; } catch (e) {}
+  return "";
+}
+function askToken(msg) {
+  out.innerHTML = `<p${msg ? ' class="err"' : ""}>${msg || "Paste the GitHub token you use to sign in to the editor."}</p>
+    <form><input type="password" placeholder="github_pat_…" aria-label="GitHub token" required><button>Show stats</button></form>`;
+  out.querySelector("form").onsubmit = e => {
+    e.preventDefault();
+    const t = out.querySelector("input").value.trim();
+    try { localStorage.setItem("jml-stats-token", t); } catch (e) {}
+    load(t);
+  };
+}
+async function load(token) {
+  if (!token) return askToken();
+  const r = await fetch("/api/stats", { headers: { Authorization: "Bearer " + token } });
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401) { try { localStorage.removeItem("jml-stats-token"); } catch (e) {} return askToken(j.error); }
+  if (!r.ok) { out.innerHTML = `<p class="err">${j.error || "Could not load the stats."}</p>`; return; }
+  const s = j.files.sample, days = s.days, max = Math.max(1, ...days.map(d => d.count));
+  const last7 = days.slice(-7).reduce((a, d) => a + d.count, 0);
+  const fmt = n => n.toLocaleString("en-US");
+  const md = d => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+  out.innerHTML = `<p class="big">${fmt(s.total)}</p><p>downloads since counting began on ${md(j.since)}, 2026 · ${fmt(last7)} in the last 7 days</p>
+    <div class="days">${days.map(d => `<span title="${md(d.date)}: ${fmt(d.count)}" style="height:${100 * d.count / max}%"></span>`).join("")}</div>
+    <div class="axis"><span>${md(days[0].date)}</span><span>${md(days[days.length - 1].date)}</span></div>
+    <table><thead><tr><th>Date (New York time)</th><th>Downloads</th></tr></thead><tbody>${
+      days.slice().reverse().filter(d => d.count).map(d => `<tr><td>${md(d.date)}</td><td>${fmt(d.count)}</td></tr>`).join("") ||
+      '<tr><td colspan="2">No downloads in the last 30 days.</td></tr>'}</tbody></table>`;
+}
+load(savedToken());
+</script>
+</body>
+</html>

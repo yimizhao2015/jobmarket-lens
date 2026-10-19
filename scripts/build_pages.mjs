@@ -108,8 +108,9 @@ for (const old of ["methodology.html", "privacy.html"]) rmSync(join(ROOT, "web",
         <h2>${esc(p.name)}</h2>
         <p class="price">${esc(p.price)}</p>
         <ul>${(p.features || []).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
-        ${p.link ? `<a class="plan-btn" href="${esc(p.link)}"${p.link.startsWith("/downloads/")
-                   // a file download is not a page view, so it is counted as a Vercel Analytics custom event
+        ${p.link ? `<a class="plan-btn" href="${esc(p.link)}"${/^\/(downloads\/|api\/download)/.test(p.link)
+                   // a file download is not a page view: /api/download counts it for /admin/stats, and it is
+                   // also sent to Vercel Analytics as a custom event
                    ? ` download onclick="window.va && va('event', { name: 'Download', data: { plan: '${esc(p.name).replace(/'/g, "")}' } })"` : ""}>${esc(p.button)}</a>`
                  : `<span class="plan-btn off" aria-disabled="true">${esc(p.button)}</span><span class="soon">Coming soon</span>`}
       </li>`;

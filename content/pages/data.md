@@ -11,7 +11,7 @@ plans:
       - Inspect schema & tags
       - Immediate direct CSV
     button: Download Free
-    link: /downloads/jobmarketlens-sample.csv
+    link: /api/download?file=sample
   - name: Latest Week Snapshot
     price: $1.99
     features:
