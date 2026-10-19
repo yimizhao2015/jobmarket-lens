@@ -1,7 +1,7 @@
 # Weekly: collect postings, rebuild the dashboard, commit it, and publish the site.
-# The SQLite history (data/lens.db) holds the full text of every posting, so it is kept out of
-# this public repo: it lives as the asset of a release named "data" in the private repo
-# DATA_REPO, read and written with the DATA_REPO_TOKEN secret, and restored before each run.
+# The SQLite history (data/lens.db) holds the full text of every posting, and the paid zips are
+# for sale, so both are kept out of this repo: they live as assets of a release named "data" in
+# the private repo DATA_REPO, read and written with the DATA_REPO_TOKEN secret.
 name: Collect and publish
 
 on:
