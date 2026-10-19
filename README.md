@@ -84,7 +84,8 @@ data/seed/                   119 postings read by hand on 2026-10-14 for the pil
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
 content/pages/*.md, content/insights/*.md   About, Methodology, Privacy and Insights articles in Markdown (edit at /admin)
 scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Vercel deploy (npm run build)
-web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages
+web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages; stats.html
+api/                         Vercel functions: the sample download counter and its stats
 web/site.css, web/share.js   shared style of the text pages; share buttons on articles
 .github/workflows/collect.yml weekly collection (Sundays 5:00 p.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
@@ -99,6 +100,11 @@ www.jobmarketlens.com/admin edits the Insights articles and the text pages. Sign
 Token**: a GitHub fine-grained personal access token for `yimizhao2015/jobmarket-lens` with *Contents: Read and
 write*. Each save is a commit to `main`, and Vercel rebuilds the site in a minute or two. Mark an article as a
 draft to hide it without deleting it; deleting removes it from the site (it stays in the Git history).
+
+www.jobmarketlens.com/admin/stats shows free sample downloads. The Get the Data button links to
+`/api/download?file=sample` (`api/download.js`), which counts the download in Upstash Redis and then sends the file;
+`api/stats.js` serves the counts only to a GitHub token that can edit this repo. The database is set by the
+`UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` environment variables in Vercel.
 
 ## Run it yourself
 
