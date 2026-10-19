@@ -16,4 +16,4 @@ Every week it collects the open postings of the S&P 500 companies and turns each
 
 ## Who makes it
 
-JobMarket Lens is an independent project by Yimi Zhao in New York City. It is not affiliated with S&P Dow Jones Indices or with any company whose postings it analyzes. Questions and corrections: <yimizhao2015@gmail.com>.
+JobMarket Lens is an independent project by Yimi Zhao in New York City. It is not affiliated with S&P Dow Jones Indices or with any company whose postings it analyzes. Questions and corrections are welcome through the Contact Us form at the bottom of the page.

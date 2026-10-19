@@ -70,10 +70,12 @@ ${og ? `<meta property="og:type" content="${og}">
 ${article}
   </article>
   <footer class="site-foot">
+    <div class="contact"></div>
     <nav aria-label="Footer">${foot(current)}</nav>
     © 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
   </footer>
 </div>
+<script src="/contact.js"></script>
 ${share ? '<script src="/share.js"></script>\n' : ""}</body>
 </html>
 `;

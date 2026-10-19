@@ -114,6 +114,20 @@ a { color: var(--accent); }
 .method p { margin: 0; }
 .closed-title { color: var(--ink-3); }
 .pill.closed { color: var(--ink-3); background: var(--bg); border: 1px solid var(--line); white-space: nowrap; }
+.contact { max-width: 520px; margin: 0 auto 20px; text-align: left; }
+.contact-form { display: grid; gap: 8px; }
+.contact-form h2 { font: 600 15px/1.3 var(--f-body); color: var(--ink); margin: 0 0 2px; text-align: center; }
+.cf-row { display: flex; gap: 8px; }
+.cf-row > input { flex: 1; min-width: 0; }
+.contact-form input, .contact-form textarea { font: 14px var(--f-body); color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; width: 100%; }
+.contact-form textarea { resize: vertical; }
+.contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--bar-soft); border-color: var(--accent); }
+.cf-end { align-items: center; justify-content: flex-end; }
+.cf-status { flex: 1; font-size: 13px; color: var(--ink-2); }
+.contact-form button { font: 600 14px/1 var(--f-body); color: #fff; background: var(--accent); border: 0; border-radius: 8px; padding: 10px 18px; cursor: pointer; }
+.contact-form button:disabled { background: var(--mute-bg); color: var(--ink-3); cursor: default; }
+.cf-hp { display: none; }
+@media (max-width: 480px) { .cf-row:not(.cf-end) { flex-direction: column; } }
 .copyright { text-align: center; color: var(--ink-3); font-size: 12px; padding: 4px 0 8px; }
 .site-nav { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 13px; }
 .site-nav.head { gap: 4px 20px; font-size: 14px; font-weight: 500; justify-content: flex-end; padding-bottom: 4px; }
@@ -205,9 +219,10 @@ a { color: var(--accent); }
   <section class="panel wide method" aria-label="Note">
     <p>Note. Data sources are job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Sites that refuse automated access are shown as blocked under Source Coverage, not estimated. Updated weekly, latest on <span id="n-run"></span>.</p>
   </section>
-  <footer class="copyright"><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/about/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about/privacy">Privacy</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a></nav>© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.</footer>
+  <footer class="copyright"><div class="contact"></div><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/about">About</a><a href="https://www.jobmarketlens.com/about/methodology">Methodology</a><a href="https://www.jobmarketlens.com/about/privacy">Privacy</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a></nav>© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.</footer>
 </div>
 <div id="tip" role="tooltip"></div>
+<script src="https://www.jobmarketlens.com/contact.js" defer></script>
 
 <script>
 const EMBEDDED = /*DATA*/null;
