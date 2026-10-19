@@ -400,7 +400,7 @@ load().then(D => {
 
     // over time: one bar per week posted (Monday to Sunday), always weekly
     document.getElementById("month-sub").textContent =
-      "By week posted, Monday to Sunday. Collection runs on Sunday evenings, so the latest week is complete.";
+      "By week posted, Monday to Sunday. Collection runs on Sunday evenings.";
     const periods = {};
     for (const r of R) { if (!r.posted) continue; const k = weekOf(r.posted); periods[k] = (periods[k] || 0) + 1; }
     const mk = Object.keys(periods).sort();
