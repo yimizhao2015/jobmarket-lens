@@ -6,11 +6,11 @@ name: Collect and publish
 
 on:
   schedule:
-    # Mondays 2:00 a.m. New York time. GitHub schedules in UTC, so 06:00 UTC (2 a.m. EDT) and
-    # 07:00 UTC (2 a.m. EST) are both scheduled; the gate job keeps the one matching New York's
-    # current offset, even if GitHub starts it late.
-    - cron: "0 6 * * 1"
-    - cron: "0 7 * * 1"
+    # Sundays 5:00 p.m. New York time, so each Monday-to-Sunday week is complete. GitHub schedules
+    # in UTC, so 21:00 UTC (5 p.m. EDT) and 22:00 UTC (5 p.m. EST) are both scheduled; the gate job
+    # keeps the one matching New York's current offset, even if GitHub starts it late.
+    - cron: "0 21 * * 0"
+    - cron: "0 22 * * 0"
   workflow_dispatch:
     inputs:
       max:
@@ -37,8 +37,8 @@ jobs:
         run: |
           tz=$(TZ=America/New_York date +%Z)
           if [ "${{ github.event_name }}" != "schedule" ] \
-             || { [ "${{ github.event.schedule }}" = "0 6 * * 1" ] && [ "$tz" = "EDT" ]; } \
-             || { [ "${{ github.event.schedule }}" = "0 7 * * 1" ] && [ "$tz" = "EST" ]; }; then
+             || { [ "${{ github.event.schedule }}" = "0 21 * * 0" ] && [ "$tz" = "EDT" ]; } \
+             || { [ "${{ github.event.schedule }}" = "0 22 * * 0" ] && [ "$tz" = "EST" ]; }; then
             echo "go=true" >> "$GITHUB_OUTPUT"
           else
             echo "go=false" >> "$GITHUB_OUTPUT"

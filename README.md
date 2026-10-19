@@ -20,7 +20,7 @@ and location.
   share, full-time share and median years of experience.
 - Charts: openings by occupation group and by company, top skills (filterable by occupation), job level,
   minimum degree, experience, work arrangement, full/part-time, licenses, pay ranges, countries, US states,
-  and postings over time (weekly bars, switching to monthly once three months are collected).
+  and postings over time (one bar per week, Monday to Sunday).
 - Source Coverage: a sample of 50 companies and the state of collection from each career site (10 per page, not affected by filters).
 - Job Postings: the latest 1,000 matching postings, newest first (25 per page). A posting that has disappeared from
   the company's site is greyed out with the date it was last seen instead of linking to a dead page.
@@ -37,7 +37,7 @@ Only postings dated October 1, 2026 or later are analyzed (`posted_from` in conf
 ## How the data is collected and stored
 
 ```
-Weekly run (GitHub Actions on Mondays at 2:00 a.m. Eastern Time, or scripts/run_local.sh on your own computer)
+Weekly run (GitHub Actions on Sundays at 5:00 p.m. Eastern Time, or scripts/run_local.sh on your own computer)
   1. download the posting history (lens.db.gz) from the private repo yimizhao2015/jobmarket-lens-data
   2. collect every company's current postings from its career site       -> data/raw/<date>/
   3. add them to the history: first seen / last seen per posting          -> data/lens.db
@@ -86,7 +86,7 @@ content/pages/*.md, content/insights/*.md   About, Methodology, Privacy and Insi
 scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Vercel deploy (npm run build)
 web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages
 web/site.css, web/share.js   shared style of the text pages; share buttons on articles
-.github/workflows/collect.yml weekly collection (Mondays 2:00 a.m. Eastern, or run it by hand from the Actions tab)
+.github/workflows/collect.yml weekly collection (Sundays 5:00 p.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
 vercel.json                  Vercel hosting: runs npm run build, serves web/, redeployed on every push
 ```
