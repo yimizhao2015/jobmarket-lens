@@ -1,7 +1,7 @@
 // "Contact Us" form on /contact: fills each <div class="contact"> and sends through Web3Forms,
 // which emails the message to the site owner. The access key is public by design (it can only send to that inbox).
 (function () {
-  const KEY = "";   // Web3Forms access key; until it is set the form shows but cannot send
+  const KEY = "58c52090-e281-4f57-a6e3-b1efefcc7209";   // Web3Forms access key; empty = form shows but cannot send
   document.querySelectorAll(".contact").forEach(el => {
     el.innerHTML = `<form class="contact-form" novalidate>
       <div class="cf-row"><input name="name" placeholder="Name" autocomplete="name" required aria-label="Name">
