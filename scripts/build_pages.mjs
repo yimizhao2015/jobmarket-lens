@@ -70,7 +70,7 @@ ${article}
   </article>
   <footer class="site-foot">
     <nav aria-label="Footer">${foot(current)}</nav>
-    © 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
+    © 2026 JobMarket Lens. All rights reserved.
   </footer>
 </div>
 ${contact ? '<script src="/contact.js"></script>\n' : ""}${share ? '<script src="/share.js"></script>\n' : ""}</body>

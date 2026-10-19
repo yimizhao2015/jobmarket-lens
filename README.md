@@ -16,7 +16,7 @@ and location.
   October 1 ($19.99). `scripts/export_csv.py` builds the two zips each week and the workflow uploads them to the
   private data repo's `data` release; the full CSV files are no longer committed to this public repo.
 
-© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
+© 2026 JobMarket Lens. All rights reserved.
 
 ## What the dashboard shows
 

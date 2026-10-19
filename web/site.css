@@ -64,7 +64,7 @@ td.r, th.r { text-align: right; font-family: var(--f-mono); font-variant-numeric
 .site-foot { text-align: center; color: var(--ink-3); font-size: 12px; margin-top: 28px; }
 .site-foot nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 6px; font-size: 13px; }
 .site-foot a { color: var(--ink-2); }
-.site-nav a.cta, .site-foot a.cta { color: var(--accent); }
+.site-nav a.cta, .site-foot a.cta { color: var(--good); font-weight: 600; }
 .byline { font: 13px var(--f-mono); color: var(--ink-3); margin: 0 0 12px; }
 .share { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 22px; }
 .share.end { margin: 32px 0 0; padding-top: 18px; border-top: 1px solid var(--line); }

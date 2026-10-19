@@ -119,7 +119,8 @@ a { color: var(--accent); }
 .site-nav.head { gap: 4px 20px; font-size: 14px; font-weight: 500; justify-content: flex-end; padding-bottom: 4px; }
 .site-nav a { color: var(--ink-2); text-decoration: none; }
 .site-nav a:hover { color: var(--accent); }
-.site-nav a.cta { color: var(--accent); }
+.site-nav a[aria-current="page"] { color: var(--accent); }
+.site-nav a.cta { color: var(--good); font-weight: 600; }
 .site-nav.foot { justify-content: center; margin: 0 0 6px; }
 @media (max-width: 700px) { .filters { position: static; } .site-nav.head { justify-content: flex-start; } }
 #tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); font-size: 12px; padding: 6px 9px;
@@ -138,7 +139,7 @@ a { color: var(--accent); }
       <h1>JobMarket <span class="lens">Lens</span></h1>
       <p class="tagline">See demand. Understand skills. Track change.</p>
     </div>
-    <nav class="site-nav head" aria-label="Site"><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/about">About</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a></nav>
+    <nav class="site-nav head" aria-label="Site"><a href="https://www.jobmarketlens.com/" aria-current="page">Dashboard</a><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/about">About</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a></nav>
   </header>
 
   <p class="intro" id="intro"></p>
@@ -205,7 +206,7 @@ a { color: var(--accent); }
   <section class="panel wide method" aria-label="Note">
     <p>Note. Data sources are job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Sites that refuse automated access are shown as blocked under Source Coverage, not estimated. Updated weekly, latest on <span id="n-run"></span>.</p>
   </section>
-  <footer class="copyright"><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/">Dashboard</a><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/about">About</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a><a href="https://www.jobmarketlens.com/contact">Contact Us</a></nav>© 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.</footer>
+  <footer class="copyright"><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/" aria-current="page">Dashboard</a><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/about">About</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a><a href="https://www.jobmarketlens.com/contact">Contact Us</a></nav>© 2026 JobMarket Lens. All rights reserved.</footer>
 </div>
 <div id="tip" role="tooltip"></div>
 
