@@ -9,5 +9,13 @@
 <body>
 <!-- Sveltia CMS: edits the Markdown in content/ and commits it to GitHub; Vercel then rebuilds the pages. -->
 <script src="https://unpkg.com/@sveltia/cms@0.227.3/dist/sveltia-cms.js"></script>
+<!-- Sveltia has no setting for extra links, so the stats link floats at the bottom-left corner. -->
+<a id="jml-stats" href="/admin/stats">Download stats</a>
+<style>
+  #jml-stats { position: fixed; left: 12px; bottom: 12px; z-index: 2147483647; padding: 6px 12px; border-radius: 999px;
+    background: #1f7a4d; color: #fff; font: 600 13px/1.2 system-ui, sans-serif; text-decoration: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2); }
+  #jml-stats:hover { background: #17603c; }
+</style>
 </body>
 </html>
