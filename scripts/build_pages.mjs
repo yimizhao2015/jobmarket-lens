@@ -30,8 +30,14 @@ function render(md, lede) {
   return lede ? html.replace(/<p>/, '<p class="lede">') : html;
 }
 
-const NAV = [["/", "Dashboard"], ["/insights", "Insights"], ["/methodology", "Methodology"], ["/about", "About"], ["/privacy", "Privacy"], ["/data", "Get the Data"]];
-const nav = current => NAV.map(([h, l]) => `<a href="${h}"${h === "/data" ? ' class="cta"' : ""}${h === current ? ' aria-current="page"' : ""}>${l}</a>`).join("");
+// Header: the main sections. Footer: the same plus the About sub-pages. /about/* highlights About.
+const NAV = [["/", "Dashboard"], ["/insights", "Insights"], ["/about", "About"], ["/data", "Get the Data"]];
+const FOOT = [["/", "Dashboard"], ["/insights", "Insights"], ["/about", "About"], ["/about/methodology", "Methodology"],
+  ["/about/privacy", "Privacy"], ["/data", "Get the Data"]];
+const links = (list, current, section) => list.map(([h, l]) => `<a href="${h}"${h === "/data" ? ' class="cta"' : ""}${
+  h === current || h === section ? ' aria-current="page"' : ""}>${l}</a>`).join("");
+const nav = current => links(NAV, current, current.startsWith("/about") ? "/about" : current.startsWith("/insights") ? "/insights" : "");
+const foot = current => links(FOOT, current, "");
 
 function page({ title, description, path, current, og, article, share }) {
   const url = SITE + path;
@@ -64,7 +70,7 @@ ${og ? `<meta property="og:type" content="${og}">
 ${article}
   </article>
   <footer class="site-foot">
-    <nav aria-label="Footer">${nav(current)}</nav>
+    <nav aria-label="Footer">${foot(current)}</nav>
     © 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
   </footer>
 </div>
@@ -75,14 +81,17 @@ ${share ? '<script src="/share.js"></script>\n' : ""}</body>
 
 const out = (rel, html) => { const p = join(ROOT, "web", rel); mkdirSync(join(p, ".."), { recursive: true }); writeFileSync(p, html); };
 
-// Pages: About, Methodology, Privacy
-for (const name of ["about", "methodology", "privacy"]) {
+// About section: About, Methodology and Privacy, with tabs between them
+const ABOUT = [["about", "/about", "About"], ["methodology", "/about/methodology", "Methodology"], ["privacy", "/about/privacy", "Privacy"]];
+for (const [name, path] of ABOUT) {
   const d = read(join(ROOT, "content/pages", name + ".md"));
-  out(name + ".html", page({
-    title: d.page_title || d.title, description: d.description, path: "/" + name, current: "/" + name,
-    article: `    <h1>${esc(d.title)}</h1>\n` + (d.dateline ? `    <p class="dateline">${esc(d.dateline)}</p>\n` : "") + render(d.body, !d.dateline),
+  const tabs = `    <nav class="tabs" aria-label="About">${ABOUT.map(([, h, l]) => `<a href="${h}"${h === path ? ' aria-current="page"' : ""}>${l}</a>`).join("")}</nav>\n`;
+  out(path.slice(1) + ".html", page({
+    title: d.page_title || d.title, description: d.description, path, current: path,
+    article: tabs + `    <h1>${esc(d.title)}</h1>\n` + (d.dateline ? `    <p class="dateline">${esc(d.dateline)}</p>\n` : "") + render(d.body, !d.dateline),
   }));
 }
+for (const old of ["methodology.html", "privacy.html"]) rmSync(join(ROOT, "web", old), { force: true });   // now under /about/
 
 // Get the Data: the plans as cards; a plan without a checkout link shows its button as coming soon
 {
@@ -111,7 +120,7 @@ if (existsSync(insightsDir)) rmSync(insightsDir, { recursive: true });   // so a
 for (const a of articles) {
   const byline = `${a.day.long} · By ${a.author || "JobMarketLens Reviews"}`;
   out(`insights/${a.slug}.html`, page({
-    title: a.title, description: a.description || a.summary, path: `/insights/${a.slug}`, current: "/insights", og: "article", share: true,
+    title: a.title, description: a.description || a.summary, path: `/insights/${a.slug}`, current: `/insights/${a.slug}`, og: "article", share: true,
     article: `    <h1>${esc(a.title)}</h1>\n    <p class="byline">${esc(byline)}</p>\n    <div class="share"></div>\n` +
       render(a.body, true) + `    <div class="share end"></div>`,
   }));

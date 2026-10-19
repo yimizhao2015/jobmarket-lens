@@ -57,4 +57,4 @@ Of the 69,940 postings that state a work arrangement, 38% are remote or hybrid a
 
 ## About these numbers
 
-Postings measure hiring intent, not hires, and coverage is not complete: some career sites block automated access and are shown as blocked rather than estimated. See the [Methodology](/methodology) for how each field is derived, or explore the numbers yourself on the [dashboard](/).
+Postings measure hiring intent, not hires, and coverage is not complete: some career sites block automated access and are shown as blocked rather than estimated. See the [Methodology](/about/methodology) for how each field is derived, or explore the numbers yourself on the [dashboard](/).

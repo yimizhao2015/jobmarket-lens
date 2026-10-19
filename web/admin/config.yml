@@ -59,7 +59,7 @@ collections:
       - name: methodology
         label: Methodology
         file: content/pages/methodology.md
-        preview_path: methodology
+        preview_path: about/methodology
         fields:
           - { label: Heading, name: title, widget: string }
           - { label: Browser tab title, name: page_title, widget: string }
@@ -68,7 +68,7 @@ collections:
       - name: privacy
         label: Privacy
         file: content/pages/privacy.md
-        preview_path: privacy
+        preview_path: about/privacy
         fields:
           - { label: Heading, name: title, widget: string }
           - { label: Browser tab title, name: page_title, widget: string }

@@ -5,28 +5,22 @@ description: "How JobMarket Lens handles visitor data."
 dateline: "Effective October 18, 2026"
 ---
 
-JobMarket Lens (www.jobmarketlens.com) is a public data dashboard. You can use it without an account, and it does not ask you for any personal information.
+You can use JobMarket Lens without an account, and it does not ask for personal information.
 
 ## What is collected
 
-- **Visitor statistics.** The site uses Vercel Web Analytics to count page views and see which pages, referring sites, countries and device types are most common. It does not use cookies and does not identify individual visitors; visits are counted with an anonymous, daily-changing identifier.
-- **Server logs.** The site is hosted by Vercel, which, like any web host, briefly processes technical data such as your IP address and browser type to deliver pages and protect against abuse.
-- **Fonts.** Pages load typefaces from Google Fonts, so your browser connects to Google's servers, which receive your IP address.
+- **Visitor statistics:** Vercel Web Analytics counts page views, referrers, countries and device types without cookies and without identifying you.
+- **Server logs:** our host, Vercel, briefly processes technical data such as your IP address to deliver pages and prevent abuse.
+- **Fonts:** pages load fonts from Google Fonts, which receives your IP address.
 
-The site does not set cookies of its own, does not sell or share personal data, and does not track you across other websites.
+The site sets no cookies of its own and does not sell or share personal data. Links to company career sites are covered by those sites' own policies.
 
-## Links to other sites
-
-Postings on the dashboard link to the companies' own career sites. Those sites have their own privacy policies, which apply once you leave JobMarket Lens.
+The site is meant for a general adult audience and does not knowingly collect information from children.
 
 ## Advertising
 
-The site does not currently show advertising. If that changes, for example through Google AdSense, this policy will be updated before any ads appear to explain how advertising partners use cookies, and visitors in regions that require it will be asked for consent.
-
-## Children
-
-The site is intended for a general adult audience and does not knowingly collect information from children.
+The site shows no ads. If that changes, this policy will be updated first, and consent will be requested where required.
 
 ## Changes and contact
 
-Changes to this policy will be posted on this page with a new effective date. Questions can be sent to <yimizhao2015@gmail.com>.
+Changes are posted here with a new effective date. Questions: <yimizhao2015@gmail.com>.

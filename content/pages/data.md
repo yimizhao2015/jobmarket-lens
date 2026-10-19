@@ -34,7 +34,7 @@ plans:
 
 ## What's in the files
 
-Each posting is one row with 24 columns: Posting ID, Title, Company, Ticker, SOC code, SOC group, Job level, Job type, Work arrangement, City, State, Country, Number of locations, Posted, Pay, Minimum degree, Major, Accepts equivalent experience, Years of experience, Skills, Licenses and certifications, Status, Last seen and URL. Fields a posting does not state read "Not specified". How each field is derived is described on the [Methodology](/methodology) page.
+Each posting is one row with 24 columns: Posting ID, Title, Company, Ticker, SOC code, SOC group, Job level, Job type, Work arrangement, City, State, Country, Number of locations, Posted, Pay, Minimum degree, Major, Accepts equivalent experience, Years of experience, Skills, Licenses and certifications, Status, Last seen and URL. Fields a posting does not state read "Not specified". How each field is derived is described on the [Methodology](/about/methodology) page.
 
 The source coverage report lists all 499 companies in scope, their career site, the collection platform and status, and how many postings were collected.
 

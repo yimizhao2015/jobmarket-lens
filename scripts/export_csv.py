@@ -111,7 +111,7 @@ def main():
     prod.mkdir(exist_ok=True)
     readme = (f"JobMarket Lens data, www.jobmarketlens.com\nLatest collection: {run}\n"
               "Job postings from the official career sites of S&P 500 companies, posted October 1, 2026 or later.\n"
-              "Field definitions: www.jobmarketlens.com/methodology\n"
+              "Field definitions: www.jobmarketlens.com/about/methodology\n"
               "Job postings remain the property of the companies that published them.\n")
     week = prod / "latest week.csv"
     write(week, [r for r in rows if r["open"]])

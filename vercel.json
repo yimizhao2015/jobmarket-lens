@@ -8,6 +8,16 @@
     {
       "source": "/template",
       "destination": "/"
+    },
+    {
+      "source": "/methodology",
+      "destination": "/about/methodology",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/about/privacy",
+      "permanent": true
     }
   ]
 }

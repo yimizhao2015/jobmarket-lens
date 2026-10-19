@@ -4,27 +4,16 @@ page_title: "About"
 description: "What JobMarket Lens is, where its data comes from and who makes it."
 ---
 
-JobMarket Lens tracks what America's largest employers are hiring for, using the job postings they publish on their own career sites.
+JobMarket Lens shows what America's largest employers are hiring for, from the job postings they publish on their own career sites.
 
-Every week it collects the current openings of the S&P 500 companies, reads each posting, and turns the text into comparable fields: occupation, job level, required degree and major, years of experience, skills, licenses and certifications, pay, work arrangement and location. The [dashboard](/) lets you filter all of it by company, occupation, location and more, and the underlying data is available on the [Get the Data](/data) page.
-
-## Why it exists
-
-Job postings are one of the earliest public signals of where the economy is heading: which occupations companies are adding, which skills and credentials they ask for, and how much they say they will pay. Most of that signal is scattered across hundreds of separate career sites. JobMarket Lens puts the largest U.S. employers side by side, from one consistent method, so students, job seekers, educators, researchers and journalists can see the same picture.
+Every week it collects the open postings of the S&P 500 companies and turns each one into comparable fields: occupation, job level, degree and major, experience, skills, licenses, pay, work arrangement and location. Explore them on the [dashboard](/), read the monthly [Insights](/insights), or download the files on [Get the Data](/data).
 
 ## What makes it different
 
-- **Official sources only.** Every posting comes from the company's own career site, not from a job board or aggregator.
-- **Open about gaps.** When a site refuses automated access, it is shown as blocked. Nothing is estimated or filled in.
-- **History, not just a snapshot.** Each posting keeps the date it was first seen, and postings that disappear are marked closed, so hiring can be followed over time.
-- **Ready to use.** A free 1,000-record sample and the full data, refreshed weekly, are available on the [Get the Data](/data) page.
-
-How each field is produced, and its limits, is described on the [Methodology](/methodology) page. Written summaries of what the data shows are under [Insights](/insights).
+- **Official sources only.** Every posting comes from the company's own career site, not a job board.
+- **Open about gaps.** Sites that refuse automated access are shown as blocked. Nothing is estimated.
+- **History over time.** Postings keep the date they were first seen and are marked closed when they disappear.
 
 ## Who makes it
 
-JobMarket Lens is an independent project by Yimi Zhao, based in New York City. It is not affiliated with S&P Dow Jones Indices or with any of the companies whose postings it analyzes.
-
-## Contact
-
-Questions, corrections and suggestions are welcome by email at <yimizhao2015@gmail.com> or through the project's [GitHub page](https://github.com/yimizhao2015/jobmarket-lens/issues).
+JobMarket Lens is an independent project by Yimi Zhao in New York City. It is not affiliated with S&P Dow Jones Indices or with any company whose postings it analyzes. Questions and corrections: <yimizhao2015@gmail.com>.
