@@ -1,7 +1,7 @@
 ---
-title: "About JobMarket Lens"
-page_title: "About"
-description: "What JobMarket Lens is, where its data comes from and who makes it."
+title: About JobMarket Lens
+page_title: About
+description: What JobMarket Lens is, where its data comes from and who makes it.
 ---
 
 JobMarket Lens shows what America's largest employers are hiring for, from the job postings they publish on their own career sites.
@@ -16,4 +16,4 @@ Every week it collects the open postings of the S&P 500 companies and turns each
 
 ## Who makes it
 
-JobMarket Lens is an independent project by Yimi Zhao in New York City. It is not affiliated with S&P Dow Jones Indices or with any company whose postings it analyzes. Questions and corrections are welcome on the [Contact Us](/contact) page.
+JobMarket Lens is an independent project. It is not affiliated with S&P Dow Jones Indices or with any company whose postings it analyzes. Questions and corrections are welcome on the [Contact Us](/contact) page.
