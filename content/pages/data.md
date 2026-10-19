@@ -24,7 +24,6 @@ plans:
     price: $19.99
     features:
       - All historical runs (Oct 5, 2026 – Present)
-      - All weekly snapshots consolidated
       - Full source coverage
       - Instant .zip download
     button: Get Full Archive
