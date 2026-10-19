@@ -1,35 +1,35 @@
 ---
-title: "Get the Data"
-page_title: "Get the Data"
-description: "Download S&P 500 job postings data: a free 1,000-record sample, the latest weekly snapshot, or the full archive since October 1, 2026."
-intro: "Every posting behind the dashboard, as clean CSV files ready for Excel, Python or R."
+title: Get the Data
+page_title: Get the Data
+description: 'Download S&P 500 job postings data: a free 1,000-record sample, the latest weekly snapshot, or the full archive since October 1, 2026.'
+intro: Every posting behind the dashboard, as clean CSV files ready for Excel, Python or R.
 plans:
-  - name: "Sample Data"
-    price: "Free"
+  - name: Sample Data
+    price: Free
     features:
-      - "1,000 representative clean records"
-      - "Inspect schema & tags"
-      - "Immediate direct CSV"
-    button: "Download Free"
-    link: "/downloads/jobmarketlens-sample.csv"
-  - name: "Latest Week Snapshot"
-    price: "$1.99"
+      - 1,000 representative clean records
+      - Inspect schema & tags
+      - Immediate direct CSV
+    button: Download Free
+    link: /downloads/jobmarketlens-sample.csv
+  - name: Latest Week Snapshot
+    price: $1.99
     features:
-      - "Complete current week clean dataset"
-      - "Source coverage report"
-      - "UTF-8 CSV / Excel"
-      - "Instant .zip download"
-    button: "Get Latest"
-    link: ""
-  - name: "Full Archive (Oct 1+)"
-    price: "$19.99"
+      - Complete current week clean dataset
+      - Source coverage report
+      - UTF-8 CSV / Excel
+      - Instant .zip download
+    button: Get Latest
+    link: ''
+  - name: Full Archive
+    price: $19.99
     features:
-      - "All historical runs (Oct 1, 2026 – Present)"
-      - "All weekly snapshots consolidated"
-      - "Full source coverage"
-      - "Instant .zip download"
-    button: "Get Full Archive"
-    link: ""
+      - All historical runs (Oct 1, 2026 – Present)
+      - All weekly snapshots consolidated
+      - Full source coverage
+      - Instant .zip download
+    button: Get Full Archive
+    link: ''
 ---
 
 ## What's in the files
