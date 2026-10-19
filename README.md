@@ -8,14 +8,8 @@ occupation (SOC major group), skills, education, experience, pay, job level, sch
 and location.
 
 - **Live site:** https://www.jobmarketlens.com/
-- **Pages:** [Insights](https://www.jobmarketlens.com/insights), [Methodology](https://www.jobmarketlens.com/methodology),
-  [About](https://www.jobmarketlens.com/about), [Privacy](https://www.jobmarketlens.com/privacy), [Get the Data](https://www.jobmarketlens.com/data). Visitor counts come from
-  Vercel Web Analytics (cookieless).
-- **Data:** sold on the [Get the Data](https://www.jobmarketlens.com/data) page: a free 1,000-record sample
-  (`web/downloads/jobmarketlens-sample.csv`), the latest weekly snapshot ($1.99) and the full archive since
-  October 1 ($19.99). `scripts/export_csv.py` builds the two zips each week and the workflow uploads them to the
-  private data repo's `data` release; the full CSV files are no longer committed to this public repo.
-
+- **Data:** [Get the Data](https://www.jobmarketlens.com/data) page
+  
 © 2026 JobMarket Lens. All rights reserved.
 
 ## What the dashboard shows
