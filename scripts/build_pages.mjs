@@ -33,13 +33,13 @@ function render(md, lede) {
 // Header: the main sections. Footer: the same plus the About sub-pages. /about/* highlights About.
 const NAV = [["/", "Dashboard"], ["/insights", "Insights"], ["/about", "About"], ["/data", "Get the Data"]];
 const FOOT = [["/", "Dashboard"], ["/insights", "Insights"], ["/about", "About"], ["/about/methodology", "Methodology"],
-  ["/about/privacy", "Privacy"], ["/data", "Get the Data"]];
+  ["/about/privacy", "Privacy"], ["/contact", "Contact Us"], ["/data", "Get the Data"]];
 const links = (list, current, section) => list.map(([h, l]) => `<a href="${h}"${h === "/data" ? ' class="cta"' : ""}${
   h === current || h === section ? ' aria-current="page"' : ""}>${l}</a>`).join("");
 const nav = current => links(NAV, current, current.startsWith("/about") ? "/about" : current.startsWith("/insights") ? "/insights" : "");
 const foot = current => links(FOOT, current, "");
 
-function page({ title, description, path, current, og, article, share }) {
+function page({ title, description, path, current, og, article, share, contact }) {
   const url = SITE + path;
   return `<!doctype html>
 <html lang="en">
@@ -70,13 +70,11 @@ ${og ? `<meta property="og:type" content="${og}">
 ${article}
   </article>
   <footer class="site-foot">
-    <div class="contact"></div>
     <nav aria-label="Footer">${foot(current)}</nav>
     © 2026 Yimi Zhao. All rights reserved. Job postings remain the property of the companies that published them.
   </footer>
 </div>
-<script src="/contact.js"></script>
-${share ? '<script src="/share.js"></script>\n' : ""}</body>
+${contact ? '<script src="/contact.js"></script>\n' : ""}${share ? '<script src="/share.js"></script>\n' : ""}</body>
 </html>
 `;
 }
@@ -94,6 +92,15 @@ for (const [name, path] of ABOUT) {
   }));
 }
 for (const old of ["methodology.html", "privacy.html"]) rmSync(join(ROOT, "web", old), { force: true });   // now under /about/
+
+// Contact Us: intro text, then the form (web/contact.js)
+{
+  const d = read(join(ROOT, "content/pages/contact.md"));
+  out("contact.html", page({
+    title: d.page_title || d.title, description: d.description, path: "/contact", current: "/contact", contact: true,
+    article: `    <h1>${esc(d.title)}</h1>\n` + render(d.body, true) + `    <div class="contact"></div>`,
+  }));
+}
 
 // Get the Data: the plans as cards; a plan without a checkout link shows its button as coming soon
 {

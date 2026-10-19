@@ -1,13 +1,12 @@
-// "Contact Us" form in the footer of every page: fills each <div class="contact"> and sends through Web3Forms,
+// "Contact Us" form on /contact: fills each <div class="contact"> and sends through Web3Forms,
 // which emails the message to the site owner. The access key is public by design (it can only send to that inbox).
 (function () {
   const KEY = "";   // Web3Forms access key; until it is set the form shows but cannot send
   document.querySelectorAll(".contact").forEach(el => {
     el.innerHTML = `<form class="contact-form" novalidate>
-      <h2>Contact Us</h2>
       <div class="cf-row"><input name="name" placeholder="Name" autocomplete="name" required aria-label="Name">
         <input name="email" type="email" placeholder="Email" autocomplete="email" required aria-label="Email"></div>
-      <textarea name="message" rows="3" placeholder="Message" required aria-label="Message"></textarea>
+      <textarea name="message" rows="6" placeholder="Message" required aria-label="Message"></textarea>
       <input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="cf-row cf-end"><span class="cf-status" role="status"></span>
         <button type="submit"${KEY ? "" : " disabled"}>${KEY ? "Send" : "Coming soon"}</button></div>

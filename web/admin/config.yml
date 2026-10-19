@@ -95,6 +95,15 @@ collections:
               - { label: Button text, name: button, widget: string }
               - { label: Button link, name: link, widget: string, required: false, hint: "Checkout or download link. Leave empty to show the button as Coming soon." }
           - { label: Text below the plans, name: body, widget: markdown, modes: [raw, rich_text] }
+      - name: contact
+        label: Contact Us
+        file: content/pages/contact.md
+        preview_path: contact
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - { label: Browser tab title, name: page_title, widget: string }
+          - { label: Description, name: description, widget: text }
+          - { label: Intro text, name: body, widget: markdown, modes: [raw, rich_text], hint: "Shown above the form" }
       - name: insights_intro
         label: Insights page intro
         file: content/pages/insights.md

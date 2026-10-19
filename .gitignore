@@ -15,6 +15,7 @@ web/methodology.html
 web/privacy.html
 web/about/
 web/data.html
+web/contact.html
 web/insights/
 
 # Paid data products: built by scripts/export_csv.py and uploaded to the private data repo, never committed here

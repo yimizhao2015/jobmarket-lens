@@ -38,4 +38,4 @@ Each posting is one row with 24 columns: Posting ID, Title, Company, Ticker, SOC
 
 The source coverage report lists all 499 companies in scope, their career site, the collection platform and status, and how many postings were collected.
 
-The data is refreshed every Monday. Job postings remain the property of the companies that published them. Questions about the data? Use the Contact Us form at the bottom of the page.
+The data is refreshed every Monday. Job postings remain the property of the companies that published them. Questions about the data? [Contact us](/contact).

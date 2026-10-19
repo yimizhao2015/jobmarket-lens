@@ -24,4 +24,4 @@ The site shows no ads. If that changes, this policy will be updated first, and c
 
 ## Changes and contact
 
-Changes are posted here with a new effective date. Questions can be sent with the Contact Us form at the bottom of the page.
+Changes are posted here with a new effective date. Questions can be sent from the [Contact Us](/contact) page.
