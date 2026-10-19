@@ -32,7 +32,7 @@ companies with two share classes count once (499 companies). Each company's care
 collector it uses are in `config/companies.json`; companies without a working collector carry a
 `known_issue` and show as "Not collected yet".
 
-Only postings dated October 1, 2026 or later are analyzed (`posted_from` in config).
+Only postings dated October 5, 2026 (`posted_from` in config) through the last complete Monday-to-Sunday week are analyzed.
 
 ## How the data is collected and stored
 

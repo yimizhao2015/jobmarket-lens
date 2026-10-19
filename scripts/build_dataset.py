@@ -13,7 +13,7 @@ import json
 import sys
 from collections import Counter
 from multiprocessing import Pool
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -121,6 +121,14 @@ def main():
             if col.get("use_seed_sample") and s["co"] not in collected:
                 seed_rows.append(seed_to_raw(s))
 
+    # The window ends with the last complete Monday-to-Sunday week: the Sunday on or before the latest
+    # run (the run itself is on Sunday evening), so a partly collected week is never shown.
+    last_run = max((s["run_date"] for s in snaps), default=date.today().isoformat())
+    lr = date.fromisoformat(last_run)
+    posted_to = (lr - timedelta(days=(lr.weekday() + 1) % 7)).isoformat()
+    if col.get("posted_to"):
+        posted_to = min(posted_to, col["posted_to"])
+
     dropped, undated, keep = Counter(), Counter(), []
     for r in rows + seed_rows:
         posted = r.get("posted_date")
@@ -129,7 +137,7 @@ def main():
             continue
         if r.get("first_seen") and posted > r["first_seen"]:
             posted = r["first_seen"]  # same clamp normalize() applies
-        if not (col["posted_from"] <= posted[:10] <= (col.get("posted_to") or "9999-12-31")):
+        if not (col["posted_from"] <= posted[:10] <= posted_to):
             dropped[r["company"]] += 1
             continue
         keep.append(r)
@@ -149,6 +157,7 @@ def main():
     data = {
         "generated": date.today().isoformat(),
         "posted_from": col["posted_from"],
+        "posted_to": posted_to,
         "universe": cfg["universe"],
         "companies": [{k: c.get(k) for k in ("rank", "ticker", "name", "weight_pct", "sector", "career_site",
                                              "adapter", "known_issue")} for c in cfg["companies"]],

@@ -5,7 +5,7 @@ Reads web/data.json (written by build_dataset.py) and writes:
   data/Job postings/Job postings YYYY-MM part N.csv
                          one row per posting, newest first, one file per month posted, in parts of ROWS_PER_FILE
   data/products/jobmarketlens-latest-week.zip    postings open in the latest run + data source.csv ($1.99)
-  data/products/jobmarketlens-full-archive.zip   every posting since October 1 + data source.csv ($19.99)
+  data/products/jobmarketlens-full-archive.zip   every posting in the window (Oct 5 through the last complete week) + data source.csv ($19.99)
   web/downloads/jobmarketlens-sample.csv         1,000 random postings, free on the site
 The CSV files under data/ and the zips are not committed to this public repo; the workflow uploads the zips to
 the private data repo. CSV files start with a UTF-8 byte order mark so Excel opens them with the right characters.
@@ -14,6 +14,7 @@ import csv
 import json
 import random
 import zipfile
+from datetime import date
 from collections import Counter
 from pathlib import Path
 
@@ -33,6 +34,12 @@ def posted_pay(r):
     amt = f(r["pay_lo"]) if r["pay_lo"] == r["pay_hi"] else f"{f(r['pay_lo'])}–{f(r['pay_hi'])}"
     per = {"hour": "per hour", "month": "per month", "year": "per year"}.get(r["pay_period"], "")
     return f"{amt} {per}".strip()
+
+
+def long(iso):
+    """2026-10-05 -> October 5, 2026"""
+    d = date.fromisoformat(iso)
+    return f"{d:%B} {d.day}, {d.year}"
 
 
 def status(c, s):
@@ -110,7 +117,8 @@ def main():
     prod = out_dir / "products"
     prod.mkdir(exist_ok=True)
     readme = (f"JobMarket Lens data, www.jobmarketlens.com\nLatest collection: {run}\n"
-              "Job postings from the official career sites of S&P 500 companies, posted October 1, 2026 or later.\n"
+              f"Job postings from the official career sites of S&P 500 companies, posted {long(D['posted_from'])} "
+              f"through {long(D.get('posted_to') or run)}.\n"
               "Field definitions: www.jobmarketlens.com/about/methodology\n"
               "Job postings remain the property of the companies that published them.\n")
     week = prod / "latest week.csv"

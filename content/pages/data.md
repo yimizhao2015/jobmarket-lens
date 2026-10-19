@@ -1,7 +1,7 @@
 ---
 title: Get the Data
 page_title: Get the Data
-description: 'Download S&P 500 job postings data: a free 1,000-record sample, the latest weekly snapshot, or the full archive since October 1, 2026.'
+description: 'Download S&P 500 job postings data: a free 1,000-record sample, the latest weekly snapshot, or the full archive since October 5, 2026.'
 intro: Every posting behind the dashboard, as clean CSV files ready for Excel, Python or R.
 plans:
   - name: Sample Data
