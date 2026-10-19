@@ -17,7 +17,6 @@ plans:
     features:
       - Complete current week clean dataset
       - Source coverage report
-      - UTF-8 CSV / Excel
       - Instant .zip download
     button: Get Latest
     link: ''
