@@ -30,10 +30,9 @@ function render(md, lede) {
   return lede ? html.replace(/<p>/, '<p class="lede">') : html;
 }
 
-// Header: the main sections. Footer: the same plus the About sub-pages. /about/* highlights About.
+// Header: the main sections. Footer: the same plus Contact Us. /about/* highlights About.
 const NAV = [["/", "Dashboard"], ["/insights", "Insights"], ["/about", "About"], ["/data", "Get the Data"]];
-const FOOT = [["/", "Dashboard"], ["/insights", "Insights"], ["/about", "About"], ["/about/methodology", "Methodology"],
-  ["/about/privacy", "Privacy"], ["/contact", "Contact Us"], ["/data", "Get the Data"]];
+const FOOT = [...NAV, ["/contact", "Contact Us"]];
 const links = (list, current, section) => list.map(([h, l]) => `<a href="${h}"${h === "/data" ? ' class="cta"' : ""}${
   h === current || h === section ? ' aria-current="page"' : ""}>${l}</a>`).join("");
 const nav = current => links(NAV, current, current.startsWith("/about") ? "/about" : current.startsWith("/insights") ? "/insights" : "");
