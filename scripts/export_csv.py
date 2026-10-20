@@ -51,6 +51,10 @@ def status(c, s):
         return "No postings returned"
     if s and s["status"] == "error":
         return "Collector error"
+    if c.get("coverage") == "blocked":
+        return "Blocked by site"
+    if c.get("coverage") == "no_job_board":
+        return "No online job board"
     if c["adapter"] == "none":
         return "Not collected yet"
     return "Collector ready, not yet run"

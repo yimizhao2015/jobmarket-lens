@@ -413,7 +413,8 @@
    "career_site": "https://jobs.akamai.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (jobs.akamai.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (jobs.akamai.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 31,
@@ -438,7 +439,8 @@
    "career_site": "https://www.are.com/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "No online job board was found on its official site; not collected."
+   "known_issue": "No online job board was found on its official site; not collected.",
+   "coverage": "no_job_board"
   },
   {
    "rank": 33,
@@ -650,7 +652,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 49,
@@ -873,7 +876,8 @@
    "career_site": "https://jobs.adp.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (jobs.adp.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (jobs.adp.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 66,
@@ -1332,7 +1336,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 100,
@@ -1373,7 +1378,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 103,
@@ -1699,7 +1705,8 @@
    "career_site": "https://careers.cognizant.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (careers.cognizant.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (careers.cognizant.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 127,
@@ -1940,7 +1947,8 @@
    "career_site": "https://www.crowncastle.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected."
+   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 145,
@@ -1951,7 +1959,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 146,
@@ -2017,7 +2026,8 @@
    "career_site": "https://www.darden.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its restaurant hiring runs through Paradox chat-driven apply flows with no public job list; not collected."
+   "known_issue": "Its restaurant hiring runs through Paradox chat-driven apply flows with no public job list; not collected.",
+   "coverage": "no_job_board"
   },
   {
    "rank": 151,
@@ -2097,7 +2107,8 @@
    "career_site": "https://www.delta.com/us/en/careers/overview",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 157,
@@ -2198,7 +2209,8 @@
    "career_site": "https://jobs.dominos.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (jobs.dominos.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (jobs.dominos.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 165,
@@ -3013,7 +3025,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 225,
@@ -3123,7 +3136,8 @@
    "career_site": "https://higher.gs.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (higher.gs.com) allows only individual /roles/ pages in robots.txt; the job list and sitemap are disallowed, so openings cannot be discovered."
+   "known_issue": "Its career site (higher.gs.com) allows only individual /roles/ pages in robots.txt; the job list and sitemap are disallowed, so openings cannot be discovered.",
+   "coverage": "blocked"
   },
   {
    "rank": 233,
@@ -3175,7 +3189,8 @@
    "career_site": "https://careers.hcahealthcare.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (careers.hcahealthcare.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (careers.hcahealthcare.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 237,
@@ -3401,7 +3416,8 @@
    "career_site": "https://www.ibm.com/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 254,
@@ -3508,7 +3524,8 @@
    "career_site": "https://www.interactivebrokers.com/en/general/about/careers-splash.php",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected."
+   "known_issue": "Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 262,
@@ -3699,7 +3716,8 @@
    "career_site": "https://www.jacobs.com/careers-jacobs",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected."
+   "known_issue": "Its Avature career site answers scripted requests with an empty HTTP 202 bot-check page; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 276,
@@ -3795,7 +3813,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 283,
@@ -3960,7 +3979,8 @@
    "career_site": "https://globalcareers-lennox.icims.com/jobs/search",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its iCIMS portal (globalcareers-lennox.icims.com) disallows all crawling in robots.txt; recorded as not collected."
+   "known_issue": "Its iCIMS portal (globalcareers-lennox.icims.com) disallows all crawling in robots.txt; recorded as not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 295,
@@ -3971,7 +3991,8 @@
    "career_site": "https://us.lindecareers.com/en/search-jobs",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its US jobs are posted on ADP and UKG/UltiPro boards whose search services are client-side or disallowed by robots.txt; not collected."
+   "known_issue": "Its US jobs are posted on ADP and UKG/UltiPro boards whose search services are client-side or disallowed by robots.txt; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 296,
@@ -4277,7 +4298,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 318,
@@ -4362,7 +4384,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 324,
@@ -4607,10 +4630,18 @@
    "name": "Norwegian Cruise Line Holdings",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2FNCLHCareersShipboard%2F",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "No official job board was found (the listed career link points to a social media page); not collected."
+   "career_site": "https://www.ncl.com/about/careers",
+   "adapter": "workday",
+   "params": {
+    "host": "nclh.wd108.myworkdayjobs.com",
+    "tenant": "nclh",
+    "sites": [
+     "NCLH_Careers",
+     "BIHL_Careers",
+     "GSC_Careers"
+    ]
+   },
+   "known_issue": null
   },
   {
    "rank": 342,
@@ -4719,7 +4750,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its careers page (omc.com/careers) returns 404 and no job board was found; not collected."
+   "known_issue": "Its careers page (omc.com/careers) returns 404 and no job board was found; not collected.",
+   "coverage": "no_job_board"
   },
   {
    "rank": 350,
@@ -4836,7 +4868,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (parkercareers.ttcportals.com) sits behind a Cloudflare bot challenge; not collected."
+   "known_issue": "Its career site (parkercareers.ttcportals.com) sits behind a Cloudflare bot challenge; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 359,
@@ -5001,7 +5034,8 @@
    "career_site": "https://careers-pplweb.icims.com/jobs/intro",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its iCIMS portal (careers-pplweb.icims.com) disallows all crawling in robots.txt; recorded as not collected."
+   "known_issue": "Its iCIMS portal (careers-pplweb.icims.com) disallows all crawling in robots.txt; recorded as not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 371,
@@ -5038,7 +5072,8 @@
    "career_site": "https://careers.progressive.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (careers.progressive.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (careers.progressive.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 374,
@@ -5240,7 +5275,8 @@
    "career_site": "https://www.regencycenters.com/regency/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected."
+   "known_issue": "Its Dayforce job board's search API answers HTTP 403 to scripted requests; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 389,
@@ -5362,7 +5398,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 398,
@@ -5566,7 +5603,8 @@
    "career_site": "https://westrockta.avature.net/en_US/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its Avature site (westrockta.avature.net) disallows its job sitemap in robots.txt and has no other server-side job list; not collected."
+   "known_issue": "Its Avature site (westrockta.avature.net) disallows its job sitemap in robots.txt and has no other server-side job list; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 414,
@@ -5835,7 +5873,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 433,
@@ -5912,7 +5951,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "No online job board was found on its official site; not collected."
+   "known_issue": "No online job board was found on its official site; not collected.",
+   "coverage": "no_job_board"
   },
   {
    "rank": 439,
@@ -6012,7 +6052,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected."
+   "known_issue": "Its corporate careers page answers scripted requests with HTTP 403, so the job platform behind it could not be identified; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 446,
@@ -6124,7 +6165,8 @@
    "career_site": "https://www.uber.com/us/en/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (jobs.uber.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (jobs.uber.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 454,
@@ -6135,7 +6177,8 @@
    "career_site": "https://www.udr.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected."
+   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 455,
@@ -6328,7 +6371,8 @@
    "career_site": "https://mycareer.verizon.com/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site (mycareer.verizon.com) answers scripted requests with HTTP 403; not collected."
+   "known_issue": "Its career site (mycareer.verizon.com) answers scripted requests with HTTP 403; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 469,
@@ -6380,7 +6424,8 @@
    "career_site": "https://viciproperties.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "No online job board was found on its official site; not collected."
+   "known_issue": "No online job board was found on its official site; not collected.",
+   "coverage": "no_job_board"
   },
   {
    "rank": 473,
@@ -6405,7 +6450,8 @@
    "career_site": null,
    "adapter": "none",
    "params": {},
-   "known_issue": "No online job board was found on its official site; not collected."
+   "known_issue": "No online job board was found on its official site; not collected.",
+   "coverage": "no_job_board"
   },
   {
    "rank": 475,
@@ -6550,7 +6596,8 @@
    "career_site": "https://welltower.com/careers/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected."
+   "known_issue": "Its UKG/UltiPro job board's search service (JobBoardView) is disallowed by robots.txt; not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 486,

@@ -160,7 +160,7 @@ def main():
         "posted_to": posted_to,
         "universe": cfg["universe"],
         "companies": [{k: c.get(k) for k in ("rank", "ticker", "name", "weight_pct", "sector", "career_site",
-                                             "adapter", "known_issue")} for c in cfg["companies"]],
+                                             "adapter", "known_issue", "coverage")} for c in cfg["companies"]],
         "soc_major": soc.SOC_MAJOR,
         "levels": parse.LEVELS,
         "degree_order": parse.DEGREE_ORDER,

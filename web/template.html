@@ -469,6 +469,8 @@ load().then(D => {
       else if (sampleCos.includes(c.ticker)) pill = `<span class="pill sample">Page-read sample</span>`;
       else if (s && s.status === "empty") pill = `<span class="pill pending">No postings returned</span>`;
       else if (s && s.status === "error") pill = `<span class="pill blocked">Collector error</span>`;
+      else if (c.coverage === "blocked") pill = `<span class="pill blocked">Blocked by site</span>`;
+      else if (c.coverage === "no_job_board") pill = `<span class="pill pending">No online job board</span>`;
       else if (c.adapter === "none") pill = `<span class="pill pending">Not collected yet</span>`;
       else pill = `<span class="pill pending">Collector ready, not yet run</span>`;
       const host = c.career_site ? new URL(c.career_site).hostname : "";

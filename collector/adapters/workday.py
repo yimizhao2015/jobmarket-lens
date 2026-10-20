@@ -7,6 +7,19 @@ from .common import html_to_text, raw_posting, seen_before
 
 
 def collect(company, params, http, max_jobs, stats):
+    """params: host, tenant, and site, or sites (a list) when the company posts on several Workday sites."""
+    if "sites" not in params:
+        yield from _collect_site(company, params, http, max_jobs, stats)
+        return
+    total = 0
+    for site in params["sites"]:
+        sub = {}
+        yield from _collect_site(company, {**params, "site": site}, http, max_jobs, sub)
+        total += sub.get("site_total") or 0
+    stats["site_total"] = total
+
+
+def _collect_site(company, params, http, max_jobs, stats):
     host, tenant, site = params["host"], params["tenant"], params["site"]
     base = f"https://{host}/wday/cxs/{tenant}/{site}"
     # Shared hosts (wd1.myworkdaysite.com) serve the public site under /recruiting/{tenant}/{site}.
