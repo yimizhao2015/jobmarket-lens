@@ -178,3 +178,29 @@ def collect_tesla(company, params, http, max_jobs, stats):
 def collect_refused_by_terms(company, params, http, max_jobs, stats):
     # The site states that automated collection is prohibited without written permission; honor it.
     raise BlockedError(params["reason"])
+
+
+def collect_listing(company, params, http, max_jobs, stats):
+    """A career page that links every opening and marks each job page up as schema.org JobPosting
+    (JazzHR's applytojob.com boards, for one). params: listing (URL), link_pattern (regex for job links,
+    group 1 = job id)."""
+    html = http.get(params["listing"]).text
+    urls = list(dict.fromkeys(m[0] for m in re.finditer(params["link_pattern"], html)))
+    stats["site_total"] = len(urls)
+    seen = 0
+    for u in urls:
+        jid = re.search(params["link_pattern"], u)[1]
+        rec = seen_before(company, http, source_id=jid)
+        if not rec:
+            try:
+                rec = _detail(company, jid, u, http)
+            except requests.HTTPError:
+                stats["gone"] = stats.get("gone", 0) + 1
+                continue
+            if rec.get("source_method") != "jsonld":
+                stats["no_jobposting"] = stats.get("no_jobposting", 0) + 1
+                continue
+        yield rec
+        seen += 1
+        if seen >= max_jobs:
+            return

@@ -22,6 +22,7 @@ ADAPTERS = {
     "apple": html_sites.collect_apple,
     "google": html_sites.collect_google,
     "jsonld_sitemap": html_sites.collect_sitemap,
+    "jsonld_listing": html_sites.collect_listing,
     "tesla": html_sites.collect_tesla,
     "walmart": walmart.collect,
     "refused_by_terms": html_sites.collect_refused_by_terms,

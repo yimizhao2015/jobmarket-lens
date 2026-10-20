@@ -2106,9 +2106,11 @@
    "weight_pct": null,
    "sector": "Energy",
    "career_site": "https://careers.devonenergy.com/search/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its SuccessFactors site (careers.devonenergy.com) serves an incomplete TLS certificate chain, so verified HTTPS requests fail; not collected."
+   "adapter": "successfactors",
+   "params": {
+    "host": "careers.devonenergy.com"
+   },
+   "known_issue": "Its SuccessFactors site serves an incomplete TLS certificate chain; the collector completes it from the certificate's own issuer link (AIA) and still verifies it."
   },
   {
    "rank": 158,
@@ -3181,10 +3183,13 @@
    "name": "Healthpeak Properties",
    "weight_pct": null,
    "sector": "Real Estate",
-   "career_site": "https://healthpeak.applytojob.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its openings are on JazzHR (healthpeak.applytojob.com), which has no collector yet."
+   "career_site": "https://healthpeak.applytojob.com/apply",
+   "adapter": "jsonld_listing",
+   "params": {
+    "listing": "https://healthpeak.applytojob.com/apply",
+    "link_pattern": "https://healthpeak\\.applytojob\\.com/apply/([A-Za-z0-9]{10})/[A-Za-z0-9-]+"
+   },
+   "known_issue": null
   },
   {
    "rank": 238,
@@ -5974,10 +5979,12 @@
    "name": "Tractor Supply",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": null,
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its career site timed out or answered HTTP 503 during testing; not collected."
+   "career_site": "https://www.tractorsupply.careers/",
+   "adapter": "successfactors",
+   "params": {
+    "host": "www.tractorsupply.careers"
+   },
+   "known_issue": null
   },
   {
    "rank": 444,

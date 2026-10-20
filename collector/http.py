@@ -1,8 +1,12 @@
 """Polite HTTP client: one session, fixed delay, robots.txt check, retries."""
+import os
 import re
+import ssl
+import tempfile
 import time
 from urllib.parse import urlparse
 
+import certifi
 import requests
 
 
@@ -52,6 +56,12 @@ class Http:
             self._last = time.time()
             try:
                 r = self.s.request(method, url, timeout=self.timeout, **kw)
+            except requests.exceptions.SSLError:
+                # Some sites send their certificate without the intermediate. Fetch the missing intermediate
+                # from the link in the certificate itself (AIA) and retry; the chain is still fully verified.
+                if attempt == 3 or not self._complete_chain(urlparse(url).hostname):
+                    raise
+                continue
             except requests.RequestException as e:
                 if attempt == 3:
                     raise
@@ -65,6 +75,37 @@ class Http:
             r.raise_for_status()
             return r
         raise RuntimeError("unreachable")
+
+    def _complete_chain(self, host):
+        if host in getattr(self, "_chain_fixed", set()):
+            return False
+        self._chain_fixed = getattr(self, "_chain_fixed", set()) | {host}
+        pems, pem = [], ssl.get_server_certificate((host, 443), timeout=self.timeout)
+        for _ in range(3):  # leaf -> intermediate(s); stop once nothing more to fetch
+            with tempfile.NamedTemporaryFile("w", suffix=".pem", delete=False) as f:
+                f.write(pem)
+            try:
+                issuers = ssl._ssl._test_decode_cert(f.name).get("caIssuers") or ()
+            finally:
+                os.unlink(f.name)
+            if not issuers:
+                break
+            der = requests.get(issuers[0], timeout=self.timeout).content
+            pem = der.decode() if der.startswith(b"-----BEGIN") else ssl.DER_cert_to_PEM_cert(der)
+            pems.append(pem)
+        if not pems:
+            return False
+        bundle = getattr(self, "_bundle", None)
+        if not bundle:
+            fd, bundle = tempfile.mkstemp(suffix=".pem")
+            os.close(fd)
+            with open(certifi.where()) as src, open(bundle, "w") as dst:
+                dst.write(src.read())
+            self._bundle = bundle
+        with open(bundle, "a") as dst:
+            dst.write("\n" + "\n".join(pems))
+        self.s.verify = bundle  # roots stay certifi's: only intermediates are added
+        return True
 
     def get(self, url, **kw):
         return self.request("GET", url, **kw)
