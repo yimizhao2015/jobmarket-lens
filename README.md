@@ -75,6 +75,8 @@ collector/                   one adapter per career-site platform + polite HTTP 
   adapters/icims.py, taleo.py, avature.py, talentbrew.py, jobvite.py   other hosted career sites
   adapters/smartrecruiters.py SmartRecruiters (posting API for Visa; others from their career pages)
   adapters/amazon.py, walmart.py   single-company collectors
+  adapters/career_apis.py     DirectEmployers .jobs, Symphony Talent, Coveo, and site-specific JSON/HTML searches
+  adapters/browser.py         sites that list jobs only in a real browser (Playwright Chromium): legacy Taleo, ADP, rendered lists
   run.py                     runs all companies in parallel, writes data/raw/<date>/run_log.json
 normalize/                   SOC mapping, skills & license dictionaries, majors (fields of study), field parsers
 scripts/build_dataset.py     normalize everything -> web/index.html (data embedded), data/normalized/postings.csv

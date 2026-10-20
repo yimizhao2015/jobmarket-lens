@@ -1,5 +1,5 @@
-from . import (amazon, ashby, avature, eightfold, greenhouse, html_sites, icims, jibe, jobvite, lever, oracle_hcm,
-               smartrecruiters, successfactors, taleo, talentbrew, walmart, workday)
+from . import (amazon, ashby, avature, browser, career_apis, eightfold, greenhouse, html_sites, icims, jibe, jobvite, lever,
+               oracle_hcm, smartrecruiters, successfactors, taleo, talentbrew, walmart, workday)
 
 ADAPTERS = {
     "workday": workday.collect,
@@ -26,4 +26,11 @@ ADAPTERS = {
     "tesla": html_sites.collect_tesla,
     "walmart": walmart.collect,
     "refused_by_terms": html_sites.collect_refused_by_terms,
+    "directemployers": career_apis.collect_directemployers,
+    "mcloud": career_apis.collect_mcloud,
+    "coveo": career_apis.collect_coveo,
+    "fastenal": career_apis.collect_fastenal,
+    "eog": career_apis.collect_eog,
+    "pca": career_apis.collect_pca,
+    "browser": browser.collect,
 }

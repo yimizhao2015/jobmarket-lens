@@ -84,27 +84,33 @@ def collect_site(company, params, http, max_jobs, stats):
                 return
             continue
         try:
-            page = BeautifulSoup(http.get(url).text, "html.parser")
+            rec = site_detail(company, jid, url, http)
         except requests.HTTPError:
             stats["gone"] = stats.get("gone", 0) + 1
             continue
-
-        def prop(name):
-            el = page.select_one(f'[itemprop="{name}"]')
-            return (el.get("content") or el.get_text(" ", strip=True)) if el else None
-
-        desc = "\n".join(filter(None, (html_to_text(str(el)) for name in ("description", "responsibilities", "qualifications", "incentives")
-                                       for el in page.select(f'[itemprop="{name}"]'))))
-        loc = ", ".join(filter(None, [prop("addressLocality"), prop("addressRegion"), prop("addressCountry")]))
-        yield raw_posting(
-            company, jid, url.split("?")[0], prop("title"),
-            description=desc or None,
-            locations=[loc] if loc else [],
-            posted_date=(prop("datePosted") or "")[:10] or None,
-            employment_type=prop("employmentType"),
-            category=prop("industry"),
-            source_method="html",
-        )
+        yield rec
         seen += 1
         if seen >= max_jobs:
             return
+
+
+def site_detail(company, jid, url, http):
+    """One jobs.smartrecruiters.com job page (schema.org microdata) as a raw posting."""
+    page = BeautifulSoup(http.get(url).text, "html.parser")
+
+    def prop(name):
+        el = page.select_one(f'[itemprop="{name}"]')
+        return (el.get("content") or el.get_text(" ", strip=True)) if el else None
+
+    desc = "\n".join(filter(None, (html_to_text(str(el)) for name in ("description", "responsibilities", "qualifications", "incentives")
+                                   for el in page.select(f'[itemprop="{name}"]'))))
+    loc = ", ".join(filter(None, [prop("addressLocality"), prop("addressRegion"), prop("addressCountry")]))
+    return raw_posting(
+        company, jid, url.split("?")[0], prop("title"),
+        description=desc or None,
+        locations=[loc] if loc else [],
+        posted_date=(prop("datePosted") or "")[:10] or None,
+        employment_type=prop("employmentType"),
+        category=prop("industry"),
+        source_method="html",
+    )

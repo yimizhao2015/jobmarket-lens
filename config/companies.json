@@ -449,9 +449,11 @@
    "weight_pct": null,
    "sector": "Health Care",
    "career_site": "https://jobs.aligntech.com",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its job site (jobs.aligntech.com) is a client-rendered front end and the Workday tenant behind it answers HTTP 401; not collected."
+   "adapter": "jsonld_listing",
+   "params": {
+    "listing": "https://jobs.aligntech.com/postings.json",
+    "link_pattern": "https://jobs\\.aligntech\\.com/en/postings/([0-9a-f-]{36})"
+   }
   },
   {
    "rank": 34,
@@ -772,7 +774,7 @@
    "career_site": "https://www.adm.com/en-us/culture-and-careers/total-rewards/",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its BrassRing site pages results through session-bound requests and shows only a last-updated date; no collector for it."
+   "known_issue": "Its BrassRing site lists every opening to a browser, but shows only a last-updated date, never a posted date, so postings cannot be dated; not collected."
   },
   {
    "rank": 58,
@@ -794,10 +796,11 @@
    "name": "Arista Networks",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": null,
+   "career_site": "https://www.arista.com/en/careers",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its careers pages link to no job board that serves openings to scripted requests; not collected."
+   "known_issue": "Its careers page (arista.com/en/careers) answers a browser with a CAPTCHA challenge (seen 2026-10-20); not collected.",
+   "coverage": "blocked"
   },
   {
    "rank": 60,
@@ -997,7 +1000,7 @@
    "career_site": "https://careers.bestbuy.com/bby",
    "adapter": "none",
    "params": {},
-   "known_issue": "Its career site renders listings in the browser and the job platform behind it could not be identified; not collected."
+   "known_issue": "Its career site (ServiceNow over BrassRing) lists every opening to a browser, but shows only a last-updated date, never a posted date, so postings cannot be dated; not collected."
   },
   {
    "rank": 75,
@@ -2359,9 +2362,10 @@
    "weight_pct": null,
    "sector": "Utilities",
    "career_site": "https://www.edisoncareers.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its career site (edisoncareers.com) links to a SuccessFactors portal that is not reachable without a browser session; not collected."
+   "adapter": "mcloud",
+   "params": {
+    "company_name": "companies/3f187166-f813-42e8-b28c-afdaec98d345"
+   }
   },
   {
    "rank": 176,
@@ -2435,10 +2439,11 @@
    "name": "EOG Resources",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://www.eogresources.com/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its custom ASP job search has no sitemap, posted dates or public feed; not collected."
+   "career_site": "https://careers.eogresources.com/process_jobsearch.asp",
+   "adapter": "eog",
+   "params": {
+    "listing": "https://careers.eogresources.com/process_jobsearch.asp"
+   }
   },
   {
    "rank": 182,
@@ -2543,9 +2548,12 @@
    "weight_pct": null,
    "sector": "Utilities",
    "career_site": "https://www.evergy.com/careers/careers-and-internships",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its legacy Taleo career section has no JSON search service and pages results through browser-side session state; no collector for it."
+   "adapter": "browser",
+   "params": {
+    "kind": "taleo_legacy",
+    "host": "evergy.taleo.net",
+    "section": "evergy_external_career_section"
+   }
   },
   {
    "rank": 190,
@@ -2689,10 +2697,11 @@
    "name": "Fastenal",
    "weight_pct": null,
    "sector": "Industrials",
-   "career_site": "https://careers.fastenal.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its custom job site (careers.fastenal.com) has no job sitemap or public job data feed; not collected."
+   "career_site": "https://jobs.fastenal.com/jobs",
+   "adapter": "fastenal",
+   "params": {
+    "host": "jobs.fastenal.com"
+   }
   },
   {
    "rank": 201,
@@ -4525,9 +4534,10 @@
    "weight_pct": null,
    "sector": "Communication Services",
    "career_site": "https://careers.newscorp.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its career site (careers.newscorp.com) renders listings in the browser and serves no job data server-side; not collected."
+   "adapter": "directemployers",
+   "params": {
+    "host": "careers.newscorp.com"
+   }
   },
   {
    "rank": 334,
@@ -4827,10 +4837,11 @@
    "name": "Packaging Corporation of America",
    "weight_pct": null,
    "sector": "Materials",
-   "career_site": "https://careers.packagingcorp.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its custom job search shows ten postings at a time through a browser-side search with no job sitemap; not collected."
+   "career_site": "https://careers.packagingcorp.com/career-search/",
+   "adapter": "pca",
+   "params": {
+    "listing": "https://careers.packagingcorp.com/career-search/"
+   }
   },
   {
    "rank": 356,
@@ -5476,10 +5487,12 @@
    "name": "Sandisk",
    "weight_pct": null,
    "sector": "Information Technology",
-   "career_site": "https://www.sandisk.com/careers/jobs-at-sandisk",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its careers page links to no job board that serves openings to scripted requests (its SmartRecruiters account has no jobs); not collected."
+   "career_site": "https://avature.sandisk.com/Careers",
+   "adapter": "avature",
+   "params": {
+    "sitemap": "https://avature.sandisk.com/Careers/sitemap_index.xml",
+    "url_pattern": "/Careers/JobDetail/"
+   }
   },
   {
    "rank": 404,
@@ -5501,10 +5514,15 @@
    "name": "Schlumberger",
    "weight_pct": null,
    "sector": "Energy",
-   "career_site": "https://careers.slb.com/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its job listing (careers.slb.com) renders in the browser with no server-side job data or job sitemap; not collected."
+   "career_site": "https://careers.slb.com/job-listing",
+   "adapter": "coveo",
+   "params": {
+    "listing": "https://careers.slb.com/job-listing",
+    "organization": "schlumbergerproduction0cs2zrh7",
+    "cq": "@source==$\"ATS_Jobs_Source - Prod\"",
+    "pipeline": "ATSJobsPipeline",
+    "search_hub": "CoveoJobsHub"
+   }
   },
   {
    "rank": 406,
@@ -5524,10 +5542,16 @@
    "name": "Sempra",
    "weight_pct": null,
    "sector": "Utilities",
-   "career_site": "https://sempra.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its openings are on ADP Recruiting, whose job list is loaded by browser-side requests; not collected."
+   "career_site": "https://myjobs.adp.com/sempra/cx",
+   "adapter": "browser",
+   "params": {
+    "kind": "adp",
+    "sites": [
+     "sempra",
+     "sdgecareers",
+     "socalgascareers"
+    ]
+   }
   },
   {
    "rank": 408,
@@ -5641,9 +5665,10 @@
    "weight_pct": null,
    "sector": "Utilities",
    "career_site": "https://southerncompany.jobs/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its job site (southerncompany.jobs) renders listings in the browser and serves no job data or JobPosting markup server-side; not collected."
+   "adapter": "directemployers",
+   "params": {
+    "host": "southerncompany.jobs"
+   }
   },
   {
    "rank": 417,
@@ -6632,9 +6657,12 @@
    "weight_pct": null,
    "sector": "Real Estate",
    "career_site": "https://www.weyerhaeuser.com/careers/",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its legacy Taleo career section has no JSON search service and pages results through browser-side session state; no collector for it."
+   "adapter": "browser",
+   "params": {
+    "kind": "taleo_legacy",
+    "host": "weyerhaeuser.taleo.net",
+    "section": "10000"
+   }
   },
   {
    "rank": 489,
@@ -6697,10 +6725,15 @@
    "name": "Wynn Resorts",
    "weight_pct": null,
    "sector": "Consumer Discretionary",
-   "career_site": "https://www.wynnresorts.com/careers",
-   "adapter": "none",
-   "params": {},
-   "known_issue": "Its careers page renders listings in the browser and the job platform behind it could not be identified; not collected."
+   "career_site": "https://www.wynnresorts.com/careers/open-roles",
+   "adapter": "browser",
+   "params": {
+    "kind": "listing_links",
+    "listing": "https://www.wynnresorts.com/careers/open-roles?careerAreas=all&companies=all&locations=all&q=all&sortBy=date&page={page}",
+    "link_pattern": "/careers/open-roles/(\\d{10,})",
+    "detail_url": "https://jobs.smartrecruiters.com/WynnResorts/{id}",
+    "detail": "smartrecruiters"
+   }
   },
   {
    "rank": 494,

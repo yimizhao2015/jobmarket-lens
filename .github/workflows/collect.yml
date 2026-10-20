@@ -54,6 +54,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
+      # A few career sites list their jobs only in a real browser (collector/adapters/browser.py).
+      - run: python -m playwright install --with-deps chromium
       - name: Restore history
         env:
           GH_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
