@@ -1,14 +1,21 @@
 // Cloudflare Worker: /api/* goes to the functions in functions/api/; everything else is a static file from web/.
+import * as buy from "./functions/api/buy.js";
+import * as deliver from "./functions/api/deliver.js";
 import * as download from "./functions/api/download.js";
+import * as lemonWebhook from "./functions/api/lemon-webhook.js";
 import * as stats from "./functions/api/stats.js";
 
-const ROUTES = { "/api/download": download, "/api/stats": stats };
+const ROUTES = {
+  "/api/buy": buy, "/api/deliver": deliver, "/api/download": download,
+  "/api/lemon-webhook": lemonWebhook, "/api/stats": stats,
+};
 
 export default {
   async fetch(request, env) {
     const route = ROUTES[new URL(request.url).pathname];
     if (!route) return env.ASSETS.fetch(request);
-    if (request.method !== "GET") return new Response("Method not allowed", { status: 405 });
-    return route.onRequestGet({ request, env });
+    const handler = request.method === "GET" ? route.onRequestGet : request.method === "POST" ? route.onRequestPost : null;
+    if (!handler) return new Response("Method not allowed", { status: 405 });
+    return handler({ request, env });
   },
 };
