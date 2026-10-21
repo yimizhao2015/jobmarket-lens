@@ -16,7 +16,8 @@ async function signed(secret, body, signature) {
 
 export async function onRequestPost({ request, env }) {
   const body = await request.text();
-  if (!(await signed(env.LEMONSQUEEZY_WEBHOOK_SECRET || "", body, request.headers.get("x-signature") || "")))
+  if (!env.LEMONSQUEEZY_WEBHOOK_SECRET) return new Response("LEMONSQUEEZY_WEBHOOK_SECRET is not set on the Worker", { status: 500 });
+  if (!(await signed(env.LEMONSQUEEZY_WEBHOOK_SECRET, body, request.headers.get("x-signature") || "")))
     return new Response("Bad signature", { status: 401 });
   const event = JSON.parse(body);
   const { token, product } = event.meta?.custom_data || {};
