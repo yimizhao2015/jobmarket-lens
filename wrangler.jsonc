@@ -19,7 +19,8 @@
   ],
   // Lemon Squeezy store and product variants (not secret). The API key, webhook secret, GitHub token and
   // Upstash variables are set as secrets in the Cloudflare dashboard.
-  "vars": { "LEMONSQUEEZY_STORE_ID": "503145", "LEMONSQUEEZY_VARIANT_LATEST": "2275137", "LEMONSQUEEZY_VARIANT_ARCHIVE": "2275158" },
+  "vars": { "LEMONSQUEEZY_STORE_ID": "503145", "LEMONSQUEEZY_VARIANT_LATEST": "2275137", "LEMONSQUEEZY_VARIANT_ARCHIVE": "2275158",
+            "UPSTASH_REDIS_REST_URL": "https://innocent-redfish-157090.upstash.io" },
   // The Upstash variables are set in the Cloudflare dashboard; keep them on each deploy.
   "keep_vars": true,
   "observability": { "enabled": true }
