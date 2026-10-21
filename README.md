@@ -87,15 +87,15 @@ web/template.html            the dashboard page; build_dataset.py embeds the dat
 content/pages/*.md, content/insights/*.md   About, Methodology, Privacy and Insights articles in Markdown (edit at /admin)
 scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Vercel deploy (npm run build)
 web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages; stats.html
-functions/api/, lib/         Cloudflare Pages functions: the sample download counter and its stats
+wrangler.jsonc, worker.js    Cloudflare Workers hosting: runs npm run build, serves web/, sends /api/* to functions/api/
+functions/api/, lib/         the sample download counter and its stats (used by worker.js)
 api/                         the same functions for Vercel, kept until the move to Cloudflare is finished
 web/postings/                the dashboard's postings, one gzip file per posted week (each under Cloudflare's 25 MB file limit)
-web/_redirects               Cloudflare Pages redirects (the same as those in vercel.json)
+web/_redirects               Cloudflare redirects (the same as those in vercel.json)
 web/site.css, web/share.js   shared style of the text pages; share buttons on articles
 .github/workflows/collect.yml weekly collection (Sundays 5:00 p.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
 vercel.json                  Vercel hosting, until the move: runs npm run build, serves web/, redeployed on every push.
-                             Cloudflare Pages uses the same settings: build command npm run build, output directory web
 ```
 
 Not in this repo: `data/lens.db` and `data/raw/` (private history), `web/data.json` (build output).

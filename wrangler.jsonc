@@ -1,0 +1,18 @@
+// Cloudflare Workers hosting: builds the text pages (npm run build), serves web/ as static files and runs
+// worker.js for /api/* (the sample download counter and its stats). Redeployed on every push to main.
+{
+  "name": "jobmarket-lens",
+  "main": "worker.js",
+  "compatibility_date": "2025-09-01",
+  "build": { "command": "npm run build" },
+  "assets": {
+    "directory": "./web",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  },
+  // The Upstash variables are set in the Cloudflare dashboard; keep them on each deploy.
+  "keep_vars": true,
+  "observability": { "enabled": true }
+}
