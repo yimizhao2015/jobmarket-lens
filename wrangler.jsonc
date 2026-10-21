@@ -12,6 +12,11 @@
     "not_found_handling": "404-page",
     "run_worker_first": ["/api/*"]
   },
+  // The site's addresses (Cloudflare creates their DNS records on deploy).
+  "routes": [
+    { "pattern": "www.jobmarketlens.com", "custom_domain": true },
+    { "pattern": "jobmarketlens.com", "custom_domain": true }
+  ],
   // The Upstash variables are set in the Cloudflare dashboard; keep them on each deploy.
   "keep_vars": true,
   "observability": { "enabled": true }
