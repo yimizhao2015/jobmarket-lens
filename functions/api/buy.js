@@ -30,8 +30,12 @@ export async function onRequestGet({ request, env }) {
     } }),
   });
   if (!r.ok) {
-    console.error("checkout failed:", r.status, await r.text());
-    return new Response("The checkout could not be opened. Please try again in a minute.", { status: 502 });
+    const detail = await r.text();
+    console.error("checkout failed:", r.status, detail);
+    // Lemon Squeezy's error title (never the key) helps tell a missing key from a wrong ID.
+    let why = "";
+    try { why = JSON.parse(detail).errors?.map(e => e.detail || e.title).join("; ") || ""; } catch {}
+    return new Response(`The checkout could not be opened. Please try again in a minute. (Lemon Squeezy ${r.status}${why ? ": " + why : ""})`, { status: 502 });
   }
   return new Response(null, { status: 303, headers: { Location: (await r.json()).data.attributes.url, "Cache-Control": "no-store" } });
 }
