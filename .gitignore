@@ -22,3 +22,5 @@ web/insights/
 data/data source.csv
 data/Job postings/
 data/products/
+# Local secrets for `wrangler pages dev`
+.dev.vars

@@ -215,12 +215,22 @@ a { color: var(--accent); }
 const EMBEDDED = /*DATA*/null;
 const NS = "Not specified";
 
+// Parses gzip-compressed JSON bytes (or plain JSON, if a host already decompressed them).
+async function gunzipJSON(bytes) {
+  if (bytes[0] !== 0x1f || bytes[1] !== 0x8b) return JSON.parse(new TextDecoder().decode(bytes));
+  return JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"))).text());
+}
+
 async function load() {
   if (typeof EMBEDDED === "string") {
     // gzip + base64: keeps the self-contained page small enough to publish with every posting inlined
-    const bytes = Uint8Array.from(atob(EMBEDDED), c => c.charCodeAt(0));
-    const text = await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"))).text();
-    return JSON.parse(text);
+    const D = await gunzipJSON(Uint8Array.from(atob(EMBEDDED), c => c.charCodeAt(0)));
+    // On the website the postings come as one file per posted week (D.chunks), each under the host's file-size limit.
+    if (D.chunks) {
+      const parts = await Promise.all(D.chunks.map(async c => gunzipJSON(new Uint8Array(await (await fetch("/postings/" + c)).arrayBuffer()))));
+      D.rows = parts.flat();
+    }
+    return D;
   }
   if (EMBEDDED) return EMBEDDED;
   const r = await fetch("data.json");

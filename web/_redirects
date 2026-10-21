@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects (same as the redirects in vercel.json).
+/template / 302
+/methodology /about/methodology 301
+/privacy /about/privacy 301

@@ -184,6 +184,28 @@ def main():
     payload = json.dumps(base64.b64encode(gzip.compress(raw_json, 9)).decode())
     body = tpl.replace("/*DATA*/null", payload)
     (ROOT / "web/artifact.html").write_text(body)
+
+    # The website's index.html loads the postings from web/postings/, one gzip file per posted week (the Monday
+    # it starts), so no file passes the host's 25 MB limit and unchanged weeks stay cached in the browser.
+    weeks = {}
+    for row in data["rows"]:
+        d = date.fromisoformat(row[fields.index("posted")][:10])
+        weeks.setdefault((d - timedelta(days=d.weekday())).isoformat(), []).append(row)
+    chunk_dir = ROOT / "web/postings"
+    chunk_dir.mkdir(exist_ok=True)
+    chunks = []
+    for wk in sorted(weeks):
+        name = f"postings-{wk}.json.gz"
+        blob = gzip.compress(json.dumps(weeks[wk], separators=(",", ":"), ensure_ascii=False).encode(), 9, mtime=0)
+        if not (chunk_dir / name).exists() or (chunk_dir / name).read_bytes() != blob:
+            (chunk_dir / name).write_bytes(blob)
+        chunks.append(name)
+    for old_file in chunk_dir.glob("postings-*.json.gz"):
+        if old_file.name not in chunks:
+            old_file.unlink()
+    site = {**data, "rows": [], "chunks": chunks}
+    site_json = json.dumps(site, separators=(",", ":"), ensure_ascii=False).encode()
+    body = tpl.replace("/*DATA*/null", json.dumps(base64.b64encode(gzip.compress(site_json, 9)).decode()))
     (ROOT / "web/index.html").write_text(
         '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'

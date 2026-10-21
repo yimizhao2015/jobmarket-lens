@@ -87,11 +87,15 @@ web/template.html            the dashboard page; build_dataset.py embeds the dat
 content/pages/*.md, content/insights/*.md   About, Methodology, Privacy and Insights articles in Markdown (edit at /admin)
 scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Vercel deploy (npm run build)
 web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages; stats.html
-api/                         Vercel functions: the sample download counter and its stats
+functions/api/, lib/         Cloudflare Pages functions: the sample download counter and its stats
+api/                         the same functions for Vercel, kept until the move to Cloudflare is finished
+web/postings/                the dashboard's postings, one gzip file per posted week (each under Cloudflare's 25 MB file limit)
+web/_redirects               Cloudflare Pages redirects (the same as those in vercel.json)
 web/site.css, web/share.js   shared style of the text pages; share buttons on articles
 .github/workflows/collect.yml weekly collection (Sundays 5:00 p.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
-vercel.json                  Vercel hosting: runs npm run build, serves web/, redeployed on every push
+vercel.json                  Vercel hosting, until the move: runs npm run build, serves web/, redeployed on every push.
+                             Cloudflare Pages uses the same settings: build command npm run build, output directory web
 ```
 
 Not in this repo: `data/lens.db` and `data/raw/` (private history), `web/data.json` (build output).
@@ -106,7 +110,7 @@ draft to hide it without deleting it; deleting removes it from the site (it stay
 www.jobmarketlens.com/admin/stats shows free sample downloads. The Get the Data button links to
 `/api/download?file=sample` (`api/download.js`), which counts the download in Upstash Redis and then sends the file;
 `api/stats.js` serves the counts only to a GitHub token that can edit this repo. The database is set by the
-`UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` environment variables in Vercel.
+`UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` environment variables in the hosting project (Vercel, then Cloudflare Pages).
 
 ## Run it yourself
 
