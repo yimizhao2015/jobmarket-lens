@@ -19,7 +19,7 @@ export async function onRequestGet({ request, env }) {
   const token = (request.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
   if (!token || !(await canEdit(token))) return json({ error: "Sign in with a GitHub token that can edit the site." }, 401);
   const db = store(env);
-  if (!db.configured) return json({ error: "The download counter has no database yet: add the Upstash variables to the Cloudflare Pages project." }, 503);
+  if (!db.configured) return json({ error: "The download counter has no database yet: add the Upstash variables in the Cloudflare Worker (Settings, Variables and Secrets)." }, 503);
 
   const days = [];
   for (let i = DAYS - 1; i >= 0; i--) days.push(today(new Date(Date.now() - i * 864e5)));
