@@ -1,5 +1,5 @@
 // Builds the text pages from the Markdown in content/ (edited in /admin): About, Methodology, Privacy,
-// the Insights index and every Insights article. Runs on each Vercel deploy (npm run build) and locally.
+// the Insights index and every Insights article. Runs on each Cloudflare deploy (npm run build) and locally.
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import { join, basename } from "node:path";
 import { load } from "js-yaml";
@@ -57,7 +57,6 @@ ${og ? `<meta property="og:type" content="${og}">
 ` : ""}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/site.css">
-<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="page">
@@ -109,9 +108,8 @@ for (const old of ["methodology.html", "privacy.html"]) rmSync(join(ROOT, "web",
         <p class="price">${esc(p.price)}</p>
         <ul>${(p.features || []).map(f => `<li>${esc(f)}</li>`).join("")}</ul>
         ${p.link ? `<a class="plan-btn" href="${esc(p.link)}"${/^\/(downloads\/|api\/download)/.test(p.link)
-                   // a file download is not a page view: /api/download counts it for /admin/stats, and it is
-                   // also sent to Vercel Analytics as a custom event
-                   ? ` download onclick="window.va && va('event', { name: 'Download', data: { plan: '${esc(p.name).replace(/'/g, "")}' } })"` : ""}>${esc(p.button)}</a>`
+                   // a file download is not a page view: /api/download counts it for /admin/stats
+                   ? " download" : ""}>${esc(p.button)}</a>`
                  : `<span class="plan-btn off" aria-disabled="true">${esc(p.button)}</span><span class="soon">Coming soon</span>`}
       </li>`;
   out("data.html", page({

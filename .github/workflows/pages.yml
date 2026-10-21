@@ -1,4 +1,4 @@
-# The dashboard is hosted on Vercel (www.jobmarketlens.com). GitHub Pages only serves pages/, a redirect there.
+# The dashboard is hosted on Cloudflare (www.jobmarketlens.com). GitHub Pages only serves pages/, a redirect there.
 name: Publish site
 
 on:

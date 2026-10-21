@@ -1,4 +1,4 @@
-# Admin area for www.jobmarketlens.com/admin (Sveltia CMS). Every save is a commit to main; Vercel rebuilds the site.
+# Admin area for www.jobmarketlens.com/admin (Sveltia CMS). Every save is a commit to main; Cloudflare rebuilds the site.
 backend:
   name: github
   repo: yimizhao2015/jobmarket-lens

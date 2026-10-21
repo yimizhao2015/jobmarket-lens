@@ -43,7 +43,7 @@ Weekly run (GitHub Actions on Sundays at 5:00 p.m. Eastern Time, or scripts/run_
   3. add them to the history: first seen / last seen per posting          -> data/lens.db
   4. normalize and rebuild the dashboard and CSV files                    -> web/index.html, data/*.csv
   5. upload the updated history back to the private repo
-  6. commit the dashboard and CSV files here; Vercel republishes the site
+  6. commit the dashboard and CSV files here; Cloudflare republishes the site
 ```
 
 Collection is incremental. Each company's career site is still listed every week, but a posting already in
@@ -85,17 +85,15 @@ scripts/run_local.sh         the whole weekly run on your own computer
 data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
 content/pages/*.md, content/insights/*.md   About, Methodology, Privacy and Insights articles in Markdown (edit at /admin)
-scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Vercel deploy (npm run build)
+scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Cloudflare deploy (npm run build)
 web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages; stats.html
 wrangler.jsonc, worker.js    Cloudflare Workers hosting: runs npm run build, serves web/, sends /api/* to functions/api/
 functions/api/, lib/         the sample download counter and its stats (used by worker.js)
-api/                         the same functions for Vercel, kept until the move to Cloudflare is finished
 web/postings/                the dashboard's postings, one gzip file per posted week (each under Cloudflare's 25 MB file limit)
-web/_redirects               Cloudflare redirects (the same as those in vercel.json)
+web/_redirects               Cloudflare redirects
 web/site.css, web/share.js   shared style of the text pages; share buttons on articles
 .github/workflows/collect.yml weekly collection (Sundays 5:00 p.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
-vercel.json                  Vercel hosting, until the move: runs npm run build, serves web/, redeployed on every push.
 ```
 
 Not in this repo: `data/lens.db` and `data/raw/` (private history), `web/data.json` (build output).
@@ -104,13 +102,13 @@ Not in this repo: `data/lens.db` and `data/raw/` (private history), `web/data.js
 
 www.jobmarketlens.com/admin edits the Insights articles and the text pages. Sign in with **Sign In Using Access
 Token**: a GitHub fine-grained personal access token for `yimizhao2015/jobmarket-lens` with *Contents: Read and
-write*. Each save is a commit to `main`, and Vercel rebuilds the site in a minute or two. Mark an article as a
+write*. Each save is a commit to `main`, and Cloudflare rebuilds the site in a minute or two. Mark an article as a
 draft to hide it without deleting it; deleting removes it from the site (it stays in the Git history).
 
 www.jobmarketlens.com/admin/stats shows free sample downloads. The Get the Data button links to
 `/api/download?file=sample` (`api/download.js`), which counts the download in Upstash Redis and then sends the file;
 `api/stats.js` serves the counts only to a GitHub token that can edit this repo. The database is set by the
-`UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` environment variables in the hosting project (Vercel, then Cloudflare Pages).
+`UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` variables in the Cloudflare Worker (Settings, then Variables and Secrets).
 
 ## Run it yourself
 

@@ -2,15 +2,15 @@
 title: "Privacy Policy"
 page_title: "Privacy Policy"
 description: "How JobMarket Lens handles visitor data."
-dateline: "Effective October 19, 2026"
+dateline: "Updated October 20, 2026"
 ---
 
 You can use JobMarket Lens without an account, and it does not ask for personal information.
 
 ## What is collected
 
-- **Visitor statistics:** Vercel Web Analytics counts page views, referrers, countries and device types without cookies and without identifying you.
-- **Server logs:** our host, Vercel, briefly processes technical data such as your IP address to deliver pages and prevent abuse.
+- **Visitor statistics:** Cloudflare Web Analytics counts page views, referrers, countries and device types without cookies and without identifying you.
+- **Server logs:** our host, Cloudflare, briefly processes technical data such as your IP address to deliver pages and prevent abuse.
 - **Fonts:** pages load fonts from Google Fonts, which receives your IP address.
 - **Contact form:** the name, email and message you send are delivered by Web3Forms to the site owner and used only to reply.
 

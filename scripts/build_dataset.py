@@ -211,8 +211,7 @@ def main():
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
         '<meta name="description" content="What America\'s largest employers are hiring for: S&amp;P 500 job postings by '
         'occupation, skills, degree, major, pay and location, updated weekly.">'
-        '<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>'
-        '<script defer src="/_vercel/insights/script.js"></script></head>\n'
+        '</head>\n'
         '<body style="margin:0">\n' + body + "\n</body></html>\n")
 
     (ROOT / "data/normalized").mkdir(parents=True, exist_ok=True)
