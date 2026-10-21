@@ -24,3 +24,4 @@ data/Job postings/
 data/products/
 # Local secrets for `wrangler pages dev`
 .dev.vars
+.wrangler/
