@@ -31,4 +31,4 @@ plans:
 
 Each posting is one row with 24 columns: Posting ID, Job Title, Company name, Company ticker, Occupation SOC code, Occupation SOC group, Job level, Job type, Work arrangement, City, State, Country, Number of locations, Posted date, Pay, Minimum degree required, Major required, Accepts equivalent experience, Years of experience, Skills, Licenses and certifications, Status, Last seen, and URL. Fields a posting does not state read "Not specified". How each field is derived is described on the [Methodology](/about/methodology) page.
 
-The data is refreshed every Sunday afternoon. Job postings remain the property of the companies that published them. Questions about the data? [Contact us](/contact).
+The data is refreshed every Monday morning. Job postings remain the property of the companies that published them. Questions about the data? [Contact us](/contact).

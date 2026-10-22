@@ -36,7 +36,7 @@ Only postings dated October 5, 2026 (`posted_from` in config) through the last c
 ## How the data is collected and stored
 
 ```
-Weekly run (GitHub Actions on Sundays at noon Eastern Time, or scripts/run_local.sh on your own computer)
+Weekly run (GitHub Actions on Mondays at 2:17 a.m. Eastern Time, or scripts/run_local.sh on your own computer)
   1. download the posting history (lens.db.gz) from the private repo yimizhao2015/jobmarket-lens-data
   2. collect every company's current postings from its career site       -> data/raw/<date>/
   3. add them to the history: first seen / last seen per posting          -> data/lens.db
@@ -91,7 +91,7 @@ functions/api/, lib/         the sample download counter and its stats (used by 
 web/postings/                the dashboard's postings, one gzip file per posted week (each under Cloudflare's 25 MB file limit)
 web/_redirects               Cloudflare redirects
 web/site.css, web/share.js   shared style of the text pages; share buttons on articles
-.github/workflows/collect.yml weekly collection (Sundays at noon Eastern, or run it by hand from the Actions tab)
+.github/workflows/collect.yml weekly collection (Mondays at 2:17 a.m. Eastern, or run it by hand from the Actions tab)
 .github/workflows/pages.yml  keeps the old GitHub Pages address redirecting to www.jobmarketlens.com
 ```
 

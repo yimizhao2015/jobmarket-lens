@@ -11,7 +11,7 @@ How postings are collected, how each field is derived, and what the numbers can 
 - **Companies:** all S&P 500 companies except Berkshire Hathaway; companies with two share classes count once (499 in all).
 - **Sources:** each company's official career site only; read through its recruiting platform's public job feed or the structured job data on each posting page.
 - **Rules:** robots.txt and crawl delays are respected. A site that refuses access is recorded as blocked; nothing is estimated or filled in.
-- **Schedule:** every Sunday at noon, Eastern Time, so each Monday-to-Sunday week is complete. The date at the bottom of the dashboard shows the latest update.
+- **Schedule:** every Monday at 2:17 a.m. Eastern Time, right after each Monday-to-Sunday week ends, so the week is complete. The date at the bottom of the dashboard shows the latest update.
 - **Scope:** the first full data collection covering every reachable company was on October 16, 2026, up to the newest 3,000 per company. Postings without a date are left out. The data covers postings dated October 5, 2026 (the first full Monday-to-Sunday week) through the end of the latest complete week.
 - **Open and closed:** a posting missing from a later successful collection of its company is marked closed, with the date it was last seen.
 
