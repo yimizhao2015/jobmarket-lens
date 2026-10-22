@@ -82,6 +82,14 @@ jobs:
           gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
           # Paid downloads (Get the Data page): replaced every week
           gh release upload data -R "$DATA_REPO" "data/products/jobmarketlens-latest-week.zip" "data/products/jobmarketlens-full-archive.zip" --clobber
+          # Source coverage (each company's collection status) is kept out of the zips; commit it to the data repo
+          rm -rf cov-repo
+          git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${DATA_REPO}" cov-repo
+          cp "data/data source.csv" "cov-repo/Source coverage.csv"
+          git -C cov-repo add "Source coverage.csv"
+          git -C cov-repo -c user.name="jobmarket-lens bot" -c user.email="actions@users.noreply.github.com" \
+            commit -q -m "Source coverage $(date -u +%F)" && git -C cov-repo push -q || echo "Source coverage unchanged"
+          rm -rf cov-repo
       - name: Commit dashboard
         run: |
           git config user.name "jobmarket-lens bot"
