@@ -16,7 +16,6 @@ plans:
     price: $1.99
     features:
       - Complete current week clean dataset
-      - Source coverage report
       - Instant .zip download
     button: Get Latest
     link: ''
@@ -24,7 +23,6 @@ plans:
     price: $19.99
     features:
       - All historical runs (Oct 5, 2026 – Present)
-      - Full source coverage
       - Instant .zip download
     button: Get Full Archive
     link: ''
@@ -32,8 +30,8 @@ plans:
 
 ## What's in the files
 
-Each posting is one row with 24 columns: Posting ID, Title, Company, Ticker, SOC code, SOC group, Job level, Job type, Work arrangement, City, State, Country, Number of locations, Posted, Pay, Minimum degree, Major, Accepts equivalent experience, Years of experience, Skills, Licenses and certifications, Status, Last seen and URL. Fields a posting does not state read "Not specified". How each field is derived is described on the [Methodology](/about/methodology) page.
+Each posting is one row with 24 columns: Posting ID, Job Title, Company name, Company ticker, Occupation SOC code, Occupation SOC group, Job level, Job type, Work arrangement, City, State, Country, Number of locations, Posted date, Pay, Minimum degree required, Major required, Accepts equivalent experience, Years of experience, Skills, Licenses and certifications, Status, Last seen, and URL. Fields a posting does not state read "Not specified". How each field is derived is described on the [Methodology](/about/methodology) page.
 
 The source coverage report lists all 499 companies in scope, their career site, the collection platform and status, and how many postings were collected.
 
-The data is refreshed every Sunday evening. Job postings remain the property of the companies that published them. Questions about the data? [Contact us](/contact).
+The data is refreshed every Sunday afternoon. Job postings remain the property of the companies that published them. Questions about the data? [Contact us](/contact).
