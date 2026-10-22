@@ -4,7 +4,7 @@ Reads web/data.json (written by build_dataset.py) and writes:
   data/data source.csv   one row per S&P 500 company in scope, with its collection status
   data/Job postings/Job postings YYYY-MM part N.csv
                          one row per posting, newest first, one file per month posted, in parts of ROWS_PER_FILE
-  data/products/jobmarketlens-latest-week.zip    postings open in the latest run ($1.99)
+  data/products/jobmarketlens-latest-week.zip    postings posted in the latest complete week ($1.99)
   data/products/jobmarketlens-full-archive.zip   every posting in the window (Oct 5 through the last complete week) ($19.99)
   web/downloads/jobmarketlens-sample.csv         1,000 random postings, free on the site
 The CSV files under data/ and the zips are not committed to this public repo; the workflow uploads the zips to
@@ -14,7 +14,7 @@ import csv
 import json
 import random
 import zipfile
-from datetime import date
+from datetime import date, timedelta
 from collections import Counter
 from pathlib import Path
 
@@ -116,7 +116,7 @@ def main():
         for part, start in enumerate(range(0, len(month_rows), ROWS_PER_FILE), 1):
             write(post_dir / f"Job postings {month} part {part}.csv", month_rows[start:start + ROWS_PER_FILE])
 
-    # Products: latest week (postings open in the latest run) and the full archive.
+    # Products: latest week and the full archive.
     run = max((s["run_date"] for s in latest.values() if s.get("run_date")), default="")
     prod = out_dir / "products"
     prod.mkdir(exist_ok=True)
@@ -125,11 +125,17 @@ def main():
               f"through {long(D.get('posted_to') or run)}.\n"
               "Field definitions: www.jobmarketlens.com/about/methodology\n"
               "Job postings remain the property of the companies that published them.\n")
+    # Latest week: every posting posted in the last complete Monday-to-Sunday week, open or closed, so its row
+    # count equals that week's bar in Postings over time
+    week_to = D.get("posted_to") or run
+    week_from = (date.fromisoformat(week_to) - timedelta(days=6)).isoformat()
+    week_rows = [r for r in rows if r["posted"] and week_from <= r["posted"][:10] <= week_to]
     week = prod / "latest week.csv"
-    write(week, [r for r in rows if r["open"]])
+    write(week, week_rows)
     with zipfile.ZipFile(prod / "jobmarketlens-latest-week.zip", "w", zipfile.ZIP_DEFLATED) as z:
-        z.write(week, f"Job postings {run}.csv")
-        z.writestr("README.txt", readme)
+        z.write(week, f"Job postings {week_from} to {week_to}.csv")
+        z.writestr("README.txt", readme + f"This file: the {len(week_rows):,} postings posted {long(week_from)} "
+                                          f"through {long(week_to)}, the latest complete week, open or closed.\n")
     week.unlink()
     with zipfile.ZipFile(prod / "jobmarketlens-full-archive.zip", "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(post_dir.glob("*.csv")):
