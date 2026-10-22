@@ -33,6 +33,6 @@ Anything a posting does not state shows as "Not specified".
 ## Limitations
 
 - Postings measure hiring intent, not hires.
-- Coverage is incomplete; the Source Coverage table on the dashboard shows each company's status.
+- Coverage is incomplete: some career sites block automated access or have no online job board, and those companies are left out rather than estimated.
 - Companies differ in how much detail they publish, and rule-based classification makes occasional mistakes.
 - Posted pay ranges are what employers advertise, not what people earn.

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a filter rail across the top, a summary strip, then a grid of small single-question panels;
-   coverage and the posting table close the page. Color is a cool optical blue on blue-tinted neutrals. */
+   the posting table closes the page. Color is a cool optical blue on blue-tinted neutrals. */
 :root {
   --bg: #f4f6f9;
   --panel: #ffffff;
@@ -195,12 +195,6 @@ a { color: var(--accent); }
     <div class="panel wide"><div><h2>Postings over Time</h2><p class="sub" id="month-sub"></p></div><div id="c-month"></div></div>
   </section>
 
-  <section class="panel wide" aria-labelledby="cov-h">
-    <div><h2 id="cov-h">Source Coverage</h2><p class="sub" id="cov-sub">Every S&amp;P 500 company in scope and the state of collection from its official career site</p></div>
-    <div class="tbl-wrap"><table id="cov"></table></div>
-    <div class="pager" id="cov-pager"></div>
-  </section>
-
   <section class="panel wide" aria-labelledby="tbl-h">
     <div class="panel-head"><div><h2 id="tbl-h">Job Postings</h2><p class="sub" id="tbl-sub"></p></div></div>
     <div class="tbl-wrap"><table id="tbl"></table></div>
@@ -208,7 +202,7 @@ a { color: var(--accent); }
   </section>
 
   <section class="panel wide method" aria-label="Note">
-    <p>Note. Data sources are job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Sites that refuse automated access are shown as blocked under Source Coverage, not estimated. Updated weekly, latest on <span id="n-run"></span>.</p>
+    <p>Note. Data sources are job postings published on the official career sites of S&amp;P 500 companies (constituents as of <span id="n-const"></span>; Berkshire Hathaway is excluded). Sites that refuse automated access are left out, not estimated. Updated weekly, latest on <span id="n-run"></span>.</p>
   </section>
   <footer class="copyright"><nav class="site-nav foot" aria-label="Footer"><a href="https://www.jobmarketlens.com/" aria-current="page">Dashboard</a><a href="https://www.jobmarketlens.com/insights">Insights</a><a href="https://www.jobmarketlens.com/about">About</a><a class="cta" href="https://www.jobmarketlens.com/data">Get the Data</a><a href="https://www.jobmarketlens.com/contact">Contact Us</a></nav>© 2026 JobMarket Lens. All rights reserved.</footer>
 </div>
@@ -258,7 +252,6 @@ load().then(D => {
   const lastRun = longDate(lastRunISO);
   const shortDate = d => new Date(d + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
   const weekOf = d => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() - (t.getUTCDay() + 6) % 7); const w = t.toISOString().slice(0, 10); return w < D.posted_from ? D.posted_from : w; };
-  const sampleCos = [...new Set(rows.filter(r => r.src === "page-read").map(r => r.co))];
   const nCos = new Set(rows.map(r => r.co)).size;
   const since = new Date(D.posted_from + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
   document.getElementById("n-run").textContent = lastRun;
@@ -433,9 +426,9 @@ load().then(D => {
     drawTable();
   }
 
-  const COV_PAGE = 10, POST_PAGE = 25;
+  const POST_PAGE = 25;
   // The tables show a sample; the full data is on the Get the Data page.
-  const COV_SAMPLE = 50, POST_SAMPLE = 1000;
+  const POST_SAMPLE = 1000;
   let tblList = [], tblPage = 0;
   function pager(id, total, page, size, go) {
     const el = document.getElementById(id);
@@ -468,38 +461,6 @@ load().then(D => {
     const amt = r.pay_lo === r.pay_hi ? f(r.pay_lo) : `${f(r.pay_lo)}–${f(r.pay_hi)}`;
     return `${amt} ${{ hour: "per hour", month: "per month", year: "per year" }[r.pay_period] || ""}`.trim();
   }
-
-  // coverage
-  const latest = {};
-  (D.snapshots || []).forEach(s => latest[s.company] = s);
-  const byCo = count(rows, "co");
-  const covHead = `<thead><tr><th>#</th><th>Company</th><th>Career site</th><th>Platform</th><th>Status</th><th>Postings</th></tr></thead>`;
-  const covRows = D.companies.map(c => {
-      const s = latest[c.ticker];
-      let pill;
-      if (s && s.status === "ok") pill = `<span class="pill ok">Collected ${s.run_date}</span>`;
-      else if (s && s.status === "blocked") pill = `<span class="pill blocked">Blocked by site</span>`;
-      else if (sampleCos.includes(c.ticker)) pill = `<span class="pill sample">Page-read sample</span>`;
-      else if (s && s.status === "empty") pill = `<span class="pill pending">No postings returned</span>`;
-      else if (s && s.status === "error") pill = `<span class="pill blocked">Collector error</span>`;
-      else if (c.coverage === "blocked") pill = `<span class="pill blocked">Blocked by site</span>`;
-      else if (c.coverage === "no_job_board") pill = `<span class="pill pending">No online job board</span>`;
-      else if (c.adapter === "none") pill = `<span class="pill pending">Not collected yet</span>`;
-      else pill = `<span class="pill pending">Collector ready, not yet run</span>`;
-      const host = c.career_site ? new URL(c.career_site).hostname : "";
-      return `<tr><td class="num">${c.rank}</td><td>${c.name} <span class="more">${c.ticker}</span></td>
-        <td>${c.career_site ? `<a href="${c.career_site}" target="_blank" rel="noopener">${host}</a>` : "–"}</td><td>${c.adapter}</td><td>${pill}</td>
-        <td class="num">${fmt(byCo[c.ticker] || 0)}${s && s.site_total ? ` <span class="more">of ${fmt(s.site_total)} listed</span>` : ""}</td></tr>`;
-    });
-  const covTotal = covRows.length;
-  covRows.splice(COV_SAMPLE);
-  document.getElementById("cov-sub").innerHTML += `; Showing ${fmt(covRows.length)} of ${fmt(covTotal)} companies. <a href="https://www.jobmarketlens.com/data">Get the Data</a>`;
-  let covPage = 0;
-  function drawCov() {
-    document.getElementById("cov").innerHTML = covHead + "<tbody>" + covRows.slice(covPage * COV_PAGE, (covPage + 1) * COV_PAGE).join("") + "</tbody>";
-    pager("cov-pager", covRows.length, covPage, COV_PAGE, p => { covPage = p; drawCov(); document.getElementById("cov-h").scrollIntoView({ block: "start" }); });
-  }
-  drawCov();
 
   render();
 });

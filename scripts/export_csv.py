@@ -4,8 +4,8 @@ Reads web/data.json (written by build_dataset.py) and writes:
   data/data source.csv   one row per S&P 500 company in scope, with its collection status
   data/Job postings/Job postings YYYY-MM part N.csv
                          one row per posting, newest first, one file per month posted, in parts of ROWS_PER_FILE
-  data/products/jobmarketlens-latest-week.zip    postings open in the latest run + data source.csv ($1.99)
-  data/products/jobmarketlens-full-archive.zip   every posting in the window (Oct 5 through the last complete week) + data source.csv ($19.99)
+  data/products/jobmarketlens-latest-week.zip    postings open in the latest run ($1.99)
+  data/products/jobmarketlens-full-archive.zip   every posting in the window (Oct 5 through the last complete week) ($19.99)
   web/downloads/jobmarketlens-sample.csv         1,000 random postings, free on the site
 The CSV files under data/ and the zips are not committed to this public repo; the workflow uploads the zips to
 the private data repo. CSV files start with a UTF-8 byte order mark so Excel opens them with the right characters.
@@ -116,7 +116,7 @@ def main():
         for part, start in enumerate(range(0, len(month_rows), ROWS_PER_FILE), 1):
             write(post_dir / f"Job postings {month} part {part}.csv", month_rows[start:start + ROWS_PER_FILE])
 
-    # Products: latest week (postings open in the latest run) and the full archive, each with the coverage list.
+    # Products: latest week (postings open in the latest run) and the full archive.
     run = max((s["run_date"] for s in latest.values() if s.get("run_date")), default="")
     prod = out_dir / "products"
     prod.mkdir(exist_ok=True)
@@ -129,13 +129,11 @@ def main():
     write(week, [r for r in rows if r["open"]])
     with zipfile.ZipFile(prod / "jobmarketlens-latest-week.zip", "w", zipfile.ZIP_DEFLATED) as z:
         z.write(week, f"Job postings {run}.csv")
-        z.write(out_dir / "data source.csv", "Source coverage.csv")
         z.writestr("README.txt", readme)
     week.unlink()
     with zipfile.ZipFile(prod / "jobmarketlens-full-archive.zip", "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(post_dir.glob("*.csv")):
             z.write(p, p.name)
-        z.write(out_dir / "data source.csv", "Source coverage.csv")
         z.writestr("README.txt", readme)
 
     # Free sample: 1,000 postings drawn at random (the same draw all week), sorted by company and date.
