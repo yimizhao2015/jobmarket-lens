@@ -122,7 +122,7 @@ def main():
                 seed_rows.append(seed_to_raw(s))
 
     # The window ends with the last complete Monday-to-Sunday week: the Sunday on or before the latest
-    # run (the run itself is on Sunday evening), so a partly collected week is never shown.
+    # run (the run itself is on Sunday at noon), so a partly collected week is never shown.
     last_run = max((s["run_date"] for s in snaps), default=date.today().isoformat())
     lr = date.fromisoformat(last_run)
     posted_to = (lr - timedelta(days=(lr.weekday() + 1) % 7)).isoformat()
