@@ -1,9 +1,9 @@
 ---
-title: "What S&P 500 companies are hiring for: a first look"
+title: 'What S&P 500 companies are hiring for: a first look'
 date: 2026-10-19
-author: "JobMarketLens Reviews"
-summary: "Two full weeks of postings: sales and management roles lead, four in ten postings that state a degree name a major, and a third disclose pay."
-description: "A first look at 144,868 job postings from 425 S&P 500 companies in the weeks of October 5 and October 12, 2026: occupations, pay, degrees, majors, skills and work arrangements."
+author: JobMarketLens Reviews
+summary: 'Two full weeks of postings: sales and management roles lead, four in ten postings that state a degree name a major, and a third disclose pay.'
+description: 'A first look at 144,868 job postings from 425 S&P 500 companies in the weeks of October 5 and October 12, 2026: occupations, pay, degrees, majors, skills and work arrangements.'
 draft: false
 ---
 
@@ -57,7 +57,7 @@ Of the 63,419 postings that state a work arrangement, 37% are remote or hybrid a
 
 ## Where the jobs are
 
-67% of postings are in the United States; most of the rest reflect these companies' global workforces. Within the U.S., California (9,473), Texas (9,267), Florida (4,930) and New York (4,542) have the most postings. Among postings that state experience, the median requirement is 4 years.
+70% of postings are in the United States; most of the rest reflect these companies' global workforces. Within the U.S., California (10,538), Texas (9,859), Florida (5,252) and New York (4,962) have the most postings. Among postings that state experience, the median requirement is 4 years.
 
 ## About these numbers
 
