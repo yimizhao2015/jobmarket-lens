@@ -19,7 +19,7 @@ How postings are collected, how each field is derived, and what the numbers can 
 
 | Field | How it is derived |
 | --- | --- |
-| Occupation | 2018 SOC major group, from rules applied to the job title (company job family as fallback); otherwise Unclassified |
+| Occupation | 2018 Standard Occupational Classification (SOC) major group, from rules applied to the job title (company job family as fallback); otherwise Unclassified |
 | Job level | Title keywords, then the company's level label, then years of experience |
 | Degree and major | Lowest degree in the required qualifications, and the fields of study named after it, grouped into 30 broad majors |
 | Experience | The first years-of-experience requirement stated |
