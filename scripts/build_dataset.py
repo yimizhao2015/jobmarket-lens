@@ -58,7 +58,7 @@ def normalize(r):
     lic = skills.find_licenses(text + " " + " ".join(r.get("certs_given", [])))
     major = majors.find_majors(text)
     locs = r.get("locations") or []
-    country, state, city = parse.parse_location(locs[0]) if locs else (None, None, None)
+    country, state, city = parse.parse_location(locs[0], set(r.get("prefer") or ())) if locs else (None, None, None)
     posted = r.get("posted_date")
     basis = "posted"
     if not posted:
@@ -141,6 +141,20 @@ def main():
             dropped[r["company"]] += 1
             continue
         keep.append(r)
+    # The countries each company's other locations clearly name; a bare city name found in several
+    # countries ("Hyderabad", "San Jose") is settled toward these
+    seen = Counter()
+    for r in keep:
+        locs = r.get("locations") or []
+        country = parse.parse_location(locs[0])[0] if locs else None
+        if country:
+            seen[r["company"], country] += 1
+    prefer = {}
+    for (co, country), n in seen.items():
+        if n >= 3:
+            prefer.setdefault(co, []).append(country)
+    for r in keep:
+        r["prefer"] = prefer.get(r["company"])
     # Normalizing is regex-heavy; spread it over the machine's cores.
     with Pool() as pool:
         out = pool.map(normalize, keep, chunksize=200)

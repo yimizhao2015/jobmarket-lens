@@ -26,7 +26,7 @@ How postings are collected, how each field is derived, and what the numbers can 
 | Skills, licenses | Matched against fixed dictionaries |
 | Pay | The posted range; U.S. dollar ranges are annualized for comparison (hourly × 2,080, monthly × 12) |
 | Work arrangement, schedule | Remote, hybrid or on-site; full-time, part-time, temporary or internship, as stated |
-| Location | The first listed location, split into city, state and country |
+| Location | The first listed location, split into city, state and country. When a site gives only a city name, the state and country come from the [GeoNames](https://www.geonames.org) place list (CC BY 4.0), and only when the name clearly points to one place; otherwise they are not filled in |
 
 Anything a posting does not state shows as "Not specified".
 

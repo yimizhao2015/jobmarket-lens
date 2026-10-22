@@ -5,6 +5,8 @@ nothing is imputed.
 """
 import re
 
+from normalize import places
+
 NS = "Not specified"
 
 # ---------------------------------------------------------------- required vs preferred
@@ -218,6 +220,12 @@ US_STATES = {
     "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming", "PR": "Puerto Rico",
 }
 _STATE_BY_NAME = {v.lower(): k for k, v in US_STATES.items()}
+_STATE_BY_NAME.update({                                       # Polish, as TJX's site writes them
+    "kalifornia": "CA", "floryda": "FL", "teksas": "TX", "pensylwania": "PA", "nowy jork": "NY", "wirginia": "VA",
+    "karolina północna": "NC", "karolina południowa": "SC", "nowy meksyk": "NM", "nowe jersey": "NJ",
+    "wirginia zachodnia": "WV", "dakota północna": "ND", "dakota południowa": "SD", "nowy hampshire": "NH",
+    "luizjana": "LA", "kolorado": "CO", "missisipi": "MS", "kentucky": "KY", "georgia": "GA", "portoryko": "PR",
+})
 COUNTRIES = {
     "US": "United States", "USA": "United States", "UNITED STATES": "United States",
     "UNITED STATES OF AMERICA": "United States", "CA": "Canada", "CAN": "Canada", "CANADA": "Canada",
@@ -274,8 +282,8 @@ def _city(c):
     return c.title() if c.isupper() and len(c) > 3 else c
 
 
-def parse_location(loc):
-    """Return (country, us_state_code_or_None, city_or_None) from one location string."""
+def _parse_rules(loc):
+    """(country, us_state_code_or_None, city_or_None) from the common location layouts."""
     if not loc:
         return None, None, None
     s = re.sub(r"\s+", " ", loc).strip()
@@ -333,3 +341,169 @@ def parse_location(loc):
         return "United States", _state(parts[i]), _city(parts[i - 1])
     city = parts[0] if (len(parts) > 1 or country is None) else None
     return country, state, _city(city)
+
+
+def parse_location(loc, prefer=None):
+    """Return (country, us_state_code_or_None, city_or_None) from one location string. prefer: countries the
+    company's other postings name, used to settle a city name found in several countries."""
+    country, state, city = _parse_rules(loc)
+    if (country == "United States" and state in COUNTRIES and city and not places.city(city, country, state)
+            and not re.search(r"united states|\bUSA?\b|" + US_STATES[state], loc, re.I)):
+        hit = places.city(city, COUNTRIES[state])           # "CA-Toronto", "DE-Munich": the code is a country
+        if hit and (not prefer or hit[0] in prefer):
+            return hit[0], None, hit[2]
+    if loc and (not country or (country == "United States" and not state)):
+        found = _parse_loose(loc, prefer)
+        if found and (not country or found[0] == country):
+            return found[0], found[1] or state, found[2]
+    return country, state, city
+
+
+_GENERIC = re.compile(r"^(dialysis|office|offices|campus|plant|center|centre|site|headquarters|hq|building|"
+                      r"store|warehouse|facility|division|region|acute|hub|branch|home|main|pharmacy|inc|llc|l\.l\.c|remote|"
+                      r"plaza|outlets?|mall|resort|hotel|hospital|clinic|lab|labs|laboratory)\.?$", re.I)
+
+
+def _plain_city(words):
+    """A city name from leftover words when the place list has no match: short, and not a site label."""
+    if not words or len(words) > 3 or any(_GENERIC.match(x) or re.search(r"\d", x) for x in words):
+        return None
+    return _city(" ".join(words))
+
+
+def _country_token(t):
+    """Country for a code or name token like "USA", "IND", "Canada" (not two-letter codes, which clash with states)."""
+    t = t.strip(" .")
+    if t.upper() in ("US", "USA"):
+        return "United States"
+    if len(t) > 2:
+        return places.country(t) or (COUNTRIES.get(t.upper()) if len(t) > 3 or t.isupper() else None)
+    return None
+
+
+def _parse_loose(loc, prefer=None):
+    """Fallback for layouts the rules miss: "USA:WA:Kirkland:...", "USA > OH > Lockbourne", "USA.VA.Reston",
+    "USA PR Cayey", "Wilmington NC USA", "Midland (MI, USA)", country names in other languages, and plain city
+    names, which are looked up in the GeoNames place list (normalize/places.py)."""
+    s = re.sub(r"\s+", " ", loc).strip().replace("\u2013", "-").replace("\u2014", "-")
+    s = re.sub(r"\+\d+ more\W*$", "", s)
+    m = re.search(r"\(([^)]*)\)", s)
+    if m:                                                   # "Midland (MI, USA)", "UGG ... (Aurora, IL)"
+        inner = _parse_loose(m.group(1), prefer) or _parse_rules(m.group(1))
+        if inner and inner[0]:
+            outside = _parse_loose(s[: m.start()] + s[m.end():], prefer)
+            c = inner[2] if inner[2] and not _state(inner[2]) and not _country_token(inner[2]) else None
+            if not c and outside and outside[0] in (None, inner[0]):
+                c = outside[2]
+            return inner[0], inner[1], c
+        s = (s[: m.start()] + " " + s[m.end():]).strip()
+    if " " not in s and re.match(r"[A-Za-z]{2,3}\.[^.]", s):
+        s = s.replace(".", ",")                             # "USA.VA.Reston", "IND.Chennai"
+    if re.match(r"usa\b", s, re.I):                        # "Usa Tx", "Usa-Ca": state codes after USA
+        s = re.sub(r"\b([A-Za-z]{2})\b", lambda m: m.group(1).upper() if m.group(1).upper() in US_STATES else m.group(1), s)
+    parts = [p.strip(" .,-#_") for p in re.split(r"[,;:>|/]| - |\s-\s?|\s?-\s", s)]
+    parts = [p for p in parts if p and not re.fullmatch(r"[A-Z]?\d[\dA-Z -]{2,9}", p) and not re.match(r"\d+[A-Za-z]?\s", p)]
+    if not parts:
+        return None
+    if "-" in parts[0]:                                     # "US-TX-HOUSTON-575 ...", "OH-Dublin-Cardinal Place"
+        hp = [p.strip() for p in parts[0].split("-") if p.strip()]
+        if _country_token(hp[0]) or (hp[0].isupper() and len(hp[0]) == 2):
+            parts = hp + parts[1:]
+    m = re.search(r"\b(?:located|based) .*\bin ([A-Z][\w' .]+?)\W*$", parts[0])
+    if m:                                                   # "This position is located at our plant in Azusa"
+        parts[0] = m.group(1)
+    country = state = None
+    iso2 = []                                               # leading two-letter codes: a state, or a country
+    rest = []
+    for i, p in enumerate(parts):
+        words = p.split()
+        whole = _country_token(p)
+        if whole and not country:
+            country = whole
+            continue
+        if len(p) == 2 and p.isupper() and (p not in US_STATES or p in COUNTRIES):
+            iso2.append(p)                                  # "CA", "IN", "DE": a state or a country
+            continue
+        if _state(p) and (p.isupper() or len(p) > 2) and not state:
+            state = _state(p)
+            continue
+        # country or state words at either end of a part: "USA PR Cayey", "Wilmington NC USA", "Missouri USA";
+        # a state name leads only when the part isn't itself a city ("Tennessee CVS Pharmacy", not "New York City")
+        is_city = places._key(p) in places._CITIES
+        changed = True
+        while words and changed:
+            changed = False
+            for idx in (0, -1):
+                if not words:
+                    break
+                for n in (4, 3, 2, 1):
+                    seg = words[:n] if idx == 0 else words[-n:]
+                    if len(seg) < n:
+                        continue
+                    t = " ".join(seg)
+                    c = _country_token(t)
+                    if c and not country:
+                        country = c
+                    elif n == 1 and idx == 0 and len(words) > 1 and t in US_STATES and t in COUNTRIES and not country:
+                        iso2.append(t)                      # "IN Hyderabad": India or Indiana
+                    elif not state and ((n == 1 and t.isupper() and t in US_STATES) or
+                                        (idx == -1 or not is_city) and (n > 1 or len(t) > 2) and _STATE_BY_NAME.get(t.lower())):
+                        state = _state(t) if t in US_STATES else _STATE_BY_NAME[t.lower()]
+                    elif n == 1 and idx == 0 and len(words) > 1 and len(t) == 2 and t.isupper():
+                        iso2.append(t)
+                    else:
+                        continue
+                    words = words[n:] if idx == 0 else words[:-n]
+                    changed = True
+                    break
+        if words:
+            rest.append(" ".join(words))
+    if state and not country:
+        abroad = [c for c in iso2 if c not in US_STATES and (COUNTRIES.get(c) or places._COUNTRY_BY_CODE.get(c))]
+        if abroad:                                          # "AU WA Joondalup": Western Australia, not Washington
+            country, state, iso2 = COUNTRIES.get(abroad[0]) or places._COUNTRY_BY_CODE[abroad[0]], None, []
+        else:
+            country = "United States"
+    if country and country != "United States":
+        state = None
+    # leading codes like "APG", "RPSNA", "AF" before the city name are skipped
+    cands = []
+    for r in rest:
+        w = r.split()
+        while len(w) > 1 and re.fullmatch(r"[A-Z0-9]{2,5}", w[0]):
+            w = w[1:]
+        cands.append(w)
+    cands = [w for w in cands if w and not all(_GENERIC.match(x) for x in w)]
+    best, fallback = None, None
+    for code in iso2 or [None]:
+        ctry, st = country, state
+        if code and ctry == "United States" and code in US_STATES and not st:
+            st = code
+        elif code and not ctry:                             # "IN Hyderabad": India or Indiana, whichever has the city
+            ctry, st = ("United States", code) if code in US_STATES else (COUNTRIES.get(code) or places._COUNTRY_BY_CODE.get(code), None)
+        for w in cands:
+            hit = None
+            # the whole part, or its first words when the rest is a site label ("Robbinsdale Dialysis")
+            for n in range(min(len(w), 4), 0, -1):
+                if n < len(w) and not all(_GENERIC.match(x) or re.search(r"\d", x) or x.isupper() for x in w[n:]):
+                    continue
+                hit = places.city(" ".join(w[:n]), ctry, st if ctry == "United States" else None, prefer)
+                if hit:
+                    break
+            if hit:
+                if not best or hit[3] > best[3]:
+                    best = hit[:2] + (hit[2] or _plain_city(w), hit[3])
+                break
+        if ctry and not fallback:
+            fallback = (ctry, st if ctry == "United States" else None, _plain_city(cands[0]) if cands else None)
+        if code in US_STATES and code in COUNTRIES and not country:   # also try the code as a country
+            hit = next((h for w in cands for h in [places.city(" ".join(w), COUNTRIES[code], prefer=prefer)] if h), None)
+            if hit and (not best or hit[3] > best[3]):
+                best = hit
+    if best:
+        return best[0], best[1] if best[0] == "United States" else None, best[2]
+    if fallback and (country or len(iso2) == 1):
+        return fallback
+    if country:
+        return country, state, _plain_city(cands[0]) if cands else None
+    return None
