@@ -11,7 +11,7 @@ plans:
       - Immediate direct CSV
     button: Download Free
     link: /api/download?file=sample
-  - name: Latest Week Snapshot
+  - name: Latest Week Data
     price: $1.99
     features:
       - All postings from the latest complete week
