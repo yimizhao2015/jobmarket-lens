@@ -14,7 +14,7 @@ plans:
   - name: Latest Week Snapshot
     price: $1.99
     features:
-      - Every posting from the latest complete week
+      - All postings from the latest complete week
       - Instant .zip download
     button: Get Latest
     link: ''
