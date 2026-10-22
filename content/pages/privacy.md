@@ -1,8 +1,8 @@
 ---
-title: "Privacy Policy"
-page_title: "Privacy Policy"
-description: "How JobMarket Lens handles visitor data."
-dateline: "Updated October 20, 2026"
+title: Privacy Policy
+page_title: Privacy Policy
+description: How JobMarket Lens handles visitor data.
+dateline: Updated October 20, 2026
 ---
 
 You can use JobMarket Lens without an account, and it does not ask for personal information.
@@ -20,7 +20,7 @@ The site is meant for a general adult audience and does not knowingly collect in
 
 ## Advertising
 
-The site shows no ads. If that changes, this policy will be updated first, and consent will be requested where required.
+The site currently shows no ads. If that changes, this policy will be updated first, and consent will be requested where required.
 
 ## Changes and contact
 
