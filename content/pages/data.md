@@ -8,7 +8,6 @@ plans:
     price: Free
     features:
       - 1,000 representative clean records
-      - Inspect schema & tags
       - Immediate direct CSV
     button: Download Free
     link: /api/download?file=sample
