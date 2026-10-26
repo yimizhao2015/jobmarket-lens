@@ -86,7 +86,13 @@ _ROWS_JS = """() => Array.from(document.querySelectorAll('[id^="requisitionListI
 
 def _taleo_list(page, http, host, section, stats):
     _open(page, http, f"https://{host}/careersection/{section}/jobsearch.ftl?lang=en")
-    page.wait_for_selector('[id^="requisitionListInterface.reqTitleLinkAction.row"]')
+    # The list, or the site's own "no jobs" message (an empty section is reported as empty, not as an error)
+    page.wait_for_function(
+        "() => document.querySelector('[id^=\"requisitionListInterface.reqTitleLinkAction.row\"]') ||"
+        " /no jobs (are )?(currently )?(available|match)/i.test(document.body.innerText)")
+    if not page.locator('[id^="requisitionListInterface.reqTitleLinkAction.row"]').count():
+        stats["site_total"] = 0
+        return []
     m = re.search(r"([\d,]+)\s+jobs? found", page.inner_text("body"))
     stats["site_total"] = int(m.group(1).replace(",", "")) if m else None
     rows = {}

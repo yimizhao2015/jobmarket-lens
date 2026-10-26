@@ -2,6 +2,7 @@
 import os
 import re
 import ssl
+import subprocess
 import tempfile
 import time
 from urllib.parse import urlparse
@@ -86,12 +87,15 @@ class Http:
                 f.write(pem)
             try:
                 issuers = ssl._ssl._test_decode_cert(f.name).get("caIssuers") or ()
+            except ssl.SSLError:
+                issuers = ()
             finally:
                 os.unlink(f.name)
             if not issuers:
                 break
-            der = requests.get(issuers[0], timeout=self.timeout).content
-            pem = der.decode() if der.startswith(b"-----BEGIN") else ssl.DER_cert_to_PEM_cert(der)
+            pem = _as_pem(requests.get(issuers[0], timeout=self.timeout).content)
+            if not pem:
+                raise requests.exceptions.SSLError(f"could not read the issuer certificate at {issuers[0]}")
             pems.append(pem)
         if not pems:
             return False
@@ -161,3 +165,18 @@ def robots_allows(rules, path):
             if n > best_len or (n == best_len and allow):
                 best_len, allowed = n, allow
     return allowed
+
+
+def _as_pem(data):
+    """The first certificate in an AIA download as PEM: a PEM or DER certificate, or a PKCS#7 bundle (.p7c),
+    which some CAs serve instead. None when it is none of these (an error page, say)."""
+    if data.startswith(b"-----BEGIN CERTIFICATE"):
+        return data.decode()
+    if not data.startswith(b"\x30"):                      # not DER at all
+        return None
+    for args in (["x509", "-inform", "DER"], ["pkcs7", "-inform", "DER", "-print_certs"]):
+        out = subprocess.run(["openssl", *args], input=data, capture_output=True)
+        m = re.search(rb"-----BEGIN CERTIFICATE-----.+?-----END CERTIFICATE-----", out.stdout, re.S)
+        if out.returncode == 0 and m:
+            return m.group(0).decode() + "\n"
+    return None
