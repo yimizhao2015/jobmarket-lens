@@ -82,14 +82,16 @@ jobs:
           gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
           # Paid downloads (Get the Data page): replaced every week
           gh release upload data -R "$DATA_REPO" "data/products/jobmarketlens-latest-week.zip" "data/products/jobmarketlens-full-archive.zip" --clobber
-          # Source coverage (each company's collection status) is kept out of the zips; commit it to the data repo
-          rm -rf cov-repo
-          git clone -q --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${DATA_REPO}" cov-repo
-          cp "data/data source.csv" "cov-repo/Source coverage.csv"
-          git -C cov-repo add "Source coverage.csv"
-          git -C cov-repo -c user.name="jobmarket-lens bot" -c user.email="actions@users.noreply.github.com" \
-            commit -q -m "Source coverage $(date -u +%F)" && git -C cov-repo push -q || echo "Source coverage unchanged"
-          rm -rf cov-repo
+          # Source coverage (each company's collection status) is kept out of the zips; commit it to the data
+          # repo through the contents API (no clone of the large seed files). A failure here only warns, so the
+          # dashboard below is still published.
+          path="Source%20coverage.csv"
+          sha=$(gh api "repos/$DATA_REPO/contents/$path" --jq .sha 2>/dev/null || true)
+          base64 -w0 "data/data source.csv" > /tmp/cov.b64
+          jq -n --rawfile c /tmp/cov.b64 --arg m "Source coverage $(date -u +%F)" --arg sha "$sha" \
+            '{message: $m, content: $c} + (if $sha == "" then {} else {sha: $sha} end)' > /tmp/cov.json
+          gh api -X PUT "repos/$DATA_REPO/contents/$path" --input /tmp/cov.json >/dev/null \
+            || echo "::warning::Could not save Source coverage.csv to $DATA_REPO"
       - name: Commit dashboard
         run: |
           git config user.name "jobmarket-lens bot"
