@@ -6,15 +6,17 @@ name: Collect and publish
 
 on:
   schedule:
-    # Mondays at 2:17 a.m. New York time, so all of Sunday is captured. GitHub schedules in UTC, so
-    # 06:17 UTC (EDT) and 07:17 UTC (EST) are both scheduled; the gate job keeps the one matching New York's current offset,
-    # even if GitHub starts it late.
-    - cron: "17 6 * * 1"
-    - cron: "17 7 * * 1"
+    # Backup only. The Cloudflare Worker's cron starts this workflow on Mondays at 2:17 a.m. New York time
+    # (lib/start_collection.js), because GitHub's own schedule can start hours late. This backup at 10:17 UTC
+    # (6:17 or 5:17 a.m. New York) skips itself when a run has already started in the last 20 hours.
+    - cron: "17 10 * * 1"
   workflow_dispatch:
     inputs:
       max:
         description: "Max postings per company (blank = config default)"
+        required: false
+      only:
+        description: "Only these tickers, comma-separated (blank = all companies)"
         required: false
 
 env:
@@ -22,6 +24,7 @@ env:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: collect
@@ -34,15 +37,17 @@ jobs:
       go: ${{ steps.check.outputs.go }}
     steps:
       - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          tz=$(TZ=America/New_York date +%Z)
-          if [ "${{ github.event_name }}" != "schedule" ] \
-             || { [ "${{ github.event.schedule }}" = "17 6 * * 1" ] && [ "$tz" = "EDT" ]; } \
-             || { [ "${{ github.event.schedule }}" = "17 7 * * 1" ] && [ "$tz" = "EST" ]; }; then
-            echo "go=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "go=false" >> "$GITHUB_OUTPUT"
+          go=true
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            since=$(date -u -d '20 hours ago' +%Y-%m-%dT%H:%M:%SZ)
+            n=$(gh api "repos/${{ github.repository }}/actions/workflows/collect.yml/runs?created=%3E%3D$since&per_page=20" \
+                  --jq '[.workflow_runs[] | select(.id != ${{ github.run_id }})] | length' || echo 0)
+            [ "${n:-0}" -gt 0 ] && go=false && echo "A run already started since $since; backup skipped."
           fi
+          echo "go=$go" >> "$GITHUB_OUTPUT"
   collect:
     needs: gate
     if: needs.gate.outputs.go == 'true'
@@ -70,7 +75,10 @@ jobs:
           fi
           gunzip -f data/lens.db.gz
       - name: Collect
-        run: python -m collector.run ${{ github.event.inputs.max && format('--max {0}', github.event.inputs.max) || '' }}
+        run: >-
+          python -m collector.run
+          ${{ github.event.inputs.max && format('--max {0}', github.event.inputs.max) || '' }}
+          ${{ github.event.inputs.only && format('--only {0}', github.event.inputs.only) || '' }}
       - name: Build dataset
         run: python scripts/build_dataset.py
       - name: Save history
