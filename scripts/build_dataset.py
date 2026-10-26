@@ -191,13 +191,7 @@ def main():
     (ROOT / "web").mkdir(exist_ok=True)
     (ROOT / "web/data.json").write_text(json.dumps(data, separators=(",", ":"), ensure_ascii=False))
 
-    # Dashboard pages with the data inlined: index.html opens straight from disk; artifact.html is the
-    # body-only variant used for publishing.
     tpl = (ROOT / "web/template.html").read_text()
-    raw_json = json.dumps(data, separators=(",", ":"), ensure_ascii=False).encode()
-    payload = json.dumps(base64.b64encode(gzip.compress(raw_json, 9)).decode())
-    body = tpl.replace("/*DATA*/null", payload)
-    (ROOT / "web/artifact.html").write_text(body)
 
     # The website's index.html loads the postings from web/postings/, one gzip file per posted week (the Monday
     # it starts), so no file passes the host's 25 MB limit and unchanged weeks stay cached in the browser.
