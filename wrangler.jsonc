@@ -23,7 +23,7 @@
             "UPSTASH_REDIS_REST_URL": "https://innocent-redfish-157090.upstash.io" },
   // Mondays 2:17 a.m. New York time (06:17 UTC in daylight saving time, 07:17 UTC otherwise; the Worker keeps
   // the right one) start the weekly collection on GitHub
-  "triggers": { "crons": ["17 6 * * 1", "17 7 * * 1"] },
+  "triggers": { "crons": ["17 6 * * MON", "17 7 * * MON"] },
   // Keep the dashboard's variables and secrets on each deploy.
   "keep_vars": true,
   "observability": { "enabled": true }
