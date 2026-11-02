@@ -9,8 +9,6 @@ draft: false
 
 Based on data collected through November 2, 2026, JobMarket Lens counts 278,834 postings published from October 5 to October 31 by 441 S&P 500 companies on their own career sites. That is every week of October since tracking began, and 16 more companies than in our [first look](/insights/2026-10-first-look).
 
-*Updated November 2, 2026: first published October 31 with data through October 25; this version adds the last week of October. Postings are counted by the date they were posted, so November 1 belongs to the November review.*
-
 ## Four weeks of postings
 
 | Week starting | Postings |
