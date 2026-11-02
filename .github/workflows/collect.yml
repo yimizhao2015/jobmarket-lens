@@ -8,7 +8,7 @@ on:
   schedule:
     # Backup only. The Cloudflare Worker's cron starts this workflow on Mondays at 2:17 a.m. New York time
     # (lib/start_collection.js), because GitHub's own schedule can start hours late. This backup at 10:17 UTC
-    # (6:17 or 5:17 a.m. New York) skips itself when a run has already started in the last 20 hours.
+    # (6:17 or 5:17 a.m. New York) skips itself when a run in the last 20 hours succeeded or is still running.
     - cron: "17 10 * * 1"
   workflow_dispatch:
     inputs:
@@ -18,6 +18,10 @@ on:
       only:
         description: "Only these tickers, comma-separated (blank = all companies)"
         required: false
+      build_only:
+        description: "Skip collection and rebuild from the saved history (after a run failed past Collect)"
+        type: boolean
+        default: false
 
 env:
   DATA_REPO: yimizhao2015/jobmarket-lens-data
@@ -44,8 +48,8 @@ jobs:
           if [ "${{ github.event_name }}" = "schedule" ]; then
             since=$(date -u -d '20 hours ago' +%Y-%m-%dT%H:%M:%SZ)
             n=$(gh api "repos/${{ github.repository }}/actions/workflows/collect.yml/runs?created=%3E%3D$since&per_page=20" \
-                  --jq '[.workflow_runs[] | select(.id != ${{ github.run_id }})] | length' || echo 0)
-            [ "${n:-0}" -gt 0 ] && go=false && echo "A run already started since $since; backup skipped."
+                  --jq '[.workflow_runs[] | select(.id != ${{ github.run_id }} and (.status != "completed" or .conclusion == "success"))] | length' || echo 0)
+            [ "${n:-0}" -gt 0 ] && go=false && echo "A run since $since succeeded or is running; backup skipped."
           fi
           echo "go=$go" >> "$GITHUB_OUTPUT"
   collect:
@@ -75,10 +79,20 @@ jobs:
           fi
           gunzip -f data/lens.db.gz
       - name: Collect
+        if: ${{ !inputs.build_only }}
         run: >-
           python -m collector.run
           ${{ github.event.inputs.max && format('--max {0}', github.event.inputs.max) || '' }}
           ${{ github.event.inputs.only && format('--only {0}', github.event.inputs.only) || '' }}
+      # Saved before the build, so a failure later in the run doesn't lose the week's collection
+      # (rerun with build_only to finish it).
+      - name: Save collected history
+        if: ${{ !inputs.build_only }}
+        env:
+          GH_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
+        run: |
+          gzip -kf data/lens.db
+          gh release upload data -R "$DATA_REPO" data/lens.db.gz --clobber
       - name: Build dataset
         run: python scripts/build_dataset.py
       - name: Save history

@@ -108,12 +108,21 @@ def normalize(r):
 
 
 def main():
+    # Normalizing is regex-heavy, so it is spread over the machine's cores. The workers start before the history
+    # is loaded: forked later, each would end up with its own copy of every posting's text, and the runner
+    # ran out of memory (Nov 2, 2026).
+    with Pool() as pool:
+        build(pool)
+
+
+def build(pool):
     cfg = json.loads((ROOT / "config/companies.json").read_text())
     col = cfg["collection"]
     rows, snaps = ([], [])
     if (ROOT / "data/lens.db").exists():
-        rows, snaps = store.load_postings(ROOT)
-    collected = {r["company"] for r in rows}
+        # postings dated before the window can't be in it (normalize only moves dates earlier)
+        rows, snaps = store.load_postings(ROOT, since=col["posted_from"])
+    collected = {s["company"] for s in snaps}
     seed_rows = []
     for f in sorted((ROOT / "data/seed").glob("*.jsonl")):
         for line in f.open():
@@ -130,6 +139,8 @@ def main():
         posted_to = min(posted_to, col["posted_to"])
 
     dropped, undated, keep = Counter(), Counter(), []
+    if (ROOT / "data/lens.db").exists():
+        dropped.update(store.count_before(ROOT, col["posted_from"]))
     for r in rows + seed_rows:
         posted = r.get("posted_date")
         if not posted:  # no posting date on the site: can't place it in the date window
@@ -141,6 +152,7 @@ def main():
             dropped[r["company"]] += 1
             continue
         keep.append(r)
+    del rows, seed_rows  # postings outside the window are no longer needed
     # The countries each company's other locations clearly name; a bare city name found in several
     # countries ("Hyderabad", "San Jose") is settled toward these
     seen = Counter()
@@ -155,9 +167,8 @@ def main():
             prefer.setdefault(co, []).append(country)
     for r in keep:
         r["prefer"] = prefer.get(r["company"])
-    # Normalizing is regex-heavy; spread it over the machine's cores.
-    with Pool() as pool:
-        out = pool.map(normalize, keep, chunksize=200)
+    out = list(pool.imap(normalize, keep, chunksize=200))
+    del keep
 
     # Compact encoding: repeated strings become indexes into lookup tables.
     skill_names = sorted({s for n in out for s in n["skills"]})

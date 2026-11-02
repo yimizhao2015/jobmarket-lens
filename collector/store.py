@@ -70,11 +70,17 @@ def ingest_run(root, run_date):
         print(f"{missing} seen_only postings were not in the history")
 
 
-def load_postings(root):
+def load_postings(root, since=None):
+    """All postings, or with since only those posted on or after it (and undated ones): the full history no
+    longer fits in a GitHub runner's memory as Python objects."""
     db = connect(root)
     latest = dict(db.execute("SELECT company, MAX(run_date) FROM snapshots WHERE status='ok' GROUP BY company"))
     rows = []
-    for company, sid, first, last, raw in db.execute("SELECT * FROM postings"):
+    query, args = "SELECT * FROM postings", ()
+    if since:
+        query += " WHERE json_extract(raw, '$.posted_date') IS NULL OR json_extract(raw, '$.posted_date') >= ?"
+        args = (since,)
+    for company, sid, first, last, raw in db.execute(query, args):
         r = json.loads(raw)
         r.update(first_seen=first, last_seen=last, is_open=(last >= (latest.get(company) or "9999")))
         rows.append(r)
@@ -82,3 +88,12 @@ def load_postings(root):
              for s in db.execute("SELECT * FROM snapshots ORDER BY run_date")]
     db.close()
     return rows, snaps
+
+
+def count_before(root, since):
+    """Postings per company posted before since, the ones load_postings(root, since) leaves out."""
+    db = connect(root)
+    n = dict(db.execute("SELECT company, COUNT(*) FROM postings WHERE json_extract(raw, '$.posted_date') < ? "
+                        "GROUP BY company", (since,)))
+    db.close()
+    return n
