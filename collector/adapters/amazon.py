@@ -23,10 +23,13 @@ def collect(company, params, http, max_jobs, stats):
         if not jobs:
             break
         for j in jobs:
+            # html_to_text gives None for an empty field, which some postings have
+            basic = html_to_text(j.get("basic_qualifications") or "")
+            preferred = html_to_text(j.get("preferred_qualifications") or "")
             text = "\n".join(filter(None, [
                 html_to_text(j.get("description")),
-                "Basic qualifications:\n" + html_to_text(j.get("basic_qualifications") or "") ,
-                "Preferred qualifications:\n" + html_to_text(j.get("preferred_qualifications") or ""),
+                basic and "Basic qualifications:\n" + basic,
+                preferred and "Preferred qualifications:\n" + preferred,
             ]))
             loc = ", ".join(filter(None, [j.get("city"), j.get("state"), j.get("country_code")])) or j.get("location")
             yield raw_posting(
