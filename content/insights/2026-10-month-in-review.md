@@ -1,6 +1,6 @@
 ---
 title: 'October 2026 in review: S&P 500 hiring, week by week'
-date: 2026-10-31
+date: 2026-11-02
 author: JobMarketLens Reviews
 summary: '278,834 postings from 441 companies in October: the job mix held steady week to week, a third of postings have already closed, and a third disclose pay.'
 description: 'A review of 278,834 job postings published by 441 S&P 500 companies from October 5 to October 31, 2026: weekly volumes, closings, occupations, pay, degrees, remote work and the biggest posters.'
