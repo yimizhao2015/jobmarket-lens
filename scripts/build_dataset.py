@@ -230,6 +230,8 @@ def build(pool):
         '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'
         '<meta name="description" content="What America\'s largest employers are hiring for: S&amp;P 500 job postings by '
         'occupation, skills, degree, major, pay and location, updated weekly.">'
+        # Impact (Udemy affiliate program) site ownership check
+        "<meta name='impact-site-verification' value='aa0460da-1668-49b8-9c3f-65b5d43bd8f1'>"
         '</head>\n'
         '<body style="margin:0">\n' + body + "\n</body></html>\n")
 
