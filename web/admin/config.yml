@@ -90,10 +90,10 @@ collections:
             summary: "{{name}} · {{price}}"
             fields:
               - { label: Plan name, name: name, widget: string }
-              - { label: Price, name: price, widget: string, hint: "e.g. Free or $1.99" }
+              - { label: Price, name: price, widget: string, hint: "e.g. Free" }
               - { label: Features, name: features, widget: list, field: { label: Feature, name: feature, widget: string } }
               - { label: Button text, name: button, widget: string }
-              - { label: Button link, name: link, widget: string, required: false, hint: "Checkout or download link. Leave empty to show the button as Coming soon." }
+              - { label: Button link, name: link, widget: string, required: false, hint: "Download link. Leave empty to show the button as Coming soon." }
           - { label: Text below the plans, name: body, widget: markdown, modes: [raw, rich_text] }
       - name: contact
         label: Contact Us

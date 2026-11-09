@@ -100,7 +100,7 @@ for (const old of ["methodology.html", "privacy.html"]) rmSync(join(ROOT, "web",
   }));
 }
 
-// Get the Data: the plans as cards; a plan without a checkout link shows its button as coming soon
+// Get the Data: the plans as cards; a plan without a link shows its button as coming soon
 {
   const d = read(join(ROOT, "content/pages/data.md"));
   const card = p => `      <li class="plan">
