@@ -1,16 +1,10 @@
 // Cloudflare Worker: /api/* goes to the functions in functions/api/; everything else is a static file from web/.
 // Its Monday cron starts the weekly collection on GitHub (lib/start_collection.js).
-import * as buy from "./functions/api/buy.js";
-import * as deliver from "./functions/api/deliver.js";
 import * as download from "./functions/api/download.js";
-import * as lemonWebhook from "./functions/api/lemon-webhook.js";
 import * as stats from "./functions/api/stats.js";
 import { startCollection } from "./lib/start_collection.js";
 
-const ROUTES = {
-  "/api/buy": buy, "/api/deliver": deliver, "/api/download": download,
-  "/api/lemon-webhook": lemonWebhook, "/api/stats": stats,
-};
+const ROUTES = { "/api/download": download, "/api/stats": stats };
 
 export default {
   async fetch(request, env) {

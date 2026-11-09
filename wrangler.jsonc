@@ -17,10 +17,9 @@
     { "pattern": "www.jobmarketlens.com", "custom_domain": true },
     { "pattern": "jobmarketlens.com", "custom_domain": true }
   ],
-  // Settings that are not secret. The secrets (LEMONSQUEEZY_API_KEY, LEMONSQUEEZY_WEBHOOK_SECRET,
-  // GITHUB_DATA_TOKEN, GITHUB_ACTIONS_TOKEN, UPSTASH_REDIS_REST_TOKEN) are set in the Cloudflare dashboard.
-  "vars": { "LEMONSQUEEZY_STORE_ID": "503145", "LEMONSQUEEZY_VARIANT_LATEST": "2275137", "LEMONSQUEEZY_VARIANT_ARCHIVE": "2275158",
-            "UPSTASH_REDIS_REST_URL": "https://innocent-redfish-157090.upstash.io" },
+  // Settings that are not secret. The secrets (GITHUB_ACTIONS_TOKEN, UPSTASH_REDIS_REST_TOKEN) are set in the
+  // Cloudflare dashboard.
+  "vars": { "UPSTASH_REDIS_REST_URL": "https://innocent-redfish-157090.upstash.io" },
   // Mondays 2:17 a.m. New York time (06:17 UTC in daylight saving time, 07:17 UTC otherwise; the Worker keeps
   // the right one) start the weekly collection on GitHub
   "triggers": { "crons": ["17 6 * * MON", "17 7 * * MON"] },
