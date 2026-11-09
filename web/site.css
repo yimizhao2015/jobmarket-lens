@@ -75,6 +75,7 @@ th[align="right"], td[align="right"] { text-align: right; font-family: var(--f-m
 article blockquote { margin: 12px 0; color: var(--ink-2); font-size: 14px; background: var(--chip); border-radius: 8px; padding: 12px 14px; }
 article blockquote p { margin: 0; color: inherit; }
 .plans { list-style: none; padding: 0; margin: 24px 0 8px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.plans:has(> .plan:only-child) { max-width: 320px; }
 .plan { margin: 0; border: 1px solid var(--line); border-radius: 12px; padding: 20px 18px; display: flex; flex-direction: column; background: var(--panel); }
 .plan h2 { font: 600 13px/1.3 var(--f-body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); margin: 0; }
 .plan .price { font: 700 30px/1.1 var(--f-display); margin: 8px 0 12px; color: var(--ink); }

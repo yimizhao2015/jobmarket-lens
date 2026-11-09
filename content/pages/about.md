@@ -6,7 +6,7 @@ description: What JobMarket Lens is, where its data comes from and who makes it.
 
 JobMarket Lens shows what America's largest employers are hiring for, from the job postings they publish on their own career sites.
 
-Every week it collects the open postings of the S&P 500 companies and turns each one into comparable fields: occupation, job level, degree and major, experience, skills, licenses, pay, work arrangement and location. Explore them on the [dashboard](/), read the monthly [Insights](/insights), or download the files on [Get the Data](/data).
+Every week it collects the open postings of the S&P 500 companies and turns each one into comparable fields: occupation, job level, degree and major, experience, skills, licenses, pay, work arrangement and location. Explore them on the [dashboard](/), read the monthly [Insights](/insights), or download a free sample on [Get the Data](/data).
 
 ## What makes it different
 
