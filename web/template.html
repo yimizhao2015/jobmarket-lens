@@ -80,6 +80,9 @@ h2 { font: 600 15px/1.3 var(--f-body); margin: 0; text-wrap: balance; }
 .bar-row .fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
 .bar-row .val { font: 12px var(--f-mono); text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
 .bar-row:hover .lab { color: var(--ink); }
+.bar-row a.lab { text-decoration: underline dotted var(--ink-3); text-underline-offset: 3px; }
+.bar-row a.lab:hover { text-decoration-style: solid; }
+.aff { color: var(--ink-3); font-size: 11.5px; margin: 0; }
 .bar-row:hover .fill { filter: brightness(1.12); }
 .bar-row .fill.ns { background: var(--bar-ns); }
 .empty { color: var(--ink-3); font-size: 12.5px; padding: 8px 0; }
@@ -170,6 +173,7 @@ a { color: var(--accent); }
       <div class="panel-head"><div><h2>Top Skills Required</h2><p class="sub">Share of postings mentioning each skill</p></div>
         <select class="inline" id="skill-soc" aria-label="Skills for occupation group"></select></div>
       <div class="bars" id="c-skills"></div>
+      <p class="aff">Skill names link to Udemy courses. These are affiliate links: JobMarket Lens may earn a commission.</p>
     </div>
     <div class="panel">
       <div class="panel-head"><div><h2>Major Required</h2><p class="sub">Fields of study named with the degree requirement; share of postings in view</p></div>
@@ -181,7 +185,8 @@ a { color: var(--accent); }
     <div class="panel"><div><h2>Work Arrangement</h2><p class="sub">Remote, hybrid or on-site as the posting states it</p></div><div class="bars" id="c-arr"></div></div>
     <div class="panel"><div><h2>Minimum Degree Required</h2><p class="sub">Lowest degree named in required qualifications</p></div><div class="bars" id="c-deg"></div></div>
     <div class="panel"><div><h2>Experience Required</h2><p class="sub">First years-of-experience requirement stated</p></div><div class="bars" id="c-yrs"></div></div>
-    <div class="panel"><div><h2>Licenses and Certifications</h2><p class="sub">Postings in view naming each</p></div><div class="bars" id="c-lic"></div></div>
+    <div class="panel"><div><h2>Licenses and Certifications</h2><p class="sub">Postings in view naming each</p></div><div class="bars" id="c-lic"></div>
+      <p class="aff">Underlined names link to Udemy prep courses. These are affiliate links: JobMarket Lens may earn a commission.</p></div>
     <div class="panel wide">
       <div class="panel-head"><div><h2>Pay Ranges by Occupation Group</h2><p class="sub">Median posted range, annualized USD (hourly × 2,080). Only postings that disclose pay in USD.</p></div></div>
       <div id="c-pay"></div>
@@ -325,6 +330,13 @@ load().then(D => {
     tip.style.left = x + "px"; tip.style.top = (e.clientY + 14) + "px"; tip.style.opacity = 1;
   });
 
+  // ---- Udemy affiliate links (Impact). Long form carries the destination through ?u=.
+  const UDEMY = "https://trk.udemy.com/c/8162658/3193860/39854";
+  const udemyLink = q => `${UDEMY}?u=${encodeURIComponent("https://www.udemy.com/courses/search/?q=" + encodeURIComponent(q))}&partnerpropertyid=9136978`;
+  const skillQuery = k => k === NS ? null : k.replace(/\s*\(.*?\)\s*/g, " ").replace(/\s*\/\s*/g, " ").replace(/\s+/g, " ").trim();
+  const LIC_LEARN = [/PMP/, /CPA/, /CFA/, /CompTIA/, /CISSP/, /CISM|CISA/, /Cisco|CCNA|CCNP/, /[Cc]loud/, /ITIL/, /Six Sigma/, /Scrum|Agile/, /SSCP/, /GIAC/, /Linux/, /FINRA|Series/, /OSHA/, /ServSafe/, /EPA 608/, /[Pp]harmacy tech/];
+  const licQuery = k => LIC_LEARN.some(re => re.test(k)) ? skillQuery(k) + " certification" : null;
+
   // ---- bar list
   function bars(id, counts, total, opts = {}) {
     const el = document.getElementById(id);
@@ -338,8 +350,10 @@ load().then(D => {
     el.innerHTML = entries.map(([k, v]) => {
       const lab = opts.label ? opts.label(k) : k;
       const shown = opts.share ? pct(v, total) : fmt(v);
-      return `<div class="bar-row" data-tip="${lab}: ${fmt(v)} postings (${pct(v, total)} of ${fmt(total)})">
-        <span class="lab">${lab}</span><span class="trk"><span class="fill${k === NS ? " ns" : ""}" style="width:${100 * v / max}%"></span></span>
+      const q = opts.learn && opts.learn(k);
+      const labEl = q ? `<a class="lab" href="${udemyLink(q)}" target="_blank" rel="sponsored noopener">${lab}</a>` : `<span class="lab">${lab}</span>`;
+      return `<div class="bar-row" data-tip="${lab}: ${fmt(v)} postings (${pct(v, total)} of ${fmt(total)})${q ? ". Click to find courses on Udemy" : ""}">
+        ${labEl}<span class="trk"><span class="fill${k === NS ? " ns" : ""}" style="width:${100 * v / max}%"></span></span>
         <span class="val">${shown}</span></div>`;
     }).join("");
   }
@@ -376,14 +390,14 @@ load().then(D => {
     bars("c-yrs", count(R, "yrs_b"), N, { order: ["0-1 yrs", "2-4 yrs", "5-7 yrs", "8-10 yrs", "10+ yrs", NS] });
     bars("c-arr", count(R, "arr"), N, { order: ["On-site", "Hybrid", "Remote", NS] });
     bars("c-sched", count(R, "sched"), N, { order: ["Full-time", "Part-time", "Full- or part-time", "Temporary / Seasonal", "Internship", "Contract", NS] });
-    bars("c-lic", countMulti(R, "lic", D.licenses), N, { limit: 10, emptyText: "No licenses or certifications named in postings in view." });
+    bars("c-lic", countMulti(R, "lic", D.licenses), N, { limit: 10, learn: licQuery, emptyText: "No licenses or certifications named in postings in view." });
     const RM = majorSel.value ? R.filter(r => r.soc === majorSel.value) : R;
     bars("c-major", countMulti(RM, "major", D.majors), RM.length, { share: true, limit: 15, emptyText: "No majors named in postings in view." });
     bars("c-country", count(R, "country"), N, { limit: 12 });
     bars("c-state", count(R.filter(r => r.state), "state"), R.filter(r => r.state).length, { limit: 12, emptyText: "No US postings in view." });
     const sk = skillSel.value;
     const RS = sk ? R.filter(r => r.soc === sk) : R;
-    bars("c-skills", countMulti(RS, "skills", skillNames), RS.length, { share: true, limit: 20, emptyText: "No dictionary skills found in postings in view." });
+    bars("c-skills", countMulti(RS, "skills", skillNames), RS.length, { share: true, limit: 20, learn: skillQuery, emptyText: "No dictionary skills found in postings in view." });
 
     // pay ranges per SOC group
     const groups = {};
