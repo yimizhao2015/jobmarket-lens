@@ -24,7 +24,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 from collector.adapters import ADAPTERS
-from collector.http import BlockedError, Http
+from collector.http import BlockedError, Cooldown, Http
 from collector import store
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -49,6 +49,14 @@ def main():
     log = json.loads(log_path.read_text()) if log_path.exists() else {}
 
     lock = threading.Lock()
+    groups = col.get("host_groups", {})
+    cooldowns = {g: Cooldown() for g in groups}
+
+    def group_of(c):
+        # A company's host group: its own "host_group", or its adapter when a group is named after the adapter.
+        g = c.get("host_group") or c["adapter"]
+        return g if g in groups else None
+
     known, last_collected = store.known_postings(ROOT)
     if args.full:
         known = {}
@@ -66,7 +74,7 @@ def main():
                 log[t] = entry
             return
         delay = col.get("request_delay_by_adapter", {}).get(c["adapter"], col["request_delay_seconds"])
-        http = Http(col["user_agent"], delay, col["respect_robots_txt"])
+        http = Http(col["user_agent"], delay, col["respect_robots_txt"], cooldown=cooldowns.get(group_of(c)))
         http.known = known.get(t, {})
         http.known_urls = {u: sid for sid, u in http.known.items() if u}
         stats, n, fetched, t0 = {}, 0, 0, time.time()
@@ -103,15 +111,24 @@ def main():
     # Slowest companies first, so none of them starts near the end of the run.
     todo = sorted((c for c in cfg["companies"] if not only or c["ticker"] in only), key=last_cost, reverse=True)
     # Companies sharing a host group (one platform's firewall) run in their own small pool, alongside the rest.
-    groups = col.get("host_groups", {})
     pools = [ThreadPoolExecutor(max_workers=args.workers)]
     pools += [ThreadPoolExecutor(max_workers=g["max_concurrent"]) for g in groups.values()]
     pool_of = dict(zip(groups, pools[1:]))
-    futures = [pool_of.get(c.get("host_group"), pools[0]).submit(one, c) for c in todo]
+    futures = [pool_of.get(group_of(c), pools[0]).submit(one, c) for c in todo]
     for fut in futures:
         fut.result()
     for p in pools:
         p.shutdown()
+
+    # Companies stopped by a security check get one more, slower pass after a pause: the check comes and goes,
+    # and by then the rest of the run has finished, so far fewer of our requests reach the platform at once.
+    retry = [c for c in todo if log.get(c["ticker"], {}).get("status") == "blocked"
+             and "security check" in (log[c["ticker"]].get("detail") or "")]
+    if retry:
+        print(f"Second pass for {len(retry)} companies stopped by a security check, in 10 minutes", flush=True)
+        time.sleep(600)
+        with ThreadPoolExecutor(max_workers=2) as p:
+            list(p.map(one, retry))
 
     log_path.write_text(json.dumps(log, indent=2))
     store.ingest_run(ROOT, args.date)
