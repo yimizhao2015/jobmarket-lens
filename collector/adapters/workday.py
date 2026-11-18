@@ -3,6 +3,7 @@
 List:   POST https://{host}/wday/cxs/{tenant}/{site}/jobs   {"limit":20,"offset":N,"searchText":"","appliedFacets":{}}
 Detail: GET  https://{host}/wday/cxs/{tenant}/{site}{externalPath}
 """
+from ..http import BlockedError
 from .common import html_to_text, raw_posting, seen_before
 
 
@@ -53,6 +54,8 @@ def _collect_site(company, params, http, max_jobs, stats):
                 continue
             try:
                 d = http.get(base + path).json().get("jobPostingInfo", {})
+            except BlockedError:  # a security check stops the company; it would refuse every later page too
+                raise
             except Exception as e:  # keep the list-level record rather than drop the posting
                 stats.setdefault("detail_errors", 0)
                 stats["detail_errors"] += 1

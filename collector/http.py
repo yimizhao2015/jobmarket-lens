@@ -4,6 +4,7 @@ import re
 import ssl
 import subprocess
 import tempfile
+import threading
 import time
 from urllib.parse import urlparse
 
@@ -15,8 +16,25 @@ class BlockedError(Exception):
     """The site refused us (robots.txt, 401/403, bot wall). Recorded, never papered over."""
 
 
+class Cooldown:
+    """A pause shared by the companies of one host group: when one of them is told to slow down (HTTP 429),
+    all of them wait, since the platform counts our requests together."""
+    def __init__(self):
+        self.lock = threading.Lock()
+        self.until = 0.0
+
+    def hold(self, seconds):
+        with self.lock:
+            self.until = max(self.until, time.time() + seconds)
+
+    def wait(self):
+        left = self.until - time.time()
+        if left > 0:
+            time.sleep(left)
+
+
 class Http:
-    def __init__(self, user_agent, delay=0.6, respect_robots=True, timeout=30):
+    def __init__(self, user_agent, delay=0.6, respect_robots=True, timeout=30, cooldown=None):
         self.s = requests.Session()
         self.s.headers.update({"User-Agent": user_agent, "Accept-Language": "en-US,en;q=0.9"})
         self.delay = delay
@@ -24,6 +42,7 @@ class Http:
         self.timeout = timeout
         self._robots = {}
         self._last = 0.0
+        self.cooldown = cooldown
         # Postings of this company already in the history, {source_id: url} and {url: source_id}; run.py
         # fills them so adapters can skip detail pages they have read before (adapters.common.seen_before).
         self.known, self.known_urls = {}, {}
@@ -50,7 +69,10 @@ class Http:
     def request(self, method, url, **kw):
         if not self._allowed(url):
             raise BlockedError(f"robots.txt disallows {url}")
-        for attempt in range(4):
+        attempts = 7  # 429s get the longer schedule below; other errors give up after 4 tries
+        for attempt in range(attempts):
+            if self.cooldown:
+                self.cooldown.wait()
             wait = self.delay - (time.time() - self._last)
             if wait > 0:
                 time.sleep(wait)
@@ -60,17 +82,34 @@ class Http:
             except requests.exceptions.SSLError:
                 # Some sites send their certificate without the intermediate. Fetch the missing intermediate
                 # from the link in the certificate itself (AIA) and retry; the chain is still fully verified.
-                if attempt == 3 or not self._complete_chain(urlparse(url).hostname):
+                if attempt >= 3 or not self._complete_chain(urlparse(url).hostname):
                     raise
                 continue
             except requests.RequestException as e:
-                if attempt == 3:
+                if attempt >= 3:
                     raise
                 time.sleep(2 ** (attempt + 1))
                 continue
             if r.status_code in (401, 403):
                 raise BlockedError(f"HTTP {r.status_code} from {url}")
-            if r.status_code in (429, 500, 502, 503, 504) and attempt < 3:
+            if r.status_code == 429 and r.headers.get("cf-mitigated") == "challenge":
+                # Not a rate limit but a Cloudflare "Security Check" page that needs a browser (Workday sites since
+                # Nov 2026). It sometimes clears after a pause; if it doesn't, the site is blocking us.
+                if attempt >= 2:
+                    raise BlockedError(f"Cloudflare security check (HTTP 429) from {url}")
+                pause = 30 * 2 ** attempt
+                if self.cooldown:
+                    self.cooldown.hold(pause)
+                time.sleep(pause)
+                continue
+            if r.status_code == 429 and attempt < attempts - 1:
+                # Too many requests: wait as long as the site asks (Retry-After), else 15 s, 30 s, ... up to 4 min.
+                pause = min(_retry_after(r) or 15 * 2 ** attempt, 240)
+                if self.cooldown:
+                    self.cooldown.hold(pause)
+                time.sleep(pause)
+                continue
+            if r.status_code in (500, 502, 503, 504) and attempt < 3:
                 time.sleep(2 ** (attempt + 2))
                 continue
             r.raise_for_status()
@@ -116,6 +155,14 @@ class Http:
 
     def post(self, url, **kw):
         return self.request("POST", url, **kw)
+
+
+def _retry_after(r):
+    """Seconds from a Retry-After header given in seconds; None when absent or a date."""
+    try:
+        return max(0.0, float(r.headers.get("Retry-After", "")))
+    except ValueError:
+        return None
 
 
 def parse_robots(text, user_agent):
