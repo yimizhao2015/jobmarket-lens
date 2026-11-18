@@ -120,6 +120,16 @@ def main():
     for p in pools:
         p.shutdown()
 
+    # Companies stopped by a security check get one more, slower pass after a pause: the check comes and goes,
+    # and by then the rest of the run has finished, so far fewer of our requests reach the platform at once.
+    retry = [c for c in todo if log.get(c["ticker"], {}).get("status") == "blocked"
+             and "security check" in (log[c["ticker"]].get("detail") or "")]
+    if retry:
+        print(f"Second pass for {len(retry)} companies stopped by a security check, in 10 minutes", flush=True)
+        time.sleep(600)
+        with ThreadPoolExecutor(max_workers=2) as p:
+            list(p.map(one, retry))
+
     log_path.write_text(json.dumps(log, indent=2))
     store.ingest_run(ROOT, args.date)
     print("run log:", log_path)
