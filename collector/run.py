@@ -4,6 +4,7 @@
     python -m collector.run --only NVDA,AMZN    # a subset
     python -m collector.run --max 200           # cap per company
     python -m collector.run --workers 48        # companies in parallel (default 48)
+    python -m collector.run --minutes 240       # stop starting requests after 240 minutes
     python -m collector.run --full              # re-read every detail page, even for known postings
 
 Writes data/raw/<run_date>/<TICKER>.jsonl and data/raw/<run_date>/run_log.json, then
@@ -24,7 +25,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 from collector.adapters import ADAPTERS
-from collector.http import BlockedError, Cooldown, Http
+from collector.http import BlockedError, Cooldown, Http, OutOfTime
 from collector import store
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -36,6 +37,8 @@ def main():
     ap.add_argument("--max", type=int, help="max postings per company (overrides config)")
     ap.add_argument("--date", default=date.today().isoformat(), help="run date label")
     ap.add_argument("--workers", type=int, default=48, help="companies collected in parallel")
+    ap.add_argument("--minutes", type=float, help="time budget: after it, companies still running stop and the rest "
+                    "are skipped, so the history is still saved before the job's own time limit")
     ap.add_argument("--full", action="store_true", help="ignore the history and re-read every detail page")
     args = ap.parse_args()
 
@@ -49,6 +52,7 @@ def main():
     log = json.loads(log_path.read_text()) if log_path.exists() else {}
 
     lock = threading.Lock()
+    deadline = time.time() + args.minutes * 60 if args.minutes else None
     groups = col.get("host_groups", {})
     cooldowns = {g: Cooldown() for g in groups}
 
@@ -75,6 +79,7 @@ def main():
             return
         delay = col.get("request_delay_by_adapter", {}).get(c["adapter"], col["request_delay_seconds"])
         http = Http(col["user_agent"], delay, col["respect_robots_txt"], cooldown=cooldowns.get(group_of(c)))
+        http.deadline = deadline
         http.known = known.get(t, {})
         http.known_urls = {u: sid for sid, u in http.known.items() if u}
         stats, n, fetched, t0 = {}, 0, 0, time.time()
@@ -93,6 +98,8 @@ def main():
             entry["status"] = "ok" if n else "empty"
         except BlockedError as e:
             entry.update(status="blocked", detail=str(e))
+        except OutOfTime as e:
+            entry.update(status="error", detail=str(e))
         except Exception as e:
             entry.update(status="error", detail=f"{type(e).__name__}: {e}")
             traceback.print_exc(file=sys.stderr)
@@ -124,10 +131,12 @@ def main():
     # and by then the rest of the run has finished, so far fewer of our requests reach the platform at once.
     retry = [c for c in todo if log.get(c["ticker"], {}).get("status") == "blocked"
              and "security check" in (log[c["ticker"]].get("detail") or "")]
-    if retry:
+    if retry and deadline and time.time() + 600 > deadline:
+        print(f"No time left for a second pass for {len(retry)} companies stopped by a security check", flush=True)
+    elif retry:
         print(f"Second pass for {len(retry)} companies stopped by a security check, in 10 minutes", flush=True)
         time.sleep(600)
-        with ThreadPoolExecutor(max_workers=2) as p:
+        with ThreadPoolExecutor(max_workers=4) as p:
             list(p.map(one, retry))
 
     log_path.write_text(json.dumps(log, indent=2))

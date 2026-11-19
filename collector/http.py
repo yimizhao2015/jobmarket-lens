@@ -16,6 +16,10 @@ class BlockedError(Exception):
     """The site refused us (robots.txt, 401/403, bot wall). Recorded, never papered over."""
 
 
+class OutOfTime(Exception):
+    """The run's time budget is used up (collector.run --minutes); the company stops where it is."""
+
+
 class Cooldown:
     """A pause shared by the companies of one host group: when one of them is told to slow down (HTTP 429),
     all of them wait, since the platform counts our requests together."""
@@ -43,6 +47,7 @@ class Http:
         self._robots = {}
         self._last = 0.0
         self.cooldown = cooldown
+        self.deadline = None  # time.time() after which no request starts (set by collector.run)
         # Postings of this company already in the history, {source_id: url} and {url: source_id}; run.py
         # fills them so adapters can skip detail pages they have read before (adapters.common.seen_before).
         self.known, self.known_urls = {}, {}
@@ -67,12 +72,16 @@ class Http:
         return robots_allows(rules, path)
 
     def request(self, method, url, **kw):
+        if self.deadline and time.time() > self.deadline:
+            raise OutOfTime("stopped: the run's time budget ran out")
         if not self._allowed(url):
             raise BlockedError(f"robots.txt disallows {url}")
         attempts = 7  # 429s get the longer schedule below; other errors give up after 4 tries
         for attempt in range(attempts):
             if self.cooldown:
                 self.cooldown.wait()
+            if self.deadline and time.time() > self.deadline:
+                raise OutOfTime("stopped: the run's time budget ran out")
             wait = self.delay - (time.time() - self._last)
             if wait > 0:
                 time.sleep(wait)
