@@ -80,8 +80,9 @@ jobs:
           gunzip -f data/lens.db.gz
       - name: Collect
         if: ${{ !inputs.build_only }}
+        # The 240-minute budget leaves room for the build within the job's 350-minute limit.
         run: >-
-          python -m collector.run
+          python -m collector.run --minutes 240
           ${{ github.event.inputs.max && format('--max {0}', github.event.inputs.max) || '' }}
           ${{ github.event.inputs.only && format('--only {0}', github.event.inputs.only) || '' }}
       # Saved before the build, so a failure later in the run doesn't lose the week's collection
