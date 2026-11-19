@@ -203,6 +203,10 @@ def _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats, params=None):
     params = params or {}
     seen, done = 0, set()
     for u in urls:
+        # Search pages such as /en/jobs/ match the job-page pattern but are not postings, and some sites refuse
+        # them (403), which would otherwise stop the whole company as blocked.
+        if re.search(r"/jobs?/?(\?.*)?$", u):
+            continue
         tokens = set(re.split(r"[/_?=&]+", u.split("://", 1)[-1]))
         if {t for t in tokens if _id_like(t)} & done:  # the same requisition under another language path
             continue
