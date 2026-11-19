@@ -131,6 +131,9 @@ def collect_sitemap(company, params, http, max_jobs, stats):
     urls = sorted(entries, key=lambda u: entries[u] or "", reverse=True)
     stats["site_total"] = len(urls)
     seen = 0
+    if params.get("id_from_jsonld"):
+        yield from _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats)
+        return
     for u in urls:
         if "id_pattern" in params:
             m = re.search(params["id_pattern"], u)
@@ -178,6 +181,54 @@ def collect_tesla(company, params, http, max_jobs, stats):
 def collect_refused_by_terms(company, params, http, max_jobs, stats):
     # The site states that automated collection is prohibited without written permission; honor it.
     raise BlockedError(params["reason"])
+
+
+def _id_like(token):
+    """A url segment that looks like a posting id (R-2026-74448, 98098808848, DANAGLOBALR1315720...), not a
+    title slug or a short site number such as Radancy's org id."""
+    return sum(ch.isdigit() for ch in token) >= 6 and token.count("-") <= 2
+
+
+def _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats):
+    """Job pages whose id is the requisition id in their JobPosting JSON-LD (identifier.value), not the url.
+
+    Used for a company's backup career site (Phenom, Radancy...), which lists the same requisitions as its
+    Workday site: with the same ids, postings already in the history from Workday are matched rather than
+    counted twice. A page is skipped without a request when its url carries a stored id or was stored before;
+    the same job under several language paths is read once."""
+    seen, done = 0, set()
+    for u in urls:
+        tokens = set(re.split(r"[/_?=&]+", u.split("://", 1)[-1]))
+        if {t for t in tokens if _id_like(t)} & done:  # the same requisition under another language path
+            continue
+        rec = seen_before(company, http, url=u)
+        if not rec:
+            sid = next((t for t in tokens if t in http.known), None)
+            rec = seen_before(company, http, source_id=sid) if sid else None
+        if not rec:
+            try:
+                page = _text(http.get(u))
+            except requests.HTTPError:  # sitemaps lag behind closed postings
+                stats["gone"] = stats.get("gone", 0) + 1
+                continue
+            jp = find_jobposting_jsonld(page)
+            ident = (jp or {}).get("identifier")
+            sid = ident.get("value") if isinstance(ident, dict) else ident
+            if not jp or not sid:
+                stats["no_jobposting"] = stats.get("no_jobposting", 0) + 1
+                if stats["no_jobposting"] > 20 and not seen:
+                    return
+                continue
+            sid = str(sid).strip()
+            rec = seen_before(company, http, source_id=sid) or jobposting_to_raw(company, sid, u, jp)
+        if rec["source_id"] in done:
+            continue
+        done.add(rec["source_id"])
+        done |= {t for t in tokens if _id_like(t)}
+        yield rec
+        seen += 1
+        if seen >= max_jobs:
+            return
 
 
 def collect_listing(company, params, http, max_jobs, stats):
