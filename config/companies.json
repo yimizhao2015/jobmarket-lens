@@ -241,6 +241,17 @@
     "host": "jj.wd5.myworkdayjobs.com",
     "tenant": "jj",
     "site": "JJ"
+   },
+   "backup": {
+    "career_site": "https://www.careers.jnj.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://www.careers.jnj.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -255,6 +266,18 @@
     "host": "mastercard.wd1.myworkdayjobs.com",
     "tenant": "mastercard",
     "site": "CorporateCareers"
+   },
+   "backup": {
+    "career_site": "https://careers.mastercard.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.mastercard.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "host_group": "phenom",
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -878,6 +901,17 @@
     "host": "assurant.wd1.myworkdayjobs.com",
     "tenant": "assurant",
     "site": "Assurant_Careers"
+   },
+   "backup": {
+    "career_site": "https://jobs.assurant.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.assurant.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -1069,6 +1103,17 @@
     "host": "bdx.wd1.myworkdayjobs.com",
     "tenant": "bdx",
     "site": "EXTERNAL_CAREER_SITE_USA"
+   },
+   "backup": {
+    "career_site": "https://jobs.bd.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.bd.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -1504,6 +1549,17 @@
     "host": "centene.wd5.myworkdayjobs.com",
     "tenant": "centene",
     "site": "Centene_External"
+   },
+   "backup": {
+    "career_site": "https://jobs.centene.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.centene.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -1731,6 +1787,17 @@
     "host": "citi.wd5.myworkdayjobs.com",
     "tenant": "citi",
     "site": "2"
+   },
+   "backup": {
+    "career_site": "https://jobs.citi.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.citi.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -2317,6 +2384,18 @@
     "host": "dollartree.wd5.myworkdayjobs.com",
     "tenant": "dollartree",
     "site": "dollartreeus"
+   },
+   "backup": {
+    "career_site": "https://careers.dollartree.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.dollartree.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "host_group": "phenom",
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -2463,6 +2542,18 @@
     "host": "ebay.wd5.myworkdayjobs.com",
     "tenant": "ebay",
     "site": "apply"
+   },
+   "backup": {
+    "career_site": "https://jobs.ebayinc.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.ebayinc.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "host_group": "phenom",
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -2623,7 +2714,18 @@
     "tenant": "equifax",
     "site": "External"
    },
-   "known_issue": null
+   "known_issue": null,
+   "backup": {
+    "career_site": "https://careers.equifax.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.equifax.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
+   }
   },
   {
    "rank": 184,
@@ -3125,6 +3227,17 @@
     "host": "gartner.wd5.myworkdayjobs.com",
     "tenant": "gartner",
     "site": "EXT"
+   },
+   "backup": {
+    "career_site": "https://jobs.gartner.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.gartner.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -3261,6 +3374,17 @@
     "host": "generalmotors.wd5.myworkdayjobs.com",
     "tenant": "generalmotors",
     "site": "Careers_GM"
+   },
+   "backup": {
+    "career_site": "https://search-careers.gm.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://search-careers.gm.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -5311,6 +5435,18 @@
     "host": "pnc.wd5.myworkdayjobs.com",
     "tenant": "pnc",
     "site": "External"
+   },
+   "backup": {
+    "career_site": "https://careers.pnc.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.pnc.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "host_group": "phenom",
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -6388,6 +6524,18 @@
     "host": "thermofisher.wd5.myworkdayjobs.com",
     "tenant": "thermofisher",
     "site": "ThermoFisherCareers"
+   },
+   "backup": {
+    "career_site": "https://jobs.thermofisher.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.thermofisher.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "host_group": "phenom",
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -6489,6 +6637,17 @@
     "host": "trimble.wd1.myworkdayjobs.com",
     "tenant": "trimble",
     "site": "TrimbleCareers"
+   },
+   "backup": {
+    "career_site": "https://trimblecareers.trimble.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://trimblecareers.trimble.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
