@@ -132,7 +132,7 @@ def collect_sitemap(company, params, http, max_jobs, stats):
     stats["site_total"] = len(urls)
     seen = 0
     if params.get("id_from_jsonld"):
-        yield from _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats)
+        yield from _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats, params)
         return
     for u in urls:
         if "id_pattern" in params:
@@ -189,13 +189,18 @@ def _id_like(token):
     return sum(ch.isdigit() for ch in token) >= 6 and token.count("-") <= 2
 
 
-def _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats):
+def _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats, params=None):
     """Job pages whose id is the requisition id in their JobPosting JSON-LD (identifier.value), not the url.
 
     Used for a company's backup career site (Phenom, Radancy...), which lists the same requisitions as its
     Workday site: with the same ids, postings already in the history from Workday are matched rather than
     counted twice. A page is skipped without a request when its url carries a stored id or was stored before;
-    the same job under several language paths is read once."""
+    the same job under several language paths is read once.
+
+    Some sites show the Workday requisition id on the page but not in the JSON-LD: params id_regex finds it
+    in the page (used only when exactly one distinct id is there), and id_replace [pattern, repl] rewrites it
+    to the form stored from Workday (Baxter: "JR-211769" -> "JR - 211769")."""
+    params = params or {}
     seen, done = 0, set()
     for u in urls:
         tokens = set(re.split(r"[/_?=&]+", u.split("://", 1)[-1]))
@@ -212,8 +217,14 @@ def _sitemap_by_jsonld_id(company, urls, http, max_jobs, stats):
                 stats["gone"] = stats.get("gone", 0) + 1
                 continue
             jp = find_jobposting_jsonld(page)
-            ident = (jp or {}).get("identifier")
-            sid = ident.get("value") if isinstance(ident, dict) else ident
+            if params.get("id_regex"):
+                found = set(re.findall(params["id_regex"], page))
+                sid = found.pop() if len(found) == 1 else None
+                if sid and params.get("id_replace"):
+                    sid = re.sub(params["id_replace"][0], params["id_replace"][1], sid)
+            else:
+                ident = (jp or {}).get("identifier")
+                sid = ident.get("value") if isinstance(ident, dict) else ident
             if not jp or not sid:
                 stats["no_jobposting"] = stats.get("no_jobposting", 0) + 1
                 if stats["no_jobposting"] > 20 and not seen:
