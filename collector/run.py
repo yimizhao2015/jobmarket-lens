@@ -15,6 +15,7 @@ as {"source_id", "seen_only": true} lines without requesting their detail pages 
 toward the per-company cap and toward "collected"; "fetched" counts detail pages actually read.
 """
 import argparse
+import contextlib
 import json
 import sys
 import threading
@@ -55,6 +56,8 @@ def main():
     deadline = time.time() + args.minutes * 60 if args.minutes else None
     groups = col.get("host_groups", {})
     cooldowns = {g: Cooldown() for g in groups}
+    # A backup site on a host group's platform (Phenom) also counts toward that group's limit.
+    group_slots = {g: threading.BoundedSemaphore(v["max_concurrent"]) for g, v in groups.items()}
 
     def group_of(c):
         # A company's host group: its own "host_group", or its adapter when a group is named after the adapter.
@@ -64,6 +67,39 @@ def main():
     known, last_collected = store.known_postings(ROOT)
     if args.full:
         known = {}
+
+    def collect_from(c, adapter, fn, params, group=None):
+        """Run one adapter for company c and write its records; (status, detail, collected, fetched, stats)."""
+        t = c["ticker"]
+        delay = col.get("request_delay_by_adapter", {}).get(adapter, col["request_delay_seconds"])
+        group = group_of(c) if adapter == c["adapter"] else group
+        http = Http(col["user_agent"], delay, col["respect_robots_txt"], cooldown=cooldowns.get(group))
+        http.deadline = deadline
+        http.known = dict(known.get(t, {}))
+        http.known_urls = {u: sid for sid, u in http.known.items() if u}
+        stats, n, fetched = {}, 0, 0
+        status, detail = None, None
+        try:
+            with open(out / f"{t}.jsonl", "w") as f:
+                for rec in fn(t, params, http, max_jobs, stats):
+                    rec["collected_at"] = args.date
+                    f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                    n += 1
+                    if not rec.get("seen_only"):
+                        fetched += 1
+                        # Listings can repeat a posting (Workday pages past the end); read it only once per run.
+                        http.known.setdefault(rec["source_id"], rec["url"])
+                        if rec["url"]:
+                            http.known_urls.setdefault(rec["url"], rec["source_id"])
+            status = "ok" if n else "empty"
+        except BlockedError as e:
+            status, detail = "blocked", str(e)
+        except OutOfTime as e:
+            status, detail = "error", str(e)
+        except Exception as e:
+            status, detail = "error", f"{type(e).__name__}: {e}"
+            traceback.print_exc(file=sys.stderr)
+        return status, detail, n, fetched, stats
 
     def one(c):
         # One Http client (own delay and robots cache) per company, so per-site politeness is unchanged
@@ -77,32 +113,22 @@ def main():
             with lock:
                 log[t] = entry
             return
-        delay = col.get("request_delay_by_adapter", {}).get(c["adapter"], col["request_delay_seconds"])
-        http = Http(col["user_agent"], delay, col["respect_robots_txt"], cooldown=cooldowns.get(group_of(c)))
-        http.deadline = deadline
-        http.known = known.get(t, {})
-        http.known_urls = {u: sid for sid, u in http.known.items() if u}
-        stats, n, fetched, t0 = {}, 0, 0, time.time()
-        try:
-            with open(out / f"{t}.jsonl", "w") as f:
-                for rec in fn(t, c["params"], http, max_jobs, stats):
-                    rec["collected_at"] = args.date
-                    f.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                    n += 1
-                    if not rec.get("seen_only"):
-                        fetched += 1
-                        # Listings can repeat a posting (Workday pages past the end); read it only once per run.
-                        http.known.setdefault(rec["source_id"], rec["url"])
-                        if rec["url"]:
-                            http.known_urls.setdefault(rec["url"], rec["source_id"])
-            entry["status"] = "ok" if n else "empty"
-        except BlockedError as e:
-            entry.update(status="blocked", detail=str(e))
-        except OutOfTime as e:
-            entry.update(status="error", detail=str(e))
-        except Exception as e:
-            entry.update(status="error", detail=f"{type(e).__name__}: {e}")
-            traceback.print_exc(file=sys.stderr)
+        t0 = time.time()
+        with group_slots.get(group_of(c)) or contextlib.nullcontext():
+            status, detail, n, fetched, stats = collect_from(c, c["adapter"], fn, c["params"])
+        backup = c.get("backup")
+        if status == "blocked" and backup:
+            # The main career site refused us (Workday's security check); the company's other official career
+            # site lists the same jobs. Its file replaces the partial one, so the run keeps one source per company.
+            with group_slots.get(backup.get("host_group")) or contextlib.nullcontext():
+                b_status, b_detail, n, fetched, stats = collect_from(c, backup["adapter"], ADAPTERS[backup["adapter"]],
+                                                                     backup["params"], backup.get("host_group"))
+            entry.update(source="backup", backup_site=backup["career_site"], main_detail=detail)
+            status, detail = b_status, (f"main site blocked ({detail}); " if b_status == "ok" else "") + (b_detail or "")
+            detail = detail.rstrip("; ") or None
+        entry["status"] = status
+        if detail:
+            entry["detail"] = detail
         entry.update(collected=n, fetched=fetched, seconds=round(time.time() - t0), **stats)
         with lock:
             log[t] = entry
