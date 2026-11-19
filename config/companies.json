@@ -154,6 +154,18 @@
     "host": "micron.wd1.myworkdayjobs.com",
     "tenant": "micron",
     "site": "External"
+   },
+   "backup": {
+    "career_site": "https://careers.micron.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.micron.com/careers/sitemap_index.xml?domain=micron.com"
+     ],
+     "id_from_jsonld": true,
+     "id_regex": "JR\\d{5,7}"
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). The page shows the Workday requisition id."
    }
   },
   {
@@ -1027,6 +1039,22 @@
     "host": "baxter.wd1.myworkdayjobs.com",
     "tenant": "baxter",
     "site": "baxter"
+   },
+   "backup": {
+    "career_site": "https://jobs.baxter.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.baxter.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true,
+     "id_regex": "JR-\\d{6}",
+     "id_replace": [
+      "^JR-",
+      "JR - "
+     ]
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). The page shows the Workday requisition id."
    }
   },
   {
@@ -1598,6 +1626,18 @@
     "host": "churchdwight.wd1.myworkdayjobs.com",
     "tenant": "churchdwight",
     "site": "chdcareers"
+   },
+   "backup": {
+    "career_site": "https://jobs.churchdwight.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.churchdwight.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true,
+     "id_regex": "R20\\d\\d-\\d{4,6}"
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). The page shows the Workday requisition id."
    }
   },
   {
@@ -2493,6 +2533,18 @@
     "host": "elevancehealth.wd1.myworkdayjobs.com",
     "tenant": "elevancehealth",
     "site": "ANT"
+   },
+   "backup": {
+    "career_site": "https://careers.elevancehealth.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.elevancehealth.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true,
+     "id_regex": "JR\\d{5,7}"
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). The page shows the Workday requisition id."
    }
   },
   {
@@ -3947,6 +3999,18 @@
     "host": "kenvue.wd5.myworkdayjobs.com",
     "tenant": "kenvue",
     "site": "kenvue"
+   },
+   "backup": {
+    "career_site": "https://jobs.kenvue.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.kenvue.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true,
+     "id_regex": "\\d{10}W"
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). The page shows the Workday requisition id."
    }
   },
   {
@@ -7066,6 +7130,18 @@
     "host": "xcelenergy.wd1.myworkdayjobs.com",
     "tenant": "xcelenergy",
     "site": "External"
+   },
+   "backup": {
+    "career_site": "https://jobs.xcelenergy.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://jobs.xcelenergy.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true,
+     "id_regex": "JR\\d{5,7}"
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). The page shows the Workday requisition id."
    }
   },
   {
