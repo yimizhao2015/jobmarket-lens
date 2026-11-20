@@ -25,7 +25,7 @@
     "note": "Workday counts our requests across all its customer sites together. With about 40 Workday companies read at once it answered HTTP 429 (Too Many Requests) for 17 companies on 2026-11-09 and 205 on 2026-11-16, so only a few run at a time and a 429 pauses them all."
    }
   },
-  "user_agent": "JobMarketLens/0.1 (research pilot; contact: see README)",
+  "user_agent": "JobMarketLens/0.1 (+https://www.jobmarketlens.com/about/methodology)",
   "respect_robots_txt": true,
   "use_seed_sample": false
  },
