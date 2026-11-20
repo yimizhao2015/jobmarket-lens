@@ -10,14 +10,14 @@
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*", "/.well-known/http-message-signatures-directory"]
   },
   // The site's addresses (Cloudflare creates their DNS records on deploy).
   "routes": [
     { "pattern": "www.jobmarketlens.com", "custom_domain": true },
     { "pattern": "jobmarketlens.com", "custom_domain": true }
   ],
-  // Settings that are not secret. The secrets (GITHUB_ACTIONS_TOKEN, UPSTASH_REDIS_REST_TOKEN) are set in the
+  // Settings that are not secret. The secrets (GITHUB_ACTIONS_TOKEN, UPSTASH_REDIS_REST_TOKEN, WEB_BOT_AUTH_KEY) are set in the
   // Cloudflare dashboard.
   "vars": { "UPSTASH_REDIS_REST_URL": "https://innocent-redfish-157090.upstash.io" },
   // Mondays 2:17 a.m. New York time (06:17 UTC in daylight saving time, 07:17 UTC otherwise; the Worker keeps

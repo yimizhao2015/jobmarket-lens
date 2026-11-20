@@ -1,10 +1,17 @@
-// Cloudflare Worker: /api/* goes to the functions in functions/api/; everything else is a static file from web/.
+// Cloudflare Worker: /api/* goes to the functions in functions/api/, the Web Bot Auth key directory to
+// functions/bot_key_directory.js; everything else is a static file from web/.
 // Its Monday cron starts the weekly collection on GitHub (lib/start_collection.js).
 import * as download from "./functions/api/download.js";
 import * as stats from "./functions/api/stats.js";
+import * as botKeys from "./functions/bot_key_directory.js";
 import { startCollection } from "./lib/start_collection.js";
 
-const ROUTES = { "/api/download": download, "/api/stats": stats };
+const ROUTES = {
+  "/api/download": download,
+  "/api/stats": stats,
+  // Web Bot Auth: the public key Cloudflare uses to verify the collector's signed requests
+  "/.well-known/http-message-signatures-directory": botKeys,
+};
 
 export default {
   async fetch(request, env) {

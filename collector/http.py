@@ -11,9 +11,14 @@ from urllib.parse import urlparse
 import certifi
 import requests
 
+from collector import bot_auth
+
 
 class BlockedError(Exception):
     """The site refused us (robots.txt, 401/403, bot wall). Recorded, never papered over."""
+
+
+_SIGNER = bot_auth.from_env()
 
 
 class OutOfTime(Exception):
@@ -48,6 +53,7 @@ class Http:
         self._last = 0.0
         self.cooldown = cooldown
         self.deadline = None  # time.time() after which no request starts (set by collector.run)
+        self.signer = _SIGNER  # Web Bot Auth (collector/bot_auth.py); None when no key is configured
         # Postings of this company already in the history, {source_id: url} and {url: source_id}; run.py
         # fills them so adapters can skip detail pages they have read before (adapters.common.seen_before).
         self.known, self.known_urls = {}, {}
@@ -60,7 +66,7 @@ class Http:
         rules = self._robots.get(base)
         if rules is None:
             try:
-                r = self.s.get(base + "/robots.txt", timeout=self.timeout)
+                r = self.s.get(base + "/robots.txt", timeout=self.timeout, headers=self._signed(base + "/robots.txt"))
                 text = r.text if r.status_code == 200 else ""
             except requests.RequestException:
                 text = ""
@@ -87,7 +93,8 @@ class Http:
                 time.sleep(wait)
             self._last = time.time()
             try:
-                r = self.s.request(method, url, timeout=self.timeout, **kw)
+                headers = {**kw.get("headers", {}), **self._signed(url)}
+                r = self.s.request(method, url, timeout=self.timeout, **{**kw, "headers": headers})
             except requests.exceptions.SSLError:
                 # Some sites send their certificate without the intermediate. Fetch the missing intermediate
                 # from the link in the certificate itself (AIA) and retry; the chain is still fully verified.
@@ -124,6 +131,9 @@ class Http:
             r.raise_for_status()
             return r
         raise RuntimeError("unreachable")
+
+    def _signed(self, url):
+        return self.signer.headers(url) if self.signer else {}
 
     def _complete_chain(self, host):
         if host in getattr(self, "_chain_fixed", set()):

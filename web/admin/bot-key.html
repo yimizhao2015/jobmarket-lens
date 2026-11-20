@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Bot Key | JobMarket Lens Admin</title>
+<link rel="stylesheet" href="/site.css">
+<style>
+  .keygen { max-width: 720px; }
+  textarea { width: 100%; min-height: 96px; font: 13px var(--f-mono, monospace); padding: 8px; box-sizing: border-box; }
+  button { padding: 8px 14px; font: inherit; cursor: pointer; }
+  .err { color: #b3261e; }
+  ol li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="site-head"><a class="brand" href="/admin">JobMarket <span>Lens</span> Admin</a>
+    <nav class="site-nav"><a href="/admin">Editor</a><a href="/admin/stats">Download stats</a><a href="/admin/bot-key" aria-current="page">Bot key</a></nav></header>
+  <article class="keygen">
+    <h1>Web Bot Auth Key</h1>
+    <p>Makes the Ed25519 key the collector signs its requests with. The key is made in this browser and is never
+      sent anywhere. Copy it into the two secrets below, then close this page.</p>
+    <p><button id="make">Make a new key</button></p>
+    <div id="out" hidden>
+      <p><strong>Private key</strong> (secret: never paste it in chat, email or a file in the repository):</p>
+      <textarea id="key" readonly></textarea>
+      <p><button id="copy">Copy</button></p>
+      <ol>
+        <li>GitHub: jobmarket-lens, Settings, Secrets and variables, Actions, New repository secret.
+          Name <code>WEB_BOT_AUTH_KEY</code>, value: the key above.</li>
+        <li>Cloudflare: Workers &amp; Pages, jobmarket-lens, Settings, Variables and Secrets, Add, type Secret.
+          Name <code>WEB_BOT_AUTH_KEY</code>, the same value. Then redeploy.</li>
+        <li>Check that <a href="/.well-known/http-message-signatures-directory">the key directory</a> shows the public key
+          <code id="x"></code>.</li>
+      </ol>
+    </div>
+    <p id="err" class="err"></p>
+  </article>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+$("make").onclick = async () => {
+  try {
+    const pair = await crypto.subtle.generateKey({ name: "Ed25519" }, true, ["sign", "verify"]);
+    const { kty, crv, x, d } = await crypto.subtle.exportKey("jwk", pair.privateKey);
+    $("key").value = JSON.stringify({ kty, crv, x, d });
+    $("x").textContent = x;
+    $("out").hidden = false;
+    $("err").textContent = "";
+  } catch (e) {
+    $("err").textContent = "This browser can't make Ed25519 keys (" + e.message + "). Try a current Chrome, Edge, Safari or Firefox.";
+  }
+};
+$("copy").onclick = () => navigator.clipboard.writeText($("key").value).then(() => { $("copy").textContent = "Copied"; });
+</script>
+</body>
+</html>

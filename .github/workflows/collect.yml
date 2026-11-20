@@ -80,6 +80,9 @@ jobs:
           gunzip -f data/lens.db.gz
       - name: Collect
         if: ${{ !inputs.build_only }}
+        # WEB_BOT_AUTH_KEY signs each request (Web Bot Auth, collector/bot_auth.py); unset means unsigned.
+        env:
+          WEB_BOT_AUTH_KEY: ${{ secrets.WEB_BOT_AUTH_KEY }}
         # The 240-minute budget leaves room for the build within the job's 350-minute limit.
         run: >-
           python -m collector.run --minutes 240
