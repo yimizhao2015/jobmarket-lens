@@ -28,9 +28,24 @@ class OutOfTime(Exception):
 class Cooldown:
     """A pause shared by the companies of one host group: when one of them is told to slow down (HTTP 429),
     all of them wait, since the platform counts our requests together."""
+    # After this many companies in a row are turned away by the security check, the platform is plainly blocking
+    # us: later challenges fail at once instead of pausing the whole group (one success resets the count).
+    FAIL_FAST_AFTER = 5
+
     def __init__(self):
         self.lock = threading.Lock()
         self.until = 0.0
+        self.blocked_in_a_row = 0
+
+    def blocked(self):
+        with self.lock:
+            self.blocked_in_a_row += 1
+
+    def ok(self):
+        self.blocked_in_a_row = 0
+
+    def fail_fast(self):
+        return self.blocked_in_a_row >= self.FAIL_FAST_AFTER
 
     def hold(self, seconds):
         with self.lock:
@@ -111,7 +126,9 @@ class Http:
             if r.status_code == 429 and r.headers.get("cf-mitigated") == "challenge":
                 # Not a rate limit but a Cloudflare "Security Check" page that needs a browser (Workday sites since
                 # Nov 2026). It sometimes clears after a pause; if it doesn't, the site is blocking us.
-                if attempt >= 2:
+                if attempt >= 2 or (self.cooldown and self.cooldown.fail_fast()):
+                    if self.cooldown:
+                        self.cooldown.blocked()
                     raise BlockedError(f"Cloudflare security check (HTTP 429) from {url}")
                 pause = 30 * 2 ** attempt
                 if self.cooldown:
@@ -129,6 +146,8 @@ class Http:
                 time.sleep(2 ** (attempt + 2))
                 continue
             r.raise_for_status()
+            if self.cooldown:
+                self.cooldown.ok()
             return r
         raise RuntimeError("unreachable")
 
