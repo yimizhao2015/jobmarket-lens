@@ -227,10 +227,7 @@ async function load() {
     // The postings come as one file per posted week (D.chunks, next to the page), each under the host's file-size limit.
     if (D.chunks) {
       const parts = await Promise.all(D.chunks.map(async c => {
-        let bytes = new Uint8Array(await (await fetch("postings/" + c)).arrayBuffer());
-        // the Claude artifact can't serve .gz files, so it carries them base64-encoded as .txt (scripts/build_artifact.py)
-        if (c.endsWith(".txt")) bytes = Uint8Array.from(atob(new TextDecoder().decode(bytes)), ch => ch.charCodeAt(0));
-        return gunzipJSON(bytes);
+        return gunzipJSON(new Uint8Array(await (await fetch("postings/" + c)).arrayBuffer()));
       }));
       D.rows = parts.flat();
     }

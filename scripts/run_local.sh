@@ -21,6 +21,7 @@ echo "== Restoring history from $DATA_REPO"
 mkdir -p data
 gh release download data -R "$DATA_REPO" -p lens.db.gz -D data --clobber
 gunzip -f data/lens.db.gz
+gh release download data -R "$DATA_REPO" -p norm_cache.db.gz -D data --clobber && gunzip -f data/norm_cache.db.gz || true
 
 echo "== Collecting (about 1-2 hours)"
 python -m collector.run "$@"
@@ -29,12 +30,11 @@ echo "== Building dashboard"
 python scripts/build_dataset.py
 
 echo "== Saving history to $DATA_REPO"
-gzip -kf data/lens.db data/normalized/postings.csv
-gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
-gh release upload data -R "$DATA_REPO" "data/products/jobmarketlens-latest-week.zip" "data/products/jobmarketlens-full-archive.zip" --clobber
+gzip -kf data/lens.db data/normalized/postings.csv data/norm_cache.db
+gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz data/norm_cache.db.gz --clobber
 
 echo "== Publishing dashboard"
-git add -A -- web/index.html web/downloads config/
+git add -A -- web/index.html web/postings web/downloads config/
 git commit -m "Data refresh $(date -u +%F) (local run)" || echo "nothing to commit"
 git pull --rebase -X theirs origin main
 git push
