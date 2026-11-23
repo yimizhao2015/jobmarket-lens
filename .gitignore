@@ -20,6 +20,7 @@ web/insights/
 
 # CSV copies built by scripts/export_csv.py, never committed here
 data/data source.csv
+data/collection status by week.csv
 data/Job postings/
 # Local secrets for `wrangler pages dev`
 .dev.vars

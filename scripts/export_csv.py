@@ -2,6 +2,9 @@
 
 Reads web/data.json (written by build_dataset.py) and writes:
   data/data source.csv   one row per S&P 500 company in scope, with its collection status
+  data/collection status by week.csv
+                         one row per company, one column per posted week: its postings that week, or "blocked",
+                         "error" or "not collected" when the run(s) right after the week did not succeed
   data/Job postings/Job postings YYYY-MM part N.csv
                          one row per posting, newest first, one file per month posted, in parts of ROWS_PER_FILE
   web/downloads/jobmarketlens-sample.csv         1,000 random postings, free on the site
@@ -56,6 +59,50 @@ def status(c, s):
     return "Collector ready, not yet run"
 
 
+STATUS_LABEL = {"blocked": "blocked", "error": "error", "not_applicable": "not collected"}
+
+
+def weekly_status(D, rows, path):
+    """Collection status by week: the postings each company posted in each Monday-to-Sunday week, or the status of
+    the run(s) in the week after it (the runs that collected it) when none of them succeeded, with any postings
+    that arrived in another run in parentheses. Workday's security check (HTTP 429) counts as blocked."""
+    first = date.fromisoformat(D["posted_from"])
+    last = date.fromisoformat(D["posted_to"])
+    weeks = [first + timedelta(weeks=i) for i in range((last - first).days // 7 + 1)]
+    count = Counter()
+    for r in rows:
+        if r["posted"]:
+            d = date.fromisoformat(r["posted"][:10])
+            count[r["co"], d - timedelta(days=d.weekday())] += 1
+    runs = {}
+    for s in sorted(D.get("snapshots") or [], key=lambda s: s["run_date"]):
+        st, det = s["status"], s.get("detail") or ""
+        if st == "error" and ("429" in det or "security check" in det):
+            st = "blocked"
+        runs.setdefault(s["company"], []).append((date.fromisoformat(s["run_date"]), st, det))
+
+    def cell(t, wk):
+        n = count[t, wk]
+        # The runs that collected this week: those in the following week (the first week also counts the
+        # first collections, made before its end)
+        sts = [st for d, st, _ in runs.get(t, [])
+               if wk + timedelta(days=7) <= d <= wk + timedelta(days=13) or (wk == weeks[0] and d < wk + timedelta(days=7))]
+        if not sts or any(st in ("ok", "empty") for st in sts):
+            return n
+        label = STATUS_LABEL.get(sts[-1], sts[-1])
+        return f"{label} ({n})" if n else label
+
+    with open(path, "w", newline="", encoding=ENC) as f:
+        w = csv.writer(f)
+        w.writerow(["Company name", "Ticker"] + [f"{wk:%b}-{wk.day}-{wk.year}" for wk in weeks]
+                   + ["Latest run", "Latest status", "Note"])
+        for c in sorted(D["companies"], key=lambda c: c["rank"]):
+            t = c["ticker"]
+            d, st, det = (runs.get(t) or [(None, "", "")])[-1]
+            w.writerow([c["name"], t] + [cell(t, wk) for wk in weeks]
+                       + [d or "", STATUS_LABEL.get(st, st), det or c.get("known_issue") or ""])
+
+
 def main():
     D = json.loads((ROOT / "web/data.json").read_text())
     rows = [dict(zip(D["fields"], r)) for r in D["rows"]]
@@ -78,6 +125,8 @@ def main():
             w.writerow([c["rank"], c["ticker"], c["name"], c.get("sector") or "", c.get("career_site") or "",
                         c["adapter"], status(c, s), s["run_date"] if s else "", by_co.get(c["ticker"], 0),
                         (s or {}).get("site_total") or "", (s and s.get("detail")) or c.get("known_issue") or ""])
+
+    weekly_status(D, rows, out_dir / "collection status by week.csv")
 
     rows.sort(key=lambda r: r["posted"] or "", reverse=True)
     header = ["Posting ID", "Title", "Company", "Ticker", "SOC code", "SOC group", "Job level", "Job type",
