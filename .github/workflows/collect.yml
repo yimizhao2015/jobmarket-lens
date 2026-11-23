@@ -83,9 +83,10 @@ jobs:
         # WEB_BOT_AUTH_KEY signs each request (Web Bot Auth, collector/bot_auth.py); unset means unsigned.
         env:
           WEB_BOT_AUTH_KEY: ${{ secrets.WEB_BOT_AUTH_KEY }}
-        # The 240-minute budget leaves room for the build within the job's 350-minute limit.
+        # The 200-minute budget leaves room for the build (about 2 hours by late Nov 2026, and growing with the
+        # history) within the job's 350-minute limit.
         run: >-
-          python -m collector.run --minutes 240
+          python -m collector.run --minutes 200
           ${{ github.event.inputs.max && format('--max {0}', github.event.inputs.max) || '' }}
           ${{ github.event.inputs.only && format('--only {0}', github.event.inputs.only) || '' }}
       # Saved before the build, so a failure later in the run doesn't lose the week's collection
