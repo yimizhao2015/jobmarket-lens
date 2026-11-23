@@ -78,6 +78,8 @@ jobs:
             rm -rf seed-repo
           fi
           gunzip -f data/lens.db.gz
+          # The build's cache of text results (scripts/build_dataset.py); without it the build reads every posting.
+          gh release download data -R "$DATA_REPO" -p norm_cache.db.gz -D data && gunzip -f data/norm_cache.db.gz || true
       - name: Collect
         if: ${{ !inputs.build_only }}
         # WEB_BOT_AUTH_KEY signs each request (Web Bot Auth, collector/bot_auth.py); unset means unsigned.
@@ -106,7 +108,8 @@ jobs:
         run: |
           gzip -kf data/lens.db data/normalized/postings.csv
           gh release view data -R "$DATA_REPO" >/dev/null 2>&1 || gh release create data -R "$DATA_REPO" --title "Posting history" --notes "SQLite history (lens.db.gz) and normalized postings (postings.csv.gz) for JobMarket Lens. Replaced on every weekly run."
-          gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz --clobber
+          gzip -kf data/norm_cache.db
+          gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz data/norm_cache.db.gz --clobber
           # Paid downloads (Get the Data page): replaced every week
           gh release upload data -R "$DATA_REPO" "data/products/jobmarketlens-latest-week.zip" "data/products/jobmarketlens-full-archive.zip" --clobber
           # Source coverage (each company's collection status) is kept out of the zips; commit it to the data
