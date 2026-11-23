@@ -37,7 +37,7 @@ Only postings dated October 5, 2026 (`posted_from` in config) through the last c
 
 ```
 Weekly run (GitHub Actions on Mondays at 2:17 a.m. Eastern Time, or scripts/run_local.sh on your own computer)
-  1. download the posting history (lens.db.gz) from the private repo yimizhao2015/jobmarket-lens-data
+  1. download the posting history (lens.db.xz) from the private repo yimizhao2015/jobmarket-lens-data
   2. collect every company's current postings from its career site       -> data/raw/<date>/
   3. add them to the history: first seen / last seen per posting          -> data/lens.db
   4. normalize and rebuild the dashboard and CSV files                    -> web/index.html, data/*.csv

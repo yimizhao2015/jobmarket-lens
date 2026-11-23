@@ -71,13 +71,17 @@ jobs:
         run: |
           # Without the private history the run would forget when postings were first seen.
           [ -n "$GH_TOKEN" ] || { echo "::error::DATA_REPO_TOKEN secret is not set"; exit 1; }
-          if ! gh release download data -R "$DATA_REPO" -p lens.db.gz -D data; then
-            # First run: start from the seed history committed to the data repo in parts.
+          # The history is saved as lens.db.xz (about half the size of gzip). lens.db.gz is the format used
+          # before Nov 30, 2026, and the seed is the starting history committed to the data repo in parts.
+          if gh release download data -R "$DATA_REPO" -p lens.db.xz -D data; then
+            xz -d -T0 -f data/lens.db.xz
+          elif gh release download data -R "$DATA_REPO" -p lens.db.gz -D data; then
+            gunzip -f data/lens.db.gz
+          else
             git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${DATA_REPO}" seed-repo
-            cat seed-repo/seed/lens.db.gz.part-* > data/lens.db.gz
+            cat seed-repo/seed/lens.db.gz.part-* | gunzip > data/lens.db
             rm -rf seed-repo
           fi
-          gunzip -f data/lens.db.gz
           # The build's cache of text results (scripts/build_dataset.py); without it the build reads every posting.
           gh release download data -R "$DATA_REPO" -p norm_cache.db.gz -D data && gunzip -f data/norm_cache.db.gz || true
       - name: Collect
@@ -98,18 +102,21 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
         run: |
-          gzip -kf data/lens.db
-          gh release upload data -R "$DATA_REPO" data/lens.db.gz --clobber
+          xz -kf -T0 -6 data/lens.db
+          gh release upload data -R "$DATA_REPO" data/lens.db.xz --clobber
       - name: Build dataset
         run: python scripts/build_dataset.py
       - name: Save history
         env:
           GH_TOKEN: ${{ secrets.DATA_REPO_TOKEN }}
         run: |
-          gzip -kf data/lens.db data/normalized/postings.csv
-          gh release view data -R "$DATA_REPO" >/dev/null 2>&1 || gh release create data -R "$DATA_REPO" --title "Posting history" --notes "SQLite history (lens.db.gz) and normalized postings (postings.csv.gz) for JobMarket Lens. Replaced on every weekly run."
-          gzip -kf data/norm_cache.db
-          gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz data/norm_cache.db.gz --clobber
+          # The build only reads lens.db, so the copy compressed after collecting is reused when there is one.
+          [ -f data/lens.db.xz ] || xz -kf -T0 -6 data/lens.db
+          gzip -kf data/normalized/postings.csv data/norm_cache.db
+          gh release view data -R "$DATA_REPO" >/dev/null 2>&1 || gh release create data -R "$DATA_REPO" --title "Posting history" --notes "SQLite history (lens.db.xz) and normalized postings (postings.csv.gz) for JobMarket Lens. Replaced on every weekly run."
+          gh release upload data -R "$DATA_REPO" data/lens.db.xz data/normalized/postings.csv.gz data/norm_cache.db.gz --clobber
+          # The old gzip copy of the history, once the xz copy is saved.
+          gh release delete-asset data lens.db.gz -R "$DATA_REPO" -y 2>/dev/null || true
           # Source coverage (each company's collection status) and Collection status by week are committed to the
           # data repo through the contents API (no clone of the large seed files). A failure here only warns, so
           # the dashboard below is still published.
