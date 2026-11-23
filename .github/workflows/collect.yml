@@ -110,16 +110,20 @@ jobs:
           gh release view data -R "$DATA_REPO" >/dev/null 2>&1 || gh release create data -R "$DATA_REPO" --title "Posting history" --notes "SQLite history (lens.db.gz) and normalized postings (postings.csv.gz) for JobMarket Lens. Replaced on every weekly run."
           gzip -kf data/norm_cache.db
           gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz data/norm_cache.db.gz --clobber
-          # Source coverage (each company's collection status) is kept out of the zips; commit it to the data
-          # repo through the contents API (no clone of the large seed files). A failure here only warns, so the
-          # dashboard below is still published.
-          path="Source%20coverage.csv"
-          sha=$(gh api "repos/$DATA_REPO/contents/$path" --jq .sha 2>/dev/null || true)
-          base64 -w0 "data/data source.csv" > /tmp/cov.b64
-          jq -n --rawfile c /tmp/cov.b64 --arg m "Source coverage $(date -u +%F)" --arg sha "$sha" \
-            '{message: $m, content: $c} + (if $sha == "" then {} else {sha: $sha} end)' > /tmp/cov.json
-          gh api -X PUT "repos/$DATA_REPO/contents/$path" --input /tmp/cov.json >/dev/null \
-            || echo "::warning::Could not save Source coverage.csv to $DATA_REPO"
+          # Source coverage (each company's collection status) and Collection status by week are committed to the
+          # data repo through the contents API (no clone of the large seed files). A failure here only warns, so
+          # the dashboard below is still published.
+          save() {  # save <local file> <path in the data repo>
+            path=$(jq -rn --arg p "$2" '$p|@uri')
+            sha=$(gh api "repos/$DATA_REPO/contents/$path" --jq .sha 2>/dev/null || true)
+            base64 -w0 "$1" > /tmp/file.b64
+            jq -n --rawfile c /tmp/file.b64 --arg m "$2 $(date -u +%F)" --arg sha "$sha" \
+              '{message: $m, content: $c} + (if $sha == "" then {} else {sha: $sha} end)' > /tmp/file.json
+            gh api -X PUT "repos/$DATA_REPO/contents/$path" --input /tmp/file.json >/dev/null \
+              || echo "::warning::Could not save $2 to $DATA_REPO"
+          }
+          save "data/data source.csv" "Source coverage.csv"
+          save "data/collection status by week.csv" "Collection status by week.csv"
       - name: Commit dashboard
         run: |
           git config user.name "jobmarket-lens bot"
