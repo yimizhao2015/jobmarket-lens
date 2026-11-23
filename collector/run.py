@@ -162,6 +162,8 @@ def main():
     elif retry:
         print(f"Second pass for {len(retry)} companies stopped by a security check, in 10 minutes", flush=True)
         time.sleep(600)
+        for cd in cooldowns.values():
+            cd.ok()  # a fresh start: the first few get the slow retries again
         with ThreadPoolExecutor(max_workers=4) as p:
             list(p.map(one, retry))
 
