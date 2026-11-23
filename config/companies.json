@@ -26,8 +26,7 @@
    }
   },
   "user_agent": "JobMarketLens/0.1 (+https://www.jobmarketlens.com/about/methodology)",
-  "respect_robots_txt": true,
-  "use_seed_sample": false
+  "respect_robots_txt": true
  },
  "companies": [
   {

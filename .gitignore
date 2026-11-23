@@ -6,8 +6,6 @@ data/norm_cache.db*
 data/raw/
 # Regenerated on every build; the dashboard inlines the data, and the CSV is attached to the "data" release
 web/data.json
-web/artifact.html
-build/
 data/normalized/postings.csv
 
 # Built from content/ by scripts/build_pages.mjs on every deploy (edit the Markdown in content/ or use /admin)
@@ -20,10 +18,9 @@ web/data.html
 web/contact.html
 web/insights/
 
-# Paid data products: built by scripts/export_csv.py and uploaded to the private data repo, never committed here
+# CSV copies built by scripts/export_csv.py, never committed here
 data/data source.csv
 data/Job postings/
-data/products/
 # Local secrets for `wrangler pages dev`
 .dev.vars
 .wrangler/

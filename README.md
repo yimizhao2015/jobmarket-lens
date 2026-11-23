@@ -79,14 +79,13 @@ collector/                   one adapter per career-site platform + polite HTTP 
   run.py                     runs all companies in parallel, writes data/raw/<date>/run_log.json
 normalize/                   SOC mapping, skills & license dictionaries, majors (fields of study), field parsers
 scripts/build_dataset.py     normalize everything -> web/index.html (data embedded), data/normalized/postings.csv
-scripts/export_csv.py        data products (zips, not committed) and the free sample in web/downloads/
+scripts/export_csv.py        CSV copies of the coverage and postings tables (not committed) and the free sample in web/downloads/
 scripts/run_local.sh         the whole weekly run on your own computer
-data/seed/                   119 postings read by hand on 2026-10-14 for the pilot (not used: use_seed_sample false)
 web/template.html            the dashboard page; build_dataset.py embeds the data into web/index.html
 content/pages/*.md, content/insights/*.md   About, Methodology, Privacy and Insights articles in Markdown (edit at /admin)
 scripts/build_pages.mjs      turns content/ into web/about.html, web/insights/... on every Cloudflare deploy (npm run build)
 web/admin/                   the admin area (Sveltia CMS): add, edit and delete articles; edit pages; stats.html
-wrangler.jsonc, worker.js    Cloudflare Workers hosting: runs npm run build, serves web/, sends /api/* to functions/api/
+wrangler.jsonc, worker.js    Cloudflare Workers hosting: runs npm run build, serves web/, sends /api/* to functions/api/ and serves the Web Bot Auth key (functions/bot_key_directory.js)
 functions/api/, lib/         the sample download counter and its stats (used by worker.js)
 web/postings/                the dashboard's postings, one gzip file per posted week (each under Cloudflare's 25 MB file limit)
 web/_redirects               Cloudflare redirects

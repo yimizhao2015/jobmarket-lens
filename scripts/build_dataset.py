@@ -2,8 +2,7 @@
 
     python scripts/build_dataset.py
 
-Inputs:  data/lens.db (from collector runs) and data/seed/*.jsonl (page-read sample, used only for
-         companies with no successful collector run yet).
+Input:   data/lens.db (from collector runs).
 Outputs: web/data.json (compact, for the dashboard), data/normalized/postings.csv (analyst-friendly).
 """
 import base64
@@ -23,27 +22,6 @@ sys.path.insert(0, str(ROOT))
 
 from collector import store  # noqa: E402
 from normalize import majors, parse, skills, soc  # noqa: E402
-
-
-def seed_to_raw(s):
-    """Turn a page-read seed row into the raw schema so it runs through the same normalizer."""
-    bits = []
-    if s.get("degree"):
-        bits.append(f"Minimum qualifications: {s['degree']}.")
-    if s.get("yrs") is not None:
-        bits.append(f"{s['yrs']} years of relevant experience.")
-    if s.get("skills"):
-        bits.append("Skills: " + ", ".join(s["skills"]) + ".")
-    if s.get("certs"):
-        bits.append("Certifications: " + ", ".join(s["certs"]) + ".")
-    return {
-        "company": s["co"], "source_id": s["id"], "url": s["url"], "title": s["title"],
-        "description": " ".join(bits) or None, "locations": s.get("loc") or [], "posted_date": s.get("posted"),
-        "employment_type": s.get("sched"), "remote_hint": "Remote" if s.get("remote") else None,
-        "pay_text": s.get("pay"), "category": s.get("cat"), "level_hint": s.get("level"),
-        "source_method": "page-read", "first_seen": "2026-10-14", "last_seen": "2026-10-14", "is_open": True,
-        "skills_given": s.get("skills") or [], "certs_given": s.get("certs") or [],
-    }
 
 
 # Reading a posting's text (skills, degree, pay, ...) is most of the build's time, and a posting's text rarely
@@ -172,13 +150,6 @@ def build(pool):
     if (ROOT / "data/lens.db").exists():
         # postings dated before the window can't be in it (normalize only moves dates earlier)
         rows, snaps = store.load_postings(ROOT, since=col["posted_from"])
-    collected = {s["company"] for s in snaps}
-    seed_rows = []
-    for f in sorted((ROOT / "data/seed").glob("*.jsonl")):
-        for line in f.open():
-            s = json.loads(line)
-            if col.get("use_seed_sample") and s["co"] not in collected:
-                seed_rows.append(seed_to_raw(s))
 
     # The window ends with the last complete Monday-to-Sunday week: the Sunday on or before the latest
     # run (the run itself is early Monday), so a partly collected week is never shown.
@@ -191,7 +162,7 @@ def build(pool):
     dropped, undated, keep = Counter(), Counter(), []
     if (ROOT / "data/lens.db").exists():
         dropped.update(store.count_before(ROOT, col["posted_from"]))
-    for r in rows + seed_rows:
+    for r in rows:
         posted = r.get("posted_date")
         if not posted:  # no posting date on the site: can't place it in the date window
             undated[r["company"]] += 1
@@ -202,7 +173,7 @@ def build(pool):
             dropped[r["company"]] += 1
             continue
         keep.append(r)
-    del rows, seed_rows  # postings outside the window are no longer needed
+    del rows  # postings outside the window are no longer needed
     # The countries each company's other locations clearly name; a bare city name found in several
     # countries ("Hyderabad", "San Jose") is settled toward these
     seen = Counter()

@@ -1,7 +1,7 @@
 # Weekly: collect postings, rebuild the dashboard, commit it, and publish the site.
-# The SQLite history (data/lens.db) holds the full text of every posting, and the paid zips are
-# for sale, so both are kept out of this repo: they live as assets of a release named "data" in
-# the private repo DATA_REPO, read and written with the DATA_REPO_TOKEN secret.
+# The SQLite history (data/lens.db) holds the full text of every posting, so it is kept out of this
+# repo: it lives as an asset of a release named "data" in the private repo DATA_REPO, read and
+# written with the DATA_REPO_TOKEN secret.
 name: Collect and publish
 
 on:
@@ -110,8 +110,6 @@ jobs:
           gh release view data -R "$DATA_REPO" >/dev/null 2>&1 || gh release create data -R "$DATA_REPO" --title "Posting history" --notes "SQLite history (lens.db.gz) and normalized postings (postings.csv.gz) for JobMarket Lens. Replaced on every weekly run."
           gzip -kf data/norm_cache.db
           gh release upload data -R "$DATA_REPO" data/lens.db.gz data/normalized/postings.csv.gz data/norm_cache.db.gz --clobber
-          # Paid downloads (Get the Data page): replaced every week
-          gh release upload data -R "$DATA_REPO" "data/products/jobmarketlens-latest-week.zip" "data/products/jobmarketlens-full-archive.zip" --clobber
           # Source coverage (each company's collection status) is kept out of the zips; commit it to the data
           # repo through the contents API (no clone of the large seed files). A failure here only warns, so the
           # dashboard below is still published.
