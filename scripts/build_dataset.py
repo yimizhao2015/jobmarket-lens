@@ -9,7 +9,9 @@ Outputs: web/data.json (compact, for the dashboard), data/normalized/postings.cs
 import base64
 import csv
 import gzip
+import hashlib
 import json
+import sqlite3
 import sys
 from collections import Counter
 from multiprocessing import Pool
@@ -44,10 +46,33 @@ def seed_to_raw(s):
     }
 
 
-def normalize(r):
+# Reading a posting's text (skills, degree, pay, ...) is most of the build's time, and a posting's text rarely
+# changes from week to week. Those results are kept in data/norm_cache.db (saved beside lens.db), keyed by a hash
+# of the fields they read plus the normalize/ code, so only new or changed postings, or all of them after a
+# dictionary or rule change, are read again. Dates, open/closed and locations are worked out fresh every build.
+CACHE = ROOT / "data/norm_cache.db"
+TEXT_INPUTS = ("title", "description", "pay_text", "category", "employment_type", "remote_hint", "locations",
+               "level_hint", "skills_given", "certs_given")
+
+
+def code_version():
+    h = hashlib.sha256()
+    for f in sorted((ROOT / "normalize").rglob("*.py")) + [Path(__file__)]:
+        h.update(f.read_bytes())
+    return h.hexdigest()[:16]
+
+
+def text_key(r, version):
+    blob = json.dumps([r.get(k) for k in TEXT_INPUTS], ensure_ascii=False, sort_keys=True, default=str)
+    return hashlib.sha1((version + blob).encode()).hexdigest()
+
+
+def read_text(r):
+    """The fields that come from the posting's own text: the slow part, cached."""
     text = r.get("description") or ""
     title = r.get("title") or ""
     full = title + "\n" + text
+    locs = r.get("locations") or []
     yrs = parse.parse_years(text)
     deg, deg_equiv = parse.parse_degree(text)
     pay = parse.parse_pay(r.get("pay_text"), text)
@@ -56,32 +81,9 @@ def normalize(r):
     for given in r.get("skills_given", []):  # page-read rows: map each listed skill to the dictionary
         sk += [s for s in skills.find_skills(given) if s not in sk]
     lic = skills.find_licenses(text + " " + " ".join(r.get("certs_given", [])))
-    major = majors.find_majors(text)
-    locs = r.get("locations") or []
-    country, state, city = parse.parse_location(locs[0], set(r.get("prefer") or ())) if locs else (None, None, None)
-    posted = r.get("posted_date")
-    basis = "posted"
-    if not posted:
-        posted, basis = r.get("first_seen"), "first_seen"
-    elif r.get("first_seen") and posted > r["first_seen"]:
-        # Some sites give a scheduled start date or a next-day local date; a posting live when we
-        # collected it was posted no later than that day.
-        posted, basis = r["first_seen"], "first_seen"
     return {
-        "id": f"{r['company']}:{r['source_id']}",
-        "co": r["company"],
-        "title": title,
-        "url": r.get("url"),
-        "posted": posted,
-        "date_basis": basis,
-        "year": int(posted[:4]) if posted else None,
-        "month": posted[:7] if posted else None,
-        "first_seen": r.get("first_seen"),
-        "last_seen": r.get("last_seen"),
-        "open": bool(r.get("is_open")),
         "soc": code,
         "soc_rule": rule,
-        "category": r.get("category"),
         "sched": parse.parse_schedule(r.get("employment_type"), title, text),
         "arr": parse.parse_arrangement(r.get("remote_hint"), locs, text),
         "deg": deg,
@@ -95,16 +97,64 @@ def normalize(r):
         "pay_hi": pay["max"] if pay else None,
         "pay_period": pay["period"] if pay else None,
         "pay_cur": pay["currency"] if pay else None,
+        "skills": sk,
+        "lic": lic,
+        "major": majors.find_majors(text),
+    }
+
+
+TEXT_FIELDS = ("soc", "soc_rule", "sched", "arr", "deg", "deg_equiv", "yrs", "yrs_b", "lvl", "pay_min", "pay_max",
+               "pay_lo", "pay_hi", "pay_period", "pay_cur", "skills", "lic", "major")
+
+
+def normalize(r):
+    """One posting's dashboard row; r["cached"] holds read_text(r) from an earlier build when there is one.
+    Returns (row, read_text result when it was computed here, else None)."""
+    cached = r.get("cached")
+    t = cached if cached is not None else read_text(r)
+    title = r.get("title") or ""
+    locs = r.get("locations") or []
+    country, state, city = parse.parse_location(locs[0], set(r.get("prefer") or ())) if locs else (None, None, None)
+    posted = r.get("posted_date")
+    basis = "posted"
+    if not posted:
+        posted, basis = r.get("first_seen"), "first_seen"
+    elif r.get("first_seen") and posted > r["first_seen"]:
+        # Some sites give a scheduled start date or a next-day local date; a posting live when we
+        # collected it was posted no later than that day.
+        posted, basis = r["first_seen"], "first_seen"
+    return _ordered({
+        "id": f"{r['company']}:{r['source_id']}",
+        "co": r["company"],
+        "title": title,
+        "url": r.get("url"),
+        "posted": posted,
+        "date_basis": basis,
+        "year": int(posted[:4]) if posted else None,
+        "month": posted[:7] if posted else None,
+        "first_seen": r.get("first_seen"),
+        "last_seen": r.get("last_seen"),
+        "open": bool(r.get("is_open")),
+        "category": r.get("category"),
         "country": country or parse.NS,
         "state": state,
         "city": city,
         "nloc": len(locs),
-        "skills": sk,
-        "lic": lic,
-        "major": major,
         "src": r.get("source_method", "api"),
         "has_text": bool(r.get("description")),
-    }
+    }, t), (None if cached is not None else t)
+
+
+# The row's field order (also postings.csv's column order)
+ORDER = ("id", "co", "title", "url", "posted", "date_basis", "year", "month", "first_seen", "last_seen", "open", "soc",
+         "soc_rule", "category", "sched", "arr", "deg", "deg_equiv", "yrs", "yrs_b", "lvl", "pay_min", "pay_max",
+         "pay_lo", "pay_hi", "pay_period", "pay_cur", "country", "state", "city", "nloc", "skills", "lic", "major",
+         "src", "has_text")
+
+
+def _ordered(base, text):
+    both = {**base, **text}
+    return {k: both[k] for k in ORDER}
 
 
 def main():
@@ -167,7 +217,31 @@ def build(pool):
             prefer.setdefault(co, []).append(country)
     for r in keep:
         r["prefer"] = prefer.get(r["company"])
-    out = list(pool.imap(normalize, keep, chunksize=200))
+    version = code_version()
+    cache = sqlite3.connect(CACHE)
+    cache.execute("CREATE TABLE IF NOT EXISTS text (key TEXT PRIMARY KEY, val TEXT)")
+    keys = [text_key(r, version) for r in keep]
+    for i in range(0, len(keep), 900):
+        part = keys[i:i + 900]
+        found = dict(cache.execute(f"SELECT key, val FROM text WHERE key IN ({','.join('?' * len(part))})", part))
+        for r, k in zip(keep[i:i + 900], part):
+            if k in found:
+                r["cached"] = json.loads(found[k])
+    cache.close()
+    print(f"{sum('cached' in r for r in keep)} of {len(keep)} postings read from the cache", flush=True)
+
+    # The next build's cache: this build's results only, so postings that left the window drop out of it.
+    CACHE.with_suffix(".new").unlink(missing_ok=True)
+    fresh = sqlite3.connect(CACHE.with_suffix(".new"))
+    fresh.execute("CREATE TABLE text (key TEXT PRIMARY KEY, val TEXT)")
+    out = []
+    for k, (n, computed) in zip(keys, pool.imap(normalize, keep, chunksize=200)):
+        val = computed if computed is not None else {f: n[f] for f in TEXT_FIELDS}
+        fresh.execute("INSERT OR REPLACE INTO text VALUES (?, ?)", (k, json.dumps(val, ensure_ascii=False)))
+        out.append(n)
+    fresh.commit()
+    fresh.close()
+    CACHE.with_suffix(".new").replace(CACHE)
     del keep
 
     # Compact encoding: repeated strings become indexes into lookup tables.
