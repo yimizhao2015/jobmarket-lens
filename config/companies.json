@@ -1479,7 +1479,19 @@
     "tenant": "cat",
     "site": "CaterpillarCareers"
    },
-   "known_issue": null
+   "known_issue": null,
+   "backup": {
+    "career_site": "https://careers.caterpillar.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.caterpillar.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true,
+     "url_pattern": "/en/jobs/"
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday. The sitemap lists each job in three languages, so only the English pages are read."
+   }
   },
   {
    "rank": 101,
@@ -1534,6 +1546,18 @@
     "host": "myhrabc.wd5.myworkdayjobs.com",
     "tenant": "myhrabc",
     "site": "Global"
+   },
+   "backup": {
+    "career_site": "https://careers.cencora.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.cencora.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "host_group": "phenom",
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
@@ -2251,6 +2275,17 @@
     "host": "davita.wd1.myworkdayjobs.com",
     "tenant": "davita",
     "site": "DKC_External"
+   },
+   "backup": {
+    "career_site": "https://careers.davita.com",
+    "adapter": "jsonld_sitemap",
+    "params": {
+     "sitemaps": [
+      "https://careers.davita.com/sitemap.xml"
+     ],
+     "id_from_jsonld": true
+    },
+    "note": "Used when the Workday site is blocked (security check since Nov 2026). Same requisition ids as Workday."
    }
   },
   {
